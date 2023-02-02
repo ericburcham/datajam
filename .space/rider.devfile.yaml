@@ -10,3 +10,4 @@ attributes:
       # (Required) IDE type: Idea, WebStorm, PyCharm,
       # RubyMine, CLion, Fleet, GoLand, PhpStorm
       type: Rider
+    projectRoot: ./src/datajem.sln
