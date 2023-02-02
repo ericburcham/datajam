@@ -1,0 +1,12 @@
+schemaVersion: 2.2.0
+metadata:
+  name: 'Fleet dev environment'
+attributes:
+  space:
+    # regular, large, xlarge
+    instanceType: xlarge
+    # a default IDE for the project
+    editor:
+      # (Required) IDE type: Idea, WebStorm, PyCharm,
+      # RubyMine, CLion, Fleet, GoLand, PhpStorm
+      type: Fleet
