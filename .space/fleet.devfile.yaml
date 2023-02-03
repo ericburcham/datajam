@@ -4,7 +4,7 @@ metadata:
 attributes:
   space:
     # regular, large, xlarge
-    instanceType: xlarge
+    instanceType: large
     # a default IDE for the project
     editor:
       # (Required) IDE type: Idea, WebStorm, PyCharm,
