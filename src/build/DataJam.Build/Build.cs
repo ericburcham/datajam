@@ -12,7 +12,8 @@ using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
-
+using Serilog.Core;
+using Serilog.Events;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -23,7 +24,7 @@ internal class Build : NukeBuild
     readonly Configuration Configuration = IsLocalBuild
         ? Configuration.Debug
         : Configuration.Release;
-
+    
     [Solution] readonly Solution Solution;
 
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
