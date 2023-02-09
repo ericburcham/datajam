@@ -28,4 +28,8 @@
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="DataContextTests\SimpleInsertions" />
+    </ItemGroup>
+
 </Project>

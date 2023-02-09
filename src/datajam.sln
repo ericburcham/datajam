@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam", "code\DataJam\Dat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.EntityFrameworkCore", "code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj", "{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.IntegrationTests", "tests\DataJam.IntegrationTests\DataJam.IntegrationTests.csproj", "{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.EntityFrameworkCore.IntegrationTests", "tests\DataJam.EntityFrameworkCore.IntegrationTests\DataJam.EntityFrameworkCore.IntegrationTests.csproj", "{8AB95696-B8F5-4A11-BDDA-CA06DD2C5929}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.EntityFrameworkCore.UnitTests", "tests\DataJam.EntityFrameworkCore.UnitTests\DataJam.EntityFrameworkCore.UnitTests.csproj", "{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB}"
@@ -22,8 +20,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.InMemory", "code\DataJam.InMemory\DataJam.InMemory.csproj", "{0EA10195-1728-4A53-9BFA-72863BEE9031}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.InMemory.UnitTests", "tests\DataJam.InMemory.UnitTests\DataJam.InMemory.UnitTests.csproj", "{A7B02DB7-85C8-4955-8160-93A4C2A0F382}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.UnitTests", "tests\DataJam.UnitTests\DataJam.UnitTests.csproj", "{4D9D7338-9150-45DE-8034-417F2034D0E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +35,6 @@ Global
 		{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8AB95696-B8F5-4A11-BDDA-CA06DD2C5929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8AB95696-B8F5-4A11-BDDA-CA06DD2C5929}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AB95696-B8F5-4A11-BDDA-CA06DD2C5929}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,10 +51,6 @@ Global
 		{A7B02DB7-85C8-4955-8160-93A4C2A0F382}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7B02DB7-85C8-4955-8160-93A4C2A0F382}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7B02DB7-85C8-4955-8160-93A4C2A0F382}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4D9D7338-9150-45DE-8034-417F2034D0E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4D9D7338-9150-45DE-8034-417F2034D0E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4D9D7338-9150-45DE-8034-417F2034D0E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4D9D7338-9150-45DE-8034-417F2034D0E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,12 +58,10 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{AFF7DB3B-0702-4E60-90BE-9ED8F76E39E3} = {D9991EE5-31A7-4B8A-9E4C-1ABE4D2C1A96}
 		{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1} = {FD970DC3-82AE-4B3E-91AE-38E9067F48F5}
-		{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41} = {D9991EE5-31A7-4B8A-9E4C-1ABE4D2C1A96}
 		{8AB95696-B8F5-4A11-BDDA-CA06DD2C5929} = {FD970DC3-82AE-4B3E-91AE-38E9067F48F5}
 		{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB} = {FD970DC3-82AE-4B3E-91AE-38E9067F48F5}
 		{0EA10195-1728-4A53-9BFA-72863BEE9031} = {1230DB43-A2D8-46C5-BBE8-EDCEB0523468}
 		{A7B02DB7-85C8-4955-8160-93A4C2A0F382} = {1230DB43-A2D8-46C5-BBE8-EDCEB0523468}
-		{4D9D7338-9150-45DE-8034-417F2034D0E6} = {D9991EE5-31A7-4B8A-9E4C-1ABE4D2C1A96}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}
