@@ -10,8 +10,4 @@
     <NukeTelemetryVersion>1</NukeTelemetryVersion>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Nuke.Common" Version="6.3.0" />
-  </ItemGroup>
-
 </Project>

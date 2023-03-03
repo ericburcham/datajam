@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+    <!-- Mandatory EP packages -->
+    <ItemGroup>
+        <PackageReference Include="StyleCop.Analyzers" Version="$(Stylecop_Analyzers_Version)">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <!-- Global properties -->
+    <PropertyGroup>
+        <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <Authors>Ghost Recon Team</Authors>
+        <Company>Enteprise Products</Company>
+        <Copyright>© Enteprise Products</Copyright>
+        <FileVersion>1.0.0</FileVersion>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <LangVersion>latest</LangVersion>
+        <PackageVersion>1.0.0</PackageVersion>
+        <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+        <Product>DataJam</Product>
+        <Version>1.0.0</Version>
+    </PropertyGroup>
+
+    <!-- Package Versions -->
+    <PropertyGroup>
+        <FluentAssertions_Version>6.10.0</FluentAssertions_Version>
+        <Microsoft_NET_Test_Sdk_Version>17.5.0</Microsoft_NET_Test_Sdk_Version>
+        <Nuke_Common_Version>6.3.0</Nuke_Common_Version>
+        <NUnit_Version>3.13.3</NUnit_Version>
+        <NUnit3TestAdapter_Version>4.4.2</NUnit3TestAdapter_Version>
+        <NUnit_Analyzers_Version>3.6.0</NUnit_Analyzers_Version>
+        <Stylecop_Analyzers_Version>1.1.118</Stylecop_Analyzers_Version>
+    </PropertyGroup>
+
+    <!-- Treat all warnings as errors -->
+    <PropertyGroup>
+        <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <!-- Disable annoying warnings -->
+    <PropertyGroup>
+        <NoWarn>1702;MSB3277;NETSDK1138;NU5104;NU1702;NU1803</NoWarn>
+    </PropertyGroup>
+
+</Project>
