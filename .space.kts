@@ -8,8 +8,8 @@ val dotNetInstallScript = """
     apt-get update && apt-get install -y apt-utils apt-transport-https
     apt-get install -y curl unzip wget software-properties-common git
     
-    wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
-    dpkg -i packages-microsoft-prod.deb
+    wget https://packages.microsoft.com/config/ubuntu/22.10/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+    sudo dpkg -i packages-microsoft-prod.deb
     rm packages-microsoft-prod.deb
     apt-get update
     apt-get install -y dotnet-sdk-3.1 dotnet-sdk-6.0
