@@ -9,7 +9,7 @@
     </ItemGroup>
 
     <PropertyGroup>
-        <RootNamespace>SecuredQueryEngine</RootNamespace>
+        <RootNamespace>DataJam</RootNamespace>
         <TargetFrameworks>net472;netstandard2.1</TargetFrameworks>
     </PropertyGroup>
 
