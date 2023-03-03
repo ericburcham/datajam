@@ -4,28 +4,32 @@
 * For more info, see https://www.jetbrains.com/help/space/automation.html
 */
 
-job("Hello World!") {
-    // Run the job in a default instance in cloud.
-    requirements {
-        workerPool = WorkerPools.SPACE_CLOUD
+val dotNetInstallScript = """
+    apt-get update && apt-get install -y apt-utils apt-transport-https
+    apt-get install -y curl unzip wget software-properties-common git
+    
+    wget https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb -O packages-microsoft-prod.deb
+    dpkg -i packages-microsoft-prod.deb
+    rm packages-microsoft-prod.deb
+    apt-get update
+    apt-get install -y dotnet-sdk-3.1 dotnet-sdk-6.0
+""".trimIndent()
+
+job("Continuous integration build") {
+    startOn {
+        gitPush { enabled = true }
     }
-
-    // Run the steps in parallel.
-    parallel {
-
-        // Say hello from a worker.
-        host("Hello Host") {
-            shellScript {
-                content = """
-                echo "Hello from a host!"
-                """
-            }
+    
+    container("mcr.microsoft.com/dotnet/sdk:6.0-focal") {
+        resources {
+            cpu = 2.cpu
+            memory = 2.gb
         }
-
-        // Say hello from an Ubuntu container.
-        container(displayName = "Hello Ubuntu", image = "ubuntu:latest")
-        {
-            args("echo", "Hello from a container!")
+        
+        shellScript {
+            content = dotNetInstallScript + """            
+            	./build.sh
+            """.trimIndent()
         }
     }
 }
