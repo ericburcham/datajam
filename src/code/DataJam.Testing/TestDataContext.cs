@@ -4,7 +4,7 @@ namespace DataJam.Testing
 {
     public class TestDataContext : IDataContext, IReadonlyDataContext
     {
-        internal readonly ObjectRepresentationRepository Repo;
+        internal readonly RepresentationRepository Repo;
 
         private readonly Queue _addQueue = new Queue();
 
@@ -12,11 +12,11 @@ namespace DataJam.Testing
 
         public TestDataContext()
         {
-            Repo = new ObjectRepresentationRepository();
+            Repo = new RepresentationRepository();
             RegisterIIdentifiables();
         }
 
-        internal TestDataContext(ObjectRepresentationRepository repo)
+        internal TestDataContext(RepresentationRepository repo)
         {
             Repo = repo;
             RegisterIIdentifiables();
@@ -33,7 +33,7 @@ namespace DataJam.Testing
         public virtual IQueryable<T> AsQueryable<T>()
             where T : class
         {
-            return Repo.Data<T>();
+            return Repo.GetRepresentations<T>();
         }
 
         public virtual int Commit()
@@ -57,12 +57,6 @@ namespace DataJam.Testing
         {
         }
 
-        /// <summary>
-        ///     This method allows you to register database "identity" like strategies for auto incrementing keys, or new guid
-        ///     keys, etc...
-        /// </summary>
-        /// <param name="identityStrategy">The strategy to use for an object</param>
-        /// <typeparam name="T">The type to use it from</typeparam>
         public void RegisterIdentityStrategy<T>(IIdentityStrategy<T> identityStrategy)
             where T : class
         {
@@ -96,9 +90,6 @@ namespace DataJam.Testing
             return item;
         }
 
-        /// <summary>
-        ///     Processes the held but uncommitted adds and removes from the context
-        /// </summary>
         protected int ProcessCommitQueues()
         {
             var changeCount = 0;

@@ -2,7 +2,7 @@ using DataJam.Testing.UnitTests.Domains.None;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace DataJam.Testing.UnitTests.DataContextTests;
+namespace DataJam.Testing.UnitTests.IdentityStrategyTests;
 
 [TestFixture]
 public class WhenIdIsInt16 : SingleEntityScenario<short>

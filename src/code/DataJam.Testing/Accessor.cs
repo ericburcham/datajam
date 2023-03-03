@@ -2,13 +2,13 @@
 
 internal class Accessor
 {
-    public Accessor(Action removeAction, Func<object, object, object> getterFunc)
+    public Accessor(Action remover, Func<object, object, object> getter)
     {
-        RemoveAction = removeAction;
-        GetterFunc = getterFunc;
+        Remover = remover;
+        Getter = getter;
     }
 
-    internal Func<object, object, object> GetterFunc { get; set; }
+    internal Func<object, object, object> Getter { get; }
 
-    internal Action RemoveAction { get; set; }
+    internal Action Remover { get; }
 }

@@ -9,9 +9,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Remove="DataContextTests\SimpleInsertions\**" />
-      <EmbeddedResource Remove="DataContextTests\SimpleInsertions\**" />
-      <None Remove="DataContextTests\SimpleInsertions\**" />
+      <Compile Remove="IdentityStrategyTests\SimpleInsertions\**" />
+      <EmbeddedResource Remove="IdentityStrategyTests\SimpleInsertions\**" />
+      <None Remove="IdentityStrategyTests\SimpleInsertions\**" />
     </ItemGroup>
 
     <ItemGroup>

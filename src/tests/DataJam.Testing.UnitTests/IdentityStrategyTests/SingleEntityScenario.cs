@@ -1,7 +1,7 @@
 using DataJam.Testing.UnitTests.Domains.None;
 using NUnit.Framework;
 
-namespace DataJam.Testing.UnitTests.DataContextTests;
+namespace DataJam.Testing.UnitTests.IdentityStrategyTests;
 
 public abstract class SingleEntityScenario<T> : InMemoryDataContextScenario where T : IEquatable<T>
 {

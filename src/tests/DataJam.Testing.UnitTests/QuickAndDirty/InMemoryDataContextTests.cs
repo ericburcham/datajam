@@ -77,7 +77,7 @@ namespace DataJam.Testing.UnitTests.QuickAndDirty
             _context.Commit();
 
             //assert
-            _context.Repo.ObjectRepresentations.Count(x => x.IsType<int>()).Should().Be(0);
+            _context.Repo.Representations.Count(x => x.IsType<int>()).Should().Be(0);
         }
 
         [TestCase]
