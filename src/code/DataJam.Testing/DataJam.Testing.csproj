@@ -10,4 +10,8 @@
       <ProjectReference Include="..\DataJam\DataJam.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Properties\" />
+    </ItemGroup>
+
 </Project>

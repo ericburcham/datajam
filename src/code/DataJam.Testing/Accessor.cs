@@ -1,4 +1,4 @@
-namespace DataJam.Testing;
+﻿namespace DataJam.Testing;
 
 internal class Accessor
 {

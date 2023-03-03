@@ -1,6 +1,6 @@
 using System.Collections;
 
-namespace DataJam.Extensions;
+namespace DataJam;
 
 public static class TypeExtensions
 {

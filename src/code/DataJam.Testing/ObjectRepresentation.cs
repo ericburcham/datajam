@@ -1,15 +1,26 @@
-namespace DataJam.Testing;
+﻿namespace DataJam.Testing;
 
-internal class Representation
+internal class ObjectRepresentation
 {
-    public object? Entity { get; set; }
-    public IEnumerable<Representation>? RelatedEntities { get; set; }
+    public ObjectRepresentation()
+    {
+        Parents = new Dictionary<object, Accessor>();
+    }
 
-    internal Dictionary<object, Accessor> Parents { get; set; } = new();
+    internal object Entity { get; set; }
 
-    public List<Representation> GetObjectRepresentationsToPrune()
+    internal Dictionary<object, Accessor> Parents { get; set; }
+
+    internal IEnumerable<ObjectRepresentation> RelatedEntities { get; set; }
+
+    public List<ObjectRepresentation> GetObjectRepresentationsToPrune()
     {
         return AllRelated().Where(x => x.Orphaned()).ToList();
+    }
+
+    public bool IsType<T1>()
+    {
+        return Entity.GetType() is T1;
     }
 
     public bool Orphaned()
@@ -26,14 +37,14 @@ internal class Representation
                     accessor.Value.GetterFunc(accessor.Key, Entity) == null);
     }
 
-    internal IEnumerable<Representation> AllRelated()
+    internal IEnumerable<ObjectRepresentation> AllRelated()
     {
-        var evaluatedObjects = new List<Representation>();
+        var evaluatedObjects = new List<ObjectRepresentation>();
 
         return AllRelated(evaluatedObjects);
     }
-    
-    internal IEnumerable<Representation> AllRelated(List<Representation> evaluatedObjects)
+
+    internal IEnumerable<ObjectRepresentation> AllRelated(List<ObjectRepresentation> evaluatedObjects)
     {
         var items = RelatedEntities.ToList();
         foreach (var objectRepresentationBase in RelatedEntities)
@@ -49,6 +60,4 @@ internal class Representation
 
         return items;
     }
-
-
 }
