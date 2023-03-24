@@ -1,12 +1,19 @@
-using FluentAssertions;
-
 namespace DataJam.EntityFrameworkCore.IntegrationTests;
+
+using FluentAssertions;
 
 [TestFixture]
 public class AlwaysPassingTests
 {
     private int _one;
+
     private int _two;
+
+    [Test]
+    public void OneShouldBeOne()
+    {
+        _one.Should().Be(1);
+    }
 
     [OneTimeSetUp]
     public void OneTimeSetUp()
@@ -18,12 +25,6 @@ public class AlwaysPassingTests
     public void SetUp()
     {
         _two = 2;
-    }
-
-    [Test]
-    public void OneShouldBeOne()
-    {
-        _one.Should().Be(1);
     }
 
     [Test]

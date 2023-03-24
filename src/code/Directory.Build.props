@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+
+    <Import Project="../Directory.Build.props"/>
+
+    <PropertyGroup>
+        <IsPackable>true</IsPackable>
+        <RootNamespace>DataJam</RootNamespace>
+    </PropertyGroup>
+
+    <!-- Include Stylecop.json -->
+    <ItemGroup>
+        <!-- Removes the stylecop.json file included from the outer Directory.Build.props file-->
+        <AdditionalFiles Remove="../../stylecop.json" Link="stylecop.json"/>
+
+        <!-- Add the stylecop.json file that is specific to the code folder. -->
+        <AdditionalFiles Include="../stylecop.json" Link="stylecop.json"/>
+    </ItemGroup>
+
+
+    <!-- Include StyleCop RuleSet -->
+    <PropertyGroup>
+        <CodeAnalysisRuleSet>../StyleCopAnalyzers.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+
+</Project>
