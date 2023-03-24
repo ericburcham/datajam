@@ -4,9 +4,20 @@
     <Import Project="../Directory.Build.props" />
 
     <PropertyGroup>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
+        <IsPackable>true</IsPackable>
         <RootNamespace>DataJam</RootNamespace>
+    </PropertyGroup>
+
+    <!-- Include Stylecop.json -->
+    <ItemGroup>
+        <AdditionalFiles Remove="../../stylecop.json" Link="stylecop.json" />
+        <AdditionalFiles Include="../stylecop.json" Link="stylecop.json" />
+    </ItemGroup>
+
+
+    <!-- Include StyleCop RuleSet -->
+    <PropertyGroup>
+        <CodeAnalysisRuleSet>../StyleCopAnalyzers.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
 </Project>

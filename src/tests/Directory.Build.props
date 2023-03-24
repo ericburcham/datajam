@@ -2,11 +2,6 @@
 <Project>
     <Import Project="../Directory.Build.props" />
 
-    <!-- Include Stylecop.json -->
-    <ItemGroup>
-        <AdditionalFiles Include="../../stylecop.json" Link="stylecop.json" />
-    </ItemGroup>
-
     <ItemGroup>
         <PackageReference Include="FluentAssertions" Version="$(FluentAssertions_Version)" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(Microsoft_NET_Test_Sdk_Version)" />
@@ -22,13 +17,6 @@
 
     <PropertyGroup>
         <IsPackable>false</IsPackable>
-        <RootNamespace>$(MSBuildProjectName)</RootNamespace>
-        <TargetFrameworks>net472;net5.0</TargetFrameworks>
-    </PropertyGroup>
-
-    <!-- Include StyleCop RuleSet -->
-    <PropertyGroup>
-        <CodeAnalysisRuleSet>../../StyleCopAnalyzers.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
 </Project>

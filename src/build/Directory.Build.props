@@ -3,24 +3,8 @@
 
     <Import Project="../Directory.Build.props" />
 
-    <!-- Include Stylecop.json -->
-    <ItemGroup>
-        <AdditionalFiles Include="../stylecop.json" Link="stylecop.json" />
-        <AdditionalFiles Include="../../StyleCopAnalyzers.ruleset" Link="StyleCopAnalyzers.ruleset" />
-    </ItemGroup>
-
     <ItemGroup>
         <PackageReference Include="Nuke.Common" Version="$(Nuke_Common_Version)" />
     </ItemGroup>
 
-
-    <PropertyGroup>
-        <RootNamespace>DataJam</RootNamespace>
-        <TargetFrameworks>net6.0</TargetFrameworks>
-    </PropertyGroup>
-
-    <!-- Include StyleCop RuleSet -->
-    <PropertyGroup>
-        <CodeAnalysisRuleSet>../../StyleCopAnalyzers.ruleset</CodeAnalysisRuleSet>
-    </PropertyGroup>
 </Project>

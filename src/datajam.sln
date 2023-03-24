@@ -20,6 +20,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "code", "code", "{0ED872A4-B40C-4B25-BA6C-FBA62694C649}"
 	ProjectSection(SolutionItems) = preProject
 		code\Directory.Build.props = code\Directory.Build.props
+		code\stylecop.json = code\stylecop.json
+		code\StyleCopAnalyzers.ruleset = code\StyleCopAnalyzers.ruleset
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F2626B7C-5C3D-4B3D-A94C-C236DD975B57}"
@@ -31,7 +33,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{086DC7D9
 	ProjectSection(SolutionItems) = preProject
 		build\Directory.Build.props = build\Directory.Build.props
 		build\Directory.Build.targets = build\Directory.Build.targets
-		build\stylecop.json = build\stylecop.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{00A30BEC-7340-4227-81C8-77E383FF7AFC}"

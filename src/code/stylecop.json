@@ -7,8 +7,6 @@
   "$schema": "https://raw.githubusercontent.com/DotNetAnalyzers/StyleCopAnalyzers/master/StyleCop.Analyzers/StyleCop.Analyzers/Settings/stylecop.schema.json",
   "settings": {
     "documentationRules": {
-      "companyName": "Enterprise Products Partners L.P. (Enterprise)",
-      "copyrightText": "© Copyright 2012 - 2022, {companyName}, All Rights Reserved.\nPermission to use, copy, modify, or distribute this software source code, binaries or\nrelated documentation, is strictly prohibited, without written consent from Enterprise.\nFor inquiries about the software, contact Enterprise: Enterprise Products Company Law\nDepartment, 1100 Louisiana, 10th Floor, Houston, Texas 77002, phone 713-381-6500.",
       "documentationCulture": "en-US",
       "documentExposedElements": true,
       "documentInterfaces": false,
