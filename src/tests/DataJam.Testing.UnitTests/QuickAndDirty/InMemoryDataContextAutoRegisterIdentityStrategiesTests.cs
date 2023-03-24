@@ -1,7 +1,8 @@
-﻿using FluentAssertions;
-using NUnit.Framework;
+﻿namespace DataJam.Testing.UnitTests.QuickAndDirty;
 
-namespace DataJam.Testing.UnitTests.QuickAndDirty;
+using FluentAssertions;
+
+using NUnit.Framework;
 
 [TestFixture]
 public class InMemoryDataContextAutoRegisterIdentityStrategiesTests
@@ -26,7 +27,7 @@ public class InMemoryDataContextAutoRegisterIdentityStrategiesTests
     {
         //Arrange
         var entity = new Entity();
-        entity.MyProperties.Add(new AnotherProperty());
+        entity.MyProperties.Add(new());
 
         //Act
         _context.Add(entity);
@@ -40,10 +41,7 @@ public class InMemoryDataContextAutoRegisterIdentityStrategiesTests
     public void Add_ShouldUseIdentityForRelatedTypes()
     {
         //Arrange
-        var entity = new Entity
-        {
-            MyProperty = new AnotherProperty()
-        };
+        var entity = new Entity { MyProperty = new() };
 
         //Act
         _context.Add(entity);
@@ -74,7 +72,7 @@ public class InMemoryDataContextAutoRegisterIdentityStrategiesTests
         var entity = new Entity();
         _context.Add(entity);
         _context.Commit();
-        entity.MyProperties.Add(new AnotherProperty());
+        entity.MyProperties.Add(new());
 
         //Act
         _context.Commit();
@@ -86,7 +84,7 @@ public class InMemoryDataContextAutoRegisterIdentityStrategiesTests
     [SetUp]
     public void SetUp()
     {
-        _context = new TestDataContext();
+        _context = new();
     }
 
     private class Entity : IIdentifiable<int>

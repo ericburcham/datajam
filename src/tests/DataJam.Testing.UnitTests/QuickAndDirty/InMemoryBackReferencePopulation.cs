@@ -1,8 +1,10 @@
-﻿using DataJam.Testing.UnitTests.QuickAndDirty.Domain;
-using FluentAssertions;
-using NUnit.Framework;
+﻿namespace DataJam.Testing.UnitTests.QuickAndDirty;
 
-namespace DataJam.Testing.UnitTests.QuickAndDirty;
+using Domain;
+
+using FluentAssertions;
+
+using NUnit.Framework;
 
 [TestFixture]
 public class InMemoryBackReferencePopulation

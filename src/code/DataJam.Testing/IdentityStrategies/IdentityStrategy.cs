@@ -1,14 +1,14 @@
+namespace DataJam.Testing;
+
 using System.Linq.Expressions;
 using System.Reflection;
-
-namespace DataJam.Testing;
 
 public abstract class IdentityStrategy<TType, TIdentity> : IIdentityStrategy<TType>
     where TType : class
 {
     private readonly Action<TType> _identitySetter;
 
-    private readonly object _lastValueLock = new object();
+    private readonly object _lastValueLock = new();
 
     protected IdentityStrategy(Expression<Func<TType, TIdentity>> property)
     {
@@ -16,6 +16,7 @@ public abstract class IdentityStrategy<TType, TIdentity> : IIdentityStrategy<TTy
         {
             var propertyInfo = GetPropertyFromExpression(property);
             var id = (TIdentity)propertyInfo.GetValue(obj, null);
+
             if (IsDefaultUnsetValue(id))
             {
                 propertyInfo.SetValue(obj, Next(), null);

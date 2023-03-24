@@ -1,11 +1,14 @@
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace DataJam.Testing.UnitTests.IdentityStrategyTests;
+
+using FluentAssertions;
+
+using NUnit.Framework;
 
 public abstract class InMemoryDataContextScenario
 {
     private int _changeCount;
+
+    protected abstract int ExpectedChangeCount { get; }
 
     [OneTimeSetUp]
     public async Task OneTimeSetUp()
@@ -19,8 +22,6 @@ public abstract class InMemoryDataContextScenario
     {
         _changeCount.Should().Be(ExpectedChangeCount);
     }
-
-    protected abstract int ExpectedChangeCount { get; }
 
     protected abstract Task<int> ArrangeAndCommitData(IUnitOfWork dataContext);
 }

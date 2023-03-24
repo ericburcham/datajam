@@ -7,7 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\DataJam\DataJam.csproj" />
+        <ProjectReference Include="..\DataJam\DataJam.csproj"/>
     </ItemGroup>
 
 </Project>

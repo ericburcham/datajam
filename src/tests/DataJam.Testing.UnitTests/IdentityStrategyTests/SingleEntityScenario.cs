@@ -1,9 +1,11 @@
-using DataJam.Testing.UnitTests.Domains.None;
-using NUnit.Framework;
-
 namespace DataJam.Testing.UnitTests.IdentityStrategyTests;
 
-public abstract class SingleEntityScenario<T> : InMemoryDataContextScenario where T : IEquatable<T>
+using Domains.None;
+
+using NUnit.Framework;
+
+public abstract class SingleEntityScenario<T> : InMemoryDataContextScenario
+    where T : IEquatable<T>
 {
     private TestEntity<T> _testEntity = null!;
 
@@ -13,12 +15,10 @@ public abstract class SingleEntityScenario<T> : InMemoryDataContextScenario wher
         ValidateId(_testEntity.Id);
     }
 
-    protected abstract void ValidateId(T id);
-
     protected override async Task<int> ArrangeAndCommitData(IUnitOfWork dataContext)
     {
         _testEntity = BuildTestEntity();
-        
+
         dataContext.Add(_testEntity);
 
         return await dataContext.CommitAsync();
@@ -26,6 +26,8 @@ public abstract class SingleEntityScenario<T> : InMemoryDataContextScenario wher
 
     protected virtual TestEntity<T> BuildTestEntity()
     {
-        return new TestEntity<T>();
+        return new();
     }
+
+    protected abstract void ValidateId(T id);
 }

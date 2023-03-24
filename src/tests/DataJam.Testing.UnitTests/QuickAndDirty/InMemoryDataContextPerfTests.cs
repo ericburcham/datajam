@@ -1,9 +1,12 @@
-﻿using System.Diagnostics;
-using DataJam.Testing.UnitTests.QuickAndDirty.Domain;
-using FluentAssertions;
-using NUnit.Framework;
+﻿namespace DataJam.Testing.UnitTests.QuickAndDirty;
 
-namespace DataJam.Testing.UnitTests.QuickAndDirty;
+using System.Diagnostics;
+
+using Domain;
+
+using FluentAssertions;
+
+using NUnit.Framework;
 
 [TestFixture]
 public class InMemoryDataContextPerfTests
@@ -13,25 +16,17 @@ public class InMemoryDataContextPerfTests
     [SetUp]
     public void Setup()
     {
-        _context = new TestDataContext();
+        _context = new();
     }
 
     [TestCase]
     public void ShouldPerformBetterThan10MsInserts()
     {
         var sw = Stopwatch.StartNew();
+
         for (var i = 0; i < 100; i++)
         {
-            _context.Add(
-                new Site
-                {
-                    Blog = new Blog
-                    {
-                        Author = new Author(),
-                        Id = Guid.NewGuid(),
-                        Posts = new List<Post> { new Post(), new Post() }
-                    }
-                });
+            _context.Add(new Site { Blog = new() { Author = new(), Id = Guid.NewGuid(), Posts = new List<Post> { new(), new() } } });
         }
 
         sw.Stop();
@@ -45,11 +40,12 @@ public class InMemoryDataContextPerfTests
     {
         //Arrange
         var sw = Stopwatch.StartNew();
+
         for (var i = 0; i < 100; i++)
         {
             var blog = new Blog();
             _context.Add(blog);
-            blog.Posts.Add(new Post());
+            blog.Posts.Add(new());
             _context.Commit();
         }
 

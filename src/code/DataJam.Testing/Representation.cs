@@ -6,7 +6,7 @@ internal class Representation
     {
         Entity = entity;
         RelatedEntities = relatedEntities;
-        Parents = new Dictionary<object, Accessor>();
+        Parents = new();
     }
 
     internal object Entity { get; }
@@ -20,14 +20,14 @@ internal class Representation
         return GetRelated().Where(x => x.IsOrphaned()).ToList();
     }
 
-    public bool IsType<T>()
-    {
-        return Entity.GetType() is T;
-    }
-
     public bool IsOrphaned()
     {
         return !Parents.Any() || Parents.All(accessor => accessor.Value.Getter(accessor.Key, Entity) == null);
+    }
+
+    public bool IsType<T>()
+    {
+        return Entity.GetType() is T;
     }
 
     internal IEnumerable<Representation> GetRelated()
@@ -40,6 +40,7 @@ internal class Representation
     internal IEnumerable<Representation> GetRelated(List<Representation> evaluatedObjects)
     {
         var items = RelatedEntities.ToList();
+
         foreach (var objectRepresentationBase in RelatedEntities)
         {
             if (evaluatedObjects.Contains(objectRepresentationBase))

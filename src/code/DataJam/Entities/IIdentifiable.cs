@@ -1,7 +1,10 @@
 ﻿namespace DataJam;
 
-public interface IIdentifiable<T>
-    where T : IEquatable<T>
+/// <summary>Represents a type that can be clearly identified by its unique <see cref="IIdentifiable{T}.Id" /> property.</summary>
+/// <typeparam name="TId">The type of the <see cref="IIdentifiable{TId}.Id" /> property.</typeparam>
+public interface IIdentifiable<TId>
+    where TId : IEquatable<TId>
 {
-    T Id { get; set; }
+    /// <summary>Gets or sets a value that uniquely represents the instance in a system of record.</summary>
+    TId Id { get; set; }
 }

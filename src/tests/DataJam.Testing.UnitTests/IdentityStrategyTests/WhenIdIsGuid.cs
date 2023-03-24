@@ -1,8 +1,10 @@
-using DataJam.Testing.UnitTests.Domains.None;
-using FluentAssertions;
-using NUnit.Framework;
-
 namespace DataJam.Testing.UnitTests.IdentityStrategyTests;
+
+using Domains.None;
+
+using FluentAssertions;
+
+using NUnit.Framework;
 
 [TestFixture]
 public class WhenIdIsGuid : SingleEntityScenario<Guid>
@@ -11,13 +13,13 @@ public class WhenIdIsGuid : SingleEntityScenario<Guid>
 
     protected override int ExpectedChangeCount => 1;
 
+    protected override TestEntity<Guid> BuildTestEntity()
+    {
+        return new() { Id = _expectedId };
+    }
+
     protected override void ValidateId(Guid id)
     {
         id.Should().Be(_expectedId);
-    }
-
-    protected override TestEntity<Guid> BuildTestEntity()
-    {
-        return new TestEntity<Guid> { Id = _expectedId };
     }
 }

@@ -1,6 +1,6 @@
-﻿using NUnit.Framework;
+﻿namespace DataJam.Testing.UnitTests.QuickAndDirty;
 
-namespace DataJam.Testing.UnitTests.QuickAndDirty;
+using NUnit.Framework;
 
 [TestFixture]
 public class InMemoryDataContextReferenceByIdTests
@@ -10,7 +10,7 @@ public class InMemoryDataContextReferenceByIdTests
     [SetUp]
     public void SetUp()
     {
-        _context = new TestDataContext();
+        _context = new();
     }
 
     [TestCase]
@@ -38,7 +38,7 @@ public class InMemoryDataContextReferenceByIdTests
     {
         public Blog()
         {
-            Posts = new List<Post>();
+            Posts = new();
         }
 
         public long Id { get; set; }

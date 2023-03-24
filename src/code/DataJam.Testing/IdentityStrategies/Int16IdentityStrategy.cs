@@ -1,6 +1,6 @@
-using System.Linq.Expressions;
-
 namespace DataJam.Testing;
+
+using System.Linq.Expressions;
 
 internal class Int16IdentityStrategy<T> : IdentityStrategy<T, short>
     where T : class

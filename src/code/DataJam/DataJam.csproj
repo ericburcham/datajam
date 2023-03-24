@@ -1,3 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
+    <ItemGroup>
+        <None Remove="DataJam.csproj.DotSettings"/>
+    </ItemGroup>
 </Project>
