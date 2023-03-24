@@ -21,6 +21,7 @@
         <PackageVersion>1.0.0</PackageVersion>
         <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
         <Product>DataJam</Product>
+        <TargetFrameworks>net6.0</TargetFrameworks>
         <Version>1.0.0</Version>
     </PropertyGroup>
 
@@ -43,6 +44,16 @@
     <!-- Disable annoying warnings -->
     <PropertyGroup>
         <NoWarn>1702;MSB3277;NETSDK1138;NU5104;NU1702;NU1803</NoWarn>
+    </PropertyGroup>
+
+    <!-- Include Stylecop.json -->
+    <ItemGroup>
+        <AdditionalFiles Include="../stylecop.json" Link="stylecop.json" />
+    </ItemGroup>
+
+    <!-- Include StyleCop RuleSet -->
+    <PropertyGroup>
+        <CodeAnalysisRuleSet>../../StyleCopAnalyzers.ruleset</CodeAnalysisRuleSet>
     </PropertyGroup>
 
 </Project>

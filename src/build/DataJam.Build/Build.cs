@@ -16,15 +16,19 @@ using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
+/// <summary>
+/// Exposes and coordinates <see cref="Target"/>s for use by Nuke Build.
+/// </summary>
 [UnsetVisualStudioEnvironmentVariables]
 public class Build : NukeBuild
 {
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly Configuration Configuration = IsLocalBuild
+    private readonly Configuration _configuration = IsLocalBuild
         ? Configuration.Debug
         : Configuration.Release;
-    
-    [Solution] readonly Solution Solution;
+
+    [Solution]
+    readonly Solution Solution;
 
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
 
@@ -44,7 +48,7 @@ public class Build : NukeBuild
              {
                  DotNetBuild(buildSettings => buildSettings
                                   .SetProjectFile(Solution)
-                                  .SetConfiguration(Configuration)
+                                  .SetConfiguration(_configuration)
                                   .EnableNoRestore());
              });
 
@@ -57,7 +61,7 @@ public class Build : NukeBuild
                                  .SetProject(Solution)
                                  .SetOutputDirectory(ArtifactsDirectory)
                                  .SetIncludeSymbols(true)
-                                 .SetConfiguration(Configuration)
+                                 .SetConfiguration(_configuration)
                                  .EnableNoRestore()
                                  .EnableNoBuild());
              });
@@ -80,7 +84,7 @@ public class Build : NukeBuild
              {
                  DotNetTest(testSettings => testSettings
                                  .SetProjectFile(Solution)
-                                 .SetConfiguration(Configuration)
+                                 .SetConfiguration(_configuration)
                                  .EnableNoRestore()
                                  .EnableNoBuild());
              });

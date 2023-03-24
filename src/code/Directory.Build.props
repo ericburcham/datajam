@@ -3,18 +3,10 @@
 
     <Import Project="../Directory.Build.props" />
 
-    <!-- Include Stylecop.json -->
-    <ItemGroup>
-        <AdditionalFiles Include="../stylecop.json" Link="stylecop.json" />
-    </ItemGroup>
-
     <PropertyGroup>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
         <RootNamespace>DataJam</RootNamespace>
-        <TargetFrameworks>net472;netstandard2.1</TargetFrameworks>
     </PropertyGroup>
 
-    <!-- Include StyleCop RuleSet -->
-    <PropertyGroup>
-        <CodeAnalysisRuleSet>../StyleCopAnalyzers.ruleset</CodeAnalysisRuleSet>
-    </PropertyGroup>
 </Project>
