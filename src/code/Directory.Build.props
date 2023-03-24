@@ -12,7 +12,7 @@
     <ItemGroup>
         <!-- Removes the stylecop.json file included from the outer Directory.Build.props file-->
         <AdditionalFiles Remove="../../stylecop.json" Link="stylecop.json"/>
-        
+
         <!-- Add the stylecop.json file that is specific to the code folder. -->
         <AdditionalFiles Include="../stylecop.json" Link="stylecop.json"/>
     </ItemGroup>

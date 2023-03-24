@@ -8,18 +8,15 @@ using Nuke.Common.Utilities.Collections;
 using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
+// ReSharper disable InconsistentNaming
 [UnsetVisualStudioEnvironmentVariables]
 class Build : NukeBuild
 {
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
-    readonly Configuration _configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
+    readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    #pragma warning disable SA1306 // Field names should begin with lower-case letter
-    #pragma warning disable SX1309 // Field names should begin with underscore
     [Solution]
     readonly Solution Solution = null!;
-    #pragma warning restore SX1309 // Field names should begin with underscore
-    #pragma warning restore SA1306 // Field names should begin with lower-case letter
 
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
 
@@ -37,7 +34,7 @@ class Build : NukeBuild
                                             .Executes(
                                                  () =>
                                                  {
-                                                     DotNetBuild(buildSettings => buildSettings.SetProjectFile(Solution).SetConfiguration(_configuration).EnableNoRestore());
+                                                     DotNetBuild(buildSettings => buildSettings.SetProjectFile(Solution).SetConfiguration(Configuration).EnableNoRestore());
                                                  });
 
     Target Pack =>
@@ -45,7 +42,7 @@ class Build : NukeBuild
                                             .Executes(
                                                  () =>
                                                  {
-                                                     DotNetPack(packSettings => packSettings.SetProject(Solution).SetOutputDirectory(ArtifactsDirectory).SetIncludeSymbols(true).SetConfiguration(_configuration).EnableNoRestore().EnableNoBuild());
+                                                     DotNetPack(packSettings => packSettings.SetProject(Solution).SetOutputDirectory(ArtifactsDirectory).SetIncludeSymbols(true).SetConfiguration(Configuration).EnableNoRestore().EnableNoBuild());
                                                  });
 
     Target Restore =>
@@ -63,7 +60,7 @@ class Build : NukeBuild
                                             .Executes(
                                                  () =>
                                                  {
-                                                     DotNetTest(testSettings => testSettings.SetProjectFile(Solution).SetConfiguration(_configuration).EnableNoRestore().EnableNoBuild());
+                                                     DotNetTest(testSettings => testSettings.SetProjectFile(Solution).SetConfiguration(Configuration).EnableNoRestore().EnableNoBuild());
                                                  });
 
     AbsolutePath TestsDirectory => RootDirectory / "src" / "tests";
