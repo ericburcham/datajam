@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj"/>
+        <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
+    </ItemGroup>
 
 </Project>

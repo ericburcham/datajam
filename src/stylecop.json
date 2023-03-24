@@ -45,7 +45,7 @@
       ]
     },
     "orderingRules": {
-	  "blankLinesBetweenUsingGroups": "require",
+      "blankLinesBetweenUsingGroups": "require",
       "elementOrder": [
         "kind",
         "constant",
