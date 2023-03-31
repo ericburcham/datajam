@@ -1,5 +1,9 @@
 ﻿namespace DataJam.Testing.UnitTests.QuickAndDirty;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using Domain;
 
 using FluentAssertions;
@@ -9,7 +13,7 @@ using NUnit.Framework;
 [TestFixture]
 public class InMemoryDataContextTests
 {
-    private TestDataContext _context;
+    private TestDataContext _context = null!;
 
     [TestCase]
     public void Add_ShouldCreateAFirstIdOfOneEveryTimeForANewInstanceOfIIdentifiableOfInt()
@@ -68,48 +72,48 @@ public class InMemoryDataContextTests
     [TestCase]
     public void Add_ShouldIgnoreNonReferenceTypeProperties()
     {
-        //arrange 
+        // arrange
         var site = new Site { Id = 2 };
 
-        //act
+        // act
         _context.Add(site);
         _context.Commit();
 
-        //assert
+        // assert
         _context.Repo.Representations.Count(x => x.IsType<int>()).Should().Be(0);
     }
 
     [TestCase]
     public void Add_ShouldIgnoreNullCollections()
     {
-        //arrange 
-        var blog = new Blog { Posts = null };
+        // arrange
+        var blog = new Blog();
 
-        //act
+        // act
         _context.Add(blog);
 
-        //assert
+        // assert
         _context.AsQueryable<Post>().Should().HaveCount(0);
     }
 
     [TestCase]
     public void Add_ShouldIncludeAllRelatedItemsFromRelatedCollections()
     {
-        //arrange 
+        // arrange
         var blog = new Blog { Posts = new List<Post> { new(), new() } };
 
-        //act
+        // act
         _context.Add(blog);
         _context.Commit();
 
-        //assert
+        // assert
         _context.AsQueryable<Post>().Should().HaveCount(2);
     }
 
     [TestCase]
     public void Add_ShouldNotAddAnItemTwiceForMultipleReferences()
     {
-        //arrange 
+        // arrange
         var post = new Post();
         var blog = new Blog { Posts = new List<Post> { post, new() } };
 
@@ -118,25 +122,25 @@ public class InMemoryDataContextTests
         _context.Add(blog);
         _context.Commit();
 
-        //act
+        // act
         _context.Add(blog2);
         _context.Commit();
 
-        //assert
+        // assert
         _context.AsQueryable<Post>().Should().HaveCount(2);
     }
 
     [TestCase]
     public void Add_ShouldStoreASite()
     {
-        //arrange 
+        // arrange
         var item = new Site();
 
-        //act
+        // act
         _context.Add(item);
         _context.Commit();
 
-        //assert
+        // assert
         var site = _context.AsQueryable<Site>().First();
         site.Should().BeSameAs(item);
     }
@@ -144,14 +148,14 @@ public class InMemoryDataContextTests
     [TestCase]
     public void Add_ShouldStoreBlogWithAuthor()
     {
-        //arrange 
+        // arrange
         var blog = new Blog { Author = new() };
 
-        //act
+        // act
         _context.Add(blog);
         _context.Commit();
 
-        //assert
+        // assert
         _context.AsQueryable<Author>().Should().HaveCount(1);
         _context.AsQueryable<Author>().First().Should().BeSameAs(blog.Author);
     }
@@ -159,14 +163,14 @@ public class InMemoryDataContextTests
     [TestCase]
     public void Add_ShouldStoreThreeLevelsOfObjects()
     {
-        //arrange 
+        // arrange
         var site = new Site { Blog = new() { Author = new() } };
 
-        //act
+        // act
         _context.Add(site);
         _context.Commit();
 
-        //assert
+        // assert
         _context.AsQueryable<Author>().Should().HaveCount(1);
         _context.AsQueryable<Author>().First().Should().BeSameAs(site.Blog.Author);
     }
@@ -174,16 +178,16 @@ public class InMemoryDataContextTests
     [TestCase]
     public void Add_ShouldStoreTwoSites()
     {
-        //arrange 
+        // arrange
         var item = new Site();
         var item2 = new Site();
 
-        //act
+        // act
         _context.Add(item);
         _context.Add(item2);
         _context.Commit();
 
-        //assert
+        // assert
         _context.AsQueryable<Site>().Any(s => ReferenceEquals(item, s)).Should().BeTrue();
 
         _context.AsQueryable<Site>().Any(s => ReferenceEquals(item2, s)).Should().BeTrue();
@@ -192,62 +196,62 @@ public class InMemoryDataContextTests
     [TestCase]
     public void Add_ShouldUseIdentityForRelatedCollectionTypes()
     {
-        //Arrange
+        // Arrange
         _context.RegisterIdentityStrategy(new Int32IdentityStrategy<Post>(x => x.Id));
         var blog = new Blog();
         blog.Posts.Add(new() { Id = 0 });
 
-        //Act
+        // Act
         _context.Add(blog);
         _context.Commit();
 
-        //Assert
+        // Assert
         blog.Posts.Single().Id.Should().NotBe(0);
     }
 
     [TestCase]
     public void Add_ShouldUseIdentityForRelatedTypes()
     {
-        //Arrange
+        // Arrange
         _context.RegisterIdentityStrategy(new GuidIdentityStrategy<Author>(x => x.Id));
         var blog = new Blog { Author = new() { Id = Guid.Empty } };
 
-        //Act
+        // Act
         _context.Add(blog);
         _context.Commit();
 
-        //Assert
+        // Assert
         blog.Author.Id.Should().NotBe(Guid.Empty);
     }
 
     [TestCase]
     public void Add_ShouldUseIdentityForType()
     {
-        //Arrange
+        // Arrange
         _context.RegisterIdentityStrategy(new Int32IdentityStrategy<Post>(x => x.Id));
         var post = new Post { Id = 0 };
 
-        //Act
+        // Act
         _context.Add(post);
         _context.Commit();
 
-        //Assert
+        // Assert
         post.Id.Should().NotBe(0);
     }
 
     [TestCase]
     public void Commit_ShouldAddNewLeafMembers()
     {
-        //Arrange
+        // Arrange
         var blog = new Blog();
         _context.Add(blog);
         _context.Commit();
 
-        //Act
+        // Act
         blog.Posts.Add(new());
         _context.Commit();
 
-        //Assert
+        // Assert
         _context.AsQueryable<Post>().Should().HaveCount(1);
     }
 
@@ -282,7 +286,7 @@ public class InMemoryDataContextTests
 
         _context.Add(blog);
         _context.Commit();
-        blog.Posts = null;
+        blog.Posts = null!;
 
         // Act
         _context.Commit();
@@ -301,7 +305,7 @@ public class InMemoryDataContextTests
         var site = new Site { Blog = blog };
         _context.Add(site);
         _context.Commit();
-        site.Blog = null;
+        site.Blog = null!;
 
         // Act
         _context.Commit();
@@ -314,33 +318,33 @@ public class InMemoryDataContextTests
     [TestCase]
     public void Commit_ShouldUseIdentityForRelatedCollectionTypes()
     {
-        //Arrange
+        // Arrange
         _context.RegisterIdentityStrategy(new Int32IdentityStrategy<Post>(x => x.Id));
         var blog = new Blog();
         _context.Add(blog);
         _context.Commit();
         blog.Posts.Add(new() { Id = 0 });
 
-        //Act
+        // Act
         _context.Commit();
 
-        //Assert
+        // Assert
         blog.Posts.Single().Id.Should().NotBe(0);
     }
 
     [TestCase]
     public void Remove_ShouldDeleteAnObjectFromRelatedObjects()
     {
-        //arrange 
+        // arrange
         var site = new Site { Blog = new() };
         _context.Add(site);
         _context.Commit();
 
-        //act
+        // act
         _context.Remove(site.Blog);
         _context.Commit();
 
-        //assert
+        // assert
         _context.AsQueryable<Blog>().Should().HaveCount(0);
         _context.AsQueryable<Site>().First().Blog.Should().BeNull();
     }
@@ -394,7 +398,7 @@ public class InMemoryDataContextTests
     [TestCase]
     public void Remove_ShouldRemoveDependentGraphOnBranchRemoval()
     {
-        //arrange 
+        // arrange
         var post = new Post();
         var blog = new Blog { Posts = new List<Post> { new(), post } };
 
@@ -403,11 +407,11 @@ public class InMemoryDataContextTests
         _context.Add(site);
         _context.Commit();
 
-        //act
+        // act
         _context.Remove(blog);
         _context.Commit();
 
-        //assert
+        // assert
         var posts = _context.AsQueryable<Post>();
         posts.Should().HaveCount(0);
     }
@@ -415,8 +419,7 @@ public class InMemoryDataContextTests
     [TestCase]
     public void Remove_ShouldRemoveFromParentButNotDeleteChildObjectsThatAreReferencedMoreThanOne()
     {
-        //arrange 
-
+        // arrange
         var post1 = new Post();
         var post2 = new Post();
         var blog1 = new Blog { Posts = new List<Post> { post1, post2 } };
@@ -443,17 +446,17 @@ public class InMemoryDataContextTests
     [TestCase]
     public void Remove_ShouldRemoveObjectFromRelatedCollection()
     {
-        //arrange 
+        // arrange
         var post = new Post();
         var blog = new Blog { Posts = new List<Post> { post } };
         _context.Add(blog);
         _context.Commit();
 
-        //act
+        // act
         _context.Remove(post);
         _context.Commit();
 
-        //assert
+        // assert
         _context.AsQueryable<Blog>().Should().HaveCount(1);
         _context.AsQueryable<Blog>().First().Posts.Should().HaveCount(0);
         _context.AsQueryable<Post>().Should().HaveCount(0);

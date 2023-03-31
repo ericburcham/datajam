@@ -1,5 +1,8 @@
 ﻿namespace DataJam.Extensions;
 
+using System.Collections.Generic;
+using System.Linq;
+
 /// <summary>Provides extension methods for types that extend IEnumerable.</summary>
 public static class EnumerableExtensions
 {

@@ -1,6 +1,9 @@
 namespace DataJam;
 
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 /// <summary>Provides extension methods for <see cref="Type" />s.</summary>
 public static class TypeExtensions

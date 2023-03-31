@@ -1,15 +1,19 @@
 ﻿namespace DataJam.Testing;
 
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Reflection;
 
 using Extensions;
 
 internal sealed class RepresentationRepository
 {
-    internal IList<Representation> Representations = new List<Representation>();
+    public System.Collections.Generic.Dictionary<Type, Action<object>> IdentityStrategies { get; set; } = new();
 
-    public Dictionary<Type, Action<object>> IdentityStrategies { get; set; } = new();
+    internal System.Collections.Generic.IList<Representation> Representations { get; } = new System.Collections.Generic.List<Representation>();
 
     internal void Add<T>(T item)
         where T : class
@@ -103,7 +107,7 @@ internal sealed class RepresentationRepository
         where T : class
     {
         var itemType = item.GetType();
-        var itemTypes = new List<Type>(itemType.GetInterfaces()) { itemType };
+        var itemTypes = new System.Collections.Generic.List<Type>(itemType.GetInterfaces()) { itemType };
 
         var identityStrategy = IdentityStrategies.Keys.Intersect(itemTypes).FirstOrDefault();
 
@@ -138,7 +142,7 @@ internal sealed class RepresentationRepository
 
     private object CreateGenericList(Type type)
     {
-        var listType = typeof(List<>);
+        var listType = typeof(System.Collections.Generic.List<>);
         Type[] typeArgs = { type };
         var genericType = listType.MakeGenericType(typeArgs);
 
@@ -153,7 +157,7 @@ internal sealed class RepresentationRepository
 
             if (value == null)
             {
-                return null;
+                return null!;
             }
 
             var collection = (IEnumerable)value;
@@ -206,7 +210,7 @@ internal sealed class RepresentationRepository
 
     private IEnumerable<Representation> GetEnumerableRelationships<T>(T item)
     {
-        var representations = new List<Representation>();
+        var representations = new System.Collections.Generic.List<Representation>();
         var enumerableProperties = item!.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x => x.PropertyType != typeof(string) && typeof(IEnumerable).IsAssignableFrom(x.PropertyType) && x.GetValue(item, null) != null);
 
         foreach (var property in enumerableProperties)
@@ -227,7 +231,7 @@ internal sealed class RepresentationRepository
 
     private IEnumerable<Representation> GetSingleRelationship<T>(T item)
     {
-        var representations = new List<Representation>();
+        var representations = new System.Collections.Generic.List<Representation>();
         var singleProperties = item!.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x => x.PropertyType.IsClass && !typeof(IEnumerable).IsAssignableFrom(x.PropertyType) && x.GetValue(item, null) != null);
 
         foreach (var property in singleProperties)
@@ -270,7 +274,7 @@ internal sealed class RepresentationRepository
         var entityType = representation.Entity.GetType();
         var nonPrimitiveProperties = entityType.GetProperties().Where(x => !x.PropertyType.IsPrimitive).ToList();
         var typesCurrentlyStored = representation.RelatedEntities.Select(x => x.Entity.GetType()).ToList();
-        var referencedProperties = new List<object>();
+        var referencedProperties = new System.Collections.Generic.List<object>();
 
         foreach (var property in nonPrimitiveProperties)
         {
@@ -314,7 +318,7 @@ internal sealed class RepresentationRepository
 
                 if (collection == null)
                 {
-                    var listType = typeof(List<>).MakeGenericType(entityType);
+                    var listType = typeof(System.Collections.Generic.List<>).MakeGenericType(entityType);
                     referencingProperty.SetValue(data.Entity, Activator.CreateInstance(listType), null);
                     collection = referencingProperty.GetValue(data.Entity, null);
                 }

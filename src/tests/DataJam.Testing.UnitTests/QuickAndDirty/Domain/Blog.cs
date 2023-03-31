@@ -1,5 +1,8 @@
 ﻿namespace DataJam.Testing.UnitTests.QuickAndDirty.Domain;
 
+using System;
+using System.Collections.Generic;
+
 public class Blog
 {
     public Blog()
@@ -14,11 +17,11 @@ public class Blog
         Title = title;
     }
 
-    public Author Author { get; set; }
+    public Author Author { get; set; } = null!;
 
     public Guid Id { get; set; }
 
     public ICollection<Post> Posts { get; set; }
 
-    public string Title { get; set; }
+    public string Title { get; set; } = null!;
 }

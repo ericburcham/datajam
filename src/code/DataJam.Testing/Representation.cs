@@ -1,5 +1,8 @@
 ﻿namespace DataJam.Testing;
 
+using System.Collections.Generic;
+using System.Linq;
+
 internal class Representation
 {
     public Representation(object entity, IEnumerable<Representation> relatedEntities)

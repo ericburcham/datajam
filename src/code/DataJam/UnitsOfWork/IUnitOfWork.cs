@@ -1,5 +1,7 @@
 namespace DataJam;
 
+using System.Threading.Tasks;
+
 /// <summary>Provides a contract for implementing the unit of work pattern.</summary>
 public interface IUnitOfWork
 {

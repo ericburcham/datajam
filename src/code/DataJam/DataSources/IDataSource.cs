@@ -1,5 +1,7 @@
 ﻿namespace DataJam;
 
+using System.Linq;
+
 /// <summary>Exposes an interface for querying data sources.</summary>
 public interface IDataSource
 {

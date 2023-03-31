@@ -2,7 +2,7 @@
 
 public class Site
 {
-    public Blog Blog { get; set; }
+    public Blog Blog { get; set; } = null!;
 
     public int Id { get; set; }
 }

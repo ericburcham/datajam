@@ -1,11 +1,15 @@
 ﻿namespace DataJam.Testing.UnitTests.QuickAndDirty;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using NUnit.Framework;
 
 [TestFixture]
 public class InMemoryDataContextReferenceByIdTests
 {
-    private TestDataContext _context;
+    private TestDataContext _context = null!;
 
     [SetUp]
     public void SetUp()

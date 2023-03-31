@@ -1,5 +1,7 @@
 ﻿namespace DataJam.Testing.UnitTests.QuickAndDirty.Domain;
 
+using System;
+
 public class Author
 {
     public Author()

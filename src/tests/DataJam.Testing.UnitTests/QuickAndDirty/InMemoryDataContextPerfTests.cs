@@ -1,5 +1,7 @@
 ﻿namespace DataJam.Testing.UnitTests.QuickAndDirty;
 
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 
 using Domain;
@@ -11,7 +13,7 @@ using NUnit.Framework;
 [TestFixture]
 public class InMemoryDataContextPerfTests
 {
-    private TestDataContext _context;
+    private TestDataContext _context = null!;
 
     [SetUp]
     public void Setup()
@@ -38,7 +40,7 @@ public class InMemoryDataContextPerfTests
     [TestCase]
     public void ShouldPerformCommitsBetterThan10Ms()
     {
-        //Arrange
+        // Arrange
         var sw = Stopwatch.StartNew();
 
         for (var i = 0; i < 100; i++)

@@ -1,5 +1,7 @@
 ﻿namespace DataJam.Testing.UnitTests.QuickAndDirty;
 
+using System.Linq;
+
 using Domain;
 
 using FluentAssertions;
@@ -32,7 +34,7 @@ public class InMemoryBackReferencePopulation
         var child = new Post();
         var blog = new Blog("Test");
         child.Blog = blog;
-        blog.Posts = null;
+        blog.Posts = null!;
 
         context.Add(child);
         context.Commit();

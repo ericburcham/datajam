@@ -1,15 +1,20 @@
 ﻿namespace DataJam.Testing;
 
+using System;
 using System.Collections;
+using System.Linq;
+using System.Threading.Tasks;
 
+/// <summary>Provides a data context useful for testing.</summary>
 public class TestDataContext : IDataContext, IReadonlyDataContext
 {
-    internal readonly RepresentationRepository Repo;
-
     private readonly Queue _addQueue = new();
 
     private readonly Queue _removeQueue = new();
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TestDataContext"/> class.
+    /// </summary>
     public TestDataContext()
     {
         Repo = new();
@@ -22,6 +27,9 @@ public class TestDataContext : IDataContext, IReadonlyDataContext
         RegisterIIdentifiables();
     }
 
+    internal RepresentationRepository Repo { get; }
+
+    /// <inheritdoc cref="IUnitOfWork" />
     public virtual T Add<T>(T item)
         where T : class
     {
@@ -30,12 +38,14 @@ public class TestDataContext : IDataContext, IReadonlyDataContext
         return item;
     }
 
+    /// <inheritdoc cref="IDataSource" />
     public virtual IQueryable<T> AsQueryable<T>()
         where T : class
     {
         return Repo.GetRepresentations<T>();
     }
 
+    /// <inheritdoc cref="IUnitOfWork" />
     public virtual int Commit()
     {
         var changeCount = 0;
@@ -45,6 +55,7 @@ public class TestDataContext : IDataContext, IReadonlyDataContext
         return changeCount;
     }
 
+    /// <inheritdoc cref="IUnitOfWork" />
     public virtual Task<int> CommitAsync()
     {
         var task = new Task<int>(Commit);
@@ -53,10 +64,16 @@ public class TestDataContext : IDataContext, IReadonlyDataContext
         return task;
     }
 
+    /// <inheritdoc cref="IDataContext" />
     public void Dispose()
     {
     }
 
+    /// <summary>
+    /// Registers the given <paramref name="identityStrategy"/>.
+    /// </summary>
+    /// <typeparam name="T">The <paramref name="identityStrategy"/>'s element Type.</typeparam>
+    /// <param name="identityStrategy">The identity strategy to register.</param>
     public void RegisterIdentityStrategy<T>(IIdentityStrategy<T> identityStrategy)
         where T : class
     {
@@ -70,12 +87,14 @@ public class TestDataContext : IDataContext, IReadonlyDataContext
         }
     }
 
+    /// <inheritdoc cref="IUnitOfWork" />
     public virtual T Reload<T>(T item)
         where T : class
     {
         return item;
     }
 
+    /// <inheritdoc cref="IUnitOfWork" />
     public virtual T Remove<T>(T item)
         where T : class
     {
@@ -84,12 +103,17 @@ public class TestDataContext : IDataContext, IReadonlyDataContext
         return item;
     }
 
+    /// <inheritdoc cref="IUnitOfWork" />
     public virtual T Update<T>(T item)
         where T : class
     {
         return item;
     }
 
+    /// <summary>
+    /// Processes all adds, updates, and removals.
+    /// </summary>
+    /// <returns>The count of items which had changes.</returns>
     protected int ProcessCommitQueues()
     {
         var changeCount = 0;
@@ -105,7 +129,7 @@ public class TestDataContext : IDataContext, IReadonlyDataContext
 
         while (_addQueue.Count > 0)
         {
-            Repo.Add(_addQueue.Dequeue());
+            Repo.Add(_addQueue.Dequeue()!);
             ++changeCount;
         }
 
@@ -129,7 +153,7 @@ public class TestDataContext : IDataContext, IReadonlyDataContext
 
         while (_removeQueue.Count > 0)
         {
-            Repo.Remove(_removeQueue.Dequeue());
+            Repo.Remove(_removeQueue.Dequeue()!);
             ++changeCount;
         }
 

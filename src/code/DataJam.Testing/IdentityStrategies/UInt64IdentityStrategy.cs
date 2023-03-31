@@ -1,17 +1,18 @@
 namespace DataJam.Testing;
 
+using System;
 using System.Linq.Expressions;
 
 internal class UInt64IdentityStrategy<T> : IdentityStrategy<T, ulong>
     where T : class
 {
-    public UInt64IdentityStrategy(Expression<Func<T, ulong>> property)
-        : base(property)
+    public UInt64IdentityStrategy(Expression<Func<T, ulong>> propertyExpression)
+        : base(propertyExpression)
     {
         Generator = GenerateInt64;
     }
 
-    protected override bool IsDefaultUnsetValue(ulong id)
+    protected override bool DefaultValueIsUnset(ulong id)
     {
         return id == default;
     }

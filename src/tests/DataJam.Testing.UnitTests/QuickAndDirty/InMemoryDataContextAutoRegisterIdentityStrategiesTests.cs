@@ -1,5 +1,8 @@
 ﻿namespace DataJam.Testing.UnitTests.QuickAndDirty;
 
+using System.Collections.Generic;
+using System.Linq;
+
 using FluentAssertions;
 
 using NUnit.Framework;
@@ -7,77 +10,77 @@ using NUnit.Framework;
 [TestFixture]
 public class InMemoryDataContextAutoRegisterIdentityStrategiesTests
 {
-    private TestDataContext _context;
+    private TestDataContext _context = null!;
 
     [TestCase]
     public void Add_ShouldNotChangeIdWhenIdExisting()
     {
-        //Arrange
+        // Arrange
         var entity = new Entity { Id = 25 };
 
-        //Act
+        // Act
         _context.Add(entity);
 
-        //Assert
+        // Assert
         entity.Id.Should().Be(25);
     }
 
     [TestCase]
     public void Add_ShouldUseIdentityForRelatedCollectionTypes()
     {
-        //Arrange
+        // Arrange
         var entity = new Entity();
         entity.MyProperties.Add(new());
 
-        //Act
+        // Act
         _context.Add(entity);
         _context.Commit();
 
-        //Assert
+        // Assert
         entity.MyProperties.Single().Id.Should().NotBe(0);
     }
 
     [TestCase]
     public void Add_ShouldUseIdentityForRelatedTypes()
     {
-        //Arrange
+        // Arrange
         var entity = new Entity { MyProperty = new() };
 
-        //Act
+        // Act
         _context.Add(entity);
         _context.Commit();
 
-        //Assert
+        // Assert
         entity.MyProperty.Id.Should().NotBe(0);
     }
 
     [TestCase]
     public void Add_ShouldUseIdentityForType()
     {
-        //Arrange
+        // Arrange
         var entity = new Entity();
 
-        //Act
+        // Act
         _context.Add(entity);
         _context.Commit();
 
-        //Assert
+        // Assert
         entity.Id.Should().NotBe(0);
     }
 
     [TestCase]
     public void Commit_ShouldUseIdentityForRelatedCollectionTypes()
     {
-        //Arrange
+        // Arrange
         var entity = new Entity();
         _context.Add(entity);
         _context.Commit();
         entity.MyProperties.Add(new());
 
-        //Act
+        // Act
         _context.Commit();
 
-        //Assert
+        // Assert
         entity.MyProperties.Single().Id.Should().NotBe(0);
     }
 
@@ -98,7 +101,7 @@ public class InMemoryDataContextAutoRegisterIdentityStrategiesTests
 
         public IList<AnotherProperty> MyProperties { get; }
 
-        public AnotherProperty MyProperty { get; set; }
+        public AnotherProperty MyProperty { get; init; } = null!;
     }
 
     private class AnotherProperty : IIdentifiable<short>
