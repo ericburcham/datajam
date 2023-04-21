@@ -1,9 +1,3 @@
-/**
-* JetBrains Space Automation
-* This Kotlin-script file lets you automate build activities
-* For more info, see https://www.jetbrains.com/help/space/automation.html
-*/
-
 val buildContainerImage = "ubuntu:22.04"
 val buildScript = """
     apt-get update && apt-get install -y apt-utils apt-transport-https
@@ -21,10 +15,6 @@ job("Continuous integration build") {
     startOn {
         gitPush {
             enabled = true
-
-            branchFilter {
-                -"refs\heads\feature\*"
-            }
         }
     }
     
