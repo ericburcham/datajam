@@ -23,13 +23,13 @@
 
     <!-- Package Versions -->
     <PropertyGroup>
-        <FluentAssertions_Version>6.10.0</FluentAssertions_Version>
+        <FluentAssertions_Version>6.11.0</FluentAssertions_Version>
         <Microsoft_NET_Test_Sdk_Version>17.5.0</Microsoft_NET_Test_Sdk_Version>
         <NSubstitute_Version>5.0.0</NSubstitute_Version>
         <Nuke_Common_Version>6.3.0</Nuke_Common_Version>
         <NUnit_Version>3.13.3</NUnit_Version>
         <NUnit3TestAdapter_Version>4.4.2</NUnit3TestAdapter_Version>
-        <NUnit_Analyzers_Version>3.6.0</NUnit_Analyzers_Version>
+        <NUnit_Analyzers_Version>3.6.1</NUnit_Analyzers_Version>
         <Stylecop_Analyzers_Version>1.2.0-beta.435</Stylecop_Analyzers_Version>
         <TestStack_Dossier_Version>4.0.0</TestStack_Dossier_Version>
     </PropertyGroup>
