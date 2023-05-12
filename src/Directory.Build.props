@@ -16,7 +16,7 @@
         <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
         <Product>DataJam</Product>
         <RootNamespace>$(MSBuildProjectName)</RootNamespace>
-        <TargetFrameworks>net48;net6.0</TargetFrameworks>
+        <TargetFrameworks>net6.0</TargetFrameworks>
         <Version>1.0.0</Version>
     </PropertyGroup>
 
