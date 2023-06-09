@@ -20,13 +20,6 @@ public interface IUnitOfWork
     /// <returns>A task that represents the asynchronous save operation. The task result contains the number of state entries written while saving changes.</returns>
     Task<int> CommitAsync();
 
-    /// <summary>Refreshes the given <paramref name="item" /> from whatever data store is backing the unit of work.</summary>
-    /// <param name="item">The item to refresh.</param>
-    /// <typeparam name="T">The <paramref name="item" />'s element type.</typeparam>
-    /// <returns>The refreshed <paramref name="item" />.</returns>
-    T Reload<T>(T item)
-        where T : class;
-
     /// <summary>Removes the given <paramref name="item" /> from the unit of work.</summary>
     /// <param name="item">The item to remove.</param>
     /// <typeparam name="T">The <paramref name="item" />'s element type.</typeparam>

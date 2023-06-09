@@ -7,8 +7,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-using Extensions;
-
 internal sealed class RepresentationRepository
 {
     public System.Collections.Generic.Dictionary<Type, Action<object>> IdentityStrategies { get; set; } = new();

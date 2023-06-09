@@ -1,5 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <None Remove="DataJam.csproj.DotSettings"/>
+        <None Remove="DataJam.csproj.DotSettings" />
+    </ItemGroup>
+    <ItemGroup>
+      <Folder Include="Extensions\" />
     </ItemGroup>
 </Project>

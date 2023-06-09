@@ -1,4 +1,4 @@
-namespace DataJam;
+namespace DataJam.Testing;
 
 using System;
 using System.Collections;
