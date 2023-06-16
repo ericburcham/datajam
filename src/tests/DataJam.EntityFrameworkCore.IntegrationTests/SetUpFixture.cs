@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 
 using DbUp;
 
+using Microsoft.EntityFrameworkCore;
+
 [SetUpFixture]
 public class SetUpFixture
 {
@@ -68,5 +70,14 @@ public class SetUpFixture
         {
             await container.StopAsync();
         }
+    }
+}
+
+
+public class MyContext : DbContext
+{
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
     }
 }
