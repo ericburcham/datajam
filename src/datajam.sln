@@ -42,6 +42,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Testing.UnitTests",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Testing", "code\DataJam.Testing\DataJam.Testing.csproj", "{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test-support", "test-support", "{1F83202C-5C08-4366-9B03-D0EB89C6F8C6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Migrations", "test-support\DataJam.Migrations\DataJam.Migrations.csproj", "{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -74,6 +78,10 @@ Global
 		{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -86,6 +94,7 @@ Global
 		{3C00C3FC-7063-40C6-B3FD-9026723DE33E} = {086DC7D9-258B-4819-B124-83752CCEE74F}
 		{F8AC6D3B-1580-4E48-A40C-F996DE011F50} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 		{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00} = {0ED872A4-B40C-4B25-BA6C-FBA62694C649}
+		{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}

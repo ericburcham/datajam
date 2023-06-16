@@ -1,7 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <ProjectReference Include="..\DataJam\DataJam.csproj"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.7" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\DataJam\DataJam.csproj" />
     </ItemGroup>
 
 </Project>
