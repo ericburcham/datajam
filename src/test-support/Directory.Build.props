@@ -5,7 +5,6 @@
 
     <PropertyGroup>
         <IsPackable>true</IsPackable>
-        <RootNamespace>DataJam</RootNamespace>
     </PropertyGroup>
 
     <!-- Include Stylecop.json -->

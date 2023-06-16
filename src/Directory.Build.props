@@ -22,6 +22,8 @@
 
     <!-- Package Versions -->
     <PropertyGroup>
+        <dbup_sqlserver_Version>5.0.8</dbup_sqlserver_Version>
+        <Microsoft_EntityFrameworkCore_Version>7.0.7</Microsoft_EntityFrameworkCore_Version>
         <FluentAssertions_Version>6.11.0</FluentAssertions_Version>
         <Microsoft_NET_Test_Sdk_Version>17.5.0</Microsoft_NET_Test_Sdk_Version>
         <NSubstitute_Version>5.0.0</NSubstitute_Version>
@@ -30,6 +32,7 @@
         <NUnit3TestAdapter_Version>4.4.2</NUnit3TestAdapter_Version>
         <NUnit_Analyzers_Version>3.6.1</NUnit_Analyzers_Version>
         <Stylecop_Analyzers_Version>1.2.0-beta.435</Stylecop_Analyzers_Version>
+        <TestContainers_MsSql_Version>3.2.0</TestContainers_MsSql_Version>
         <TestStack_Dossier_Version>4.0.0</TestStack_Dossier_Version>
     </PropertyGroup>
 
