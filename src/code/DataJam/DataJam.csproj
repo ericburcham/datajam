@@ -1,7 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
     <ItemGroup>
-        <Reference Include="Microsoft.EntityFrameworkCore">
-            <HintPath>C:\Users\james\.nuget\packages\microsoft.entityframeworkcore\7.0.7\lib\net6.0\Microsoft.EntityFrameworkCore.dll</HintPath>
-        </Reference>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(Microsoft_EntityFrameworkCore_Version)"/>
     </ItemGroup>
 </Project>
