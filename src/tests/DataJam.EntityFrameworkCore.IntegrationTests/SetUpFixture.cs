@@ -5,14 +5,10 @@ using System.Threading.Tasks;
 
 using DbUp;
 
-using Microsoft.EntityFrameworkCore;
-
 [SetUpFixture]
 public class SetUpFixture
 {
     private static Assembly MigrationAssembly => Assembly.Load("DataJam.Migrations");
-
-    private string _connectionString;
 
     [OneTimeSetUp]
     public async Task OneTimeSetUp()
@@ -27,19 +23,6 @@ public class SetUpFixture
         await StopContainers();
     }
 
-    private async Task InsertFamilies()
-    {
-        var domain = new FamilyDomain(_connectionString);
-        var dataContext = new DomainContext<FamilyDomain>(domain);
-
-        foreach (var child in BuildFamilies())
-        {
-            dataContext.Add(child);
-        }
-
-        await dataContext.CommitAsync();
-    }
-
     private Task DeployMsSqlDatabase()
     {
         var connectionString = Dependencies.Instance.MsSql.GetConnectionString();
@@ -49,7 +32,6 @@ public class SetUpFixture
 
         if (upgradeResult.Successful)
         {
-            _connectionString = connectionString;
             return Task.CompletedTask;
         }
 
@@ -70,14 +52,5 @@ public class SetUpFixture
         {
             await container.StopAsync();
         }
-    }
-}
-
-
-public class MyContext : DbContext
-{
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        base.OnModelCreating(modelBuilder);
     }
 }

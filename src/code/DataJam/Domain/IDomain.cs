@@ -1,4 +1,6 @@
-﻿namespace DataJam.Repositories;
+﻿namespace DataJam.Domain;
+
+using Microsoft.EntityFrameworkCore;
 
 public interface IDomain
 {
@@ -7,5 +9,5 @@ public interface IDomain
 
 public interface IConfigureDomainMappings
 {
-    void Configure(ModelBuilder modelBuilder)
+    void ApplyDomainMappings(ModelBuilder modelBuilder);
 }

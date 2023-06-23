@@ -56,16 +56,12 @@ public abstract class IdentityStrategy<T, TIdentity> : IIdentityStrategy<T>
         return Generator.Invoke();
     }
 
-    /// <summary>
-    /// Checks whether the default value for this identity strategy is unset.
-    /// </summary>
+    /// <summary>Checks whether the default value for this identity strategy is unset.</summary>
     /// <param name="id">The identity Type.</param>
     /// <returns>A value indicating whether the default value for this identity strategy is unset.</returns>
     protected abstract bool DefaultValueIsUnset(TIdentity id);
 
-    /// <summary>
-    /// Sets the <see cref="LastValue"/> property to the given <paramref name="value"/>.
-    /// </summary>
+    /// <summary>Sets the <see cref="LastValue" /> property to the given <paramref name="value" />.</summary>
     /// <param name="value">The value to use.</param>
     protected void SetLastValue(TIdentity value)
     {

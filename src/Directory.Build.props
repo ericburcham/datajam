@@ -23,7 +23,7 @@
     <!-- Package Versions -->
     <PropertyGroup>
         <dbup_sqlserver_Version>5.0.8</dbup_sqlserver_Version>
-        <Microsoft_EntityFrameworkCore_Version>7.0.7</Microsoft_EntityFrameworkCore_Version>
+        <Microsoft_EntityFrameworkCore_Version>7.0.8</Microsoft_EntityFrameworkCore_Version>
         <FluentAssertions_Version>6.11.0</FluentAssertions_Version>
         <Microsoft_NET_Test_Sdk_Version>17.5.0</Microsoft_NET_Test_Sdk_Version>
         <NSubstitute_Version>5.0.0</NSubstitute_Version>
@@ -56,7 +56,7 @@
 
     <!-- Enable Init keyword in .Net Framework -->
     <ItemGroup>
-        <Compile Include="..\..\IsExternalInit.cs" Link="IsExternalInit.cs" />
+        <Compile Include="..\..\IsExternalInit.cs" Link="IsExternalInit.cs"/>
     </ItemGroup>
 
     <!-- Include Stylecop.json -->

@@ -6,7 +6,7 @@
         <NukeRootDirectory>..\..\..</NukeRootDirectory>
         <NukeScriptDirectory>..\..\..</NukeScriptDirectory>
         <NukeTelemetryVersion>1</NukeTelemetryVersion>
-        <RootNamespace />
+        <RootNamespace/>
         <TargetFrameworks></TargetFrameworks>
         <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
