@@ -2,11 +2,13 @@ namespace DataJam.Domain;
 
 using DataContexts;
 
+using Microsoft.EntityFrameworkCore;
+
 public class DomainContext<TDomain> : DataContext, IDomainContext<TDomain>
     where TDomain : class, IDomain
 {
-    public DomainContext(string connectionString, TDomain domain)
-        : base(connectionString, domain.MappingConfiguration)
+    public DomainContext(DbContextOptions options, TDomain domain)
+        : base(options, domain.MappingConfiguration)
     {
     }
 }

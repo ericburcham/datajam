@@ -9,6 +9,8 @@ using Domain;
 
 using FluentAssertions;
 
+using Microsoft.EntityFrameworkCore;
+
 [TestFixture]
 public class WhenAnEntityIsPersisted
 {
@@ -17,9 +19,10 @@ public class WhenAnEntityIsPersisted
     [Test]
     public void ItCanBeRetrieved()
     {
+        var dbContextOptions = new DbContextOptionsBuilder().UseSqlServer(ConnectionString).Options;
         var mappingConfiguration = new FamilyMappingConfiguration();
         var domain = new FamilyDomain(mappingConfiguration);
-        var domainContext = new DomainContext<FamilyDomain>(ConnectionString, domain);
+        var domainContext = new DomainContext<FamilyDomain>(dbContextOptions, domain);
         var result = domainContext.AsQueryable<Child>().Single();
         result.Name.Should().Be("Kid");
         result.Father?.Name.Should().Be("Dad");
@@ -30,9 +33,10 @@ public class WhenAnEntityIsPersisted
     public async Task OneTimeSetUp()
     {
         // Insert some test data.
+        var dbContextOptions = new DbContextOptionsBuilder().UseSqlServer(ConnectionString).Options;
         var mappingConfiguration = new FamilyMappingConfiguration();
         var domain = new FamilyDomain(mappingConfiguration);
-        var domainContext = new DomainContext<FamilyDomain>(ConnectionString, domain);
+        var domainContext = new DomainContext<FamilyDomain>(dbContextOptions, domain);
         var father = new Father { Name = "Dad" };
         var mother = new Mother { Name = "Mom" };
         var child = new Child { Name = "Kid" };

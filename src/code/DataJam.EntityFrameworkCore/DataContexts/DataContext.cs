@@ -12,8 +12,8 @@ public class DataContext : DbContext, IDataContext
 {
     private readonly IConfigureDomainMappings _mappingConfiguration;
 
-    public DataContext(string connectionString, IConfigureDomainMappings mappingConfiguration)
-        : base(GetOptions(connectionString))
+    public DataContext(DbContextOptions options, IConfigureDomainMappings mappingConfiguration)
+        : base(options)
     {
         _mappingConfiguration = mappingConfiguration;
     }
