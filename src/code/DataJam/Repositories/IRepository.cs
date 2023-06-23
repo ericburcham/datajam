@@ -26,9 +26,9 @@ public interface IRepository
 
         /// <summary>Finds a single item based on a specified scalar query.</summary>
         /// <typeparam name="T">The type of the item to find.</typeparam>
-        /// <param name="query">The scalar query to execute.</param>
+        /// <param name="scalar">The scalar query to execute.</param>
         /// <returns>The item matching the specified scalar query.</returns>
-        T Find<T>(IScalar<T> query);
+        T Find<T>(IScalar<T> scalar);
 
         /// <summary>Finds a collection of projection items based on a specified query.</summary>
         /// <typeparam name="TSelection">The type of the items to select from.</typeparam>
@@ -40,9 +40,9 @@ public interface IRepository
 
         /// <summary>Finds a single item based on a specified scalar query asynchronously.</summary>
         /// <typeparam name="T">The type of the item to find.</typeparam>
-        /// <param name="query">The scalar query to execute.</param>
+        /// <param name="scalar">The scalar query to execute.</param>
         /// <returns>A task representing the asynchronous operation. The task result contains the item matching the specified scalar query.</returns>
-        Task<T> FindAsync<T>(IScalar<T> query);
+        Task<T> FindAsync<T>(IScalar<T> scalar);
 
         /// <summary>Finds a collection of items based on a specified query asynchronously.</summary>
         /// <typeparam name="T">The type of the items to find.</typeparam>

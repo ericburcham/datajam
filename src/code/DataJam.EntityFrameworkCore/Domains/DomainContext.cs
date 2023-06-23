@@ -1,6 +1,8 @@
-namespace DataJam.Domain;
+namespace DataJam.Domains;
 
-using DataContexts;
+using DataJam.DataContexts;
+
+using Domain;
 
 using Microsoft.EntityFrameworkCore;
 

@@ -1,6 +1,5 @@
 namespace DataJam.DataContexts;
 
-using System;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -65,29 +64,4 @@ public class DataContext : DbContext, IDataContext
         _mappingConfiguration.ApplyDomainMappings(modelBuilder);
         base.OnModelCreating(modelBuilder);
     }
-
-    private static DbContextOptions GetOptions(string connectionString)
-    {
-        var builder = new DbContextOptionsBuilder();
-
-        return builder.UseSqlServer(connectionString).Options;
-    }
-}
-
-public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyDataContext
-{
-    public IQueryable<T> AsQueryable<T>()
-        where T : class
-    {
-        throw new NotImplementedException();
-    }
-
-    public void Dispose()
-    {
-        throw new NotImplementedException();
-    }
-}
-
-public class ReadonlyDbContext
-{
 }
