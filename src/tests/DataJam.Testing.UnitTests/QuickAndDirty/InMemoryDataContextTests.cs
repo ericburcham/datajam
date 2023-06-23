@@ -13,7 +13,7 @@ using NUnit.Framework;
 [TestFixture]
 public class InMemoryDataContextTests
 {
-    private TestDataContext _context = null!;
+    private DataContext _context = null!;
 
     [TestCase]
     public void Add_ShouldCreateAFirstIdOfOneEveryTimeForANewInstanceOfIIdentifiableOfInt()

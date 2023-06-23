@@ -6,20 +6,20 @@ using System.Linq;
 using System.Threading.Tasks;
 
 /// <summary>Provides a data context useful for testing.</summary>
-public class TestDataContext : IDataContext, IReadonlyDataContext
+public class DataContext : IDataContext, IReadonlyDataContext
 {
     private readonly Queue _addQueue = new();
 
     private readonly Queue _removeQueue = new();
 
-    /// <summary>Initializes a new instance of the <see cref="TestDataContext" /> class.</summary>
-    public TestDataContext()
+    /// <summary>Initializes a new instance of the <see cref="DataContext" /> class.</summary>
+    public DataContext()
     {
         Repo = new();
         RegisterIIdentifiables();
     }
 
-    internal TestDataContext(RepresentationRepository repo)
+    internal DataContext(RepresentationRepository repo)
     {
         Repo = repo;
         RegisterIIdentifiables();

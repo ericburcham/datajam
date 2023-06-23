@@ -1,6 +1,4 @@
-﻿namespace DataJam.Domains;
-
-using DataJam.Repositories;
+﻿namespace DataJam;
 
 public class DomainRepository<TDomain> : Repository, IDomainRepository<TDomain>
     where TDomain : class

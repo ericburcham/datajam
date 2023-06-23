@@ -1,9 +1,7 @@
-namespace DataJam.DataContexts;
+namespace DataJam;
 
 using System.Linq;
 using System.Threading.Tasks;
-
-using Domain;
 
 using Microsoft.EntityFrameworkCore;
 

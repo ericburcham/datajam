@@ -4,8 +4,6 @@ using System.Threading.Tasks;
 
 using Domain;
 
-using Domains;
-
 using FluentAssertions;
 
 using Microsoft.EntityFrameworkCore;

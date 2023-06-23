@@ -9,7 +9,7 @@ using NUnit.Framework;
 [TestFixture]
 public class InMemoryDataContextReferenceByIdTests
 {
-    private TestDataContext _context = null!;
+    private DataContext _context = null!;
 
     [SetUp]
     public void SetUp()

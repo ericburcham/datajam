@@ -14,7 +14,7 @@ public class InMemoryBackReferencePopulation
     [TestCase]
     public void ShouldPopulateCollectionBasedReference()
     {
-        var context = new TestDataContext();
+        var context = new DataContext();
 
         var child = new Post();
         var blog = new Blog("Test");
@@ -29,7 +29,7 @@ public class InMemoryBackReferencePopulation
     [TestCase]
     public void ShouldPopulateCollectionBasedReferenceReplacingNullCollection()
     {
-        var context = new TestDataContext();
+        var context = new DataContext();
 
         var child = new Post();
         var blog = new Blog("Test");
@@ -45,7 +45,7 @@ public class InMemoryBackReferencePopulation
     [TestCase]
     public void ShouldPopulateSingleReference()
     {
-        var context = new TestDataContext();
+        var context = new DataContext();
 
         var child = new Post();
         var blog = new Blog("Test");

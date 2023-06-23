@@ -1,13 +1,6 @@
-﻿namespace DataJam.Domain;
-
-using Microsoft.EntityFrameworkCore;
+﻿namespace DataJam;
 
 public interface IDomain
 {
     IConfigureDomainMappings MappingConfiguration { get; }
-}
-
-public interface IConfigureDomainMappings
-{
-    void ApplyDomainMappings(ModelBuilder modelBuilder);
 }

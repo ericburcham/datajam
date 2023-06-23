@@ -1,9 +1,7 @@
-namespace DataJam.Repositories;
+namespace DataJam;
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
-using DataJam;
 
 public class Repository : IRepository
 {

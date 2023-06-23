@@ -10,7 +10,7 @@ using NUnit.Framework;
 [TestFixture]
 public class InMemoryDataContextAutoRegisterIdentityStrategiesTests
 {
-    private TestDataContext _context = null!;
+    private DataContext _context = null!;
 
     [TestCase]
     public void Add_ShouldNotChangeIdWhenIdExisting()

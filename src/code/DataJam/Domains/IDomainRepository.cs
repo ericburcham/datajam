@@ -1,6 +1,4 @@
-﻿namespace DataJam.Domains;
-
-using Repositories;
+﻿namespace DataJam;
 
 public interface IDomainRepository<in TDomain> : IRepository
     where TDomain : class

@@ -15,7 +15,7 @@ public abstract class InMemoryDataContextScenario
     [OneTimeSetUp]
     public async Task OneTimeSetUp()
     {
-        var dataContext = new TestDataContext();
+        var dataContext = new DataContext();
         _changeCount = await ArrangeAndCommitData(dataContext);
     }
 

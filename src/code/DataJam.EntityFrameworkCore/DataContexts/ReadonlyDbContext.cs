@@ -1,4 +1,4 @@
-namespace DataJam.DataContexts;
+namespace DataJam;
 
 public class ReadonlyDbContext
 {

@@ -13,7 +13,7 @@ using NUnit.Framework;
 [TestFixture]
 public class InMemoryDataContextPerfTests
 {
-    private TestDataContext _context = null!;
+    private DataContext _context = null!;
 
     [SetUp]
     public void Setup()
