@@ -4,10 +4,10 @@ using Microsoft.EntityFrameworkCore;
 
 public class FamilyMappingConfigurator : IConfigureDomainMappings<ModelBuilder>
 {
-    public void Configure(ModelBuilder modelBuilder)
+    public void Configure(ModelBuilder configurationBinder)
     {
-        new ChildMapping().Configure(modelBuilder.Entity<Child>());
-        new FatherMapping().Configure(modelBuilder.Entity<Father>());
-        new MotherMapping().Configure(modelBuilder.Entity<Mother>());
+        new ChildMapping().Configure(configurationBinder.Entity<Child>());
+        new FatherMapping().Configure(configurationBinder.Entity<Father>());
+        new MotherMapping().Configure(configurationBinder.Entity<Mother>());
     }
 }
