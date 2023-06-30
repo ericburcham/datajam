@@ -2,12 +2,10 @@
 
 using Microsoft.EntityFrameworkCore;
 
-public class FamilyDomain : IDomain<ModelBuilder>
+public class FamilyDomain : EntityFrameworkCoreDomain
 {
-    public FamilyDomain(IConfigureDomainMappings<ModelBuilder> mappingConfiguration)
+    public FamilyDomain(IConfigureDomainMappings<ModelBuilder> mappingConfigurator, DbContextOptions configurationOptions)
+        : base(mappingConfigurator, configurationOptions)
     {
-        MappingConfigurator = mappingConfiguration;
     }
-
-    public IConfigureDomainMappings<ModelBuilder> MappingConfigurator { get; }
 }

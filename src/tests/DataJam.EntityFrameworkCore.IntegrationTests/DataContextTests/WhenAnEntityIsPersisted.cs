@@ -21,8 +21,8 @@ public class WhenAnEntityIsPersisted : TransactionalScenario
     {
         var dbContextOptions = new DbContextOptionsBuilder().UseSqlServer(ConnectionString).Options;
         var mappingConfiguration = new FamilyMappingConfigurator();
-        var domain = new FamilyDomain(mappingConfiguration);
-        var domainContext = new DomainContext<FamilyDomain>(dbContextOptions, domain);
+        var domain = new FamilyDomain(mappingConfiguration, dbContextOptions);
+        var domainContext = new DomainContext<FamilyDomain>(domain);
         var result = domainContext.AsQueryable<Child>().Single();
         result.Name.Should().Be("Kid");
         result.Father?.Name.Should().Be("Dad");
@@ -35,8 +35,8 @@ public class WhenAnEntityIsPersisted : TransactionalScenario
         // Insert some test data.
         var dbContextOptions = new DbContextOptionsBuilder().UseSqlServer(ConnectionString).Options;
         var mappingConfiguration = new FamilyMappingConfigurator();
-        var domain = new FamilyDomain(mappingConfiguration);
-        var domainContext = new DomainContext<FamilyDomain>(dbContextOptions, domain);
+        var domain = new FamilyDomain(mappingConfiguration, dbContextOptions);
+        var domainContext = new DomainContext<FamilyDomain>(domain);
         var father = new Father { Name = "Dad" };
         var mother = new Mother { Name = "Mom" };
         var child = new Child { Name = "Kid" };
