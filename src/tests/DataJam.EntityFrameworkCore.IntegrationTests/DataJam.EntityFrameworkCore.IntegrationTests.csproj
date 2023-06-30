@@ -1,18 +1,18 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <PackageReference Include="dbup-sqlserver" Version="$(dbup_sqlserver_Version)"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(Microsoft_EntityFrameworkCore_Version)"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(Microsoft_EntityFrameworkCore_Version)"/>
-        <PackageReference Include="Testcontainers.MsSql" Version="$(TestContainers_MsSql_Version)"/>
+        <PackageReference Include="dbup-sqlserver" Version="$(dbup_sqlserver_Version)" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(Microsoft_EntityFrameworkCore_Version)" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(Microsoft_EntityFrameworkCore_Version)" />
+        <PackageReference Include="Testcontainers.MsSql" Version="$(TestContainers_MsSql_Version)" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj"/>
-        <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj"/>
-        <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
-        <ProjectReference Include="..\..\test-support\DataJam.Migrations\DataJam.Migrations.csproj"/>
-        <ProjectReference Include="..\..\test-support\DataJam.TestSupport\DataJam.TestSupport.csproj"/>
+        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj" />
+        <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
+        <ProjectReference Include="..\..\test-support\DataJam.Migrations\DataJam.Migrations.csproj" />
+        <ProjectReference Include="..\..\test-support\DataJam.TestSupport\DataJam.TestSupport.csproj" />
     </ItemGroup>
 
 </Project>
