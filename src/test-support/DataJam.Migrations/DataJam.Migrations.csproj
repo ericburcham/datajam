@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <None Remove="Migrations\*.sql"/>
+        <EmbeddedResource Include="Migrations\*.sql"/>
+    </ItemGroup>
+
+</Project>

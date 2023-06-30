@@ -1,0 +1,21 @@
+﻿namespace DataJam.Testing.UnitTests.QuickAndDirty.Domain;
+
+using System;
+
+public class Author
+{
+    public Author()
+    {
+        Id = Guid.NewGuid();
+    }
+
+    public string? Email { get; set; }
+
+    public string? FirstName { get; set; }
+
+    public Guid Id { get; set; }
+
+    public string? LastName { get; set; }
+
+    public string? TwitterHandle { get; set; }
+}
