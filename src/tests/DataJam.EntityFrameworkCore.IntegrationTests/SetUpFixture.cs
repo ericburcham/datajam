@@ -40,17 +40,21 @@ public class SetUpFixture
 
     private async Task StartContainers()
     {
-        foreach (var container in Dependencies.Instance.Containers)
-        {
-            await container.StartAsync();
-        }
+        await Parallel.ForEachAsync(
+            Dependencies.Instance.Containers,
+            async (container, token) =>
+            {
+                await container.StartAsync(token);
+            });
     }
 
     private async Task StopContainers()
     {
-        foreach (var container in Dependencies.Instance.Containers)
-        {
-            await container.StopAsync();
-        }
+        await Parallel.ForEachAsync(
+            Dependencies.Instance.Containers,
+            async (container, token) =>
+            {
+                await container.StopAsync(token);
+            });
     }
 }
