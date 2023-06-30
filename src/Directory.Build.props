@@ -12,12 +12,12 @@
         <IsPackable>false</IsPackable>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
-        <PackageVersion>1.0.0-beta02</PackageVersion>
+        <PackageVersion>1.0.0-beta03</PackageVersion>
         <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
         <Product>DataJam</Product>
         <RootNamespace>$(MSBuildProjectName)</RootNamespace>
         <TargetFrameworks>net6.0</TargetFrameworks>
-        <Version>1.0.0-beta02</Version>
+        <Version>1.0.0-beta03</Version>
     </PropertyGroup>
 
     <!-- Package Versions -->

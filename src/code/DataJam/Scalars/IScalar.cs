@@ -1,9 +1,7 @@
 namespace DataJam;
 
-using System;
-
-/// <summary>Exposes an interface for requests that return scalar values.</summary>
-/// <typeparam name="TResult">The return <see cref="Type" /> of the query.</typeparam>
+/// <summary>Exposes an interface for scalar queries.</summary>
+/// <typeparam name="TResult">The type of the expected result.</typeparam>
 public interface IScalar<out TResult>
 {
     /// <summary>Executes the request against the specified data source and returns the scalar value.</summary>
