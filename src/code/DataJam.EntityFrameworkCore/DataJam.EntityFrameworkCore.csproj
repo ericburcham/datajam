@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(Microsoft_EntityFrameworkCore_Version)" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(Microsoft_EntityFrameworkCore_Version)"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DataJam\DataJam.csproj" />
+        <ProjectReference Include="..\DataJam\DataJam.csproj"/>
     </ItemGroup>
 
 </Project>
