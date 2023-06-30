@@ -2,5 +2,5 @@
 
 public interface IDomain
 {
-    IConfigureDomainMappings MappingConfiguration { get; }
+    IConfigureDomainMappings MappingConfigurator { get; }
 }

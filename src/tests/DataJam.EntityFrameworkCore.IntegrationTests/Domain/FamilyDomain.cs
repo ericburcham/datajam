@@ -4,8 +4,8 @@ public class FamilyDomain : IDomain
 {
     public FamilyDomain(IConfigureDomainMappings mappingConfiguration)
     {
-        MappingConfiguration = mappingConfiguration;
+        MappingConfigurator = mappingConfiguration;
     }
 
-    public IConfigureDomainMappings MappingConfiguration { get; }
+    public IConfigureDomainMappings MappingConfigurator { get; }
 }

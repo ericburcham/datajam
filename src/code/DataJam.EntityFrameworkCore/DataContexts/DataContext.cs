@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 public class DataContext : DbContext, IDataContext
 {
-    private readonly IConfigureDomainMappings _mappingConfiguration;
+    private readonly IConfigureDomainMappings? _mappingConfiguration;
 
     public DataContext(DbContextOptions options, IConfigureDomainMappings mappingConfiguration)
         : base(options)
@@ -59,7 +59,7 @@ public class DataContext : DbContext, IDataContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        _mappingConfiguration.ApplyDomainMappings(modelBuilder);
+        _mappingConfiguration?.Configure(modelBuilder);
         base.OnModelCreating(modelBuilder);
     }
 }

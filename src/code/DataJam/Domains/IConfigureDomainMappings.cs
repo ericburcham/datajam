@@ -4,5 +4,5 @@ using Microsoft.EntityFrameworkCore;
 
 public interface IConfigureDomainMappings
 {
-    void ApplyDomainMappings(ModelBuilder modelBuilder);
+    void Configure(ModelBuilder modelBuilder);
 }
