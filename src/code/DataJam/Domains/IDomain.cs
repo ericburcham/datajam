@@ -1,6 +1,7 @@
 ﻿namespace DataJam;
 
-public interface IDomain
+public interface IDomain<in TConfigurationBinder>
+    where TConfigurationBinder : class
 {
-    IConfigureDomainMappings MappingConfigurator { get; }
+    IConfigureDomainMappings<TConfigurationBinder> MappingConfigurator { get; }
 }

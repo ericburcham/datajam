@@ -1,8 +1,7 @@
 namespace DataJam;
 
-using Microsoft.EntityFrameworkCore;
-
-public interface IConfigureDomainMappings
+public interface IConfigureDomainMappings<in TConfigurationBinder>
+    where TConfigurationBinder : class
 {
-    void Configure(ModelBuilder modelBuilder);
+    void Configure(TConfigurationBinder provider);
 }

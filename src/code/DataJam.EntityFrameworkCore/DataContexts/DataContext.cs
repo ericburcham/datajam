@@ -7,9 +7,9 @@ using Microsoft.EntityFrameworkCore;
 
 public class DataContext : DbContext, IDataContext
 {
-    private readonly IConfigureDomainMappings? _mappingConfiguration;
+    private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfiguration;
 
-    public DataContext(DbContextOptions options, IConfigureDomainMappings mappingConfiguration)
+    public DataContext(DbContextOptions options, IConfigureDomainMappings<ModelBuilder> mappingConfiguration)
         : base(options)
     {
         _mappingConfiguration = mappingConfiguration;

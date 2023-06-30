@@ -1,11 +1,13 @@
 ﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.Domain;
 
-public class FamilyDomain : IDomain
+using Microsoft.EntityFrameworkCore;
+
+public class FamilyDomain : IDomain<ModelBuilder>
 {
-    public FamilyDomain(IConfigureDomainMappings mappingConfiguration)
+    public FamilyDomain(IConfigureDomainMappings<ModelBuilder> mappingConfiguration)
     {
         MappingConfigurator = mappingConfiguration;
     }
 
-    public IConfigureDomainMappings MappingConfigurator { get; }
+    public IConfigureDomainMappings<ModelBuilder> MappingConfigurator { get; }
 }
