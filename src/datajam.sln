@@ -3,21 +3,55 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataJam", "DataJam", "{D9991EE5-31A7-4B8A-9E4C-1ABE4D2C1A96}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataJam.EntityFrameworkCore", "DataJam.EntityFrameworkCore", "{FD970DC3-82AE-4B3E-91AE-38E9067F48F5}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam", "code\DataJam\DataJam.csproj", "{AFF7DB3B-0702-4E60-90BE-9ED8F76E39E3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.EntityFrameworkCore", "code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj", "{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.UnitTests", "tests\DataJam.UnitTests\DataJam.UnitTests.csproj", "{B0017FBE-33E8-464C-A889-F729DE4E80D2}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.IntegrationTests", "tests\DataJam.IntegrationTests\DataJam.IntegrationTests.csproj", "{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.EntityFrameworkCore.IntegrationTests", "tests\DataJam.EntityFrameworkCore.IntegrationTests\DataJam.EntityFrameworkCore.IntegrationTests.csproj", "{8AB95696-B8F5-4A11-BDDA-CA06DD2C5929}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.EntityFrameworkCore.UnitTests", "tests\DataJam.EntityFrameworkCore.UnitTests\DataJam.EntityFrameworkCore.UnitTests.csproj", "{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.Build", "build\DataJam.Build\DataJam.Build.csproj", "{3C00C3FC-7063-40C6-B3FD-9026723DE33E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "code", "code", "{0ED872A4-B40C-4B25-BA6C-FBA62694C649}"
+	ProjectSection(SolutionItems) = preProject
+		code\Directory.Build.props = code\Directory.Build.props
+		code\stylecop.json = code\stylecop.json
+		code\StyleCopAnalyzers.ruleset = code\StyleCopAnalyzers.ruleset
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F2626B7C-5C3D-4B3D-A94C-C236DD975B57}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Directory.Build.props = tests\Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{086DC7D9-258B-4819-B124-83752CCEE74F}"
+	ProjectSection(SolutionItems) = preProject
+		build\Directory.Build.props = build\Directory.Build.props
+		build\Directory.Build.targets = build\Directory.Build.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{00A30BEC-7340-4227-81C8-77E383FF7AFC}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		stylecop.json = stylecop.json
+		StyleCopAnalyzers.ruleset = StyleCopAnalyzers.ruleset
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Testing.UnitTests", "tests\DataJam.Testing.UnitTests\DataJam.Testing.UnitTests.csproj", "{F8AC6D3B-1580-4E48-A40C-F996DE011F50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Testing", "code\DataJam.Testing\DataJam.Testing.csproj", "{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test-support", "test-support", "{1F83202C-5C08-4366-9B03-D0EB89C6F8C6}"
+	ProjectSection(SolutionItems) = preProject
+		test-support\Directory.Build.props = test-support\Directory.Build.props
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Migrations", "test-support\DataJam.Migrations\DataJam.Migrations.csproj", "{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Utilities", "code\DataJam.Utilities\DataJam.Utilities.csproj", "{25C6CABB-ED1F-4AB6-A4E4-C8CE93C190D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport", "test-support\DataJam.TestSupport\DataJam.TestSupport.csproj", "{1A21ED3C-9BDD-42B7-B0A7-E340111DBAFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,14 +67,6 @@ Global
 		{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B0017FBE-33E8-464C-A889-F729DE4E80D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B0017FBE-33E8-464C-A889-F729DE4E80D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B0017FBE-33E8-464C-A889-F729DE4E80D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B0017FBE-33E8-464C-A889-F729DE4E80D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8AB95696-B8F5-4A11-BDDA-CA06DD2C5929}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8AB95696-B8F5-4A11-BDDA-CA06DD2C5929}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AB95696-B8F5-4A11-BDDA-CA06DD2C5929}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,17 +75,43 @@ Global
 		{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3C00C3FC-7063-40C6-B3FD-9026723DE33E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3C00C3FC-7063-40C6-B3FD-9026723DE33E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8AC6D3B-1580-4E48-A40C-F996DE011F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8AC6D3B-1580-4E48-A40C-F996DE011F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8AC6D3B-1580-4E48-A40C-F996DE011F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8AC6D3B-1580-4E48-A40C-F996DE011F50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25C6CABB-ED1F-4AB6-A4E4-C8CE93C190D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25C6CABB-ED1F-4AB6-A4E4-C8CE93C190D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25C6CABB-ED1F-4AB6-A4E4-C8CE93C190D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25C6CABB-ED1F-4AB6-A4E4-C8CE93C190D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A21ED3C-9BDD-42B7-B0A7-E340111DBAFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A21ED3C-9BDD-42B7-B0A7-E340111DBAFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A21ED3C-9BDD-42B7-B0A7-E340111DBAFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A21ED3C-9BDD-42B7-B0A7-E340111DBAFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{AFF7DB3B-0702-4E60-90BE-9ED8F76E39E3} = {D9991EE5-31A7-4B8A-9E4C-1ABE4D2C1A96}
-		{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1} = {FD970DC3-82AE-4B3E-91AE-38E9067F48F5}
-		{B0017FBE-33E8-464C-A889-F729DE4E80D2} = {D9991EE5-31A7-4B8A-9E4C-1ABE4D2C1A96}
-		{74E750E0-1D09-42B1-9DE5-D9CEEEC6DB41} = {D9991EE5-31A7-4B8A-9E4C-1ABE4D2C1A96}
-		{8AB95696-B8F5-4A11-BDDA-CA06DD2C5929} = {FD970DC3-82AE-4B3E-91AE-38E9067F48F5}
-		{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB} = {FD970DC3-82AE-4B3E-91AE-38E9067F48F5}
+		{AFF7DB3B-0702-4E60-90BE-9ED8F76E39E3} = {0ED872A4-B40C-4B25-BA6C-FBA62694C649}
+		{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1} = {0ED872A4-B40C-4B25-BA6C-FBA62694C649}
+		{8AB95696-B8F5-4A11-BDDA-CA06DD2C5929} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
+		{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
+		{3C00C3FC-7063-40C6-B3FD-9026723DE33E} = {086DC7D9-258B-4819-B124-83752CCEE74F}
+		{F8AC6D3B-1580-4E48-A40C-F996DE011F50} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
+		{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00} = {0ED872A4-B40C-4B25-BA6C-FBA62694C649}
+		{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{25C6CABB-ED1F-4AB6-A4E4-C8CE93C190D5} = {0ED872A4-B40C-4B25-BA6C-FBA62694C649}
+		{1A21ED3C-9BDD-42B7-B0A7-E340111DBAFC} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}

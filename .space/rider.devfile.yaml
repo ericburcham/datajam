@@ -1,0 +1,13 @@
+schemaVersion: 2.2.0
+metadata:
+  name: 'Rider dev environment'
+attributes:
+  space:
+    # regular, large, xlarge
+    instanceType: large
+    # a default IDE for the project
+    editor:
+      # (Required) IDE type: Idea, WebStorm, PyCharm,
+      # RubyMine, CLion, Fleet, GoLand, PhpStorm
+      type: Rider
+    projectRoot: ./src/datajam.sln

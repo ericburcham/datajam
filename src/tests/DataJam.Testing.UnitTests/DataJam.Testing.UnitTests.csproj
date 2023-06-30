@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\code\DataJam.Testing\DataJam.Testing.csproj"/>
+        <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
+    </ItemGroup>
+
+</Project>

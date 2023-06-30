@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+    <!-- Global properties -->
+    <PropertyGroup>
+        <AssemblyName>$(MSBuildProjectName)</AssemblyName>
+        <AssemblyVersion>1.0.0</AssemblyVersion>
+        <Authors>Ghost Recon Team</Authors>
+        <Company>Enteprise Products</Company>
+        <Copyright>© Enteprise Products</Copyright>
+        <FileVersion>1.0.0</FileVersion>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <IsPackable>false</IsPackable>
+        <LangVersion>latest</LangVersion>
+        <Nullable>enable</Nullable>
+        <PackageVersion>1.0.0-beta02</PackageVersion>
+        <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
+        <Product>DataJam</Product>
+        <RootNamespace>$(MSBuildProjectName)</RootNamespace>
+        <TargetFrameworks>net6.0</TargetFrameworks>
+        <Version>1.0.0-beta02</Version>
+    </PropertyGroup>
+
+    <!-- Package Versions -->
+    <PropertyGroup>
+        <dbup_sqlserver_Version>5.0.8</dbup_sqlserver_Version>
+        <Microsoft_EntityFrameworkCore_Version>7.0.8</Microsoft_EntityFrameworkCore_Version>
+        <FluentAssertions_Version>6.11.0</FluentAssertions_Version>
+        <Microsoft_NET_Test_Sdk_Version>17.5.0</Microsoft_NET_Test_Sdk_Version>
+        <NSubstitute_Version>5.0.0</NSubstitute_Version>
+        <Nuke_Common_Version>6.3.0</Nuke_Common_Version>
+        <NUnit_Version>3.13.3</NUnit_Version>
+        <NUnit3TestAdapter_Version>4.4.2</NUnit3TestAdapter_Version>
+        <NUnit_Analyzers_Version>3.6.1</NUnit_Analyzers_Version>
+        <Stylecop_Analyzers_Version>1.2.0-beta.435</Stylecop_Analyzers_Version>
+        <TestContainers_MsSql_Version>3.2.0</TestContainers_MsSql_Version>
+        <TestStack_Dossier_Version>4.0.0</TestStack_Dossier_Version>
+    </PropertyGroup>
+
+    <!-- Treat all warnings as errors -->
+    <PropertyGroup>
+        <TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+    </PropertyGroup>
+
+    <!-- Disable annoying warnings -->
+    <PropertyGroup>
+        <NoWarn>1702;CS1591;MSB3277;NETSDK1138;NU5104;NU1702;NU1803</NoWarn>
+    </PropertyGroup>
+
+    <!-- Stylecop Analyzers -->
+    <ItemGroup>
+        <PackageReference Include="StyleCop.Analyzers" Version="$(Stylecop_Analyzers_Version)">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <!-- Enable Init keyword in .Net Framework -->
+    <ItemGroup>
+        <Compile Include="..\..\IsExternalInit.cs" Link="IsExternalInit.cs"/>
+    </ItemGroup>
+
+    <!-- Include Stylecop.json -->
+    <ItemGroup>
+        <AdditionalFiles Include="../../stylecop.json" Link="stylecop.json"/>
+    </ItemGroup>
+
+    <!-- Include StyleCop RuleSet -->
+    <PropertyGroup>
+        <CodeAnalysisRuleSet>../../StyleCopAnalyzers.ruleset</CodeAnalysisRuleSet>
+    </PropertyGroup>
+
+</Project>

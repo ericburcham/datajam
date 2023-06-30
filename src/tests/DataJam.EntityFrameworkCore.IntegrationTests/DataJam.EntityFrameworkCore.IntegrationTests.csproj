@@ -1,24 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net7.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
+    <ItemGroup>
+        <PackageReference Include="dbup-sqlserver" Version="$(dbup_sqlserver_Version)"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(Microsoft_EntityFrameworkCore_Version)"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(Microsoft_EntityFrameworkCore_Version)"/>
+        <PackageReference Include="Testcontainers.MsSql" Version="$(TestContainers_MsSql_Version)"/>
+    </ItemGroup>
 
-    <IsPackable>false</IsPackable>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
-    <PackageReference Include="NUnit" Version="3.13.3" />
-    <PackageReference Include="NUnit3TestAdapter" Version="4.2.1" />
-    <PackageReference Include="NUnit.Analyzers" Version="3.3.0" />
-    <PackageReference Include="coverlet.collector" Version="3.1.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj" />
-    <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj"/>
+        <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj"/>
+        <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
+        <ProjectReference Include="..\..\test-support\DataJam.Migrations\DataJam.Migrations.csproj"/>
+        <ProjectReference Include="..\..\test-support\DataJam.TestSupport\DataJam.TestSupport.csproj"/>
+    </ItemGroup>
 
 </Project>

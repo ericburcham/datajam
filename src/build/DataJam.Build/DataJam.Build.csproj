@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <NoWarn>CS0649;CS0169;CS1591</NoWarn>
+        <NukeRootDirectory>..\..\..</NukeRootDirectory>
+        <NukeScriptDirectory>..\..\..</NukeScriptDirectory>
+        <NukeTelemetryVersion>1</NukeTelemetryVersion>
+        <RootNamespace/>
+        <TargetFrameworks></TargetFrameworks>
+        <TargetFramework>net6.0</TargetFramework>
+    </PropertyGroup>
+
+</Project>
