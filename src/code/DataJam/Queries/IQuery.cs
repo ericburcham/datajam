@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 
 /// <summary>Exposes an interface for requests that return collections.</summary>
-/// <typeparam name="TResult">The return <see cref="Type" /> of the query.</typeparam>
+/// <typeparam name="TResult">The type of the expected result set.</typeparam>
 public interface IQuery<out TResult>
 {
     /// <summary>Executes the request against the specified data source and returns the results.</summary>

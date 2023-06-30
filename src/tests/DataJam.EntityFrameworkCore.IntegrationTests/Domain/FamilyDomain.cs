@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 
 public class FamilyDomain : EntityFrameworkCoreDomain
 {
-    public FamilyDomain(IConfigureDomainMappings<ModelBuilder> mappingConfigurator, DbContextOptions configurationOptions)
-        : base(mappingConfigurator, configurationOptions)
+    public FamilyDomain(DbContextOptions configurationOptions, IConfigureDomainMappings<ModelBuilder> mappingConfigurator)
+        : base(configurationOptions, mappingConfigurator)
     {
     }
 }
