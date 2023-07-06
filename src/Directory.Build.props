@@ -9,6 +9,7 @@
         <Copyright>© Enteprise Products</Copyright>
         <FileVersion>1.0.0</FileVersion>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <ImplicitUsings>disable</ImplicitUsings>
         <IsPackable>false</IsPackable>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
