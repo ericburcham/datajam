@@ -17,9 +17,6 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)", Name = "Configuration")]
     readonly Configuration _configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    [Parameter("Verbosity of the build - Default is 'Quiet'", Name = "DotNetVerbosity")]
-    readonly DotNetVerbosity _verbosity = DotNetVerbosity.Quiet;
-
     [Solution]
     readonly Solution Solution = null!;
 
@@ -121,7 +118,7 @@ class Build : NukeBuild
     Action StandardBuild(Configuration configuration) =>
         () =>
         {
-            DotNetBuild(buildSettings => buildSettings.SetProjectFile(Solution).SetConfiguration(configuration).EnableNoRestore().SetVerbosity(_verbosity));
+            DotNetBuild(buildSettings => buildSettings.SetProjectFile(Solution).SetConfiguration(configuration).EnableNoRestore());
         };
 
     /// <summary>Creates an action that performs the project's standard DotNet Clean task.</summary>
@@ -130,7 +127,7 @@ class Build : NukeBuild
     Action StandardClean(Configuration configuration) =>
         () =>
         {
-            DotNetClean(settings => settings.SetConfiguration(configuration).SetProject(Solution).SetVerbosity(_verbosity));
+            DotNetClean(settings => settings.SetConfiguration(configuration).SetProject(Solution));
         };
 
     /// <summary>Creates an action that performs the project's standard DotNet Restore task.</summary>
@@ -138,12 +135,12 @@ class Build : NukeBuild
     Action StandardRestore() =>
         () =>
         {
-            DotNetRestore(restoreSettings => restoreSettings.SetProjectFile(Solution).SetVerbosity(_verbosity));
+            DotNetRestore(restoreSettings => restoreSettings.SetProjectFile(Solution));
         };
 
     Action StandardTest(Configuration configuration) =>
         () =>
         {
-            DotNetTest(testSettings => testSettings.SetProjectFile(Solution).SetConfiguration(configuration).EnableNoRestore().EnableNoBuild().EnableNoRestore().SetVerbosity(_verbosity));
+            DotNetTest(testSettings => testSettings.SetProjectFile(Solution).SetConfiguration(configuration).EnableNoRestore().EnableNoBuild().EnableNoRestore());
         };
 }
