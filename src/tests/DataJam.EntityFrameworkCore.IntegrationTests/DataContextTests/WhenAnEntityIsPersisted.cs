@@ -23,10 +23,10 @@ public class WhenAnEntityIsPersisted : TransactionalScenario
         var mappingConfiguration = new FamilyMappingConfigurator();
         var domain = new FamilyDomain(mappingConfiguration, dbContextOptions);
         var domainContext = new DomainContext<FamilyDomain>(domain);
-        var result = domainContext.AsQueryable<Child>().Single();
+        var result = domainContext.AsQueryable<Child>().Include(child => child.Father).Include(child => child.Mother).Single();
         result.Name.Should().Be("Kid");
-        result.Father?.Name.Should().Be("Dad");
-        result.Mother?.Name.Should().Be("Mother");
+        result.Father.Name.Should().Be("Dad");
+        result.Mother.Name.Should().Be("Mom");
     }
 
     [OneTimeSetUp]
