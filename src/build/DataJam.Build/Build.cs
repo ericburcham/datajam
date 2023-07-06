@@ -67,15 +67,15 @@ class Build : NukeBuild
     /// <summary>Gets a target that runs dotnet clean for the release configuration.</summary>
     Target CleanRelease => targetDefinition => targetDefinition.Executes(StandardClean(Configuration.Release));
 
-    Target Default => targetDefinition => targetDefinition.DependsOn(CleanAll, Restore, BuildAll);
+    Target Default => targetDefinition => targetDefinition.DependsOn(CleanDebug, CleanRelease, Restore, BuildDebug, BuildRelease, TestDebug, TestRelease, Pack);
 
-    // Target Pack =>
-    //     targetDefinition => targetDefinition.DependsOn(Test)
-    //                                         .Executes(
-    //                                              () =>
-    //                                              {
-    //                                                  DotNetPack(packSettings => packSettings.SetProject(Solution).SetOutputDirectory(PackagesDirectory).SetIncludeSymbols(true).SetConfiguration(Configuration).EnableNoRestore().EnableNoBuild());
-    //                                              });
+    Target Pack =>
+        targetDefinition => targetDefinition.Executes(
+            () =>
+            {
+                DotNetPack(packSettings => packSettings.SetProject(Solution).SetOutputDirectory(PackagesDirectory).SetIncludeSymbols(true).SetConfiguration(Configuration.Release).EnableNoRestore().EnableNoBuild());
+            });
+
     AbsolutePath PackagesDirectory => RootDirectory / "packages";
 
     /// <summary>Gets a target that restores package dependencies.</summary>
