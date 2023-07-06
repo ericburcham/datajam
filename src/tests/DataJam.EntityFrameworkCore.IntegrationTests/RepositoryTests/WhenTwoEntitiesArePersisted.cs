@@ -20,7 +20,7 @@ public class WhenTwoEntitiesArePersisted : TransactionalScenario
     {
         var dbContextOptions = new DbContextOptionsBuilder().UseSqlServer(ConnectionString).Options;
         var mappingConfiguration = new FamilyMappingConfigurator();
-        var domain = new FamilyDomain(mappingConfiguration, dbContextOptions);
+        var domain = new FamilyDomain(dbContextOptions, mappingConfiguration);
         var domainContext = new DomainContext<FamilyDomain>(domain);
         var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
         var query = new GetChildren();
@@ -34,7 +34,7 @@ public class WhenTwoEntitiesArePersisted : TransactionalScenario
         // Insert some test data.
         var dbContextOptions = new DbContextOptionsBuilder().UseSqlServer(ConnectionString).Options;
         var mappingConfiguration = new FamilyMappingConfigurator();
-        var domain = new FamilyDomain(mappingConfiguration, dbContextOptions);
+        var domain = new FamilyDomain(dbContextOptions, mappingConfiguration);
         var domainContext = new DomainContext<FamilyDomain>(domain);
         var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 
