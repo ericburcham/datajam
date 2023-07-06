@@ -20,11 +20,13 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)", Name = "Configuration")]
     readonly Configuration _configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    [Solution]
-    readonly Solution Solution = null!;
-
+    /// <summary>Gets information about the git repository.</summary>
     [GitRepository]
     readonly GitRepository Repository = null!;
+
+    /// <summary>Gets the DotNet solution.</summary>
+    [Solution]
+    readonly Solution Solution = null!;
 
     /// <summary>Gets the absolute path for nuget package output.</summary>
     static AbsolutePath PackagesDirectory => RootDirectory / "packages";
@@ -91,16 +93,19 @@ class Build : NukeBuild
             });
 
     Target Publish =>
-        targetDefinition => targetDefinition.Requires(() => Repository.IsOnMainOrMasterBranch())
+        targetDefinition => targetDefinition.OnlyWhenStatic(() => !Repository.IsOnMainOrMasterBranch())
                                             .Executes(
                                                  () =>
                                                  {
+                                                     // Parameters and secrets:  https://www.jetbrains.com/help/space/automation-parameters.html#pass-parameters-as-environment-variables
+                                                     // .NET and .NET Core:      https://www.jetbrains.com/help/space/net-core.html
                                                      Log.Information("Commit = {Value}", Repository.Commit);
                                                      Log.Information("Branch = {Value}", Repository.Branch);
                                                      Log.Information("Tags = {Value}", Repository.Tags);
 
                                                      Log.Information("main branch = {Value}", Repository.IsOnMainBranch());
                                                      Log.Information("main/master branch = {Value}", Repository.IsOnMainOrMasterBranch());
+                                                     Log.Information("develop branch = {Value}", Repository.IsOnDevelopBranch());
                                                      Log.Information("release/* branch = {Value}", Repository.IsOnReleaseBranch());
                                                      Log.Information("hotfix/* branch = {Value}", Repository.IsOnHotfixBranch());
 
