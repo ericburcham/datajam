@@ -23,6 +23,15 @@ class Build : NukeBuild
     [Solution]
     readonly Solution Solution = null!;
 
+    /// <summary>Gets the absolute path for nuget package output.</summary>
+    static AbsolutePath PackagesDirectory => RootDirectory / "packages";
+
+    /// <summary>Gets the absolute path for the project's source code.</summary>
+    static AbsolutePath SourceDirectory => RootDirectory / "src" / "code";
+
+    /// <summary>Gets the absolute path for the project's test folder.</summary>
+    static AbsolutePath TestsDirectory => RootDirectory / "src" / "tests";
+
     /// <summary>Gets a target that runs DotNet Build for all build configurations.</summary>
     Target BuildAll => targetDefinition => targetDefinition.DependsOn(BuildDebug, BuildRelease);
 
@@ -41,10 +50,10 @@ class Build : NukeBuild
     /// <summary>Gets a target that runs DotNet Build for the Release configuration after running all dependencies.</summary>
     Target BuildReleaseWithDependencies => targetDefinition => targetDefinition.DependsOn(CleanRelease, Restore, BuildRelease);
 
-    /// <summary>Gets a target that runs dotnet clean for all configurations, removes all bin and object folders, and ensures the package output folder is clean.</summary>
+    /// <summary>Gets a target that runs DotNet Clean for all configurations, removes all bin and object folders, and ensures the package output folder is clean.</summary>
     Target CleanAll => targetDefinition => targetDefinition.DependsOn(CleanDebug, CleanRelease, CleanOutput, CleanPackages);
 
-    /// <summary>Gets a target that runs dotnet clean for the debug configuration.</summary>
+    /// <summary>Gets a target that runs DotNet Clean for the debug configuration.</summary>
     Target CleanDebug => targetDefinition => targetDefinition.Executes(StandardClean(Configuration.Debug));
 
     /// <summary>Gets a target that removes all bin and object folders.</summary>
@@ -64,38 +73,40 @@ class Build : NukeBuild
                 EnsureCleanDirectory(PackagesDirectory);
             });
 
-    /// <summary>Gets a target that runs dotnet clean for the release configuration.</summary>
+    /// <summary>Gets a target that runs DotNet Clean for the release configuration.</summary>
     Target CleanRelease => targetDefinition => targetDefinition.Executes(StandardClean(Configuration.Release));
 
+    /// <summary>Gets a target that runs the default build.</summary>
     Target Default => targetDefinition => targetDefinition.DependsOn(CleanDebug, CleanRelease, Restore, BuildDebug, BuildRelease, TestDebug, TestRelease, Pack);
 
+    /// <summary>Gets a target that runs DotNet Pack for the release configuration.</summary>
     Target Pack =>
         targetDefinition => targetDefinition.Executes(
             () =>
             {
-                DotNetPack(packSettings => packSettings.SetProject(Solution).SetOutputDirectory(PackagesDirectory).SetIncludeSymbols(true).SetConfiguration(Configuration.Release).EnableNoRestore().EnableNoBuild());
+                DotNetPack(packSettings => packSettings.SetProject(Solution).SetOutputDirectory(PackagesDirectory).EnableIncludeSymbols().SetConfiguration(Configuration.Release).EnableNoRestore().EnableNoBuild());
             });
-
-    AbsolutePath PackagesDirectory => RootDirectory / "packages";
 
     /// <summary>Gets a target that restores package dependencies.</summary>
     Target Restore => targetDefinition => targetDefinition.After(CleanAll, CleanDebug, CleanOutput, CleanPackages, CleanRelease).Executes(StandardRestore());
 
-    AbsolutePath SourceDirectory => RootDirectory / "src" / "code";
-
+    /// <summary>Gets a target that runs DotNet Test for all build configurations.</summary>
     Target TestAll => targetDefinition => targetDefinition.DependsOn(TestDebug, TestRelease);
 
+    /// <summary>Gets a target that runs DotNet Test for all build configurations after running all dependencies.</summary>
     Target TestAllWithDependencies => targetDefinition => targetDefinition.DependsOn(CleanDebug, CleanRelease, Restore, BuildDebug, BuildRelease, TestDebug, TestRelease);
 
+    /// <summary>Gets a target that runs DotNet Test for the debug configuration.</summary>
     Target TestDebug => targetDefinition => targetDefinition.After(CleanDebug, Restore, BuildDebug).Executes(StandardTest(Configuration.Debug));
 
+    /// <summary>Gets a target that runs DotNet Test for the debug configuration after running all dependencies.</summary>
     Target TestDebugWithDependencies => targetDefinition => targetDefinition.DependsOn(CleanDebug, Restore, BuildDebug, TestDebug);
 
+    /// <summary>Gets a target that runs DotNet Test for the release configuration.</summary>
     Target TestRelease => targetDefinition => targetDefinition.After(CleanRelease, Restore, BuildRelease).Executes(StandardTest(Configuration.Release));
 
+    /// <summary>Gets a target that runs DotNet test for the release configuration after running all dependencies.</summary>
     Target TestReleaseWithDependencies => targetDefinition => targetDefinition.DependsOn(CleanRelease, Restore, BuildRelease, TestRelease);
-
-    AbsolutePath TestsDirectory => RootDirectory / "src" / "tests";
 
     // Support plugins are available for:
     // - JetBrains ReSharper        https://nuke.build/resharper
