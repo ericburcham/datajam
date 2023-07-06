@@ -1,4 +1,6 @@
-﻿using Nuke.Common;
+﻿using System;
+
+using Nuke.Common;
 using Nuke.Common.Execution;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
@@ -18,16 +20,31 @@ class Build : NukeBuild
     [Solution]
     readonly Solution Solution = null!;
 
-    AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
+    /// <summary>Gets a target that runs dotnet clean for all configurations, removes all bin and object folders, and ensures the package output folder is clean.</summary>
+    Target CleanAll => targetDefinition => targetDefinition.DependsOn(CleanDebug, CleanRelease, CleanOutput, CleanPackages);
 
-    Target Clean =>
+    /// <summary>Gets a target that runs dotnet clean for the debug configuration.</summary>
+    Target CleanDebug => targetDefinition => targetDefinition.Executes(DoStandardClean(Configuration.Debug));
+
+    /// <summary>Gets a target that removes all bin and object folders.</summary>
+    Target CleanOutput =>
         targetDefinition => targetDefinition.Executes(
             () =>
             {
                 SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
                 TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-                EnsureCleanDirectory(ArtifactsDirectory);
             });
+
+    /// <summary>Gets a target that ensures the package output folder is clean.</summary>
+    Target CleanPackages =>
+        targetDefinition => targetDefinition.Executes(
+            () =>
+            {
+                EnsureCleanDirectory(PackagesDirectory);
+            });
+
+    /// <summary>Gets a target that runs dotnet clean for the release configuration.</summary>
+    Target CleanRelease => targetDefinition => targetDefinition.Executes(DoStandardClean(Configuration.Release));
 
     Target Compile =>
         targetDefinition => targetDefinition.DependsOn(Restore)
@@ -37,16 +54,39 @@ class Build : NukeBuild
                                                      DotNetBuild(buildSettings => buildSettings.SetProjectFile(Solution).SetConfiguration(Configuration).EnableNoRestore());
                                                  });
 
+    Target CompileDebug =>
+        targetDefinition => targetDefinition.Executes(
+            () =>
+            {
+                DotNetBuild(buildSettings => buildSettings.SetProjectFile(Solution).SetConfiguration(Configuration.Debug).EnableNoRestore());
+            });
+
+    Target CompileRelease =>
+        targetDefinition => targetDefinition.Executes(
+            () =>
+            {
+                DotNetBuild(buildSettings => buildSettings.SetProjectFile(Solution).SetConfiguration(Configuration.Release).EnableNoRestore());
+            });
+
     Target Pack =>
         targetDefinition => targetDefinition.DependsOn(Test)
                                             .Executes(
                                                  () =>
                                                  {
-                                                     DotNetPack(packSettings => packSettings.SetProject(Solution).SetOutputDirectory(ArtifactsDirectory).SetIncludeSymbols(true).SetConfiguration(Configuration).EnableNoRestore().EnableNoBuild());
+                                                     DotNetPack(packSettings => packSettings.SetProject(Solution).SetOutputDirectory(PackagesDirectory).SetIncludeSymbols(true).SetConfiguration(Configuration).EnableNoRestore().EnableNoBuild());
                                                  });
 
+    AbsolutePath PackagesDirectory => RootDirectory / "packages";
+
     Target Restore =>
-        targetDefinition => targetDefinition.DependsOn(Clean)
+        targetDefinition => targetDefinition.Executes(
+            () =>
+            {
+                DotNetRestore(restoreSettings => restoreSettings.SetProjectFile(Solution));
+            });
+
+    Target RestoreWithDependencies =>
+        targetDefinition => targetDefinition.DependsOn(CleanAll)
                                             .Executes(
                                                  () =>
                                                  {
@@ -71,4 +111,13 @@ class Build : NukeBuild
     // - Microsoft VisualStudio     https://nuke.build/visualstudio
     // - Microsoft VSCode           https://nuke.build/vscode
     public static int Main() => Execute<Build>(build => build.Pack);
+
+    /// <summary>Creates an action that performs the project's standard DotNet Clean task.</summary>
+    /// <param name="configuration">The build configuration to use.</param>
+    /// <returns>An action that performs the project's standard DotNet Clean task.</returns>
+    Action DoStandardClean(Configuration configuration) =>
+        () =>
+        {
+            DotNetClean(settings => settings.SetConfiguration(configuration).SetProject(Solution));
+        };
 }

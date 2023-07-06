@@ -72,10 +72,17 @@
           "items": {
             "type": "string",
             "enum": [
-              "Clean",
+              "CleanAll",
+              "CleanDebug",
+              "CleanOutput",
+              "CleanPackages",
+              "CleanRelease",
               "Compile",
+              "CompileDebug",
+              "CompileRelease",
               "Pack",
               "Restore",
+              "RestoreWithDependencies",
               "Test"
             ]
           }
@@ -90,10 +97,17 @@
           "items": {
             "type": "string",
             "enum": [
-              "Clean",
+              "CleanAll",
+              "CleanDebug",
+              "CleanOutput",
+              "CleanPackages",
+              "CleanRelease",
               "Compile",
+              "CompileDebug",
+              "CompileRelease",
               "Pack",
               "Restore",
+              "RestoreWithDependencies",
               "Test"
             ]
           }
