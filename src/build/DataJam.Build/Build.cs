@@ -17,7 +17,7 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)", Name = "Configuration")]
     readonly Configuration _configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    [Parameter("Verbosity of the build - Default is 'Quiet'", Name = "Verbosity")]
+    [Parameter("Verbosity of the build - Default is 'Quiet'", Name = "DotNetVerbosity")]
     readonly DotNetVerbosity _verbosity = DotNetVerbosity.Quiet;
 
     [Solution]
