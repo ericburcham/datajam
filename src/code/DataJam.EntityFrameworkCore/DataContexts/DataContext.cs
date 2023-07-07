@@ -5,22 +5,14 @@ using System.Threading.Tasks;
 
 using Microsoft.EntityFrameworkCore;
 
-/// <summary>
-///     Provides a disposable unit of work capable of both read and write operations.
-/// </summary>
+/// <summary>Provides a disposable unit of work capable of both read and write operations.</summary>
 public class DataContext : DbContext, IDataContext
 {
     private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator;
 
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="DataContext" /> class.
-    /// </summary>
-    /// <param name="configurationOptions">
-    ///     The configuration options.
-    /// </param>
-    /// <param name="mappingConfigurator">
-    ///     The mapping configurator to use.
-    /// </param>
+    /// <summary>Initializes a new instance of the <see cref="DataContext" /> class.</summary>
+    /// <param name="configurationOptions">The configuration options.</param>
+    /// <param name="mappingConfigurator">The mapping configurator to use.</param>
     public DataContext(DbContextOptions configurationOptions, IConfigureDomainMappings<ModelBuilder> mappingConfigurator)
         : base(configurationOptions)
     {

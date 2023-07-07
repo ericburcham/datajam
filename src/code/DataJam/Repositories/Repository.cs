@@ -3,19 +3,13 @@ namespace DataJam;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-/// <summary>
-///     Provides an implementation of the Repository pattern.
-/// </summary>
+/// <summary>Provides an implementation of the Repository pattern.</summary>
 public class Repository : IRepository
 {
     private readonly IDataContext _dataContext;
 
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="Repository" /> class.
-    /// </summary>
-    /// <param name="dataContext">
-    ///     The data context to use.
-    /// </param>
+    /// <summary>Initializes a new instance of the <see cref="Repository" /> class.</summary>
+    /// <param name="dataContext">The data context to use.</param>
     public Repository(IDataContext dataContext)
     {
         _dataContext = dataContext;
