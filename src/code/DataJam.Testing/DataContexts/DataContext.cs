@@ -5,14 +5,18 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 
-/// <summary>Provides a data context useful for testing.</summary>
+/// <summary>
+///     Provides a data context useful for testing.
+/// </summary>
 public class DataContext : IDataContext, IReadonlyDataContext
 {
     private readonly Queue _addQueue = new();
 
     private readonly Queue _removeQueue = new();
 
-    /// <summary>Initializes a new instance of the <see cref="DataContext" /> class.</summary>
+    /// <summary>
+    ///     Initializes a new instance of the <see cref="DataContext" /> class.
+    /// </summary>
     public DataContext()
     {
         Repo = new();
@@ -67,9 +71,15 @@ public class DataContext : IDataContext, IReadonlyDataContext
     {
     }
 
-    /// <summary>Registers the given <paramref name="identityStrategy" />.</summary>
-    /// <typeparam name="T">The <paramref name="identityStrategy" />'s element Type.</typeparam>
-    /// <param name="identityStrategy">The identity strategy to register.</param>
+    /// <summary>
+    ///     Registers the given <paramref name="identityStrategy" />.
+    /// </summary>
+    /// <typeparam name="T">
+    ///     The <paramref name="identityStrategy" />'s element Type.
+    /// </typeparam>
+    /// <param name="identityStrategy">
+    ///     The identity strategy to register.
+    /// </param>
     public void RegisterIdentityStrategy<T>(IIdentityStrategy<T> identityStrategy)
         where T : class
     {
@@ -106,8 +116,12 @@ public class DataContext : IDataContext, IReadonlyDataContext
         return item;
     }
 
-    /// <summary>Processes all adds, updates, and removals.</summary>
-    /// <returns>The count of items which had changes.</returns>
+    /// <summary>
+    ///     Processes all adds, updates, and removals.
+    /// </summary>
+    /// <returns>
+    ///     The count of items which had changes.
+    /// </returns>
     protected int ProcessCommitQueues()
     {
         var changeCount = 0;

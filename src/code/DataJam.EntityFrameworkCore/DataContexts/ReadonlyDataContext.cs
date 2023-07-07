@@ -3,7 +3,9 @@ namespace DataJam;
 using System;
 using System.Linq;
 
-/// <summary>Provides a data context which is limited to read operations.</summary>
+/// <summary>
+///     Provides a data context which is limited to read operations.
+/// </summary>
 public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyDataContext
 {
     /// <inheritdoc cref="IDataSource.AsQueryable{TResult}" />

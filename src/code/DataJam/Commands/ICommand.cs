@@ -5,7 +5,11 @@ namespace DataJam;
 /// </summary>
 public interface ICommand
 {
-    /// <summary>Executes the command using the provided data context.</summary>
-    /// <param name="dataContext">The data context to execute the command with.</param>
+    /// <summary>
+    ///     Executes the command using the provided data context.
+    /// </summary>
+    /// <param name="dataContext">
+    ///     The data context to execute the command with.
+    /// </param>
     void Execute(IDataContext dataContext);
 }
