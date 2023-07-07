@@ -86,14 +86,16 @@ class Build : NukeBuild
 
     /// <summary>Gets a target that runs DotNet Pack for the release configuration.</summary>
     Target Pack =>
-        targetDefinition => targetDefinition.Executes(
-            () =>
-            {
-                DotNetPack(packSettings => packSettings.SetProject(Solution).SetOutputDirectory(PackagesDirectory).EnableIncludeSymbols().SetConfiguration(Configuration.Release).EnableNoRestore().EnableNoBuild());
-            });
+        targetDefinition => targetDefinition.After(CleanAll, CleanDebug, CleanOutput, CleanPackages, CleanRelease, BuildDebug, BuildRelease, TestDebug, TestRelease)
+                                            .Executes(
+                                                 () =>
+                                                 {
+                                                     DotNetPack(packSettings => packSettings.SetProject(Solution).SetOutputDirectory(PackagesDirectory).EnableIncludeSymbols().SetConfiguration(Configuration.Release).EnableNoRestore().EnableNoBuild());
+                                                 });
 
     Target Publish =>
-        targetDefinition => targetDefinition.OnlyWhenStatic(() => !Repository.IsOnMainOrMasterBranch())
+        targetDefinition => targetDefinition.After(CleanAll, CleanDebug, CleanOutput, CleanPackages, CleanRelease, BuildDebug, BuildRelease, TestDebug, TestRelease, Pack)
+                                            .OnlyWhenStatic(() => !Repository.IsOnMainOrMasterBranch())
                                             .Executes(
                                                  () =>
                                                  {
