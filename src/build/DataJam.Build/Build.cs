@@ -58,8 +58,8 @@ class Build : NukeBuild
                                             .Executes(
                                                  () =>
                                                  {
-                                                     SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-                                                     TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
+                                                     SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(x => x.DeleteDirectory());
+                                                     TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(x => x.DeleteDirectory());
                                                  });
 
     /// <summary>Gets a target that ensures the package output folder is clean.</summary>
@@ -68,7 +68,7 @@ class Build : NukeBuild
                                             .Executes(
                                                  () =>
                                                  {
-                                                     EnsureCleanDirectory(PackagesDirectory);
+                                                     PackagesDirectory.CreateOrCleanDirectory();
                                                  });
 
     /// <summary>Gets a target that runs DotNet Clean for the release configuration.</summary>
