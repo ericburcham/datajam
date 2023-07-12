@@ -12,14 +12,14 @@
     </PropertyGroup>
 
     <!-- Conditional Version properties -->
-    <PropertyGroup>
-        <AssemblyVersion Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</AssemblyVersion>
-        <AssemblyVersion Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix).$(BuildNumber)</AssemblyVersion>
+    <PropertyGroup Condition=" '$(VersionSuffix)' == '' ">
+        <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
+        <Version>$(VersionPrefix)</Version>
+    </PropertyGroup>
 
-        <FileVersion>$(AssemblyVersion)</FileVersion>
-
-        <Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</Version>
-        <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)$(VersionSuffix)$(BuildNumber)</Version>
+    <PropertyGroup Condition=" '$(VersionSuffix)' != '' ">
+        <AssemblyVersion>$(VersionPrefix).$(BuildNumber)</AssemblyVersion>
+        <Version>$(VersionPrefix)$(VersionSuffix)$(BuildNumber)</Version>
     </PropertyGroup>
 
     <!-- Global properties -->
