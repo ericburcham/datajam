@@ -1,24 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
+    <!-- Computed properties -->
+    <PropertyGroup>
+        <BuildNumber>$([System.DateTime]::UtcNow.ToString(mmff))</BuildNumber>
+    </PropertyGroup>
+
+    <!-- Fixed Version properties -->
+    <PropertyGroup>
+        <VersionPrefix>1.0.0</VersionPrefix>
+        <VersionSuffix>-alpha</VersionSuffix>
+    </PropertyGroup>
+
+    <!-- Conditional Version properties -->
+    <PropertyGroup>
+        <AssemblyVersion Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</AssemblyVersion>
+        <AssemblyVersion Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix).$(BuildNumber)</AssemblyVersion>
+
+        <Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</Version>
+        <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)$(VersionSuffix)$(BuildNumber)</Version>
+
+        <FileVersion>$(AssemblyVersion)</FileVersion>
+    </PropertyGroup>
+
     <!-- Global properties -->
     <PropertyGroup>
         <AssemblyName>$(MSBuildProjectName)</AssemblyName>
-        <AssemblyVersion>1.0.0</AssemblyVersion>
         <Authors>Ghost Recon Team</Authors>
         <Company>Enteprise Products</Company>
         <Copyright>© Enteprise Products</Copyright>
-        <FileVersion>1.0.0</FileVersion>
+        <DefineConstants>STD</DefineConstants>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <ImplicitUsings>disable</ImplicitUsings>
         <IsPackable>false</IsPackable>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
-        <PackageVersion>1.0.0-beta04</PackageVersion>
         <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
         <Product>DataJam</Product>
         <RootNamespace>$(MSBuildProjectName)</RootNamespace>
-        <TargetFrameworks>net6.0</TargetFrameworks>
-        <Version>1.0.0-beta04</Version>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
     <!-- Package Versions -->
