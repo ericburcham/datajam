@@ -16,10 +16,10 @@
         <AssemblyVersion Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</AssemblyVersion>
         <AssemblyVersion Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix).$(BuildNumber)</AssemblyVersion>
 
+        <FileVersion>$(AssemblyVersion)</FileVersion>
+
         <Version Condition=" '$(VersionSuffix)' == '' ">$(VersionPrefix)</Version>
         <Version Condition=" '$(VersionSuffix)' != '' ">$(VersionPrefix)$(VersionSuffix)$(BuildNumber)</Version>
-
-        <FileVersion>$(AssemblyVersion)</FileVersion>
     </PropertyGroup>
 
     <!-- Global properties -->
@@ -28,7 +28,6 @@
         <Authors>Ghost Recon Team</Authors>
         <Company>Enteprise Products</Company>
         <Copyright>© Enteprise Products</Copyright>
-        <DefineConstants>STD</DefineConstants>
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
         <ImplicitUsings>disable</ImplicitUsings>
         <IsPackable>false</IsPackable>
