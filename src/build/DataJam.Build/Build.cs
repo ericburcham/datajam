@@ -41,10 +41,10 @@ class Build : NukeBuild
     Target BuildAll => targetDefinition => targetDefinition.DependsOn(BuildDebug, BuildRelease);
 
     /// <summary>Gets a target that runs DotNet Build for the debug configuration.</summary>
-    Target BuildDebug => targetDefinition => targetDefinition.After(CleanDebug, Restore).Executes(RunBuild(Configuration.Debug));
+    Target BuildDebug => targetDefinition => targetDefinition.DependsOn(Restore).Executes(RunBuild(Configuration.Debug));
 
     /// <summary>Gets a target that runs DotNet Build for the Release configuration.</summary>
-    Target BuildRelease => targetDefinition => targetDefinition.After(CleanRelease, Restore).Executes(RunBuild(Configuration.Release));
+    Target BuildRelease => targetDefinition => targetDefinition.After(BuildDebug).DependsOn(Restore).Executes(RunBuild(Configuration.Release));
 
     /// <summary>Gets a target that runs DotNet Clean for all configurations, removes all bin and object folders, and ensures the package output folder is clean.</summary>
     Target CleanAll => targetDefinition => targetDefinition.DependsOn(CleanDebug, CleanRelease, CleanOutput, CleanPackages);
@@ -54,30 +54,32 @@ class Build : NukeBuild
 
     /// <summary>Gets a target that removes all bin and object folders.</summary>
     Target CleanOutput =>
-        targetDefinition => targetDefinition.Executes(
-            () =>
-            {
-                SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-                TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
-            });
+        targetDefinition => targetDefinition.After(CleanDebug, CleanRelease)
+                                            .Executes(
+                                                 () =>
+                                                 {
+                                                     SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
+                                                     TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(DeleteDirectory);
+                                                 });
 
     /// <summary>Gets a target that ensures the package output folder is clean.</summary>
     Target CleanPackages =>
-        targetDefinition => targetDefinition.Executes(
-            () =>
-            {
-                EnsureCleanDirectory(PackagesDirectory);
-            });
+        targetDefinition => targetDefinition.After(CleanDebug, CleanRelease)
+                                            .Executes(
+                                                 () =>
+                                                 {
+                                                     EnsureCleanDirectory(PackagesDirectory);
+                                                 });
 
     /// <summary>Gets a target that runs DotNet Clean for the release configuration.</summary>
-    Target CleanRelease => targetDefinition => targetDefinition.Executes(RunClean(Configuration.Release));
+    Target CleanRelease => targetDefinition => targetDefinition.After(CleanDebug).Executes(RunClean(Configuration.Release));
 
     /// <summary>Gets a target that runs the default build.</summary>
-    Target Default => targetDefinition => targetDefinition.DependsOn(CleanDebug, CleanRelease, Restore, BuildDebug, BuildRelease, TestDebug, TestRelease, Pack, Publish);
+    Target Default => targetDefinition => targetDefinition.DependsOn(CleanAll, Publish);
 
     /// <summary>Gets a target that runs DotNet Pack for the release configuration.</summary>
     Target Pack =>
-        targetDefinition => targetDefinition.After(CleanAll, CleanDebug, CleanOutput, CleanPackages, CleanRelease, BuildDebug, BuildRelease, TestDebug, TestRelease)
+        targetDefinition => targetDefinition.DependsOn(TestAll)
                                             .Executes(
                                                  () =>
                                                  {
@@ -85,7 +87,7 @@ class Build : NukeBuild
                                                  });
 
     Target Publish =>
-        targetDefinition => targetDefinition.After(CleanAll, CleanDebug, CleanOutput, CleanPackages, CleanRelease, BuildDebug, BuildRelease, TestDebug, TestRelease, Pack)
+        targetDefinition => targetDefinition.DependsOn(Pack)
                                             .OnlyWhenStatic(() => !Repository.IsOnMainOrMasterBranch())
                                             .Executes(
                                                  () =>
@@ -113,10 +115,10 @@ class Build : NukeBuild
     Target TestAll => targetDefinition => targetDefinition.DependsOn(TestDebug, TestRelease);
 
     /// <summary>Gets a target that runs DotNet Test for the debug configuration.</summary>
-    Target TestDebug => targetDefinition => targetDefinition.After(CleanDebug, Restore, BuildDebug).Executes(RunTests(Configuration.Debug));
+    Target TestDebug => targetDefinition => targetDefinition.DependsOn(BuildDebug).Executes(RunTests(Configuration.Debug));
 
     /// <summary>Gets a target that runs DotNet Test for the release configuration.</summary>
-    Target TestRelease => targetDefinition => targetDefinition.After(CleanRelease, Restore, BuildRelease).Executes(RunTests(Configuration.Release));
+    Target TestRelease => targetDefinition => targetDefinition.After(TestDebug).DependsOn(BuildRelease).Executes(RunTests(Configuration.Release));
 
     // Support plugins are available for:
     // - JetBrains ReSharper        https://nuke.build/resharper
