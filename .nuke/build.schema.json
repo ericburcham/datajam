@@ -73,11 +73,8 @@
             "type": "string",
             "enum": [
               "BuildAll",
-              "BuildAllWithDependencies",
               "BuildDebug",
-              "BuildDebugWithDependencies",
               "BuildRelease",
-              "BuildReleaseWithDependencies",
               "CleanAll",
               "CleanDebug",
               "CleanOutput",
@@ -88,11 +85,8 @@
               "Publish",
               "Restore",
               "TestAll",
-              "TestAllWithDependencies",
               "TestDebug",
-              "TestDebugWithDependencies",
-              "TestRelease",
-              "TestReleaseWithDependencies"
+              "TestRelease"
             ]
           }
         },
@@ -107,11 +101,8 @@
             "type": "string",
             "enum": [
               "BuildAll",
-              "BuildAllWithDependencies",
               "BuildDebug",
-              "BuildDebugWithDependencies",
               "BuildRelease",
-              "BuildReleaseWithDependencies",
               "CleanAll",
               "CleanDebug",
               "CleanOutput",
@@ -122,11 +113,8 @@
               "Publish",
               "Restore",
               "TestAll",
-              "TestAllWithDependencies",
               "TestDebug",
-              "TestDebugWithDependencies",
-              "TestRelease",
-              "TestReleaseWithDependencies"
+              "TestRelease"
             ]
           }
         },
