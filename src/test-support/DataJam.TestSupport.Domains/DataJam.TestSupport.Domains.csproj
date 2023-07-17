@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
+      <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj" />
+    </ItemGroup>
+
+</Project>
