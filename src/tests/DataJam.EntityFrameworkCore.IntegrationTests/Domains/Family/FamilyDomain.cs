@@ -1,4 +1,4 @@
-﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.Domain;
+﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.Domains.Family;
 
 using Microsoft.EntityFrameworkCore;
 

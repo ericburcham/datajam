@@ -16,4 +16,8 @@
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport\DataJam.TestSupport.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="TestScenarios" />
+    </ItemGroup>
+
 </Project>

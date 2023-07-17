@@ -1,9 +1,9 @@
-﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.Domain;
+﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.Domains.Family;
+
+using DataJam.TestSupport.Domains.Family;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-using TestSupport.Domains.Family;
 
 public class FatherMapping : FamilyMapping<Father>
 {

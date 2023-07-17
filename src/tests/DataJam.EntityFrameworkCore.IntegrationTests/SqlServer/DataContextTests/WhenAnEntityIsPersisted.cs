@@ -1,21 +1,22 @@
-﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.DataContextTests;
+﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.SqlServer.DataContextTests;
 
 using System.Linq;
 using System.Threading.Tasks;
 
-using Domain;
+using DataJam.EntityFrameworkCore.IntegrationTests.SqlServer;
+using DataJam.TestSupport;
+using DataJam.TestSupport.Domains.Family;
+
+using Domains.Family;
 
 using FluentAssertions;
 
 using Microsoft.EntityFrameworkCore;
 
-using TestSupport;
-using TestSupport.Domains.Family;
-
 [TestFixture]
 public class WhenAnEntityIsPersisted : TransactionalScenario
 {
-    private static readonly string ConnectionString = Dependencies.Instance.MsSql.GetConnectionString();
+    private static readonly string ConnectionString = SqlServerDependencies.Instance.MsSql.GetConnectionString();
 
     [Test]
     public void ItCanBeRetrieved()
