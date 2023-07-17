@@ -10,6 +10,7 @@ using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 
 using TestSupport;
+using TestSupport.Domains.Family;
 
 [TestFixture]
 public class WhenAnEntityIsPersisted : TransactionalScenario

@@ -1,4 +1,4 @@
-namespace DataJam.EntityFrameworkCore.IntegrationTests.Domain;
+namespace DataJam.TestSupport.Domains.Family;
 
 using System.Collections.Generic;
 

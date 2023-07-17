@@ -3,6 +3,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+using TestSupport.Domains.Family;
+
 public class MotherMapping : FamilyMapping<Mother>
 {
     public override void Configure(EntityTypeBuilder<Mother> builder)
