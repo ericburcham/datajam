@@ -2,22 +2,12 @@
 
 using System.Threading.Tasks;
 
+using TestSupport;
+
 [SetUpFixture]
-public class SetUpFixture
+public class RootSetUpFixture : RootSetUpFixtureBase
 {
-    [OneTimeSetUp]
-    public async Task OneTimeSetUp()
-    {
-        await StartContainers();
-    }
-
-    [OneTimeTearDown]
-    public async Task OneTimeTearDown()
-    {
-        await StopContainers();
-    }
-
-    private async Task StartContainers()
+    protected override async Task StartContainers()
     {
         await Parallel.ForEachAsync(
             ContainerProvider.Instance.Containers,
@@ -27,7 +17,7 @@ public class SetUpFixture
             });
     }
 
-    private async Task StopContainers()
+    protected override async Task StopContainers()
     {
         await Parallel.ForEachAsync(
             ContainerProvider.Instance.Containers,

@@ -1,6 +1,4 @@
-namespace DataJam.TestSupport.Domains.Family;
-
-using DataJam.TestSupport.Entities;
+namespace DataJam.TestSupport.EntityFrameworkCore.Domains.Family;
 
 public abstract class Person : Entity
 {

@@ -1,4 +1,4 @@
-namespace DataJam.TestSupport.Domains.Family;
+namespace DataJam.TestSupport.EntityFrameworkCore.Domains.Family;
 
 public class GetChildren : Query<Child>
 {

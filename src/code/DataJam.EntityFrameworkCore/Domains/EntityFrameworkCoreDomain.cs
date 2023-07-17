@@ -1,6 +1,7 @@
 namespace DataJam;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 
 /// <summary>Provides a base class for domains that is specific to Entity Framework Core.</summary>
 public abstract class EntityFrameworkCoreDomain : Domain<ModelBuilder, DbContextOptions>, IEntityFrameworkCoreDomain

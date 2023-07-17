@@ -12,7 +12,7 @@ using Testcontainers.MsSql;
 
 using TestSupport;
 
-public class SqlServerDependencies : Singleton<SqlServerDependencies>, IDeployDatabases, IProvideContainers
+public class SqlServerDependencies : Singleton<SqlServerDependencies>, IProvideContainers
 {
     private SqlServerDependencies()
     {

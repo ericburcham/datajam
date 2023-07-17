@@ -12,12 +12,12 @@
         <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj" />
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.Migrations\DataJam.Migrations.csproj" />
-        <ProjectReference Include="..\..\test-support\DataJam.TestSupport.Domains\DataJam.TestSupport.Domains.csproj" />
+        <ProjectReference Include="..\..\test-support\DataJam.TestSupport.EntityFrameworkCore\DataJam.TestSupport.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport\DataJam.TestSupport.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="TestScenarios" />
+      <None Remove="DataJam.EntityFrameworkCore.IntegrationTests.csproj.DotSettings" />
     </ItemGroup>
 
 </Project>

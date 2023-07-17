@@ -4,13 +4,14 @@ using System.Threading.Tasks;
 
 using DataJam.EntityFrameworkCore.IntegrationTests.SqlServer;
 using DataJam.TestSupport;
-using DataJam.TestSupport.Domains.Family;
 
 using Domains.Family;
 
 using FluentAssertions;
 
 using Microsoft.EntityFrameworkCore;
+
+using TestSupport.EntityFrameworkCore.Domains.Family;
 
 [TestFixture]
 public class WhenAnEntityIsPersisted : TransactionalScenario
