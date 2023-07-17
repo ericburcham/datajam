@@ -10,7 +10,6 @@ using Nuke.Common.Utilities.Collections;
 
 using Serilog;
 
-using static Nuke.Common.IO.FileSystemTasks;
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 // ReSharper disable InconsistentNaming

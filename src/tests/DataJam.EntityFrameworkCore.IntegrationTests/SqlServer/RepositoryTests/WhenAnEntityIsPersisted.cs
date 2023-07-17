@@ -2,53 +2,37 @@
 
 using System.Threading.Tasks;
 
-using DataJam.EntityFrameworkCore.IntegrationTests.SqlServer;
-using DataJam.TestSupport;
-
 using Domains.Family;
 
 using FluentAssertions;
 
-using Microsoft.EntityFrameworkCore;
-
 using TestSupport.EntityFrameworkCore.Domains.Family;
 
 [TestFixture]
-public class WhenAnEntityIsPersisted : TransactionalScenario
+public class WhenAnEntityIsPersisted : EntityFrameworkCoreScenario<SqlServerDependencies, FamilyMappingConfigurator>
 {
-    private static readonly string ConnectionString = SqlServerDependencies.Instance.MsSql.GetConnectionString();
+    public WhenAnEntityIsPersisted()
+        : base(SqlServerDependencies.Instance)
+    {
+    }
 
     [Test]
     public void ItCanBeRetrieved()
     {
-        var dbContextOptions = new DbContextOptionsBuilder().UseSqlServer(ConnectionString).Options;
-        var mappingConfiguration = new FamilyMappingConfigurator();
-        var domain = new FamilyDomain(dbContextOptions, mappingConfiguration);
-        var domainContext = new DomainContext<FamilyDomain>(domain);
-        var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
         var scalar = new GetChildByName("Kid");
-        var result = domainRepository.Find(scalar);
+        var result = Repository.Find(scalar);
         result.Name.Should().Be("Kid");
-        result.Father?.Name.Should().Be("Dad");
-        result.Mother?.Name.Should().Be("Mother");
+        result.Father.Name.Should().Be("Dad");
+        result.Mother.Name.Should().Be("Mom");
     }
 
-    [OneTimeSetUp]
-    protected async Task OneTimeSetUp()
+    protected override async Task InsertScenarioData()
     {
-        // Insert some test data.
-        var dbContextOptions = new DbContextOptionsBuilder().UseSqlServer(ConnectionString).Options;
-        var mappingConfiguration = new FamilyMappingConfigurator();
-        var domain = new FamilyDomain(dbContextOptions, mappingConfiguration);
-        var domainContext = new DomainContext<FamilyDomain>(domain);
-        var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
         var father = new Father { Name = "Dad" };
         var mother = new Mother { Name = "Mom" };
         var child = new Child { Name = "Kid" };
         child.AddParents(father, mother);
-        domainRepository.Context.Add(child);
-
-        // Query the test data.
-        await domainRepository.Context.CommitAsync();
+        Repository.Context.Add(child);
+        await Repository.Context.CommitAsync();
     }
 }

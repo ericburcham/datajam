@@ -8,11 +8,14 @@ using DbUp;
 
 using DotNet.Testcontainers.Containers;
 
+using Microsoft.EntityFrameworkCore;
+
 using Testcontainers.MsSql;
 
 using TestSupport;
+using TestSupport.EntityFrameworkCore;
 
-public class SqlServerDependencies : Singleton<SqlServerDependencies>, IProvideContainers
+public class SqlServerDependencies : Singleton<SqlServerDependencies>, IProvideContainers, IProvideDbContextOptions
 {
     private SqlServerDependencies()
     {
@@ -28,6 +31,8 @@ public class SqlServerDependencies : Singleton<SqlServerDependencies>, IProvideC
     }
 
     public MsSqlContainer MsSql { get; set; }
+
+    public DbContextOptions Options => new DbContextOptionsBuilder().UseSqlServer(MsSql.GetConnectionString()).Options;
 
     private static Assembly MigrationAssembly => Assembly.Load("DataJam.Migrations");
 

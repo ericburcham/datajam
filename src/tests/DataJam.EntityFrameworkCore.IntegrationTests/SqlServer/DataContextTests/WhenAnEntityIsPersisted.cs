@@ -12,34 +12,31 @@ using Microsoft.EntityFrameworkCore;
 using TestSupport.EntityFrameworkCore.Domains.Family;
 
 [TestFixture]
-public class WhenAnEntityIsPersisted : SqlServerScenario
+public class WhenAnEntityIsPersisted : EntityFrameworkCoreScenario<SqlServerDependencies, FamilyMappingConfigurator>
 {
+    public WhenAnEntityIsPersisted()
+        : base(SqlServerDependencies.Instance)
+    {
+    }
+
     [Test]
     public void ItCanBeRetrieved()
     {
-        var mappingConfiguration = new FamilyMappingConfigurator();
-        var domain = new FamilyDomain(DbContextOptions, mappingConfiguration);
-        var domainContext = new DomainContext<FamilyDomain>(domain);
-        var result = domainContext.AsQueryable<Child>().Include(child => child.Father).Include(child => child.Mother).Single();
+        var result = Context.AsQueryable<Child>().Include(child => child.Father).Include(child => child.Mother).Single();
         result.Name.Should().Be("Kid");
         result.Father.Name.Should().Be("Dad");
         result.Mother.Name.Should().Be("Mom");
     }
 
-    [OneTimeSetUp]
-    protected async Task OneTimeSetUp()
+    protected override async Task InsertScenarioData()
     {
         // Insert some test data.
-        var mappingConfiguration = new FamilyMappingConfigurator();
-        var domain = new FamilyDomain(DbContextOptions, mappingConfiguration);
-        var domainContext = new DomainContext<FamilyDomain>(domain);
         var father = new Father { Name = "Dad" };
         var mother = new Mother { Name = "Mom" };
         var child = new Child { Name = "Kid" };
         child.AddParents(father, mother);
-        domainContext.Add(child);
+        Context.Add(child);
 
-        // Query the test data.
-        await domainContext.CommitAsync();
+        await Context.CommitAsync();
     }
 }
