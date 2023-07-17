@@ -1,7 +1,5 @@
 ﻿namespace DataJam.TestSupport.EntityFrameworkCore.Domains.Family;
 
-using System.Linq;
-
 public class GetChildByName : Scalar<Child>
 {
     public GetChildByName(string name)
