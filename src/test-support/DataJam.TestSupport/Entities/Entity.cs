@@ -1,4 +1,4 @@
-﻿namespace DataJam.TestSupport.Entities;
+﻿namespace DataJam.TestSupport;
 
 public class Entity : Entity<long>, IEntity
 {

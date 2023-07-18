@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore;
 /// <summary>A ReadonlyDbContext instance represents a session with the database and can be used to query instances of your entities.</summary>
 /// <remarks>
 ///     <para>
-///         Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This includes both parallel execution
-///         of async queries and any explicit concurrent use from multiple threads. Therefore, always await async calls immediately, or use separate DbContext
+///         Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This includes both parallel execution of
+///         async queries and any explicit concurrent use from multiple threads. Therefore, always await async calls immediately, or use separate DbContext
 ///         instances for operations that execute in parallel. See <see href="https://aka.ms/efcore-docs-threading">Avoiding DbContext threading issues</see> for
 ///         more information and examples.
 ///     </para>
 ///     <para>
-///         Typically you create a class that derives from ReadonlyDbContext and contains <see cref="DbSet{TEntity}" /> properties for each entity in the model.
-///         If the <see cref="DbSet{TEntity}" /> properties have a public setter, they are automatically initialized when the instance of the derived context is
+///         Typically you create a class that derives from ReadonlyDbContext and contains <see cref="DbSet{TEntity}" /> properties for each entity in the model. If
+///         the <see cref="DbSet{TEntity}" /> properties have a public setter, they are automatically initialized when the instance of the derived context is
 ///         created.
 ///     </para>
 ///     <para>

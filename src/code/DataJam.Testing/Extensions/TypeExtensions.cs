@@ -22,8 +22,8 @@ public static class TypeExtensions
     }
 
     /// <summary>
-    ///     Returns the type param "T" from a <paramref name="type" /> that is <see cref="IEnumerable{T}" />.  If the given type is not enumerable, this method
-    ///     returns the given type.
+    ///     Returns the type param "T" from a <paramref name="type" /> that is <see cref="IEnumerable{T}" />.  If the given type is not enumerable, this method returns
+    ///     the given type.
     /// </summary>
     /// <param name="type">The <see cref="Type" /> to examine.</param>
     /// <returns>A <see cref="Type" /> representing the element type if <paramref name="type" /> is an enumerable.  Otherwise the given type.</returns>
