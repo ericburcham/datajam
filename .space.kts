@@ -34,9 +34,6 @@ val releaseBuildScript = """
     PATH=${'$'}PATH:${'$'}HOME/.dotnet:${'$'}HOME/.dotnet/tools
     dotnet --list-sdks
 
-    # Register the space nuget feed.
-    dotnet nuget add source {{ project:msa_nuget_target_url }} -n nuget.org
-
     # Execute the Nuke build.
     ./build.sh
 """.trimIndent()
