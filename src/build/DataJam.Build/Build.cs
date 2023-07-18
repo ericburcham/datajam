@@ -91,6 +91,12 @@ class Build : NukeBuild
               .Executes(
                    () =>
                    {
+                       Console.WriteLine("--------------------------------------------------------------------------------");
+                       Console.WriteLine("Attempting to publish NuGet packages to Space.  Diagnostic information follows.");
+                       Console.WriteLine($"API Key   : {_nuGetSpaceTargetApiKey}");
+                       Console.WriteLine($"Target URL: {_nuGetSpaceTargetUrl}");
+                       Console.WriteLine("--------------------------------------------------------------------------------");
+
                        var packages = ArtifactsDirectory.GlobFiles("*.nupkg");
 
                        DotNetNuGetPush(pushSettings => pushSettings.SetApiKey(_nuGetSpaceTargetApiKey).SetSource(_nuGetSpaceTargetUrl).CombineWith(packages, (combinedPushSettings, targetPath) => combinedPushSettings.SetTargetPath(targetPath)), 5, true);

@@ -55,11 +55,11 @@
           "type": "string",
           "description": "NuGet.org - NuGet target URL"
         },
-        "NuGetPublicSpaceTargetApiKey": {
+        "NuGetSpaceTargetApiKey": {
           "type": "string",
           "description": "Space - NuGet target API key / access token"
         },
-        "NuGetPublicSpaceTargetUrl": {
+        "NuGetSpaceTargetUrl": {
           "type": "string",
           "description": "Space - NuGet target URL"
         },
@@ -91,7 +91,7 @@
               "Clean",
               "Compile",
               "Package",
-              "PublishPackagesToPublicSpace",
+              "PublishPackagesToSpace",
               "PushPackagesToNuGetOrg",
               "Restore",
               "Test"
@@ -111,7 +111,7 @@
               "Clean",
               "Compile",
               "Package",
-              "PublishPackagesToPublicSpace",
+              "PublishPackagesToSpace",
               "PushPackagesToNuGetOrg",
               "Restore",
               "Test"
