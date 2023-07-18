@@ -49,14 +49,14 @@ job("Continuous Integration Build") {
             // Enable for all git flow branches.
             branchFilter {
                 // Develop branch
-                -"refs/develop"
+                +"refs/develop"
 
                 // Git-flow branch prefixes
-                -"refs/bugfix/*"
-                -"refs/feature/*"
-                -"refs/hotfix/*"
-                -"refs/release/*"
-                -"refs/support/*"
+                +"refs/bugfix/*"
+                +"refs/feature/*"
+                +"refs/hotfix/*"
+                +"refs/release/*"
+                +"refs/support/*"
             }
         }
     }
@@ -90,7 +90,7 @@ job("Release Build") {
             // Enable for all git flow branches.
             branchFilter {
                 // Main branch
-                -"refs/main"
+                +"refs/main"
             }
         }
     }
