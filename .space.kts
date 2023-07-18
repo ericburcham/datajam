@@ -9,7 +9,7 @@ val buildScript = """
     PATH=${'$'}PATH:${'$'}HOME/.dotnet:${'$'}HOME/.dotnet/tools
     dotnet --list-sdks
     
-    dotnet nuget add source $NuGetSpaceTargetUrl -n space -u "%JB_SPACE_CLIENT_ID%" -p "%JB_SPACE_CLIENT_SECRET%" --store-password-in-clear-text
+    dotnet nuget add source $FEED_URL -n space -u "%JB_SPACE_CLIENT_ID%" -p "%JB_SPACE_CLIENT_SECRET%" --store-password-in-clear-text
 
     ./build.sh
 """.trimIndent()
@@ -31,6 +31,8 @@ job("Continuous Integration Build") {
     }
 
     container(buildContainerImage) {
+        env["FEED_URL"] = Secrets("msa_nuget_space_target_url")
+
         resources {
             cpu = 2.cpu
             memory = 4.gb
