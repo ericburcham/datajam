@@ -8,6 +8,8 @@ val buildScript = """
     ./dotnet-install.sh --channel 6.0
     PATH=${'$'}PATH:${'$'}HOME/.dotnet:${'$'}HOME/.dotnet/tools
     dotnet --list-sdks
+    
+    dotnet nuget add source $JB_SPACE_CLIENT_ID -n space -u "%JB_SPACE_CLIENT_ID%" -p "%JB_SPACE_CLIENT_SECRET%" --store-password-in-clear-text
 
     ./build.sh
 """.trimIndent()
