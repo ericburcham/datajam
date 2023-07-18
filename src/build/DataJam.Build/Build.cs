@@ -1,9 +1,12 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 using Nuke.Common;
 using Nuke.Common.Execution;
+using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
 
@@ -16,21 +19,25 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)", Name = "Configuration")]
     readonly Configuration _configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    /// <summary>The API key for publishing nuget packages to nuget.org.</summary>
+    /// <summary>The API key for publishing nuGet packages to nuGet.org.</summary>
     [Parameter("NuGet.org - NuGet target API key / access token", Name = "NuGetOrgTargetApiKey")]
-    readonly string? _nugetOrgTargetApiKey;
+    readonly string? _nuGetOrgTargetApiKey;
 
-    /// <summary>The URl for publishing nuget packages to nuget.org.</summary>
+    /// <summary>The URl for publishing nuGet packages to nuGet.org.</summary>
     [Parameter("NuGet.org - NuGet target URL", Name = "NuGetOrgTargetUrl")]
-    readonly string? _nugetOrgTargetUrl;
+    readonly string? _nuGetOrgTargetUrl;
 
-    /// <summary>The API key for publishing nuget packages to JetBrains space.</summary>
+    /// <summary>The API key for publishing nuGet packages to JetBrains space.</summary>
     [Parameter("Space - NuGet target API key / access token", Name = "NuGetPublicSpaceTargetApiKey")]
-    readonly string? _nugetPublicSpaceTargetApiKey;
+    readonly string? _nuGetPublicSpaceTargetApiKey;
 
-    /// <summary>The URL for publishing nuget packages to JetBrains space.</summary>
+    /// <summary>The URL for publishing nuGet packages to JetBrains space.</summary>
     [Parameter("Space - NuGet target URL", Name = "NuGetPublicSpaceTargetUrl")]
-    readonly string? _nugetPublicSpaceTargetUrl;
+    readonly string? _nuGetPublicSpaceTargetUrl;
+
+    /// <summary>Gets information about the git repository.</summary>
+    [GitRepository]
+    readonly GitRepository Repository = null!;
 
     /// <summary>Gets the DotNet solution.</summary>
     [Solution]
@@ -42,7 +49,7 @@ class Build : NukeBuild
     /// <summary>Gets the absolute path for the project's test folder.</summary>
     static AbsolutePath TestsDirectory => RootDirectory / "src" / "tests";
 
-    /// <summary>Gets the absolute path for nuget package output.</summary>
+    /// <summary>Gets the absolute path for nuGet package output.</summary>
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
 
     /// <summary>Gets a target that cleans artifact, bin, and obj folders.</summary>
@@ -74,6 +81,32 @@ class Build : NukeBuild
                        {
                            DotNetPack(packSettings => packSettings.EnableIncludeSource().EnableIncludeSymbols().EnableNoBuild().EnableNoRestore().SetConfiguration(_configuration).SetProject(project).SetOutputDirectory(ArtifactsDirectory));
                        }
+                   });
+
+    // ReSharper disable once UnusedMember.Local
+    Target PublishPackagesToPublicSpace =>
+        _ => _.TriggeredBy(Package)
+              .OnlyWhenStatic(() => !string.IsNullOrEmpty(_nuGetPublicSpaceTargetApiKey) && !string.IsNullOrEmpty(_nuGetPublicSpaceTargetUrl) && _nuGetPublicSpaceTargetUrl != " ")
+              .WhenSkipped(DependencyBehavior.Execute)
+              .Executes(
+                   () =>
+                   {
+                       var packages = ArtifactsDirectory.GlobFiles("*.symbols.nupkg");
+
+                       DotNetNuGetPush(pushSettings => pushSettings.SetApiKey(_nuGetPublicSpaceTargetApiKey).SetSource(_nuGetPublicSpaceTargetUrl).CombineWith(packages, (combinedPushSettings, targetPath) => combinedPushSettings.SetTargetPath(targetPath)), 5, true);
+                   });
+
+    // ReSharper disable once UnusedMember.Local
+    Target PushPackagesToNuGetOrg =>
+        _ => _.TriggeredBy(Package)
+              .OnlyWhenStatic(() => Repository.IsOnMainBranch() && (Environment.GetEnvironmentVariable("JB_SPACE_GIT_BRANCH") ?? string.Empty).Contains("main", StringComparison.OrdinalIgnoreCase) && !string.IsNullOrEmpty(_nuGetOrgTargetApiKey) && !string.IsNullOrEmpty(_nuGetOrgTargetUrl) && _nuGetOrgTargetUrl != " ")
+              .WhenSkipped(DependencyBehavior.Execute)
+              .Executes(
+                   () =>
+                   {
+                       var packages = ArtifactsDirectory.GlobFiles("*.nupkg");
+
+                       DotNetNuGetPush(pushSettings => pushSettings.SetApiKey(_nuGetOrgTargetApiKey).SetSource(_nuGetOrgTargetUrl).CombineWith(packages, (combinedPushSettings, targetPath) => combinedPushSettings.SetTargetPath(targetPath)), 5, true);
                    });
 
     /// <summary>Gets a target that restores package dependencies.</summary>
