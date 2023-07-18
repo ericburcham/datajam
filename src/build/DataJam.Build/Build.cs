@@ -99,7 +99,7 @@ class Build : NukeBuild
 
                        var packages = ArtifactsDirectory.GlobFiles("*.nupkg");
 
-                       DotNetNuGetPush(pushSettings => pushSettings.SetApiKey(_nuGetSpaceTargetApiKey).SetSource(_nuGetSpaceTargetUrl).CombineWith(packages, (combinedPushSettings, targetPath) => combinedPushSettings.SetTargetPath(targetPath)), 5, true);
+                       DotNetNuGetPush(pushSettings => pushSettings.EnableSkipDuplicate().SetApiKey(_nuGetSpaceTargetApiKey).SetSource(_nuGetSpaceTargetUrl).CombineWith(packages, (combinedPushSettings, targetPath) => combinedPushSettings.SetTargetPath(targetPath)), 5, true);
                    });
 
     // ReSharper disable once UnusedMember.Local

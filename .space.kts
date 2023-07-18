@@ -55,7 +55,7 @@ job("Continuous Integration Build") {
                 +"refs/bugfix/*"
                 +"refs/feature/*"
                 +"refs/hotfix/*"
-                +"refs/release/*"
+                +"release/*"
                 +"refs/support/*"
             }
         }
