@@ -4,8 +4,15 @@
     <Import Project="../Directory.Build.props"/>
 
     <PropertyGroup>
+        <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+        <EmbedUntrackedSources>True</EmbedUntrackedSources>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <IncludePackageReferencesDuringMarkupCompilation>true</IncludePackageReferencesDuringMarkupCompilation>
+        <IncludeSource>True</IncludeSource>
+        <IncludeSymbols>True</IncludeSymbols>
         <IsPackable>true</IsPackable>
         <RootNamespace>DataJam</RootNamespace>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>
 
     <!-- Include Stylecop.json -->

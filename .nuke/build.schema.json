@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
-  "title": "Build Schema",
   "$ref": "#/definitions/build",
+  "title": "Build Schema",
   "definitions": {
     "build": {
       "type": "object",
@@ -47,6 +47,22 @@
           "type": "boolean",
           "description": "Disables displaying the NUKE logo"
         },
+        "NuGetOrgTargetApiKey": {
+          "type": "string",
+          "description": "NuGet.org - NuGet target API key / access token"
+        },
+        "NuGetOrgTargetUrl": {
+          "type": "string",
+          "description": "NuGet.org - NuGet target URL"
+        },
+        "NuGetSpaceTargetApiKey": {
+          "type": "string",
+          "description": "Space - NuGet target API key / access token"
+        },
+        "NuGetSpaceTargetUrl": {
+          "type": "string",
+          "description": "Space - NuGet target URL"
+        },
         "Partition": {
           "type": "string",
           "description": "Partition to use on CI"
@@ -72,27 +88,13 @@
           "items": {
             "type": "string",
             "enum": [
-              "BuildAll",
-              "BuildAllWithDependencies",
-              "BuildDebug",
-              "BuildDebugWithDependencies",
-              "BuildRelease",
-              "BuildReleaseWithDependencies",
-              "CleanAll",
-              "CleanDebug",
-              "CleanOutput",
-              "CleanPackages",
-              "CleanRelease",
-              "Default",
-              "Pack",
-              "Publish",
+              "Clean",
+              "Compile",
+              "Package",
+              "PublishPackagesToSpace",
+              "PushPackagesToNuGetOrg",
               "Restore",
-              "TestAll",
-              "TestAllWithDependencies",
-              "TestDebug",
-              "TestDebugWithDependencies",
-              "TestRelease",
-              "TestReleaseWithDependencies"
+              "Test"
             ]
           }
         },
@@ -106,27 +108,13 @@
           "items": {
             "type": "string",
             "enum": [
-              "BuildAll",
-              "BuildAllWithDependencies",
-              "BuildDebug",
-              "BuildDebugWithDependencies",
-              "BuildRelease",
-              "BuildReleaseWithDependencies",
-              "CleanAll",
-              "CleanDebug",
-              "CleanOutput",
-              "CleanPackages",
-              "CleanRelease",
-              "Default",
-              "Pack",
-              "Publish",
+              "Clean",
+              "Compile",
+              "Package",
+              "PublishPackagesToSpace",
+              "PushPackagesToNuGetOrg",
               "Restore",
-              "TestAll",
-              "TestAllWithDependencies",
-              "TestDebug",
-              "TestDebugWithDependencies",
-              "TestRelease",
-              "TestReleaseWithDependencies"
+              "Test"
             ]
           }
         },

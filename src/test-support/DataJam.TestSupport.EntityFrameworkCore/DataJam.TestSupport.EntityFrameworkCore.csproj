@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj" />
+      <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj" />
+      <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
+      <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(Microsoft_EntityFrameworkCore_Version)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="DataJam.TestSupport.EntityFrameworkCore.csproj.DotSettings" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Domains" />
+    </ItemGroup>
+
+</Project>
