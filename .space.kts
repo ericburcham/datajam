@@ -35,7 +35,7 @@ val releaseBuildScript = """
     dotnet --list-sdks
 
     # Register the space nuget feed.
-    dotnet nuget add source {{ project:msa_nuget_target_url }} -n nuget.org
+    dotnet nuget add source {{ project:msa_nuget_space_target_url }} -n space -u "%JB_SPACE_CLIENT_ID%" -p "%JB_SPACE_CLIENT_SECRET%" --store-password-in-clear-text
 
     # Execute the Nuke build.
     ./build.sh
