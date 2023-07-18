@@ -47,6 +47,22 @@
           "type": "boolean",
           "description": "Disables displaying the NUKE logo"
         },
+        "NuGetOrgTargetApiKey": {
+          "type": "string",
+          "description": "NuGet.org - NuGet target API key / access token"
+        },
+        "NuGetOrgTargetUrl": {
+          "type": "string",
+          "description": "NuGet.org - NuGet target URL"
+        },
+        "NuGetPublicSpaceTargetApiKey": {
+          "type": "string",
+          "description": "Space - NuGet target API key / access token"
+        },
+        "NuGetPublicSpaceTargetUrl": {
+          "type": "string",
+          "description": "Space - NuGet target URL"
+        },
         "Partition": {
           "type": "string",
           "description": "Partition to use on CI"
@@ -72,21 +88,13 @@
           "items": {
             "type": "string",
             "enum": [
-              "BuildAll",
-              "BuildDebug",
-              "BuildRelease",
-              "CleanAll",
-              "CleanDebug",
-              "CleanOutput",
-              "CleanPackages",
-              "CleanRelease",
+              "Clean",
+              "Compile",
               "Default",
-              "Pack",
+              "Package",
               "Publish",
               "Restore",
-              "TestAll",
-              "TestDebug",
-              "TestRelease"
+              "Test"
             ]
           }
         },
@@ -100,21 +108,13 @@
           "items": {
             "type": "string",
             "enum": [
-              "BuildAll",
-              "BuildDebug",
-              "BuildRelease",
-              "CleanAll",
-              "CleanDebug",
-              "CleanOutput",
-              "CleanPackages",
-              "CleanRelease",
+              "Clean",
+              "Compile",
               "Default",
-              "Pack",
+              "Package",
               "Publish",
               "Restore",
-              "TestAll",
-              "TestDebug",
-              "TestRelease"
+              "Test"
             ]
           }
         },
