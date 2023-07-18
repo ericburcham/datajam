@@ -90,9 +90,7 @@
             "enum": [
               "Clean",
               "Compile",
-              "Default",
               "Package",
-              "Publish",
               "Restore",
               "Test"
             ]
@@ -110,9 +108,7 @@
             "enum": [
               "Clean",
               "Compile",
-              "Default",
               "Package",
-              "Publish",
               "Restore",
               "Test"
             ]

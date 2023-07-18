@@ -2,13 +2,10 @@
 
 using Nuke.Common;
 using Nuke.Common.Execution;
-using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Utilities.Collections;
-
-using Serilog;
 
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -35,10 +32,6 @@ class Build : NukeBuild
     [Parameter("Space - NuGet target URL", Name = "NuGetPublicSpaceTargetUrl")]
     readonly string? _nugetPublicSpaceTargetUrl;
 
-    /// <summary>Gets information about the git repository.</summary>
-    [GitRepository]
-    readonly GitRepository Repository = null!;
-
     /// <summary>Gets the DotNet solution.</summary>
     [Solution]
     readonly Solution Solution = null!;
@@ -59,7 +52,7 @@ class Build : NukeBuild
             {
                 SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(x => x.DeleteDirectory());
                 TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(x => x.DeleteDirectory());
-                ArtifactsDirectory.CreateDirectory();
+                ArtifactsDirectory.CreateOrCleanDirectory();
             });
 
     /// <summary>Gets a target that runs DotNet Build for the solution.</summary>
@@ -68,11 +61,8 @@ class Build : NukeBuild
               .Executes(
                    () =>
                    {
-                       DotNetBuild(_ => _.EnableNoRestore().SetConfiguration(_configuration).SetProjectFile(Solution).SetProperty("GeneratePackageOnBuild", "False"));
+                       DotNetBuild(buildSettings => buildSettings.EnableNoRestore().SetConfiguration(_configuration).SetProjectFile(Solution).SetProperty("GeneratePackageOnBuild", "false"));
                    });
-
-    /// <summary>Gets a target that runs the default build.</summary>
-    Target Default => _ => _.DependsOn(Clean, Publish);
 
     /// <summary>Gets a target that runs DotNet Pack for the solution.</summary>
     Target Package =>
@@ -82,30 +72,8 @@ class Build : NukeBuild
                    {
                        foreach (var project in Solution.AllProjects.Where(p => p.GetProperty<bool>("GeneratePackageOnBuild")))
                        {
-                           DotNetPack(_ => _.EnableIncludeSource().EnableIncludeSymbols().EnableNoBuild().EnableNoRestore().SetConfiguration(_configuration).SetProject(project).SetOutputDirectory(ArtifactsDirectory));
+                           DotNetPack(packSettings => packSettings.EnableIncludeSource().EnableIncludeSymbols().EnableNoBuild().EnableNoRestore().SetConfiguration(_configuration).SetProject(project).SetOutputDirectory(ArtifactsDirectory));
                        }
-                   });
-
-    Target Publish =>
-        _ => _.DependsOn(Package)
-              .OnlyWhenStatic(() => !Repository.IsOnMainOrMasterBranch())
-              .Executes(
-                   () =>
-                   {
-                       // Parameters and secrets:  https://www.jetbrains.com/help/space/automation-parameters.html#pass-parameters-as-environment-variables
-                       // .NET and .NET Core:      https://www.jetbrains.com/help/space/net-core.html
-                       Log.Information("Commit = {Value}", Repository.Commit);
-                       Log.Information("Branch = {Value}", Repository.Branch);
-                       Log.Information("Tags = {Value}", Repository.Tags);
-
-                       Log.Information("main branch = {Value}", Repository.IsOnMainBranch());
-                       Log.Information("main/master branch = {Value}", Repository.IsOnMainOrMasterBranch());
-                       Log.Information("develop branch = {Value}", Repository.IsOnDevelopBranch());
-                       Log.Information("release/* branch = {Value}", Repository.IsOnReleaseBranch());
-                       Log.Information("hotfix/* branch = {Value}", Repository.IsOnHotfixBranch());
-
-                       Log.Information("Https URL = {Value}", Repository.HttpsUrl);
-                       Log.Information("SSH URL = {Value}", Repository.SshUrl);
                    });
 
     /// <summary>Gets a target that restores package dependencies.</summary>
@@ -114,7 +82,7 @@ class Build : NukeBuild
               .Executes(
                    () =>
                    {
-                       DotNetRestore(_ => _.SetProjectFile(Solution));
+                       DotNetRestore(restoreSettings => restoreSettings.SetProjectFile(Solution));
                    });
 
     /// <summary>Gets a target that runs DotNet Test for the solution.</summary>
@@ -123,7 +91,7 @@ class Build : NukeBuild
               .Executes(
                    () =>
                    {
-                       DotNetTest(_ => _.EnableNoBuild().EnableNoRestore().SetConfiguration(_configuration).SetProjectFile(Solution));
+                       DotNetTest(testSettings => testSettings.EnableNoBuild().EnableNoRestore().SetConfiguration(_configuration).SetProjectFile(Solution));
                    });
 
     // Support plugins are available for:
@@ -131,5 +99,5 @@ class Build : NukeBuild
     // - JetBrains Rider            https://nuke.build/rider
     // - Microsoft VisualStudio     https://nuke.build/visualstudio
     // - Microsoft VSCode           https://nuke.build/vscode
-    public static int Main() => Execute<Build>(build => build.Default);
+    public static int Main() => Execute<Build>(build => build.Package);
 }

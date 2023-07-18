@@ -4,6 +4,7 @@
     <Import Project="../Directory.Build.props"/>
 
     <PropertyGroup>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <IsPackable>true</IsPackable>
         <RootNamespace>DataJam</RootNamespace>
     </PropertyGroup>
