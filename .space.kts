@@ -9,7 +9,7 @@ val buildScript = """
     PATH=${'$'}PATH:${'$'}HOME/.dotnet:${'$'}HOME/.dotnet/tools
     dotnet --list-sdks
     
-    dotnet nuget add source $FEED_URL -n space -u "%JB_SPACE_CLIENT_ID%" -p "%JB_SPACE_CLIENT_SECRET%" --store-password-in-clear-text
+    # dotnet nuget add source (URL Here) -n space -u "%JB_SPACE_CLIENT_ID%" -p "%JB_SPACE_CLIENT_SECRET%" --store-password-in-clear-text
 
     ./build.sh
 """.trimIndent()
@@ -31,7 +31,7 @@ job("Continuous Integration Build") {
     }
 
     container(buildContainerImage) {
-        env["FEED_URL"] = Secrets("msa_nuget_space_target_url")
+        env["FEED_URL"] = {{ msa_nuget_space_target_url }}
 
         resources {
             cpu = 2.cpu
@@ -44,8 +44,8 @@ job("Continuous Integration Build") {
         env.set("DOTNET_CLI_TELEMETRY_OPTOUT", "true")
 
         // Set environment variables.
-        env.set("NuGetSpaceTargetApiKey", Params("msa_nuget_space_api_key"))
-        env.set("NuGetSpaceTargetUrl", Secrets("msa_nuget_space_target_url"))
+        env.set("NuGetSpaceTargetApiKey", {{ msa_nuget_space_api_key }})
+        env.set("NuGetSpaceTargetUrl", {{ msa_nuget_space_target_url }})
 
         shellScript {
             content = buildScript
