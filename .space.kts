@@ -28,6 +28,10 @@ job("Continuous Integration Build") {
 
             // Enable for all git flow branches.
             branchFilter {
+                // Develop branch
+                -"refs/develop"
+
+                // Git-flow branch prefixes
                 -"refs/bugfix/*"
                 -"refs/feature/*"
                 -"refs/hotfix/*"
