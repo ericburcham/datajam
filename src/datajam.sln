@@ -48,6 +48,27 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport", "test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.EntityFrameworkCore", "test-support\DataJam.TestSupport.EntityFrameworkCore\DataJam.TestSupport.EntityFrameworkCore.csproj", "{2DE00942-F708-48F1-AF30-5ABD93F1E172}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{7ADD1DA9-9513-4576-B490-72CED6334CB2}"
+	ProjectSection(SolutionItems) = preProject
+		..\.gitignore = ..\.gitignore
+		..\.space.kts = ..\.space.kts
+		..\CODEOWNERS = ..\CODEOWNERS
+		..\README.md = ..\README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".space", ".space", "{A1A42544-191B-4ACE-B5EC-2F189FA8E731}"
+	ProjectSection(SolutionItems) = preProject
+		..\.space\fleet.devfile.yaml = ..\.space\fleet.devfile.yaml
+		..\.space\rider.devfile.yaml = ..\.space\rider.devfile.yaml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7F294636-6B02-4F75-B1F5-4CB5D7678020}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		stylecop.json = stylecop.json
+		StyleCopAnalyzers.ruleset = StyleCopAnalyzers.ruleset
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -112,6 +133,8 @@ Global
 		{25C6CABB-ED1F-4AB6-A4E4-C8CE93C190D5} = {0ED872A4-B40C-4B25-BA6C-FBA62694C649}
 		{1A21ED3C-9BDD-42B7-B0A7-E340111DBAFC} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 		{2DE00942-F708-48F1-AF30-5ABD93F1E172} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{A1A42544-191B-4ACE-B5EC-2F189FA8E731} = {7ADD1DA9-9513-4576-B490-72CED6334CB2}
+		{7F294636-6B02-4F75-B1F5-4CB5D7678020} = {7ADD1DA9-9513-4576-B490-72CED6334CB2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}

@@ -33,6 +33,7 @@
         <IsPackable>false</IsPackable>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
         <ProduceReferenceAssembly>True</ProduceReferenceAssembly>
         <Product>DataJam</Product>
         <RootNamespace>$(MSBuildProjectName)</RootNamespace>

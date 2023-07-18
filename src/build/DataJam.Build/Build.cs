@@ -28,12 +28,12 @@ class Build : NukeBuild
     readonly string? _nuGetOrgTargetUrl;
 
     /// <summary>The API key for publishing nuGet packages to JetBrains space.</summary>
-    [Parameter("Space - NuGet target API key / access token", Name = "NuGetPublicSpaceTargetApiKey")]
-    readonly string? _nuGetPublicSpaceTargetApiKey;
+    [Parameter("Space - NuGet target API key / access token", Name = "NuGetSpaceTargetApiKey")]
+    readonly string? _nuGetSpaceTargetApiKey;
 
     /// <summary>The URL for publishing nuGet packages to JetBrains space.</summary>
-    [Parameter("Space - NuGet target URL", Name = "NuGetPublicSpaceTargetUrl")]
-    readonly string? _nuGetPublicSpaceTargetUrl;
+    [Parameter("Space - NuGet target URL", Name = "NuGetSpaceTargetUrl")]
+    readonly string? _nuGetSpaceTargetUrl;
 
     /// <summary>Gets information about the git repository.</summary>
     [GitRepository]
@@ -84,16 +84,16 @@ class Build : NukeBuild
                    });
 
     // ReSharper disable once UnusedMember.Local
-    Target PublishPackagesToPublicSpace =>
+    Target PublishPackagesToSpace =>
         _ => _.TriggeredBy(Package)
-              .OnlyWhenStatic(() => !string.IsNullOrEmpty(_nuGetPublicSpaceTargetApiKey) && !string.IsNullOrEmpty(_nuGetPublicSpaceTargetUrl) && _nuGetPublicSpaceTargetUrl != " ")
+              .OnlyWhenStatic(() => !string.IsNullOrEmpty(_nuGetSpaceTargetApiKey) && !string.IsNullOrEmpty(_nuGetSpaceTargetUrl) && _nuGetSpaceTargetUrl != " ")
               .WhenSkipped(DependencyBehavior.Execute)
               .Executes(
                    () =>
                    {
-                       var packages = ArtifactsDirectory.GlobFiles("*.symbols.nupkg");
+                       var packages = ArtifactsDirectory.GlobFiles("*.nupkg");
 
-                       DotNetNuGetPush(pushSettings => pushSettings.SetApiKey(_nuGetPublicSpaceTargetApiKey).SetSource(_nuGetPublicSpaceTargetUrl).CombineWith(packages, (combinedPushSettings, targetPath) => combinedPushSettings.SetTargetPath(targetPath)), 5, true);
+                       DotNetNuGetPush(pushSettings => pushSettings.SetApiKey(_nuGetSpaceTargetApiKey).SetSource(_nuGetSpaceTargetUrl).CombineWith(packages, (combinedPushSettings, targetPath) => combinedPushSettings.SetTargetPath(targetPath)), 5, true);
                    });
 
     // ReSharper disable once UnusedMember.Local
