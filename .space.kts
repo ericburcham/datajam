@@ -31,7 +31,7 @@ job("Continuous Integration Build") {
     }
 
     container(buildContainerImage) {
-        env["FEED_URL"] = "{{ msa_nuget_space_target_url }}"
+        env["FEED_URL"] = "{{ project:msa_nuget_space_target_url }}"
 
         resources {
             cpu = 2.cpu
@@ -44,8 +44,8 @@ job("Continuous Integration Build") {
         env.set("DOTNET_CLI_TELEMETRY_OPTOUT", "true")
 
         // Set environment variables.
-        env.set("NuGetSpaceTargetApiKey", "{{ msa_nuget_space_api_key }}")
-        env.set("NuGetSpaceTargetUrl", "{{ msa_nuget_space_target_url }}")
+        env.set("NuGetSpaceTargetApiKey", "{{ project:msa_nuget_space_api_key }}")
+        env.set("NuGetSpaceTargetUrl", "{{ project:msa_nuget_space_target_url }}")
 
         shellScript {
             content = buildScript
