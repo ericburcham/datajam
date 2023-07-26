@@ -1,4 +1,5 @@
-﻿// ReSharper disable VariableHidesOuterVariable
+﻿// ReSharper disable InconsistentNaming
+// ReSharper disable VariableHidesOuterVariable
 
 namespace DataJam.Build;
 
@@ -42,13 +43,13 @@ public class Build : NukeBuild
     [GitRepository]
     private readonly GitRepository _repository = null!;
 
-    /// <summary>Gets the DotNet solution.</summary>
-    [Solution]
-    private readonly Solution _solution = null!;
-
     /// <summary>Gets version information.</summary>
     [VersionInfo]
     private readonly VersionInfo? _versionInfo;
+
+    /// <summary>Gets the DotNet solution.</summary>
+    [Solution]
+    private readonly Solution Solution = null!;
 
     /// <summary>Gets the absolute path for the project's source code.</summary>
     private static AbsolutePath SourceDirectory => RootDirectory / "src" / "code";
@@ -84,7 +85,7 @@ public class Build : NukeBuild
                              .SetConfiguration(_configuration)
                              .SetFileVersion(_versionInfo?.FileVersion)
                              .SetInformationalVersion(_versionInfo?.InformationalVersion)
-                             .SetProjectFile(_solution)
+                             .SetProjectFile(Solution)
                              .SetProperty("GeneratePackageOnBuild", "False")
                              .SetVersionPrefix(_versionInfo?.VersionPrefix)
                              .SetVersionSuffix(_versionInfo?.VersionSuffix)
@@ -98,7 +99,7 @@ public class Build : NukeBuild
             .Executes(
                  () =>
                  {
-                     foreach (var project in _solution.AllProjects.Where(p => p.GetProperty<bool>("GeneratePackageOnBuild")))
+                     foreach (var project in Solution.AllProjects.Where(p => p.GetProperty<bool>("GeneratePackageOnBuild")))
                      {
                          DotNetPack(
                              _ => _
@@ -144,7 +145,7 @@ public class Build : NukeBuild
             .Executes(
                  () =>
                  {
-                     DotNetRestore(_ => _.SetProjectFile(_solution));
+                     DotNetRestore(_ => _.SetProjectFile(Solution));
                  });
 
     /// <summary>Gets a target that runs DotNet Test for the solution.</summary>
@@ -159,7 +160,7 @@ public class Build : NukeBuild
                              .EnableNoBuild()
                              .EnableNoRestore()
                              .SetConfiguration(_configuration)
-                             .SetProjectFile(_solution));
+                             .SetProjectFile(Solution));
                  });
 
     // Support plugins are available for:
