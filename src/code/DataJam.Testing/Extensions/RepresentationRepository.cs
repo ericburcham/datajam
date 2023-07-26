@@ -209,7 +209,10 @@ internal sealed class RepresentationRepository
     private IEnumerable<Representation> GetEnumerableRelationships<T>(T item)
     {
         var representations = new List<Representation>();
-        var enumerableProperties = item!.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x => x.PropertyType != typeof(string) && typeof(IEnumerable).IsAssignableFrom(x.PropertyType) && x.GetValue(item, null) != null);
+
+        var enumerableProperties = item!.GetType()
+                                        .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                                        .Where(x => x.PropertyType != typeof(string) && typeof(IEnumerable).IsAssignableFrom(x.PropertyType) && x.GetValue(item, null) != null);
 
         foreach (var property in enumerableProperties)
         {
@@ -230,7 +233,10 @@ internal sealed class RepresentationRepository
     private IEnumerable<Representation> GetSingleRelationship<T>(T item)
     {
         var representations = new List<Representation>();
-        var singleProperties = item!.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance).Where(x => x.PropertyType.IsClass && !typeof(IEnumerable).IsAssignableFrom(x.PropertyType) && x.GetValue(item, null) != null);
+
+        var singleProperties = item!.GetType()
+                                    .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                                    .Where(x => x.PropertyType.IsClass && !typeof(IEnumerable).IsAssignableFrom(x.PropertyType) && x.GetValue(item, null) != null);
 
         foreach (var property in singleProperties)
         {
@@ -298,7 +304,9 @@ internal sealed class RepresentationRepository
             }
 
             var collectionType = typeof(ICollection<>).MakeGenericType(entityType);
-            var propertiesThatReferToRepresentation = data.Entity.GetType().GetProperties().Where(x => x.PropertyType == entityType || x.PropertyType.IsAssignableFrom(collectionType));
+
+            var propertiesThatReferToRepresentation =
+                data.Entity.GetType().GetProperties().Where(x => x.PropertyType == entityType || x.PropertyType.IsAssignableFrom(collectionType));
 
             var addMethod = collectionType.GetMethod("Add");
             var propertyInfos = propertiesThatReferToRepresentation.ToList();

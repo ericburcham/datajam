@@ -1,6 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
-
-namespace DataJam.Build;
+﻿namespace DataJam.Build;
 
 using System;
 using System.IO;
@@ -15,7 +13,7 @@ public class VersionInfoAttribute : ValueInjectionAttributeBase
 {
     private const string VERSION_INFO_FILENAME = "version-info.txt";
 
-    private readonly GitRepository _gitRepository;
+    private readonly GitRepository _repository;
 
     private readonly AbsolutePath _rootDirectory;
 
@@ -24,15 +22,9 @@ public class VersionInfoAttribute : ValueInjectionAttributeBase
     public VersionInfoAttribute()
     {
         _rootDirectory = NukeBuild.RootDirectory;
-        _gitRepository = GitRepository.FromLocalDirectory(_rootDirectory);
+        _repository = GitRepository.FromLocalDirectory(_rootDirectory);
         _spaceExecutionNumber = Environment.GetEnvironmentVariable("JB_SPACE_EXECUTION_NUMBER");
     }
-
-    public bool IsBeta { get; set; }
-
-    public int VersionMajor { get; set; } = 1;
-
-    public int VersionMinor { get; set; }
 
     private string VersionPrefix
     {
@@ -51,12 +43,12 @@ public class VersionInfoAttribute : ValueInjectionAttributeBase
         {
             var buildNumber = GetBuildNumber();
 
-            if (_gitRepository.IsOnMainBranch())
+            if (_repository.IsOnMainBranch())
             {
                 return string.Empty;
             }
 
-            return _gitRepository.IsOnReleaseBranch() ? $"beta{buildNumber}" : $"alpha{buildNumber}";
+            return _repository.IsOnReleaseBranch() ? $"beta{buildNumber}" : $"alpha{buildNumber}";
         }
     }
 

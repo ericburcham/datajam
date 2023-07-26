@@ -1,4 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
+﻿// ReSharper disable VariableHidesOuterVariable
 
 namespace DataJam.Build;
 
@@ -40,15 +40,15 @@ public class Build : NukeBuild
 
     /// <summary>Gets information about the git repository.</summary>
     [GitRepository]
-    private readonly GitRepository GitRepository = null!;
+    private readonly GitRepository _repository = null!;
 
     /// <summary>Gets the DotNet solution.</summary>
     [Solution]
-    private readonly Solution Solution = null!;
+    private readonly Solution _solution = null!;
 
     /// <summary>Gets version information.</summary>
     [VersionInfo]
-    private readonly VersionInfo? VersionInfo;
+    private readonly VersionInfo? _versionInfo;
 
     /// <summary>Gets the absolute path for the project's source code.</summary>
     private static AbsolutePath SourceDirectory => RootDirectory / "src" / "code";
@@ -61,121 +61,106 @@ public class Build : NukeBuild
 
     /// <summary>Gets a target that cleans artifact, bin, and obj folders.</summary>
     private Target Clean =>
-        _ => _.Executes(
-            () =>
-            {
-                SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(x => x.DeleteDirectory());
-                TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(x => x.DeleteDirectory());
-                ArtifactsDirectory.CreateOrCleanDirectory();
-            });
+        _ => _
+           .Executes(
+                () =>
+                {
+                    SourceDirectory.GlobDirectories("**/bin", "**/obj").ForEach(x => x.DeleteDirectory());
+                    TestsDirectory.GlobDirectories("**/bin", "**/obj").ForEach(x => x.DeleteDirectory());
+                    ArtifactsDirectory.CreateOrCleanDirectory();
+                });
 
     /// <summary>Gets a target that runs DotNet Build for the solution.</summary>
     private Target Compile =>
-        _ => _.DependsOn(Restore)
-              .Executes(
-                   () =>
-                   {
-                       DotNetBuild(
-                           buildSettings =>
-                               buildSettings
-                                  .EnableNoRestore()
-                                  .SetAssemblyVersion(VersionInfo?.AssemblyVersion)
-                                  .SetConfiguration(_configuration)
-                                  .SetFileVersion(VersionInfo?.FileVersion)
-                                  .SetInformationalVersion(VersionInfo?.InformationalVersion)
-                                  .SetProjectFile(Solution)
-                                  .SetProperty("GeneratePackageOnBuild", "False")
-                                  .SetVersionPrefix(VersionInfo?.VersionPrefix)
-                                  .SetVersionSuffix(VersionInfo?.VersionSuffix)
-                                  .SetVersion(VersionInfo?.Version));
-                   });
+        _ => _
+            .DependsOn(Restore)
+            .Executes(
+                 () =>
+                 {
+                     DotNetBuild(
+                         _ => _
+                             .EnableNoRestore()
+                             .SetAssemblyVersion(_versionInfo?.AssemblyVersion)
+                             .SetConfiguration(_configuration)
+                             .SetFileVersion(_versionInfo?.FileVersion)
+                             .SetInformationalVersion(_versionInfo?.InformationalVersion)
+                             .SetProjectFile(_solution)
+                             .SetProperty("GeneratePackageOnBuild", "False")
+                             .SetVersionPrefix(_versionInfo?.VersionPrefix)
+                             .SetVersionSuffix(_versionInfo?.VersionSuffix)
+                             .SetVersion(_versionInfo?.Version));
+                 });
 
     /// <summary>Gets a target that runs DotNet Pack for the solution.</summary>
     private Target Package =>
-        _ => _.DependsOn(Compile)
-              .Executes(
-                   () =>
-                   {
-                       foreach (var project in Solution.AllProjects.Where(p => p.GetProperty<bool>("GeneratePackageOnBuild")))
-                       {
-                           DotNetPack(
-                               packSettings => packSettings
-                                              .EnableIncludeSource()
-                                              .EnableIncludeSymbols()
-                                              .EnableNoBuild()
-                                              .EnableNoRestore()
-                                              .SetConfiguration(_configuration)
-                                              .SetProject(project)
-                                              .SetOutputDirectory(ArtifactsDirectory)
-                                              .SetVersion(VersionInfo?.PackageVersion));
-                       }
-                   });
+        _ => _
+            .DependsOn(Test)
+            .Executes(
+                 () =>
+                 {
+                     foreach (var project in _solution.AllProjects.Where(p => p.GetProperty<bool>("GeneratePackageOnBuild")))
+                     {
+                         DotNetPack(
+                             _ => _
+                                 .EnableIncludeSource()
+                                 .EnableIncludeSymbols()
+                                 .EnableNoBuild()
+                                 .EnableNoRestore()
+                                 .SetConfiguration(_configuration)
+                                 .SetProject(project)
+                                 .SetOutputDirectory(ArtifactsDirectory)
+                                 .SetVersion(_versionInfo?.PackageVersion));
+                     }
+                 });
 
     // ReSharper disable once UnusedMember.Local
     private Target PublishPackagesToSpace =>
-        _ => _.TriggeredBy(Package)
-              .OnlyWhenStatic(() => !string.IsNullOrEmpty(_nuGetSpaceTargetApiKey) && !string.IsNullOrEmpty(_nuGetSpaceTargetUrl) && _nuGetSpaceTargetUrl != " ")
-              .WhenSkipped(DependencyBehavior.Execute)
-              .Executes(
-                   () =>
-                   {
-                       Console.WriteLine("--------------------------------------------------------------------------------");
-                       Console.WriteLine("Attempting to publish NuGet packages to Space.  Diagnostic information follows.");
-                       Console.WriteLine($"API Key   : {_nuGetSpaceTargetApiKey}");
-                       Console.WriteLine($"Target URL: {_nuGetSpaceTargetUrl}");
-                       Console.WriteLine("--------------------------------------------------------------------------------");
-
-                       var packages = ArtifactsDirectory.GlobFiles("*.nupkg");
-
-                       DotNetNuGetPush(
-                           pushSettings => pushSettings.EnableSkipDuplicate()
-                                                       .SetApiKey(_nuGetSpaceTargetApiKey)
-                                                       .SetSource(_nuGetSpaceTargetUrl)
-                                                       .CombineWith(packages, (combinedPushSettings, targetPath) => combinedPushSettings.SetTargetPath(targetPath)),
-                           5,
-                           true);
-                   });
+        _ => _
+            .TriggeredBy(Package)
+            .OnlyWhenStatic(ShouldPublishToSpace())
+            .WhenSkipped(DependencyBehavior.Execute)
+            .Executes(
+                 () =>
+                 {
+                     PublishPackages(_nuGetSpaceTargetApiKey, _nuGetSpaceTargetUrl);
+                 });
 
     // ReSharper disable once UnusedMember.Local
     private Target PushPackagesToNuGetOrg =>
-        _ => _.TriggeredBy(Package)
-              .OnlyWhenStatic(
-                   () => GitRepository.IsOnMainBranch()
-                         && (Environment.GetEnvironmentVariable("JB_SPACE_GIT_BRANCH") ?? string.Empty).Contains("main", StringComparison.OrdinalIgnoreCase)
-                         && !string.IsNullOrEmpty(_nuGetOrgTargetApiKey)
-                         && !string.IsNullOrEmpty(_nuGetOrgTargetUrl)
-                         && _nuGetOrgTargetUrl != " ")
-              .WhenSkipped(DependencyBehavior.Execute)
-              .Executes(
-                   () =>
-                   {
-                       var packages = ArtifactsDirectory.GlobFiles("*.nupkg");
-
-                       DotNetNuGetPush(
-                           pushSettings => pushSettings.SetApiKey(_nuGetOrgTargetApiKey)
-                                                       .SetSource(_nuGetOrgTargetUrl)
-                                                       .CombineWith(packages, (combinedPushSettings, targetPath) => combinedPushSettings.SetTargetPath(targetPath)),
-                           5,
-                           true);
-                   });
+        _ => _
+            .TriggeredBy(Package)
+            .OnlyWhenStatic(ShouldPublishToNuGetOrg())
+            .WhenSkipped(DependencyBehavior.Execute)
+            .Executes(
+                 () =>
+                 {
+                     PublishPackages(_nuGetOrgTargetApiKey, _nuGetOrgTargetUrl);
+                 });
 
     /// <summary>Gets a target that restores package dependencies.</summary>
     private Target Restore =>
-        _ => _.DependsOn(Clean)
-              .Executes(
-                   () =>
-                   {
-                       DotNetRestore(restoreSettings => restoreSettings.SetProjectFile(Solution));
-                   });
+        _ => _
+            .DependsOn(Clean)
+            .Executes(
+                 () =>
+                 {
+                     DotNetRestore(_ => _.SetProjectFile(_solution));
+                 });
 
     /// <summary>Gets a target that runs DotNet Test for the solution.</summary>
     private Target Test =>
-        _ => _.DependsOn(Compile)
-              .Executes(
-                   () =>
-                   {
-                       DotNetTest(testSettings => testSettings.EnableNoBuild().EnableNoRestore().SetConfiguration(_configuration).SetProjectFile(Solution));
-                   });
+        _ => _
+            .DependsOn(Compile)
+            .Executes(
+                 () =>
+                 {
+                     DotNetTest(
+                         _ => _
+                             .EnableNoBuild()
+                             .EnableNoRestore()
+                             .SetConfiguration(_configuration)
+                             .SetProjectFile(_solution));
+                 });
 
     // Support plugins are available for:
     // - JetBrains ReSharper        https://nuke.build/resharper
@@ -183,4 +168,27 @@ public class Build : NukeBuild
     // - Microsoft VisualStudio     https://nuke.build/visualstudio
     // - Microsoft VSCode           https://nuke.build/vscode
     public static int Main() => Execute<Build>(build => build.Package);
+
+    private void PublishPackages(string? apiKey, string? targetUrl)
+    {
+        var packages = ArtifactsDirectory.GlobFiles("*.nupkg");
+
+        DotNetNuGetPush(
+            _ => _
+                .EnableSkipDuplicate()
+                .SetApiKey(apiKey)
+                .SetSource(targetUrl)
+                .CombineWith(packages, (settings, path) => settings.SetTargetPath(path)),
+            5,
+            true);
+    }
+
+    private Func<bool> ShouldPublishToNuGetOrg() =>
+        () => _repository.IsOnMainBranch()
+              && (Environment.GetEnvironmentVariable("JB_SPACE_GIT_BRANCH") ?? string.Empty).Contains("main", StringComparison.OrdinalIgnoreCase)
+              && !string.IsNullOrEmpty(_nuGetOrgTargetApiKey)
+              && !string.IsNullOrEmpty(_nuGetOrgTargetUrl)
+              && _nuGetOrgTargetUrl != " ";
+
+    private Func<bool> ShouldPublishToSpace() => () => !string.IsNullOrEmpty(_nuGetSpaceTargetApiKey) && !string.IsNullOrEmpty(_nuGetSpaceTargetUrl) && _nuGetSpaceTargetUrl != " ";
 }
