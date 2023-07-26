@@ -1,35 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Project>
-    <!-- Computed properties -->
-    <PropertyGroup>
-        <BuildNumber>$([System.DateTime]::UtcNow.ToString(mmff))</BuildNumber>
-    </PropertyGroup>
-
-    <!-- Fixed Version properties -->
-    <PropertyGroup>
-        <VersionPrefix>1.0.4</VersionPrefix>
-    </PropertyGroup>
-
-    <!-- Conditional Version properties -->
-    <PropertyGroup Condition=" '$(VersionSuffix)' == '' ">
-        <AssemblyVersion>$(VersionPrefix)</AssemblyVersion>
-        <Version>$(VersionPrefix)</Version>
-    </PropertyGroup>
-
-    <PropertyGroup Condition=" '$(VersionSuffix)' != '' ">
-        <AssemblyVersion>$(VersionPrefix).$(BuildNumber)</AssemblyVersion>
-        <Version>$(VersionPrefix)$(VersionSuffix)$(BuildNumber)</Version>
-    </PropertyGroup>
-
     <!-- Global properties -->
     <PropertyGroup>
         <AssemblyName>$(MSBuildProjectName)</AssemblyName>
         <Authors>Ghost Recon Team</Authors>
         <Company>Enteprise Products</Company>
         <Copyright>© Enteprise Products</Copyright>
-        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <ImplicitUsings>disable</ImplicitUsings>
-        <IsPackable>false</IsPackable>
+        <IsPackable>False</IsPackable>
         <LangVersion>latest</LangVersion>
         <Nullable>enable</Nullable>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
