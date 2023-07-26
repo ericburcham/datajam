@@ -6,11 +6,11 @@
     <PropertyGroup>
         <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
         <EmbedUntrackedSources>True</EmbedUntrackedSources>
-        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-        <IncludePackageReferencesDuringMarkupCompilation>true</IncludePackageReferencesDuringMarkupCompilation>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <IncludePackageReferencesDuringMarkupCompilation>True</IncludePackageReferencesDuringMarkupCompilation>
         <IncludeSource>True</IncludeSource>
         <IncludeSymbols>True</IncludeSymbols>
-        <IsPackable>true</IsPackable>
+        <IsPackable>True</IsPackable>
         <RootNamespace>DataJam</RootNamespace>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     </PropertyGroup>

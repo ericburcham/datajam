@@ -54,6 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{7ADD1DA9-9513-45
 		..\.space.kts = ..\.space.kts
 		..\CODEOWNERS = ..\CODEOWNERS
 		..\README.md = ..\README.md
+		..\version-info.txt = ..\version-info.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".space", ".space", "{A1A42544-191B-4ACE-B5EC-2F189FA8E731}"

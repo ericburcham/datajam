@@ -1,3 +1,5 @@
+namespace DataJam.Build;
+
 using System.ComponentModel;
 
 using Nuke.Common.Tooling;
