@@ -16,18 +16,12 @@ public abstract class EntityFrameworkCoreScenario<TDbContextOptionProvider, TMap
     protected EntityFrameworkCoreScenario(TDbContextOptionProvider dbContextOptionProvider)
     {
         var domain = new FamilyDomain(dbContextOptionProvider.Options, new TMappingConfigurator());
-        Context = new(domain);
-        Repository = new(Context);
-    }
 
-    protected DomainContext<FamilyDomain> Context { get; }
+        DomainContext<FamilyDomain> context = new(domain);
+        Repository = new(context);
+    }
 
     protected DomainRepository<FamilyDomain> Repository { get; }
-
-    protected FamilyDomain GetDomain(TDbContextOptionProvider dbContextOptionProvider, TMappingConfigurator mappingConfigurator)
-    {
-        return new(dbContextOptionProvider.Options, mappingConfigurator);
-    }
 
     protected abstract Task InsertScenarioData();
 

@@ -30,6 +30,7 @@
         <NUnit3TestAdapter_Version>4.5.0</NUnit3TestAdapter_Version>
         <NUnit_Analyzers_Version>3.6.1</NUnit_Analyzers_Version>
         <Stylecop_Analyzers_Version>1.2.0-beta.435</Stylecop_Analyzers_Version>
+        <TestContainers_Version>3.2.0</TestContainers_Version>
         <TestContainers_MsSql_Version>3.3.0</TestContainers_MsSql_Version>
         <TestStack_Dossier_Version>4.0.0</TestStack_Dossier_Version>
     </PropertyGroup>

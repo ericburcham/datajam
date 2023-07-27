@@ -5,7 +5,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="DataJam.TestSupport.csproj.DotSettings" />
+      <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
     </ItemGroup>
 
 </Project>

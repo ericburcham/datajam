@@ -20,6 +20,7 @@ public class SqlServerDependencies : Singleton<SqlServerDependencies>, IProvideC
     private SqlServerDependencies()
     {
         MsSql = new MsSqlBuilder().Build();
+        MsSql.StartAsync().Wait();
     }
 
     public IEnumerable<IContainer> Containers

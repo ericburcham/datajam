@@ -7,14 +7,10 @@ using TestSupport;
 [SetUpFixture]
 public class RootSetUpFixture : RootSetUpFixtureBase
 {
-    protected override async Task StartContainers()
+    protected override Task StartContainers()
     {
-        await Parallel.ForEachAsync(
-            ContainerProvider.Instance.Containers,
-            async (container, token) =>
-            {
-                await container.StartAsync(token);
-            });
+        // Nothing to do here.
+        return Task.CompletedTask;
     }
 
     protected override async Task StopContainers()
