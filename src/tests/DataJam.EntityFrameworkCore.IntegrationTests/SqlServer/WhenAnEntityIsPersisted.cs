@@ -2,11 +2,12 @@
 
 using System.Threading.Tasks;
 
-using DataJam.EntityFrameworkCore.IntegrationTests.Domains.Family;
-using DataJam.TestSupport.EntityFrameworkCore;
-using DataJam.TestSupport.EntityFrameworkCore.Domains.Family;
+using Domains.Family;
 
 using FluentAssertions;
+
+using TestSupport.EntityFrameworkCore;
+using TestSupport.EntityFrameworkCore.Domains.Family;
 
 [TestFixtureSource(typeof(ServiceProvider), nameof(ServiceProvider.Services))]
 public class WhenAnEntityIsPersisted
