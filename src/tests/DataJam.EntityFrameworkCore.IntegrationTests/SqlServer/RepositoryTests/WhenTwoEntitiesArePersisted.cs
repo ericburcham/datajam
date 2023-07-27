@@ -26,14 +26,12 @@ public class WhenTwoEntitiesArePersisted : EntityFrameworkCoreScenario<SqlServer
 
     protected override async Task InsertScenarioData()
     {
-        // Add the first child.
         var father1 = new Father { Name = "Dad 1" };
         var mother1 = new Mother { Name = "Mom 1" };
         var child1 = new Child { Name = "Kid 1" };
         child1.AddParents(father1, mother1);
         Repository.Context.Add(child1);
 
-        // Add the second child.
         var father2 = new Father { Name = "Dad 2" };
         var mother2 = new Mother { Name = "Mom 2" };
         var child2 = new Child { Name = "Kid 2" };

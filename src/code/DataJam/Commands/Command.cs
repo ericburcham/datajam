@@ -6,11 +6,11 @@ using System;
 public abstract class Command : ICommand
 {
     /// <summary>Gets or sets the command action to execute.</summary>
-    protected Action<IDataContext> ContextCommand { get; set; } = null!;
+    protected Action<IUnitOfWork> ContextCommand { get; set; } = null!;
 
     /// <inheritdoc cref="ICommand" />
-    public void Execute(IDataContext dataContext)
+    public void Execute(IUnitOfWork unitOfWork)
     {
-        ContextCommand(dataContext);
+        ContextCommand(unitOfWork);
     }
 }

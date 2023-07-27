@@ -1,4 +1,5 @@
 ﻿// ReSharper disable InconsistentNaming
+// ReSharper disable UnusedMember.Local
 // ReSharper disable VariableHidesOuterVariable
 
 namespace DataJam.Build;
@@ -23,44 +24,33 @@ public class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)", Name = "Configuration")]
     private readonly Configuration _configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
-    /// <summary>The API key for publishing nuGet packages to nuGet.org.</summary>
     [Parameter("NuGet.org - NuGet target API key / access token", Name = "NuGetOrgTargetApiKey")]
     private readonly string? _nuGetOrgTargetApiKey;
 
-    /// <summary>The URl for publishing nuGet packages to nuGet.org.</summary>
     [Parameter("NuGet.org - NuGet target URL", Name = "NuGetOrgTargetUrl")]
     private readonly string? _nuGetOrgTargetUrl;
 
-    /// <summary>The API key for publishing nuGet packages to JetBrains space.</summary>
     [Parameter("Space - NuGet target API key / access token", Name = "NuGetSpaceTargetApiKey")]
     private readonly string? _nuGetSpaceTargetApiKey;
 
-    /// <summary>The URL for publishing nuGet packages to JetBrains space.</summary>
     [Parameter("Space - NuGet target URL", Name = "NuGetSpaceTargetUrl")]
     private readonly string? _nuGetSpaceTargetUrl;
 
-    /// <summary>Gets information about the git repository.</summary>
     [GitRepository]
     private readonly GitRepository _repository = null!;
 
-    /// <summary>Gets version information.</summary>
     [VersionInfo]
     private readonly VersionInfo? _versionInfo;
 
-    /// <summary>Gets the DotNet solution.</summary>
     [Solution]
     private readonly Solution Solution = null!;
 
-    /// <summary>Gets the absolute path for the project's source code.</summary>
     private static AbsolutePath SourceDirectory => RootDirectory / "src" / "code";
 
-    /// <summary>Gets the absolute path for the project's test folder.</summary>
     private static AbsolutePath TestsDirectory => RootDirectory / "src" / "tests";
 
-    /// <summary>Gets the absolute path for nuGet package output.</summary>
     private AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
 
-    /// <summary>Gets a target that cleans artifact, bin, and obj folders.</summary>
     private Target Clean =>
         _ => _
            .Executes(
@@ -71,7 +61,6 @@ public class Build : NukeBuild
                     ArtifactsDirectory.CreateOrCleanDirectory();
                 });
 
-    /// <summary>Gets a target that runs DotNet Build for the solution.</summary>
     private Target Compile =>
         _ => _
             .DependsOn(Restore)
@@ -92,7 +81,6 @@ public class Build : NukeBuild
                              .SetVersion(_versionInfo?.Version));
                  });
 
-    /// <summary>Gets a target that runs DotNet Pack for the solution.</summary>
     private Target Package =>
         _ => _
             .DependsOn(Test)
@@ -114,7 +102,6 @@ public class Build : NukeBuild
                      }
                  });
 
-    // ReSharper disable once UnusedMember.Local
     private Target PublishPackagesToSpace =>
         _ => _
             .TriggeredBy(Package)
@@ -126,7 +113,6 @@ public class Build : NukeBuild
                      PublishPackages(_nuGetSpaceTargetApiKey, _nuGetSpaceTargetUrl);
                  });
 
-    // ReSharper disable once UnusedMember.Local
     private Target PushPackagesToNuGetOrg =>
         _ => _
             .TriggeredBy(Package)
@@ -138,7 +124,6 @@ public class Build : NukeBuild
                      PublishPackages(_nuGetOrgTargetApiKey, _nuGetOrgTargetUrl);
                  });
 
-    /// <summary>Gets a target that restores package dependencies.</summary>
     private Target Restore =>
         _ => _
             .DependsOn(Clean)
@@ -148,7 +133,6 @@ public class Build : NukeBuild
                      DotNetRestore(_ => _.SetProjectFile(Solution));
                  });
 
-    /// <summary>Gets a target that runs DotNet Test for the solution.</summary>
     private Target Test =>
         _ => _
             .DependsOn(Compile)
@@ -163,11 +147,6 @@ public class Build : NukeBuild
                              .SetProjectFile(Solution));
                  });
 
-    // Support plugins are available for:
-    // - JetBrains ReSharper        https://nuke.build/resharper
-    // - JetBrains Rider            https://nuke.build/rider
-    // - Microsoft VisualStudio     https://nuke.build/visualstudio
-    // - Microsoft VSCode           https://nuke.build/vscode
     public static int Main() => Execute<Build>(build => build.Package);
 
     private void PublishPackages(string? apiKey, string? targetUrl)

@@ -30,7 +30,6 @@ public class WhenAnEntityIsPersisted : EntityFrameworkCoreScenario<SqlServerDepe
 
     protected override async Task InsertScenarioData()
     {
-        // Insert some test data.
         var father = new Father { Name = "Dad" };
         var mother = new Mother { Name = "Mom" };
         var child = new Child { Name = "Kid" };
