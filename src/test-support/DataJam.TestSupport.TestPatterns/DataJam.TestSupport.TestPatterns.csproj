@@ -2,11 +2,10 @@
 
     <ItemGroup>
         <PackageReference Include="NUnit" Version="$(Nunit_Version)" />
-        <PackageReference Include="Testcontainers" Version="$(Testcontainers_Version)" />
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="DataJam.TestSupport.csproj.DotSettings" />
+        <None Remove="DataJam.TestSupport.csproj.DotSettings" />
     </ItemGroup>
 
 </Project>

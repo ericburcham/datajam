@@ -1,5 +1,7 @@
 ﻿namespace DataJam.TestSupport;
 
+using System;
+
 public class Entity : Entity<long>, IEntity
 {
 }

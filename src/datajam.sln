@@ -70,6 +70,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7F294636-6B0
 		StyleCopAnalyzers.ruleset = StyleCopAnalyzers.ruleset
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.TestPatterns", "test-support\DataJam.TestSupport.TestPatterns\DataJam.TestSupport.TestPatterns.csproj", "{9664DC25-73EE-467D-9AB7-C6C5506B5F7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -118,6 +120,10 @@ Global
 		{2DE00942-F708-48F1-AF30-5ABD93F1E172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DE00942-F708-48F1-AF30-5ABD93F1E172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DE00942-F708-48F1-AF30-5ABD93F1E172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9664DC25-73EE-467D-9AB7-C6C5506B5F7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9664DC25-73EE-467D-9AB7-C6C5506B5F7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9664DC25-73EE-467D-9AB7-C6C5506B5F7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9664DC25-73EE-467D-9AB7-C6C5506B5F7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,6 +142,7 @@ Global
 		{2DE00942-F708-48F1-AF30-5ABD93F1E172} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 		{A1A42544-191B-4ACE-B5EC-2F189FA8E731} = {7ADD1DA9-9513-4576-B490-72CED6334CB2}
 		{7F294636-6B02-4F75-B1F5-4CB5D7678020} = {7ADD1DA9-9513-4576-B490-72CED6334CB2}
+		{9664DC25-73EE-467D-9AB7-C6C5506B5F7B} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}

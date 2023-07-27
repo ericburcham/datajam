@@ -1,5 +1,7 @@
 ﻿namespace DataJam.TestSupport;
 
+using System.Threading.Tasks;
+
 using NUnit.Framework;
 
 public abstract class RootSetUpFixtureBase

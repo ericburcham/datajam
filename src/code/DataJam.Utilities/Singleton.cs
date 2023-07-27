@@ -1,5 +1,7 @@
 ﻿namespace DataJam;
 
+using System;
+
 /// <summary>A class that enforces the Singleton design pattern.</summary>
 /// <typeparam name="TDerived">The Type of the derived type.</typeparam>
 public abstract class Singleton<TDerived>
