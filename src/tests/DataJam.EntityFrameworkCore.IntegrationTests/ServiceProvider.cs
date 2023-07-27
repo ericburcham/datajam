@@ -2,10 +2,6 @@
 
 using System.Collections;
 
-using Domains.Family;
-
-using Microsoft.EntityFrameworkCore;
-
 using SqlServer;
 
 using TestSupport.EntityFrameworkCore;
