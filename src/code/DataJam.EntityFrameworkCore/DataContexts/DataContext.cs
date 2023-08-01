@@ -48,7 +48,7 @@ public class DataContext : DbContext, IDataContext
     {
         ChangeTracker.DetectChanges();
 
-        return await SaveChangesAsync();
+        return await SaveChangesAsync().ConfigureAwait(false);
     }
 
     /// <inheritdoc cref="IUnitOfWork.Remove{T}" />

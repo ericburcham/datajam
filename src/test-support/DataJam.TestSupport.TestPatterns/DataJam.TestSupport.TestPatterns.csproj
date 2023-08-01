@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="FluentAssertions" Version="$(FluentAssertions_Version)" />
+        <PackageReference Include="NUnit" Version="$(NUnit_Version)" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
+      <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj" />
+    </ItemGroup>
+
+</Project>

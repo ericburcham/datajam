@@ -24,7 +24,7 @@ public abstract class SingleEntityScenario<T> : InMemoryDataContextScenario
 
         dataContext.Add(_testEntity);
 
-        return await dataContext.CommitAsync();
+        return await dataContext.CommitAsync().ConfigureAwait(false);
     }
 
     protected virtual TestEntity<T> BuildTestEntity()

@@ -1,14 +1,14 @@
-﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.Domains.Family;
+﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.Sqlite.Domains.Family.Maps;
+
+using DataJam.TestSupport.TestPatterns.Domains.Family;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-using TestSupport.TestPatterns.Domains.Family;
 
 public class MotherMapping : FamilyMapping<Mother>
 {
     public override void Configure(EntityTypeBuilder<Mother> builder)
     {
-        builder.ToTable(nameof(Mother), SCHEMA).HasKey(mother => mother.Id);
+        builder.ToTable(nameof(Mother)).HasKey(mother => mother.Id);
     }
 }
