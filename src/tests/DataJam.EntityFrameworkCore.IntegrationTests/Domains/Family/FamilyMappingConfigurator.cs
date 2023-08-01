@@ -2,7 +2,7 @@ namespace DataJam.EntityFrameworkCore.IntegrationTests.Domains.Family;
 
 using Microsoft.EntityFrameworkCore;
 
-using TestSupport.EntityFrameworkCore.Domains.Family;
+using TestSupport.TestPatterns.Domains.Family;
 
 public class FamilyMappingConfigurator : IConfigureDomainMappings<ModelBuilder>
 {

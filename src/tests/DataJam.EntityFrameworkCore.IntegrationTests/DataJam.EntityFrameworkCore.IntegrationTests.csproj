@@ -13,6 +13,7 @@
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.Migrations\DataJam.Migrations.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.EntityFrameworkCore\DataJam.TestSupport.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\test-support\DataJam.TestSupport.TestPatterns\DataJam.TestSupport.TestPatterns.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport\DataJam.TestSupport.csproj" />
     </ItemGroup>
 

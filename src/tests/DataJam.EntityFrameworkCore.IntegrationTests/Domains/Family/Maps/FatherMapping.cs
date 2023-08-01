@@ -3,7 +3,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-using TestSupport.EntityFrameworkCore.Domains.Family;
+using TestSupport.TestPatterns.Domains.Family;
 
 public class FatherMapping : FamilyMapping<Father>
 {

@@ -7,7 +7,7 @@ using Domains.Family;
 using FluentAssertions;
 
 using TestSupport.EntityFrameworkCore;
-using TestSupport.EntityFrameworkCore.Domains.Family;
+using TestSupport.TestPatterns.Domains.Family;
 
 [TestFixtureSource(typeof(ServiceProvider), nameof(ServiceProvider.Services))]
 public class WhenAnEntityIsPersisted

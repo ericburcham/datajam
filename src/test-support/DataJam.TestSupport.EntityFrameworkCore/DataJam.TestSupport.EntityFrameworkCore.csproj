@@ -15,8 +15,4 @@
       <None Remove="DataJam.TestSupport.EntityFrameworkCore.csproj.DotSettings" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Domains" />
-    </ItemGroup>
-
 </Project>
