@@ -8,7 +8,7 @@ using SqlServer;
 
 public static class TestRepositoryProvider
 {
-    public static IEnumerable Services
+    public static IEnumerable Repositories
     {
         get
         {

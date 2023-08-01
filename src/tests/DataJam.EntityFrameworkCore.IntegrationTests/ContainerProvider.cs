@@ -1,29 +1,19 @@
 ﻿namespace DataJam.EntityFrameworkCore.IntegrationTests;
 
 using System.Collections.Generic;
-using System.Linq;
 
 using DotNet.Testcontainers.Containers;
 
-using SqlServer;
-
 using TestSupport;
 
-public class ContainerProvider : Singleton<ContainerProvider>, IProvideContainers
+public class ContainerProvider : Singleton<ContainerProvider>, IProvideContainers, IRegisterContainers
 {
-    public IEnumerable<IContainer> Containers
-    {
-        get
-        {
-            return ContainerProviders.SelectMany(containerProvider => containerProvider.Containers);
-        }
-    }
+    private readonly ICollection<IContainer> _containers = new List<IContainer>();
 
-    private static IEnumerable<IProvideContainers> ContainerProviders
+    public IEnumerable<IContainer> Containers => _containers;
+
+    public void Register(IContainer container)
     {
-        get
-        {
-            yield return SqlServerDependencies.Instance;
-        }
+        _containers.Add(container);
     }
 }

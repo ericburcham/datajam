@@ -1,7 +1,9 @@
 ﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.SqlServer;
 
+using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 
 using DbUp;
@@ -17,10 +19,14 @@ using TestSupport.EntityFrameworkCore;
 
 public class SqlServerDependencies : Singleton<SqlServerDependencies>, IProvideContainers, IProvideDbContextOptions
 {
+    private readonly ReaderWriterLockSlim _containerLock = new();
+
+    private readonly MsSqlContainer _msSql;
+
     private SqlServerDependencies()
     {
-        MsSql = new MsSqlBuilder().Build();
-        MsSql.StartAsync().Wait();
+        _msSql = new MsSqlBuilder().Build();
+        ContainerProvider.Instance.Register(_msSql);
     }
 
     public IEnumerable<IContainer> Containers
@@ -31,11 +37,44 @@ public class SqlServerDependencies : Singleton<SqlServerDependencies>, IProvideC
         }
     }
 
-    public MsSqlContainer MsSql { get; set; }
-
     public DbContextOptions Options => new DbContextOptionsBuilder().UseSqlServer(MsSql.GetConnectionString()).Options;
 
     private static Assembly MigrationAssembly => Assembly.Load("DataJam.Migrations");
+
+    private MsSqlContainer MsSql
+    {
+        get
+        {
+            _containerLock.EnterUpgradeableReadLock();
+
+            try
+            {
+                if (_msSql.State == TestcontainersStates.Undefined)
+                {
+                    _containerLock.EnterWriteLock();
+
+                    try
+                    {
+                        _msSql.StartAsync().Wait();
+                    }
+                    finally
+                    {
+                        _containerLock.ExitWriteLock();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                _containerLock.ExitUpgradeableReadLock();
+            }
+
+            return _msSql;
+        }
+    }
 
     public Task DeployDatabase()
     {

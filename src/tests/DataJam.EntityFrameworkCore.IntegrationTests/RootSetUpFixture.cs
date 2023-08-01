@@ -1,16 +1,23 @@
 ﻿namespace DataJam.EntityFrameworkCore.IntegrationTests;
 
+using System.Linq;
 using System.Threading.Tasks;
+
+using DotNet.Testcontainers.Containers;
 
 using TestSupport;
 
 [SetUpFixture]
 public class RootSetUpFixture : RootSetUpFixtureBase
 {
-    protected override Task StartContainers()
+    protected override async Task StartContainers()
     {
-        // Nothing to do here.
-        return Task.CompletedTask;
+        await Parallel.ForEachAsync(
+            ContainerProvider.Instance.Containers.Where(x => x.State == TestcontainersStates.Undefined),
+            async (container, token) =>
+            {
+                await container.StartAsync(token);
+            });
     }
 
     protected override async Task StopContainers()

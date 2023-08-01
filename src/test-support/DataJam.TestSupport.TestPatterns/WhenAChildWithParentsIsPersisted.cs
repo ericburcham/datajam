@@ -8,14 +8,16 @@ using FluentAssertions;
 
 using NUnit.Framework;
 
-public abstract class WhenAnEntityIsPersisted
+public abstract class WhenAChildWithParentsIsPersisted : TransactionalScenario
 {
-    protected WhenAnEntityIsPersisted(IRepository repository)
+    protected WhenAChildWithParentsIsPersisted(IRepository repository)
     {
         Repository = repository;
     }
 
-    public IRepository Repository { get; }
+    private IRepository Repository { get; }
+
+    private int RowCount { get; set; }
 
     [Test]
     public void ItCanBeRetrieved()
@@ -35,6 +37,12 @@ public abstract class WhenAnEntityIsPersisted
         var child = new Child { Name = "Kid" };
         child.AddParents(father, mother);
         Repository.Context.Add(child);
-        await Repository.Context.CommitAsync();
+        RowCount = await Repository.Context.CommitAsync();
+    }
+
+    [Test]
+    public void TheRowCountShouldBeCorrect()
+    {
+        RowCount.Should().Be(3);
     }
 }
