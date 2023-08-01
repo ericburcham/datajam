@@ -40,7 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test-support", "test-suppor
 		test-support\Directory.Build.props = test-support\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Migrations", "test-support\DataJam.Migrations\DataJam.Migrations.csproj", "{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Migrations.MsSql", "test-support\DataJam.Migrations.MsSql\DataJam.Migrations.MsSql.csproj", "{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Utilities", "code\DataJam.Utilities\DataJam.Utilities.csproj", "{25C6CABB-ED1F-4AB6-A4E4-C8CE93C190D5}"
 EndProject

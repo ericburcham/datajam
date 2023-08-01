@@ -1,12 +1,8 @@
-﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.SqlServer;
+﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.MsSql;
 
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 using System.Threading;
-using System.Threading.Tasks;
-
-using DbUp;
 
 using DotNet.Testcontainers.Containers;
 
@@ -17,13 +13,13 @@ using Testcontainers.MsSql;
 using TestSupport;
 using TestSupport.EntityFrameworkCore;
 
-public class SqlServerDependencies : Singleton<SqlServerDependencies>, IProvideContainers, IProvideDbContextOptions
+public class MsSqlDependencies : Singleton<MsSqlDependencies>, IProvideContainers, IProvideDbContextOptions
 {
     private readonly ReaderWriterLockSlim _containerLock = new();
 
     private readonly MsSqlContainer _msSql;
 
-    private SqlServerDependencies()
+    private MsSqlDependencies()
     {
         _msSql = new MsSqlBuilder().Build();
         ContainerProvider.Instance.Register(_msSql);
@@ -39,9 +35,7 @@ public class SqlServerDependencies : Singleton<SqlServerDependencies>, IProvideC
 
     public DbContextOptions Options => new DbContextOptionsBuilder().UseSqlServer(MsSql.GetConnectionString()).Options;
 
-    private static Assembly MigrationAssembly => Assembly.Load("DataJam.Migrations");
-
-    private MsSqlContainer MsSql
+    internal MsSqlContainer MsSql
     {
         get
         {
@@ -74,20 +68,5 @@ public class SqlServerDependencies : Singleton<SqlServerDependencies>, IProvideC
 
             return _msSql;
         }
-    }
-
-    public Task DeployDatabase()
-    {
-        var connectionString = Instance.MsSql.GetConnectionString();
-
-        EnsureDatabase.For.SqlDatabase(connectionString);
-        var upgradeResult = DeployChanges.To.SqlDatabase(connectionString).WithScriptsEmbeddedInAssembly(MigrationAssembly).LogToConsole().Build().PerformUpgrade();
-
-        if (upgradeResult.Successful)
-        {
-            return Task.CompletedTask;
-        }
-
-        throw upgradeResult.Error;
     }
 }

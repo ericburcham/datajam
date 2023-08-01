@@ -1,4 +1,4 @@
-﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.SqlServer;
+﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.MsSql;
 
 [TestFixtureSource(typeof(TestRepositoryProvider), nameof(TestRepositoryProvider.Repositories))]
 public class WhenPersistingAndRetrievingAChild : TestSupport.TestPatterns.WhenPersistingAndRetrievingAChild

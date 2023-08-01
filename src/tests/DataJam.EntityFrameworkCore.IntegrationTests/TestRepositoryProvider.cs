@@ -4,7 +4,7 @@ using System.Collections;
 
 using Domains.Family;
 
-using SqlServer;
+using MsSql;
 
 public static class TestRepositoryProvider
 {
@@ -18,7 +18,7 @@ public static class TestRepositoryProvider
 
     private static TestFixtureData BuildSqlServerRepository(string testName)
     {
-        var dbContextOptions = SqlServerDependencies.Instance.Options;
+        var dbContextOptions = MsSqlDependencies.Instance.Options;
         var domain = new FamilyDomain(dbContextOptions, new FamilyMappingConfigurator());
         var domainContext = new DomainContext<FamilyDomain>(domain);
         var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
