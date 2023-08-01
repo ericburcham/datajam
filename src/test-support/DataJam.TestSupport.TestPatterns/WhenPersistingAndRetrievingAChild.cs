@@ -62,4 +62,12 @@ public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
     {
         StateEntriesWritten.Should().Be(3);
     }
+
+    [OneTimeTearDown]
+    protected override void OneTimeTearDown()
+    {
+        base.OneTimeTearDown();
+        var dataContext = (IDataContext)_repository.Context;
+        dataContext.Dispose();
+    }
 }

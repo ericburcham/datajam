@@ -33,6 +33,7 @@ public class RootSetUpFixture : RootSetUpFixtureBase
     {
         await base.OneTimeTearDown().ConfigureAwait(false);
 
+        SqliteConnection.ClearAllPools();
         var sqlLiteConnectionString = SqliteDependencies.Instance.Sqlite.GetConnectionString();
         var connectionStringBuilder = new SqliteConnectionStringBuilder(sqlLiteConnectionString);
         var path = connectionStringBuilder.DataSource;
