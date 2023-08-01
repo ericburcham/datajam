@@ -1,9 +1,9 @@
 ﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.SqlServer;
 
 [TestFixtureSource(typeof(TestRepositoryProvider), nameof(TestRepositoryProvider.Repositories))]
-public class WhenAChildWithParentsIsPersisted : TestSupport.TestPatterns.WhenAChildWithParentsIsPersisted
+public class WhenPersistingAndRetrievingAChild : TestSupport.TestPatterns.WhenPersistingAndRetrievingAChild
 {
-    public WhenAChildWithParentsIsPersisted(IRepository repository)
+    public WhenPersistingAndRetrievingAChild(IRepository repository)
         : base(repository)
     {
     }

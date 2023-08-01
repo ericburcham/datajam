@@ -9,13 +9,13 @@ public abstract class RootSetUpFixtureBase
     [OneTimeSetUp]
     public async Task OneTimeSetUp()
     {
-        await StartContainers();
+        await StartContainers().ConfigureAwait(false);
     }
 
     [OneTimeTearDown]
     public async Task OneTimeTearDown()
     {
-        await StopContainers();
+        await StopContainers().ConfigureAwait(false);
     }
 
     protected abstract Task StartContainers();

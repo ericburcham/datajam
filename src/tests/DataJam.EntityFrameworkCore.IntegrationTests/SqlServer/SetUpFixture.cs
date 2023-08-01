@@ -8,6 +8,6 @@ public class SetUpFixture
     [OneTimeSetUp]
     public async Task OneTimeSetUp()
     {
-        await SqlServerDependencies.Instance.DeployDatabase();
+        await SqlServerDependencies.Instance.DeployDatabase().ConfigureAwait(false);
     }
 }

@@ -13,20 +13,22 @@ public class RootSetUpFixture : RootSetUpFixtureBase
     protected override async Task StartContainers()
     {
         await Parallel.ForEachAsync(
-            ContainerProvider.Instance.Containers.Where(x => x.State == TestcontainersStates.Undefined),
-            async (container, token) =>
-            {
-                await container.StartAsync(token);
-            });
+                           ContainerProvider.Instance.Containers.Where(x => x.State == TestcontainersStates.Undefined),
+                           async (container, token) =>
+                           {
+                               await container.StartAsync(token).ConfigureAwait(false);
+                           })
+                      .ConfigureAwait(false);
     }
 
     protected override async Task StopContainers()
     {
         await Parallel.ForEachAsync(
-            ContainerProvider.Instance.Containers,
-            async (container, token) =>
-            {
-                await container.StopAsync(token);
-            });
+                           ContainerProvider.Instance.Containers,
+                           async (container, token) =>
+                           {
+                               await container.StopAsync(token).ConfigureAwait(false);
+                           })
+                      .ConfigureAwait(false);
     }
 }

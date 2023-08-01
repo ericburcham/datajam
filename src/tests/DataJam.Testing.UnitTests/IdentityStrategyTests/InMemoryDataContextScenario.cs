@@ -16,7 +16,7 @@ public abstract class InMemoryDataContextScenario
     public async Task OneTimeSetUp()
     {
         var dataContext = new DataContext();
-        _changeCount = await ArrangeAndCommitData(dataContext);
+        _changeCount = await ArrangeAndCommitData(dataContext).ConfigureAwait(false);
     }
 
     [Test]
