@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-      <RootNamespace>DataJam.Migrations.MsSql</RootNamespace>
+      <RootNamespace>DataJam.Migrations.Sqlite</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

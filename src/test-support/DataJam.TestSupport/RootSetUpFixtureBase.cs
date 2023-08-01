@@ -7,13 +7,13 @@ using NUnit.Framework;
 public abstract class RootSetUpFixtureBase
 {
     [OneTimeSetUp]
-    public async Task OneTimeSetUp()
+    public virtual async Task OneTimeSetUp()
     {
         await StartContainers().ConfigureAwait(false);
     }
 
     [OneTimeTearDown]
-    public async Task OneTimeTearDown()
+    public virtual async Task OneTimeTearDown()
     {
         await StopContainers().ConfigureAwait(false);
     }

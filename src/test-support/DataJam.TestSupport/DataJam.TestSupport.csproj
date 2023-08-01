@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
+        <PackageReference Include="dbup-sqlite" Version="$(dbup_sqlite_Version)" />
         <PackageReference Include="dbup-sqlserver" Version="$(dbup_sqlserver_Version)" />
         <PackageReference Include="NUnit" Version="$(Nunit_Version)" />
         <PackageReference Include="Testcontainers" Version="$(Testcontainers_Version)" />

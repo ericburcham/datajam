@@ -20,9 +20,13 @@
 
     <!-- Package Versions -->
     <PropertyGroup>
+        <dbup_sqlite_Version>5.0.8</dbup_sqlite_Version>
         <dbup_sqlserver_Version>5.0.8</dbup_sqlserver_Version>
-        <Microsoft_EntityFrameworkCore_Version>7.0.9</Microsoft_EntityFrameworkCore_Version>
         <FluentAssertions_Version>6.11.0</FluentAssertions_Version>
+        <Microsoft_EntityFrameworkCore_Version>7.0.9</Microsoft_EntityFrameworkCore_Version>
+        <Microsoft_EntityFrameworkCore_Relational>7.0.9</Microsoft_EntityFrameworkCore_Relational>
+        <Microsoft_EntityFrameworkCore_Sqlite_Version>7.0.9</Microsoft_EntityFrameworkCore_Sqlite_Version>
+        <Microsoft_EntityFrameworkCore_SqlServer_Version>7.0.9</Microsoft_EntityFrameworkCore_SqlServer_Version>
         <Microsoft_NET_Test_Sdk_Version>17.6.3</Microsoft_NET_Test_Sdk_Version>
         <NSubstitute_Version>5.0.0</NSubstitute_Version>
         <Nuke_Common_Version>7.0.2</Nuke_Common_Version>
