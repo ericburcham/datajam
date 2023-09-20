@@ -40,7 +40,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test-support", "test-suppor
 		test-support\Directory.Build.props = test-support\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Migrations", "test-support\DataJam.Migrations\DataJam.Migrations.csproj", "{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Migrations.MsSql", "test-support\DataJam.Migrations.MsSql\DataJam.Migrations.MsSql.csproj", "{FAA30C8D-2328-49D4-B526-33DCAFF0B4BA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Utilities", "code\DataJam.Utilities\DataJam.Utilities.csproj", "{25C6CABB-ED1F-4AB6-A4E4-C8CE93C190D5}"
 EndProject
@@ -54,6 +54,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{7ADD1DA9-9513-45
 		..\.space.kts = ..\.space.kts
 		..\CODEOWNERS = ..\CODEOWNERS
 		..\README.md = ..\README.md
+		..\version-info.txt = ..\version-info.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".space", ".space", "{A1A42544-191B-4ACE-B5EC-2F189FA8E731}"
@@ -68,6 +69,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7F294636-6B0
 		stylecop.json = stylecop.json
 		StyleCopAnalyzers.ruleset = StyleCopAnalyzers.ruleset
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.TestPatterns", "test-support\DataJam.TestSupport.TestPatterns\DataJam.TestSupport.TestPatterns.csproj", "{3E1EC2B7-AE43-4F74-B56B-7E0771B45FF2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Migrations.Sqlite", "test-support\DataJam.Migrations.Sqlite\DataJam.Migrations.Sqlite.csproj", "{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -117,6 +122,14 @@ Global
 		{2DE00942-F708-48F1-AF30-5ABD93F1E172}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2DE00942-F708-48F1-AF30-5ABD93F1E172}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2DE00942-F708-48F1-AF30-5ABD93F1E172}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E1EC2B7-AE43-4F74-B56B-7E0771B45FF2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E1EC2B7-AE43-4F74-B56B-7E0771B45FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E1EC2B7-AE43-4F74-B56B-7E0771B45FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E1EC2B7-AE43-4F74-B56B-7E0771B45FF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -135,6 +148,8 @@ Global
 		{2DE00942-F708-48F1-AF30-5ABD93F1E172} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 		{A1A42544-191B-4ACE-B5EC-2F189FA8E731} = {7ADD1DA9-9513-4576-B490-72CED6334CB2}
 		{7F294636-6B02-4F75-B1F5-4CB5D7678020} = {7ADD1DA9-9513-4576-B490-72CED6334CB2}
+		{3E1EC2B7-AE43-4F74-B56B-7E0771B45FF2} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}

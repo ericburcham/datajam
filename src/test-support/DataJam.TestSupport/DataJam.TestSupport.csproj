@@ -1,14 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net6.0</TargetFramework>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <Nullable>enable</Nullable>
-    </PropertyGroup>
-
     <ItemGroup>
-        <PackageReference Include="NUnit" Version="3.13.3" />
-        <PackageReference Include="Testcontainers" Version="3.2.0" />
+        <PackageReference Include="dbup-sqlite" Version="$(dbup_sqlite_Version)" />
+        <PackageReference Include="dbup-sqlserver" Version="$(dbup_sqlserver_Version)" />
+        <PackageReference Include="NUnit" Version="$(Nunit_Version)" />
+        <PackageReference Include="Testcontainers" Version="$(Testcontainers_Version)" />
     </ItemGroup>
 
     <ItemGroup>

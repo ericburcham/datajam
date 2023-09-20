@@ -1,8 +1,9 @@
+namespace DataJam.Build;
+
 using System.ComponentModel;
 
 using Nuke.Common.Tooling;
 
-/// <summary>Provides configuration for the build.</summary>
 [TypeConverter(typeof(TypeConverter<Configuration>))]
 public class Configuration : Enumeration
 {

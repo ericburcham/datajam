@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+      <RootNamespace>DataJam.Migrations.MsSql</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Remove="Migrations\*.sql" />
+        <EmbeddedResource Include="Migrations\*.sql" />
+    </ItemGroup>
+
+</Project>

@@ -11,26 +11,7 @@ val buildScript = """
     wget https://dot.net/v1/dotnet-install.sh
     chmod +x ./dotnet-install.sh
     ./dotnet-install.sh --channel 6.0
-    PATH=${'$'}PATH:${'$'}HOME/.dotnet:${'$'}HOME/.dotnet/tools
-    dotnet --list-sdks
-
-    # Register the space nuget feed.
-    dotnet nuget add source {{ project:msa_nuget_space_target_url }} -n space -u "%JB_SPACE_CLIENT_ID%" -p "%JB_SPACE_CLIENT_SECRET%" --store-password-in-clear-text
-
-    # Execute the Nuke build.
-    ./build.sh
-""".trimIndent()
-
-// Sets the build script to execute for the RELEASE build.
-val releaseBuildScript = """
-    # Update apt and install necessary Linux tools.
-    apt-get update && apt-get install -y apt-utils apt-transport-https
-    apt-get install -y curl unzip wget software-properties-common git
-
-    # Install the dotnet frameworks and command lines we need.
-    wget https://dot.net/v1/dotnet-install.sh
-    chmod +x ./dotnet-install.sh
-    ./dotnet-install.sh --channel 6.0
+    ./dotnet-install.sh --channel 7.0
     PATH=${'$'}PATH:${'$'}HOME/.dotnet:${'$'}HOME/.dotnet/tools
     dotnet --list-sdks
 
@@ -81,6 +62,26 @@ job("Continuous Integration Build") {
         }
     }
 }
+
+// Sets the build script to execute for the RELEASE build.
+val releaseBuildScript = """
+    # Update apt and install necessary Linux tools.
+    apt-get update && apt-get install -y apt-utils apt-transport-https
+    apt-get install -y curl unzip wget software-properties-common git
+
+    # Install the dotnet frameworks and command lines we need.
+    wget https://dot.net/v1/dotnet-install.sh
+    chmod +x ./dotnet-install.sh
+    ./dotnet-install.sh --channel 6.0
+    PATH=${'$'}PATH:${'$'}HOME/.dotnet:${'$'}HOME/.dotnet/tools
+    dotnet --list-sdks
+
+    # Register the space nuget feed.
+    dotnet nuget add source {{ project:msa_nuget_space_target_url }} -n space -u "%JB_SPACE_CLIENT_ID%" -p "%JB_SPACE_CLIENT_SECRET%" --store-password-in-clear-text
+
+    # Execute the Nuke build.
+    ./build.sh
+""".trimIndent()
 
 job("Release Build") {
     startOn {
