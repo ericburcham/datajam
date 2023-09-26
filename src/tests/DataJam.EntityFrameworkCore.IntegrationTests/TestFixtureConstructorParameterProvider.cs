@@ -33,9 +33,9 @@ public static class TestFixtureConstructorParameterProvider
 
     private static TestFixtureData BuildSqliteConstructorParameters()
     {
-        var domain = new SqliteFamilyDomain(SqliteDependencies.Instance.Options, new SqliteFamilyMappingConfigurator());
-        var domainContext = new DomainContext<SqliteFamilyDomain>(domain);
-        var domainRepository = new DomainRepository<SqliteFamilyDomain>(domainContext);
+        var domain = new FamilyDomain(SqliteDependencies.Instance.Options, new SqliteFamilyMappingConfigurator());
+        var domainContext = new DomainContext<FamilyDomain>(domain);
+        var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 
         return new(domainRepository, false) { TestName = "Sqlite" };
     }
