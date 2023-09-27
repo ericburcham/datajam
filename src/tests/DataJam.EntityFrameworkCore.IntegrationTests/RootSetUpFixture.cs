@@ -10,6 +10,8 @@ using Microsoft.Data.Sqlite;
 
 using MsSql;
 
+using MySql;
+
 using Sqlite;
 
 using TestSupport;
@@ -25,8 +27,12 @@ public class RootSetUpFixture : RootSetUpFixtureBase
     public override async Task OneTimeSetUp()
     {
         await base.OneTimeSetUp().ConfigureAwait(false);
-        await DeploySqlite().ConfigureAwait(false);
+
+        await DeployMySql().ConfigureAwait(false);
         await DeployMsSql().ConfigureAwait(false);
+        await DeploySqlite().ConfigureAwait(false);
+
+        // await Task.WhenAll(DeployMsSql(), DeploySqlite(), DeployMySql()).ConfigureAwait(false);
     }
 
     public override async Task OneTimeTearDown()
@@ -70,6 +76,13 @@ public class RootSetUpFixture : RootSetUpFixtureBase
     {
         var connectionString = MsSqlDependencies.Instance.MsSql.GetConnectionString();
         var databaseDeployer = new MsSqlDatabaseDeployer(connectionString, MSSQL_MIGRATION_ASSEMBLY);
+        await databaseDeployer.Deploy().ConfigureAwait(false);
+    }
+
+    private static async Task DeployMySql()
+    {
+        var connectionString = MySqlDependencies.Instance.MySql.GetConnectionString();
+        var databaseDeployer = new MySqlDatabaseDeployer(connectionString, MSSQL_MIGRATION_ASSEMBLY);
         await databaseDeployer.Deploy().ConfigureAwait(false);
     }
 

@@ -20,6 +20,7 @@
 
     <!-- Package Versions -->
     <PropertyGroup>
+        <dbup_mysql_version>5.0.10</dbup_mysql_version>
         <dbup_sqlite_Version>5.0.8</dbup_sqlite_Version>
         <dbup_sqlserver_Version>5.0.8</dbup_sqlserver_Version>
         <FluentAssertions_Version>6.11.0</FluentAssertions_Version>
@@ -28,6 +29,7 @@
         <Microsoft_EntityFrameworkCore_Sqlite_Version>7.0.9</Microsoft_EntityFrameworkCore_Sqlite_Version>
         <Microsoft_EntityFrameworkCore_SqlServer_Version>7.0.9</Microsoft_EntityFrameworkCore_SqlServer_Version>
         <Microsoft_NET_Test_Sdk_Version>17.6.3</Microsoft_NET_Test_Sdk_Version>
+        <MySql_EntityFrameworkCore_Version>7.0.5</MySql_EntityFrameworkCore_Version>
         <NSubstitute_Version>5.0.0</NSubstitute_Version>
         <Nuke_Common_Version>7.0.2</Nuke_Common_Version>
         <NUnit_Version>3.13.3</NUnit_Version>
@@ -36,6 +38,7 @@
         <Stylecop_Analyzers_Version>1.2.0-beta.435</Stylecop_Analyzers_Version>
         <TestContainers_Version>3.2.0</TestContainers_Version>
         <TestContainers_MsSql_Version>3.3.0</TestContainers_MsSql_Version>
+        <TestContainers_MySql_Version>3.5.0</TestContainers_MySql_Version>
         <TestStack_Dossier_Version>4.0.0</TestStack_Dossier_Version>
     </PropertyGroup>
 

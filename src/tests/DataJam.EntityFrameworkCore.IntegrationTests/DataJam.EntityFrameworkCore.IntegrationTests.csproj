@@ -4,7 +4,9 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="$(Microsoft_EntityFrameworkCore_Relational)" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="$(Microsoft_EntityFrameworkCore_Sqlite_Version)" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="$(Microsoft_EntityFrameworkCore_SqlServer_Version)" />
+        <PackageReference Include="MySql.EntityFrameworkCore" Version="$(MySql_EntityFrameworkCore_Version)" />
         <PackageReference Include="Testcontainers.MsSql" Version="$(TestContainers_MsSql_Version)" />
+        <PackageReference Include="Testcontainers.MySql" Version="$(TestContainers_MySql_Version)" />
     </ItemGroup>
 
     <ItemGroup>

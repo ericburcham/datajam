@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 
 using MsSql;
 
+using MySql;
+
 using Sqlite;
 using Sqlite.Domains.Family;
 
@@ -17,6 +19,7 @@ public static class TestFixtureConstructorParameterProvider
     {
         get
         {
+            yield return BuildMySqlConstructorParameters();
             yield return BuildSqliteConstructorParameters();
             yield return BuildSqlServerConstructorParameters();
         }
@@ -29,6 +32,15 @@ public static class TestFixtureConstructorParameterProvider
         var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 
         return new(domainRepository, useAmbientTransaction) { TestName = testName };
+    }
+
+    private static TestFixtureData BuildMySqlConstructorParameters()
+    {
+        var domain = new FamilyDomain(MySqlDependencies.Instance.Options, new FamilyMappingConfigurator());
+        var domainContext = new DomainContext<FamilyDomain>(domain);
+        var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
+
+        return new(domainRepository, true) { TestName = "MySql" };
     }
 
     private static TestFixtureData BuildSqliteConstructorParameters()
