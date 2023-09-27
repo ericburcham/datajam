@@ -24,6 +24,8 @@ public class RootSetUpFixture : RootSetUpFixtureBase
 
     private const string MSSQL_MIGRATION_ASSEMBLY = "DataJam.Migrations.MsSql";
 
+    private const string MYSQL_MIGRATION_ASSEMBLY = MSSQL_MIGRATION_ASSEMBLY;
+
     public override async Task OneTimeSetUp()
     {
         await base.OneTimeSetUp().ConfigureAwait(false);
@@ -82,7 +84,7 @@ public class RootSetUpFixture : RootSetUpFixtureBase
     private static async Task DeployMySql()
     {
         var connectionString = MySqlDependencies.Instance.MySql.GetConnectionString();
-        var databaseDeployer = new MySqlDatabaseDeployer(connectionString, MSSQL_MIGRATION_ASSEMBLY);
+        var databaseDeployer = new MySqlDatabaseDeployer(connectionString, MYSQL_MIGRATION_ASSEMBLY);
         await databaseDeployer.Deploy().ConfigureAwait(false);
     }
 
