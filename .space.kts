@@ -10,8 +10,7 @@ val buildScript = """
     # Install the dotnet frameworks and command lines we need.
     wget https://dot.net/v1/dotnet-install.sh
     chmod +x ./dotnet-install.sh
-    ./dotnet-install.sh --channel 6.0
-    ./dotnet-install.sh --channel 7.0
+    ./dotnet-install.sh --channel 8.0
     PATH=${'$'}PATH:${'$'}HOME/.dotnet:${'$'}HOME/.dotnet/tools
     dotnet --list-sdks
 
