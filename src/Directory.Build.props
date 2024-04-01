@@ -36,11 +36,6 @@
         </PackageReference>
     </ItemGroup>
 
-    <!-- Enable Init keyword in .Net Framework -->
-    <ItemGroup>
-        <Compile Include="..\..\IsExternalInit.cs" Link="IsExternalInit.cs"/>
-    </ItemGroup>
-
     <!-- Include Stylecop.json -->
     <ItemGroup>
         <AdditionalFiles Include="../../stylecop.json" Link="stylecop.json"/>
