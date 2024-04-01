@@ -9,4 +9,9 @@
         <TargetFramework>net8.0</TargetFramework>
     </PropertyGroup>
 
+    <!-- The binary formatter will be removed altogether in net9.0 -->
+    <PropertyGroup>
+        <EnableUnsafeBinaryFormatterSerialization>true</EnableUnsafeBinaryFormatterSerialization>
+    </PropertyGroup>
+
 </Project>
