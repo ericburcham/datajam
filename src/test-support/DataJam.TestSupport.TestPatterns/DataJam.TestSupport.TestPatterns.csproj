@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="$(FluentAssertions_Version)" />
-        <PackageReference Include="NUnit" Version="$(NUnit_Version)" />
+        <PackageReference Include="FluentAssertions" />
+        <PackageReference Include="NUnit" />
     </ItemGroup>
 
     <ItemGroup>
