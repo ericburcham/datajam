@@ -4,16 +4,15 @@
     <Import Project="../Directory.Build.props"/>
 
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" Version="$(FluentAssertions_Version)"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="$(Microsoft_NET_Test_Sdk_Version)"/>
-        <PackageReference Include="NSubstitute" Version="$(NSubstitute_Version)"/>
-        <PackageReference Include="NUnit" Version="$(NUnit_Version)"/>
-        <PackageReference Include="NUnit3TestAdapter" Version="$(NUnit3TestAdapter_Version)"/>
-        <PackageReference Include="NUnit.Analyzers" Version="$(NUnit_Analyzers_Version)">
+        <PackageReference Include="FluentAssertions" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="NSubstitute" />
+        <PackageReference Include="NUnit" />
+        <PackageReference Include="NUnit3TestAdapter" />
+        <PackageReference Include="NUnit.Analyzers">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="TestStack.Dossier" Version="$(TestStack_Dossier_Version)"/>
     </ItemGroup>
 
     <PropertyGroup>
