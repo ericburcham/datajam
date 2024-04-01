@@ -2,11 +2,13 @@
 
 using System.Collections;
 
-using Domains.Family;
-
 using Microsoft.EntityFrameworkCore;
 
 using MsSql;
+using MsSql.Domains.Family;
+
+using Mysql;
+using Mysql.Domains.Family;
 
 using Sqlite;
 using Sqlite.Domains.Family;
@@ -17,35 +19,35 @@ public static class TestFixtureConstructorParameterProvider
     {
         get
         {
+            yield return BuildMySqlConstructorParameters();
             yield return BuildSqliteConstructorParameters();
             yield return BuildSqlServerConstructorParameters();
         }
     }
 
-    private static TestFixtureData BuildConstructorParameters(DbContextOptions dbContextOptions, string testName, bool useAmbientTransaction)
+    private static TestFixtureData BuildConstructorParameters<TMappingConfigurator>(DbContextOptions dbContextOptions, string testName, bool useAmbientTransaction)
+        where TMappingConfigurator : IConfigureDomainMappings<ModelBuilder>, new()
     {
-        var domain = new FamilyDomain(dbContextOptions, new FamilyMappingConfigurator());
+        var mappingConfigurator = new TMappingConfigurator();
+        var domain = new FamilyDomain(dbContextOptions, mappingConfigurator);
         var domainContext = new DomainContext<FamilyDomain>(domain);
         var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 
         return new(domainRepository, useAmbientTransaction) { TestName = testName };
     }
 
+    private static TestFixtureData BuildMySqlConstructorParameters()
+    {
+        return BuildConstructorParameters<MySqlFamilyMappingConfigurator>(MySqlDependencies.Instance.Options, "MySql", true);
+    }
+
     private static TestFixtureData BuildSqliteConstructorParameters()
     {
-        var domain = new SqliteFamilyDomain(SqliteDependencies.Instance.Options, new SqliteFamilyMappingConfigurator());
-        var domainContext = new DomainContext<SqliteFamilyDomain>(domain);
-        var domainRepository = new DomainRepository<SqliteFamilyDomain>(domainContext);
-
-        return new(domainRepository, false) { TestName = "Sqlite" };
+        return BuildConstructorParameters<SqliteFamilyMappingConfigurator>(SqliteDependencies.Instance.Options, "Sqlite", false);
     }
 
     private static TestFixtureData BuildSqlServerConstructorParameters()
     {
-        var domain = new FamilyDomain(MsSqlDependencies.Instance.Options, new FamilyMappingConfigurator());
-        var domainContext = new DomainContext<FamilyDomain>(domain);
-        var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
-
-        return new(domainRepository, true) { TestName = "MsSql" };
+        return BuildConstructorParameters<MsSqlFamilyMappingConfigurator>(MsSqlDependencies.Instance.Options, "MsSql", true);
     }
 }

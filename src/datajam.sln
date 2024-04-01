@@ -76,6 +76,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.TestPat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Migrations.Sqlite", "test-support\DataJam.Migrations.Sqlite\DataJam.Migrations.Sqlite.csproj", "{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Migrations.MySql", "test-support\DataJam.Migrations.MySql\DataJam.Migrations.MySql.csproj", "{ED6035CC-D7CE-4FEE-9D16-281E10797E3A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -132,6 +134,10 @@ Global
 		{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED6035CC-D7CE-4FEE-9D16-281E10797E3A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED6035CC-D7CE-4FEE-9D16-281E10797E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED6035CC-D7CE-4FEE-9D16-281E10797E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED6035CC-D7CE-4FEE-9D16-281E10797E3A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 		{7F294636-6B02-4F75-B1F5-4CB5D7678020} = {7ADD1DA9-9513-4576-B490-72CED6334CB2}
 		{3E1EC2B7-AE43-4F74-B56B-7E0771B45FF2} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 		{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{ED6035CC-D7CE-4FEE-9D16-281E10797E3A} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}

@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="dbup-mysql" />
         <PackageReference Include="dbup-sqlite" />
         <PackageReference Include="dbup-sqlserver" />
         <PackageReference Include="NUnit" />

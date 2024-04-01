@@ -1,4 +1,4 @@
-namespace DataJam.EntityFrameworkCore.IntegrationTests.Domains.Family;
+namespace DataJam.EntityFrameworkCore.IntegrationTests.Mysql.Domains.Family.Maps;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -6,7 +6,5 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 public abstract class FamilyMapping<TEntity> : IEntityTypeConfiguration<TEntity>
     where TEntity : class
 {
-    private protected const string SCHEMA = "Family";
-
     public abstract void Configure(EntityTypeBuilder<TEntity> builder);
 }
