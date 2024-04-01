@@ -10,7 +10,7 @@ using Microsoft.Data.Sqlite;
 
 using MsSql;
 
-using MySql;
+using Mysql;
 
 using Sqlite;
 
@@ -24,7 +24,7 @@ public class RootSetUpFixture : RootSetUpFixtureBase
 
     private const string MSSQL_MIGRATION_ASSEMBLY = "DataJam.Migrations.MsSql";
 
-    private const string MYSQL_MIGRATION_ASSEMBLY = MSSQL_MIGRATION_ASSEMBLY;
+    private const string MYSQL_MIGRATION_ASSEMBLY = "DataJam.Migrations.MySql";
 
     public override async Task OneTimeSetUp()
     {
