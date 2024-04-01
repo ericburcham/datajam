@@ -1,10 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <PropertyGroup>
+        <NoWarn>$(NoWarn);NETSDK1206</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
-        <PackageReference Include="dbup-sqlite" Version="$(dbup_sqlite_Version)" />
-        <PackageReference Include="dbup-sqlserver" Version="$(dbup_sqlserver_Version)" />
-        <PackageReference Include="NUnit" Version="$(Nunit_Version)" />
-        <PackageReference Include="Testcontainers" Version="$(Testcontainers_Version)" />
+        <PackageReference Include="dbup-sqlite" />
+        <PackageReference Include="dbup-sqlserver" />
+        <PackageReference Include="NUnit" />
+        <PackageReference Include="Testcontainers" />
     </ItemGroup>
 
     <ItemGroup>

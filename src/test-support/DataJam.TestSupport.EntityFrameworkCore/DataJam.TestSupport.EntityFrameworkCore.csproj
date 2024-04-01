@@ -1,14 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <PropertyGroup>
+        <NoWarn>$(NoWarn);NETSDK1206</NoWarn>
+    </PropertyGroup>
+
     <ItemGroup>
-      <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj" />
-      <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj" />
-      <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
-      <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore" Version="$(Microsoft_EntityFrameworkCore_Version)" />
+        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj" />
+        <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
+        <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj" />
     </ItemGroup>
 
     <ItemGroup>

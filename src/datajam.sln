@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F2626B7C
 		tests\Directory.Build.props = tests\Directory.Build.props
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{086DC7D9-258B-4819-B124-83752CCEE74F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{086DC7D9-258B-4819-B124-83752CCEE74F}"
 	ProjectSection(SolutionItems) = preProject
 		build\Directory.Build.props = build\Directory.Build.props
 		build\Directory.Build.targets = build\Directory.Build.targets
@@ -55,6 +55,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{7ADD1DA9-9513-45
 		..\CODEOWNERS = ..\CODEOWNERS
 		..\README.md = ..\README.md
 		..\version-info.txt = ..\version-info.txt
+		..\nuget.config = ..\nuget.config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".space", ".space", "{A1A42544-191B-4ACE-B5EC-2F189FA8E731}"
@@ -68,6 +69,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7F294636-6B0
 		Directory.Build.props = Directory.Build.props
 		stylecop.json = stylecop.json
 		StyleCopAnalyzers.ruleset = StyleCopAnalyzers.ruleset
+		Directory.Packages.props = Directory.Packages.props
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.TestPatterns", "test-support\DataJam.TestSupport.TestPatterns\DataJam.TestSupport.TestPatterns.csproj", "{3E1EC2B7-AE43-4F74-B56B-7E0771B45FF2}"
