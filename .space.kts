@@ -43,8 +43,8 @@ job("Continuous Integration Build") {
 
     container(buildContainerImage) {
         resources {
-            cpu = 2.cpu
-            memory = 4.gb
+            cpu = 4.cpu
+            memory = 8.gb
         }
 
         // Disable unneeded dotnet stuff.
@@ -77,8 +77,8 @@ job("Release Build") {
 
     container(buildContainerImage) {
         resources {
-            cpu = 2.cpu
-            memory = 4.gb
+            cpu = 4.cpu
+            memory = 8.gb
         }
 
         // Disable unneeded dotnet stuff.
