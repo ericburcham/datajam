@@ -1,9 +1,9 @@
 ﻿namespace DataJam.EntityFrameworkCore.MsSql.IntegrationTests.Domains.Family.Maps;
 
-using DataJam.TestSupport.TestPatterns.Domains.Family;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+using TestSupport.TestPatterns.Domains.Family;
 
 public class ChildMapping : FamilyMapping<Child>
 {

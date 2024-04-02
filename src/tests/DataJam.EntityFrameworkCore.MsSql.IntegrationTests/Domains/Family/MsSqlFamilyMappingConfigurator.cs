@@ -1,10 +1,10 @@
 namespace DataJam.EntityFrameworkCore.MsSql.IntegrationTests.Domains.Family;
 
-using DataJam.TestSupport.TestPatterns.Domains.Family;
-
 using Maps;
 
 using Microsoft.EntityFrameworkCore;
+
+using TestSupport.TestPatterns.Domains.Family;
 
 public class MsSqlFamilyMappingConfigurator : IConfigureDomainMappings<ModelBuilder>
 {

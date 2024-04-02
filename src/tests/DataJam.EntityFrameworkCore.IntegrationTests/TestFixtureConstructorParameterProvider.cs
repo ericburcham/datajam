@@ -4,9 +4,6 @@ using System.Collections;
 
 using Microsoft.EntityFrameworkCore;
 
-using MsSql;
-using MsSql.Domains.Family;
-
 using Mysql;
 using Mysql.Domains.Family;
 
@@ -21,7 +18,6 @@ public static class TestFixtureConstructorParameterProvider
         {
             yield return BuildMySqlConstructorParameters();
             yield return BuildSqliteConstructorParameters();
-            yield return BuildSqlServerConstructorParameters();
         }
     }
 
@@ -44,10 +40,5 @@ public static class TestFixtureConstructorParameterProvider
     private static TestFixtureData BuildSqliteConstructorParameters()
     {
         return BuildConstructorParameters<SqliteFamilyMappingConfigurator>(SqliteDependencies.Instance.Options, "Sqlite", false);
-    }
-
-    private static TestFixtureData BuildSqlServerConstructorParameters()
-    {
-        return BuildConstructorParameters<MsSqlFamilyMappingConfigurator>(MsSqlDependencies.Instance.Options, "MsSql", true);
     }
 }
