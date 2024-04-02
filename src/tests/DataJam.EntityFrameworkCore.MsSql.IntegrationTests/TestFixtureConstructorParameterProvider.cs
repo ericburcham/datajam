@@ -4,6 +4,8 @@ using System.Collections;
 
 using Domains.Family;
 
+using TestSupport.EntityFrameworkCore.Domains.Family;
+
 public static class TestFixtureConstructorParameterProvider
 {
     public static IEnumerable Repositories

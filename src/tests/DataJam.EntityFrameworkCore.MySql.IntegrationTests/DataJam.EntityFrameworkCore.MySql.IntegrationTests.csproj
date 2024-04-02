@@ -13,6 +13,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj"/>
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
         <ProjectReference Include="..\..\test-support\DataJam.Migrations.MySql\DataJam.Migrations.MySql.csproj"/>

@@ -41,6 +41,12 @@ public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
         _result.Name.Should().Be("Kid");
     }
 
+    [Test]
+    public void ItShouldHaveAValidId()
+    {
+        _result.Id.Should().NotBe(0);
+    }
+
     [OneTimeSetUp]
     public async Task OneTimeSetUp()
     {

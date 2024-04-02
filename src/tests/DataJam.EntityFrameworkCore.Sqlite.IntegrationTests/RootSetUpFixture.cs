@@ -1,4 +1,4 @@
-﻿namespace DataJam.EntityFrameworkCore.IntegrationTests;
+﻿namespace DataJam.EntityFrameworkCore.Sqlite.IntegrationTests;
 
 using System.IO;
 using System.Linq;
@@ -8,10 +8,6 @@ using DotNet.Testcontainers.Containers;
 
 using Microsoft.Data.Sqlite;
 
-using Mysql;
-
-using Sqlite;
-
 using TestSupport;
 using TestSupport.Migrators;
 
@@ -20,13 +16,11 @@ public class RootSetUpFixture : RootSetUpFixtureBase
 {
     private const string SQLITE_MIGRATION_ASSEMBLY = "DataJam.Migrations.Sqlite";
 
-    private const string MYSQL_MIGRATION_ASSEMBLY = "DataJam.Migrations.MySql";
-
     public override async Task OneTimeSetUp()
     {
         await base.OneTimeSetUp().ConfigureAwait(false);
 
-        await Task.WhenAll(DeploySqlite(), DeployMySql()).ConfigureAwait(false);
+        await DeploySqlite().ConfigureAwait(false);
     }
 
     public override async Task OneTimeTearDown()
@@ -64,13 +58,6 @@ public class RootSetUpFixture : RootSetUpFixtureBase
                                await container.StopAsync(token).ConfigureAwait(false);
                            })
                       .ConfigureAwait(false);
-    }
-
-    private static async Task DeployMySql()
-    {
-        var connectionString = MySqlDependencies.Instance.MySql.GetConnectionString();
-        var databaseDeployer = new MySqlDatabaseDeployer(connectionString, MYSQL_MIGRATION_ASSEMBLY);
-        await databaseDeployer.Deploy().ConfigureAwait(false);
     }
 
     private static async Task DeploySqlite()

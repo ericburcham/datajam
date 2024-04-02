@@ -1,4 +1,4 @@
-﻿namespace DataJam.EntityFrameworkCore.IntegrationTests;
+﻿namespace DataJam.EntityFrameworkCore.MySql.IntegrationTests;
 
 [TestFixtureSource(typeof(TestFixtureConstructorParameterProvider), nameof(TestFixtureConstructorParameterProvider.Repositories))]
 public class WhenPersistingAndRetrievingAChild : TestSupport.TestPatterns.WhenPersistingAndRetrievingAChild

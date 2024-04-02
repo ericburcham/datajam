@@ -14,4 +14,8 @@
       <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="DataJam.TestSupport.TestPatterns.csproj.DotSettings" />
+    </ItemGroup>
+
 </Project>

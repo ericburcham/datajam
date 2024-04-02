@@ -1,14 +1,12 @@
-﻿namespace DataJam.EntityFrameworkCore.IntegrationTests;
+﻿namespace DataJam.EntityFrameworkCore.MySql.IntegrationTests;
 
 using System.Collections;
 
+using Domains.Family;
+
 using Microsoft.EntityFrameworkCore;
 
-using Mysql;
-using Mysql.Domains.Family;
-
-using Sqlite;
-using Sqlite.Domains.Family;
+using TestSupport.EntityFrameworkCore.Domains.Family;
 
 public static class TestFixtureConstructorParameterProvider
 {
@@ -17,7 +15,6 @@ public static class TestFixtureConstructorParameterProvider
         get
         {
             yield return BuildMySqlConstructorParameters();
-            yield return BuildSqliteConstructorParameters();
         }
     }
 
@@ -35,10 +32,5 @@ public static class TestFixtureConstructorParameterProvider
     private static TestFixtureData BuildMySqlConstructorParameters()
     {
         return BuildConstructorParameters<MySqlFamilyMappingConfigurator>(MySqlDependencies.Instance.Options, "MySql", true);
-    }
-
-    private static TestFixtureData BuildSqliteConstructorParameters()
-    {
-        return BuildConstructorParameters<SqliteFamilyMappingConfigurator>(SqliteDependencies.Instance.Options, "Sqlite", false);
     }
 }

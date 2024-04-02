@@ -1,4 +1,4 @@
-﻿namespace DataJam.EntityFrameworkCore.IntegrationTests;
+﻿namespace DataJam.EntityFrameworkCore.Sqlite.IntegrationTests;
 
 using System.Collections.Generic;
 
