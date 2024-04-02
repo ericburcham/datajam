@@ -42,7 +42,7 @@ public class RootSetUpFixture : RootSetUpFixtureBase
         await base.OneTimeTearDown().ConfigureAwait(false);
 
         SqliteConnection.ClearAllPools();
-        var sqlLiteConnectionString = SqliteDependencies.Instance.Sqlite.GetConnectionString();
+        var sqlLiteConnectionString = SqliteDependencies.SqliteMockContainer.GetConnectionString();
         var connectionStringBuilder = new SqliteConnectionStringBuilder(sqlLiteConnectionString);
         var path = connectionStringBuilder.DataSource;
 
@@ -90,7 +90,7 @@ public class RootSetUpFixture : RootSetUpFixtureBase
 
     private static async Task DeploySqlite()
     {
-        var connectionString = SqliteDependencies.Instance.Sqlite.GetConnectionString();
+        var connectionString = SqliteDependencies.SqliteMockContainer.GetConnectionString();
         var databaseDeployer = new SqliteDatabaseDeployer(connectionString, SQLITE_MIGRATION_ASSEMBLY);
         await databaseDeployer.Deploy().ConfigureAwait(false);
     }

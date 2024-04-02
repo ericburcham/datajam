@@ -4,16 +4,14 @@ using System;
 using System.Collections.Generic;
 using System.Threading;
 
-using DataJam.TestSupport;
-using DataJam.TestSupport.EntityFrameworkCore;
-
 using DotNet.Testcontainers.Containers;
 
 using Microsoft.EntityFrameworkCore;
 
-using MySql.Data.MySqlClient;
-
 using Testcontainers.MySql;
+
+using TestSupport;
+using TestSupport.EntityFrameworkCore;
 
 public class MySqlDependencies : Singleton<MySqlDependencies>, IProvideContainers, IProvideDbContextOptions
 {
@@ -39,18 +37,7 @@ public class MySqlDependencies : Singleton<MySqlDependencies>, IProvideContainer
         }
     }
 
-    public DbContextOptions Options
-    {
-        get
-        {
-            var dbContextOptionsBuilder = new DbContextOptionsBuilder();
-            var connectionString = MySql.GetConnectionString();
-            var connectionStringBuilder = new MySqlConnectionStringBuilder(connectionString) { UserID = USER_ID, Password = PASSWORD };
-            var contextOptionsBuilder = dbContextOptionsBuilder.UseMySQL(connectionStringBuilder.ConnectionString);
-
-            return contextOptionsBuilder.Options;
-        }
-    }
+    public DbContextOptions Options => new DbContextOptionsBuilder().UseMySQL(MySql.GetConnectionString()).Options;
 
     internal MySqlContainer MySql
     {

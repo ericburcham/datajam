@@ -1,8 +1,6 @@
 ﻿namespace DataJam.EntityFrameworkCore.IntegrationTests.Sqlite;
 
 using System;
-using System.IO;
-using System.Threading;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -10,27 +8,21 @@ using TestSupport.EntityFrameworkCore;
 
 public class SqliteDependencies : Singleton<SqliteDependencies>, IProvideDbContextOptions
 {
-    private readonly ReaderWriterLockSlim _containerLock = new();
+    private static readonly Lazy<DbContextOptions> _dbContextOptions = new(BuildDbContextOptions);
 
-    public DbContextOptions Options => new DbContextOptionsBuilder().UseSqlite(Sqlite.GetConnectionString()).Options;
+    private static readonly Lazy<SqliteMockContainer> _sqlite = new(BuildSqlite);
 
-    public Sqlite Sqlite { get; } = new();
-}
+    public static SqliteMockContainer SqliteMockContainer => _sqlite.Value;
 
-public class Sqlite
-{
-    private readonly string _connectionString;
+    public DbContextOptions Options => _dbContextOptions.Value;
 
-    public Sqlite()
+    private static DbContextOptions BuildDbContextOptions()
     {
-        var guid = Guid.NewGuid();
-        var executableDirectory = AppDomain.CurrentDomain.BaseDirectory;
-        var dataFile = Path.Combine(executableDirectory, $"{guid}.db");
-        _connectionString = $"Data Source={dataFile}";
+        return new DbContextOptionsBuilder().UseSqlite(SqliteMockContainer.GetConnectionString()).Options;
     }
 
-    public string GetConnectionString()
+    private static SqliteMockContainer BuildSqlite()
     {
-        return _connectionString;
+        return new();
     }
 }
