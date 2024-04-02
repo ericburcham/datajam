@@ -78,6 +78,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Migrations.Sqlite",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Migrations.MySql", "test-support\DataJam.Migrations.MySql\DataJam.Migrations.MySql.csproj", "{ED6035CC-D7CE-4FEE-9D16-281E10797E3A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore.MsSql.IntegrationTests", "tests\DataJam.EntityFrameworkCore.MsSql.IntegrationTests\DataJam.EntityFrameworkCore.MsSql.IntegrationTests.csproj", "{0EBB582A-0221-4046-8482-09F4E1FD70AF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore.MySql.IntegrationTests", "tests\DataJam.EntityFrameworkCore.MySql.IntegrationTests\DataJam.EntityFrameworkCore.MySql.IntegrationTests.csproj", "{7A683122-E92C-4EB0-BE13-0847992C94CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore.Sqlite.IntegrationTests", "tests\DataJam.EntityFrameworkCore.Sqlite.IntegrationTests\DataJam.EntityFrameworkCore.Sqlite.IntegrationTests.csproj", "{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -138,6 +144,18 @@ Global
 		{ED6035CC-D7CE-4FEE-9D16-281E10797E3A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED6035CC-D7CE-4FEE-9D16-281E10797E3A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED6035CC-D7CE-4FEE-9D16-281E10797E3A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EBB582A-0221-4046-8482-09F4E1FD70AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EBB582A-0221-4046-8482-09F4E1FD70AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EBB582A-0221-4046-8482-09F4E1FD70AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EBB582A-0221-4046-8482-09F4E1FD70AF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A683122-E92C-4EB0-BE13-0847992C94CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A683122-E92C-4EB0-BE13-0847992C94CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A683122-E92C-4EB0-BE13-0847992C94CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A683122-E92C-4EB0-BE13-0847992C94CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,6 +177,9 @@ Global
 		{3E1EC2B7-AE43-4F74-B56B-7E0771B45FF2} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 		{B68FBAED-D8B7-4FFC-AB22-2790FBD2A46B} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 		{ED6035CC-D7CE-4FEE-9D16-281E10797E3A} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{0EBB582A-0221-4046-8482-09F4E1FD70AF} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
+		{7A683122-E92C-4EB0-BE13-0847992C94CC} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
+		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}
