@@ -1,6 +1,5 @@
 ﻿namespace DataJam.TestSupport.Migrators;
 
-using System;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -18,17 +17,7 @@ public class MySqlDatabaseDeployer : DatabaseDeployer
 
     protected override Task DeployInternal(Assembly migrationAssembly)
     {
-        try
-        {
-            EnsureDatabase.For.MySqlDatabase(_connectionString);
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-
-            throw;
-        }
-
+        EnsureDatabase.For.MySqlDatabase(_connectionString);
         var upgradeResult = DeployChanges.To.MySqlDatabase(_connectionString).WithScriptsEmbeddedInAssembly(migrationAssembly).LogToConsole().Build().PerformUpgrade();
 
         if (upgradeResult.Successful)
