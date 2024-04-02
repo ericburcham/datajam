@@ -9,10 +9,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj" />
-        <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj" />
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
-        <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj" />
+        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -2,9 +2,9 @@
 
 using System.Collections;
 
-using Domains.Family;
+using Family;
 
-using TestSupport.EntityFrameworkCore.Domains.Family;
+using TestSupport.EntityFrameworkCore;
 
 public static class TestFixtureConstructorParameterProvider
 {

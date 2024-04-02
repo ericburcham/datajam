@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="dbup-mysql" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer"/>
@@ -23,6 +24,10 @@
 
     <ItemGroup>
       <EmbeddedResource Include="Migrations\0001_family_schema.sql" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="DataJam.EntityFrameworkCore.MySql.IntegrationTests.csproj.DotSettings" />
     </ItemGroup>
 
 </Project>

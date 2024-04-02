@@ -9,7 +9,6 @@ using DotNet.Testcontainers.Containers;
 using Microsoft.Data.Sqlite;
 
 using TestSupport;
-using TestSupport.Migrators;
 
 [SetUpFixture]
 public class RootSetUpFixture : RootSetUpFixtureBase

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 using DbUp;
 
-using TestSupport.Migrators;
+using TestSupport;
 
 public class MySqlDatabaseDeployer : DatabaseDeployer
 {

@@ -1,4 +1,4 @@
-﻿namespace DataJam.TestSupport.Migrators;
+﻿namespace DataJam.TestSupport;
 
 using System.Threading.Tasks;
 
