@@ -14,8 +14,6 @@ using TestSupport.Migrators;
 [SetUpFixture]
 public class RootSetUpFixture : RootSetUpFixtureBase
 {
-    private const string SQLITE_MIGRATION_ASSEMBLY = "DataJam.Migrations.Sqlite";
-
     public override async Task OneTimeSetUp()
     {
         await base.OneTimeSetUp().ConfigureAwait(false);
@@ -63,7 +61,7 @@ public class RootSetUpFixture : RootSetUpFixtureBase
     private static async Task DeploySqlite()
     {
         var connectionString = SqliteDependencies.SqliteMockContainer.GetConnectionString();
-        var databaseDeployer = new SqliteDatabaseDeployer(connectionString, SQLITE_MIGRATION_ASSEMBLY);
+        var databaseDeployer = new SqliteDatabaseDeployer(connectionString);
         await databaseDeployer.Deploy().ConfigureAwait(false);
     }
 }

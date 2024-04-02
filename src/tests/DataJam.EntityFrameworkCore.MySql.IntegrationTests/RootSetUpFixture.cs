@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 using DotNet.Testcontainers.Containers;
 
 using TestSupport;
-using TestSupport.Migrators;
 
 [SetUpFixture]
 public class RootSetUpFixture : RootSetUpFixtureBase
 {
-    private const string MYSQL_MIGRATION_ASSEMBLY = "DataJam.Migrations.MySql";
-
     public override async Task OneTimeSetUp()
     {
         await base.OneTimeSetUp().ConfigureAwait(false);
@@ -45,7 +42,7 @@ public class RootSetUpFixture : RootSetUpFixtureBase
     private static async Task DeployMySql()
     {
         var connectionString = MySqlDependencies.Instance.MySql.GetConnectionString();
-        var databaseDeployer = new MySqlDatabaseDeployer(connectionString, MYSQL_MIGRATION_ASSEMBLY);
+        var databaseDeployer = new MySqlDatabaseDeployer(connectionString);
         await databaseDeployer.Deploy().ConfigureAwait(false);
     }
 }

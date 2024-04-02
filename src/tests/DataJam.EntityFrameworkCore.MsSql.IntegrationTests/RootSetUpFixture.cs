@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 using DotNet.Testcontainers.Containers;
 
 using TestSupport;
-using TestSupport.Migrators;
 
 [SetUpFixture]
 public class RootSetUpFixture : RootSetUpFixtureBase
 {
-    private const string MSSQL_MIGRATION_ASSEMBLY = "DataJam.Migrations.MsSql";
-
     public override async Task OneTimeSetUp()
     {
         await base.OneTimeSetUp().ConfigureAwait(false);
@@ -45,7 +42,7 @@ public class RootSetUpFixture : RootSetUpFixtureBase
     private static async Task DeployMsSql()
     {
         var connectionString = MsSqlDependencies.Instance.MsSql.GetConnectionString();
-        var databaseDeployer = new MsSqlDatabaseDeployer(connectionString, MSSQL_MIGRATION_ASSEMBLY);
+        var databaseDeployer = new MsSqlDatabaseDeployer(connectionString);
         await databaseDeployer.Deploy().ConfigureAwait(false);
     }
 }

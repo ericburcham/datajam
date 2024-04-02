@@ -1,19 +1,22 @@
-﻿namespace DataJam.TestSupport.Migrators;
+﻿namespace DataJam.EntityFrameworkCore.MsSql.IntegrationTests;
 
 using System.Reflection;
 using System.Threading.Tasks;
 
 using DbUp;
 
+using TestSupport.Migrators;
+
 public class MsSqlDatabaseDeployer : DatabaseDeployer
 {
     private readonly string _connectionString;
 
-    public MsSqlDatabaseDeployer(string connectionString, string migrationAssembly)
-        : base(migrationAssembly)
+    public MsSqlDatabaseDeployer(string connectionString)
     {
         _connectionString = connectionString;
     }
+
+    protected override Assembly MigrationAssembly => GetType().Assembly;
 
     protected override Task DeployInternal(Assembly migrationAssembly)
     {

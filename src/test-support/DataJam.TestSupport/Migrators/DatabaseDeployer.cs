@@ -5,18 +5,11 @@ using System.Threading.Tasks;
 
 public abstract class DatabaseDeployer : IDeployDatabases
 {
-    private readonly string _migrationAssembly;
-
-    protected DatabaseDeployer(string migrationAssembly)
-    {
-        _migrationAssembly = migrationAssembly;
-    }
+    protected abstract Assembly MigrationAssembly { get; }
 
     public Task Deploy()
     {
-        var migrationAssembly = Assembly.Load(_migrationAssembly);
-
-        return DeployInternal(migrationAssembly);
+        return DeployInternal(MigrationAssembly);
     }
 
     protected abstract Task DeployInternal(Assembly migrationAssembly);
