@@ -5,15 +5,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="dbup-mysql" />
-        <PackageReference Include="dbup-sqlite" />
-        <PackageReference Include="dbup-sqlserver" />
         <PackageReference Include="NUnit" />
         <PackageReference Include="Testcontainers" />
     </ItemGroup>
 
     <ItemGroup>
       <None Remove="DataJam.TestSupport.csproj.DotSettings" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj" />
     </ItemGroup>
 
 </Project>
