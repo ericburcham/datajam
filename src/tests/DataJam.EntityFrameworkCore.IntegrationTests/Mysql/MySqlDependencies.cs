@@ -43,10 +43,7 @@ public class MySqlDependencies : Singleton<MySqlDependencies>, IProvideContainer
     {
         get
         {
-            var dbContextOptionsBuilder = new DbContextOptionsBuilder();
-            var connectionString = MySql.GetConnectionString();
-            var connectionStringBuilder = new MySqlConnectionStringBuilder(connectionString) { UserID = USER_ID, Password = PASSWORD };
-            var contextOptionsBuilder = dbContextOptionsBuilder.UseMySQL(connectionStringBuilder.ConnectionString);
+            var contextOptionsBuilder = new DbContextOptionsBuilder().UseMySQL(MySql.GetConnectionString());
 
             return contextOptionsBuilder.Options;
         }

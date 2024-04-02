@@ -7,10 +7,10 @@ using System;
 public abstract class Singleton<TDerived>
     where TDerived : Singleton<TDerived>
 {
-    private static readonly Lazy<TDerived> LAZY = new(Instantiate);
+    private static readonly Lazy<TDerived> _lazy = new(Instantiate);
 
     /// <summary>Gets the single <typeparamref name="TDerived" /> instance.</summary>
-    public static TDerived Instance => LAZY.Value;
+    public static TDerived Instance => _lazy.Value;
 
     private static TDerived Instantiate()
     {
