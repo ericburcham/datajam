@@ -31,6 +31,6 @@ public static class TestFixtureConstructorParameterProvider
 
     private static TestFixtureData BuildMySqlConstructorParameters()
     {
-        return BuildConstructorParameters<MySqlFamilyMappingConfigurator>(MySqlDependencies.Instance.Options, "MySql", true);
+        return BuildConstructorParameters<MappingConfigurator>(MySqlDependencies.Instance.Options, "MySql", true);
     }
 }

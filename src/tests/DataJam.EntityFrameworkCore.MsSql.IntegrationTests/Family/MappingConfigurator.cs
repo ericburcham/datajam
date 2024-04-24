@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 using TestSupport.TestPatterns.Family;
 
-public class MsSqlFamilyMappingConfigurator : IConfigureDomainMappings<ModelBuilder>
+public class MappingConfigurator : IConfigureDomainMappings<ModelBuilder>
 {
     public void Configure(ModelBuilder configurationBinder)
     {

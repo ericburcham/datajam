@@ -1,10 +1,10 @@
-namespace DataJam.EntityFrameworkCore.Sqlite.IntegrationTests.Family;
+namespace DataJam.EntityFrameworkCore.MySql.IntegrationTests.Family;
 
 using Microsoft.EntityFrameworkCore;
 
 using TestSupport.TestPatterns.Family;
 
-public class SqliteFamilyMappingConfigurator : IConfigureDomainMappings<ModelBuilder>
+public class MappingConfigurator : IConfigureDomainMappings<ModelBuilder>
 {
     public void Configure(ModelBuilder configurationBinder)
     {
