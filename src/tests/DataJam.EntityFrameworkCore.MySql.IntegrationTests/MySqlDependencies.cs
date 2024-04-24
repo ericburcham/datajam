@@ -13,7 +13,7 @@ using Testcontainers.MySql;
 using TestSupport;
 using TestSupport.EntityFrameworkCore;
 
-public class MySqlDependencies : Singleton<MySqlDependencies>, IProvideContainers, IProvideDbContextOptions
+public class MySqlDependencies : Singleton<MySqlDependencies>, IProvideDbContextOptions
 {
     private const string USER_ID = "root";
 
@@ -21,20 +21,7 @@ public class MySqlDependencies : Singleton<MySqlDependencies>, IProvideContainer
 
     private readonly ReaderWriterLockSlim _containerLock = new();
 
-    private readonly MySqlContainer _mySql;
-
-    public MySqlDependencies()
-    {
-        _mySql = new MySqlBuilder().WithUsername(USER_ID).WithPassword(PASSWORD).Build();
-    }
-
-    public IEnumerable<IContainer> Containers
-    {
-        get
-        {
-            yield return MySql;
-        }
-    }
+    private readonly MySqlContainer _mySql = new MySqlBuilder().WithUsername(USER_ID).WithPassword(PASSWORD).Build();
 
     public DbContextOptions Options => new DbContextOptionsBuilder().UseMySQL(MySql.GetConnectionString()).Options;
 

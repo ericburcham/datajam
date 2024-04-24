@@ -5,16 +5,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore"/>
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
-        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
+        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="DataJam.TestSupport.EntityFrameworkCore.csproj.DotSettings" />
+        <None Remove="DataJam.TestSupport.EntityFrameworkCore.csproj.DotSettings"/>
     </ItemGroup>
 
 </Project>

@@ -1,7 +1,5 @@
 # clean-solution-quick-start/datajam
 
-
-
 ## Getting Started
 
 Download links:
@@ -9,8 +7,6 @@ Download links:
 SSH clone URL: ssh://git@git.jetbrains.space/ericburcham/clean-solution-quick-start/datajam.git
 
 HTTPS clone URL: https://git.jetbrains.space/ericburcham/clean-solution-quick-start/datajam.git
-
-
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 

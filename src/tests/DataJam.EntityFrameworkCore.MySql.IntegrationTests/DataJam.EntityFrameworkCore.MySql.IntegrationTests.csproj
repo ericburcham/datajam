@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="dbup-mysql" />
+        <PackageReference Include="dbup-mysql"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer"/>
@@ -14,7 +14,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj"/>
         <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj"/>
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.EntityFrameworkCore\DataJam.TestSupport.EntityFrameworkCore.csproj"/>
@@ -23,11 +23,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <EmbeddedResource Include="Migrations\0001_family_schema.sql" />
+        <EmbeddedResource Include="Migrations\0001_family_schema.sql"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="DataJam.EntityFrameworkCore.MySql.IntegrationTests.csproj.DotSettings" />
+        <None Remove="DataJam.EntityFrameworkCore.MySql.IntegrationTests.csproj.DotSettings"/>
     </ItemGroup>
 
 </Project>

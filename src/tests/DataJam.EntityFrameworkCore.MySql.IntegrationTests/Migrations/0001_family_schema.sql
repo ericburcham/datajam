@@ -1,5 +1,6 @@
 -- Use the correct database.
-USE test;
+USE
+test;
 
 -- Create family tables for child, father, and mother
 CREATE TABLE Mother
@@ -9,13 +10,13 @@ CREATE TABLE Mother
     CONSTRAINT PK_Mother PRIMARY KEY (ID)
 );
 
- CREATE TABLE Father
- (
-     Id   bigint       NOT NULL AUTO_INCREMENT,
-     Name varchar(100) NOT NULL,
-     CONSTRAINT  PK_Father PRIMARY KEY (ID)
- );
- 
+CREATE TABLE Father
+(
+    Id   bigint       NOT NULL AUTO_INCREMENT,
+    Name varchar(100) NOT NULL,
+    CONSTRAINT PK_Father PRIMARY KEY (ID)
+);
+
 CREATE TABLE Child
 (
     Id       bigint       NOT NULL AUTO_INCREMENT,

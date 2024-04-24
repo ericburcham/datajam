@@ -4,7 +4,7 @@
     <Import Project="../Directory.Build.props"/>
 
     <ItemGroup>
-        <PackageReference Include="Nuke.Common" />
+        <PackageReference Include="Nuke.Common"/>
     </ItemGroup>
 
 </Project>

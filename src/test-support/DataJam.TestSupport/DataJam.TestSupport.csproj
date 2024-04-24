@@ -5,16 +5,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="NUnit" />
-        <PackageReference Include="Testcontainers" />
+        <PackageReference Include="NUnit"/>
+        <PackageReference Include="Testcontainers"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="DataJam.TestSupport.csproj.DotSettings" />
+        <None Remove="DataJam.TestSupport.csproj.DotSettings"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj" />
+        <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj"/>
     </ItemGroup>
 
 </Project>

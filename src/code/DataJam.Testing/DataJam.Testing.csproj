@@ -5,11 +5,11 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\DataJam\DataJam.csproj" />
+        <ProjectReference Include="..\DataJam\DataJam.csproj"/>
     </ItemGroup>
 
     <ItemGroup>
-      <None Remove="DataJam.Testing.csproj.DotSettings" />
+        <None Remove="DataJam.Testing.csproj.DotSettings"/>
     </ItemGroup>
 
 </Project>
