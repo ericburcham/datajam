@@ -1,7 +1,6 @@
 ﻿namespace DataJam.EntityFrameworkCore.MySql.IntegrationTests;
 
 using System;
-using System.Collections.Generic;
 using System.Threading;
 
 using DotNet.Testcontainers.Containers;
@@ -10,7 +9,6 @@ using Microsoft.EntityFrameworkCore;
 
 using Testcontainers.MySql;
 
-using TestSupport;
 using TestSupport.EntityFrameworkCore;
 
 public class MySqlDependencies : Singleton<MySqlDependencies>, IProvideDbContextOptions
