@@ -8,15 +8,12 @@ public class TransactionalScenario
 {
     private readonly TransactionScope? _transactionScope;
 
-    public TransactionalScenario(bool useAmbientTransaction)
+    public TransactionalScenario()
     {
-        if (useAmbientTransaction)
-        {
-            _transactionScope = new(
-                TransactionScopeOption.Required,
-                new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
-                TransactionScopeAsyncFlowOption.Enabled);
-        }
+        _transactionScope = new(
+            TransactionScopeOption.Required,
+            new TransactionOptions { IsolationLevel = IsolationLevel.ReadCommitted },
+            TransactionScopeAsyncFlowOption.Enabled);
     }
 
     [OneTimeTearDown]

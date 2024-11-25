@@ -14,7 +14,6 @@ public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
     private Child _result = null!;
 
     protected WhenPersistingAndRetrievingAChild(IRepository repository, bool useAmbientTransaction)
-        : base(useAmbientTransaction)
     {
         _repository = repository;
     }
