@@ -7,18 +7,15 @@ using EntityFrameworkCore;
 
 using FluentAssertions;
 
-using Microsoft.EntityFrameworkCore.Storage;
-
 using NUnit.Framework;
 
-public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario<IDbContextTransaction>
+public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
 {
     private readonly IRepository _repository;
 
     private Child _result = null!;
 
     protected WhenPersistingAndRetrievingAChild(IRepository repository)
-        : base((IUnitOfWork<IDbContextTransaction>)repository.Context)
     {
         _repository = repository;
     }
