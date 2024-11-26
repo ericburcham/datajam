@@ -21,15 +21,7 @@ public class MySqlDependencies : Singleton<MySqlDependencies>, IProvideDbContext
 
     private readonly MySqlContainer _mySql = new MySqlBuilder().WithUsername(USER_ID).WithPassword(PASSWORD).Build();
 
-    public TransactionalDbContextOptions Options
-    {
-        get
-        {
-            var rawOptions = new DbContextOptionsBuilder().UseMySQL(MySql.GetConnectionString()).Options;
-
-            return new ExplicitTransactionalDbContextOptions(rawOptions, true, true);
-        }
-    }
+    public DbContextOptions Options => new DbContextOptionsBuilder().UseMySQL(MySql.GetConnectionString()).Options;
 
     internal MySqlContainer MySql
     {

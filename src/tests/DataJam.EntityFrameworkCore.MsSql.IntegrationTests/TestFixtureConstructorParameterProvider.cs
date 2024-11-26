@@ -4,6 +4,8 @@ using System.Collections;
 
 using Family;
 
+using Microsoft.EntityFrameworkCore;
+
 using TestSupport.EntityFrameworkCore;
 
 public static class TestFixtureConstructorParameterProvider
@@ -19,8 +21,7 @@ public static class TestFixtureConstructorParameterProvider
     private static TestFixtureData BuildSqlServerConstructorParameters()
     {
         var mappingConfigurator = new MappingConfigurator();
-        var dbContextOptions = MsSqlDependencies.Instance.Options;
-        var domain = new FamilyDomain(dbContextOptions, mappingConfigurator, dbContextOptions.SupportsLocalTransactions, dbContextOptions.SupportsTransactionScopes);
+        var domain = new FamilyDomain(MsSqlDependencies.Instance.Options, mappingConfigurator);
         var domainContext = new DomainContext<FamilyDomain>(domain);
         var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 

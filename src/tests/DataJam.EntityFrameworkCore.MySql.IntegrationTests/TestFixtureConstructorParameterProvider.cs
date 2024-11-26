@@ -18,11 +18,11 @@ public static class TestFixtureConstructorParameterProvider
         }
     }
 
-    private static TestFixtureData BuildConstructorParameters<TMappingConfigurator>(TransactionalDbContextOptions dbContextOptions, string testName)
+    private static TestFixtureData BuildConstructorParameters<TMappingConfigurator>(DbContextOptions dbContextOptions, string testName)
         where TMappingConfigurator : IConfigureDomainMappings<ModelBuilder>, new()
     {
         var mappingConfigurator = new TMappingConfigurator();
-        var domain = new FamilyDomain(dbContextOptions, mappingConfigurator, dbContextOptions.SupportsLocalTransactions, dbContextOptions.SupportsTransactionScopes);
+        var domain = new FamilyDomain(dbContextOptions, mappingConfigurator);
         var domainContext = new DomainContext<FamilyDomain>(domain);
         var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 

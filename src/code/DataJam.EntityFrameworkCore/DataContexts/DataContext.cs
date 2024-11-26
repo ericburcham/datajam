@@ -1,5 +1,6 @@
 namespace DataJam;
 
+using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -15,24 +16,22 @@ public class DataContext : DbContext, IDataContext, IUnitOfWork<IDbContextTransa
     /// <summary>Initializes a new instance of the <see cref="DataContext" /> class.</summary>
     /// <param name="options">The configuration options.</param>
     /// <param name="mappingConfigurator">The mapping configurator to use.</param>
-    /// <param name="supportsLocalTransactions">Indicates whether the data context supports local transactions.</param>
-    /// <param name="supportsTransactionScopes">Indicates whether the data context supports transaction scope participation.</param>
-    public DataContext(DbContextOptions options, IConfigureDomainMappings<ModelBuilder> mappingConfigurator, bool supportsLocalTransactions, bool supportsTransactionScopes)
+    public DataContext(DbContextOptions options, IConfigureDomainMappings<ModelBuilder> mappingConfigurator)
         : base(options)
     {
         _mappingConfigurator = mappingConfigurator;
-        SupportsLocalTransactions = supportsLocalTransactions;
-        SupportsTransactionScopes = supportsTransactionScopes;
     }
 
     /// <inheritdoc cref="ISupportTransactions{TTransaction}.CurrentTransaction" />
     public IDbContextTransaction? CurrentTransaction => Database.CurrentTransaction;
 
     /// <inheritdoc cref="IDeclareTransactionSupport.SupportsLocalTransactions" />
-    public bool SupportsLocalTransactions { get; }
+    public bool SupportsLocalTransactions =>
+        throw new NotImplementedException($"{typeof(DataContext).FullName} does not support {nameof(SupportsLocalTransactions)} at this time.");
 
     /// <inheritdoc cref="IDeclareTransactionSupport.SupportsTransactionScopes" />
-    public bool SupportsTransactionScopes { get; }
+    public bool SupportsTransactionScopes =>
+        throw new NotImplementedException($"{typeof(DataContext).FullName} does not support {nameof(SupportsTransactionScopes)} at this time.");
 
     /// <inheritdoc cref="IUnitOfWork.Add{T}" />
     public new T Add<T>(T item)

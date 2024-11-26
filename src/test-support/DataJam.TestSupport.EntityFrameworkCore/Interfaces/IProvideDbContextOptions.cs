@@ -1,6 +1,8 @@
 ﻿namespace DataJam.TestSupport.EntityFrameworkCore;
 
+using Microsoft.EntityFrameworkCore;
+
 public interface IProvideDbContextOptions
 {
-    TransactionalDbContextOptions Options { get; }
+    DbContextOptions Options { get; }
 }
