@@ -14,11 +14,13 @@ public class SqliteDependencies : Singleton<SqliteDependencies>, IProvideDbConte
 
     public static SqliteMockContainer SqliteMockContainer => _sqlite.Value;
 
-    public DbContextOptions Options => _dbContextOptions.Value;
+    public TransactionalDbContextOptions Options => new ExplicitTransactionalDbContextOptions(_dbContextOptions.Value, true);
 
     private static DbContextOptions BuildDbContextOptions()
     {
-        return new DbContextOptionsBuilder().UseSqlite(SqliteMockContainer.GetConnectionString()).Options;
+        return new DbContextOptionsBuilder()
+              .UseSqlite(SqliteMockContainer.GetConnectionString())
+              .Options;
     }
 
     private static SqliteMockContainer BuildSqlite()

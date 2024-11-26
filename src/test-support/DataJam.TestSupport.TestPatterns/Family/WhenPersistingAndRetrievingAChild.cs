@@ -3,17 +3,22 @@
 using System.Linq;
 using System.Threading.Tasks;
 
+using EntityFrameworkCore;
+
 using FluentAssertions;
+
+using Microsoft.EntityFrameworkCore.Storage;
 
 using NUnit.Framework;
 
-public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
+public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario<IDbContextTransaction>
 {
     private readonly IRepository _repository;
 
     private Child _result = null!;
 
-    protected WhenPersistingAndRetrievingAChild(IRepository repository, bool useAmbientTransaction)
+    protected WhenPersistingAndRetrievingAChild(IRepository repository)
+        : base((IUnitOfWork<IDbContextTransaction>)repository.Context)
     {
         _repository = repository;
     }

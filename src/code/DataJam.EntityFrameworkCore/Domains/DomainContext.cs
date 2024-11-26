@@ -8,7 +8,7 @@ public class DomainContext<TDomain> : DataContext, IDomainContext<TDomain>
     /// <summary>Initializes a new instance of the <see cref="DomainContext{TDomain}" /> class.</summary>
     /// <param name="domain">The domain to use.</param>
     public DomainContext(TDomain domain)
-        : base(domain.ConfigurationOptions, domain.MappingConfigurator)
+        : base(domain.ConfigurationOptions, domain.MappingConfigurator, domain.SupportsLocalTransactions, domain.SupportsTransactionScopes)
     {
     }
 }

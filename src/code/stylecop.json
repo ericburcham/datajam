@@ -8,7 +8,7 @@
   "settings": {
     "documentationRules": {
       "documentationCulture": "en-US",
-      "documentExposedElements": true,
+      "documentExposedElements": false,
       "documentInterfaces": false,
       "documentInternalElements": false,
       "documentPrivateElements": false,

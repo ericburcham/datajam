@@ -17,7 +17,15 @@ public class MsSqlDependencies : Singleton<MsSqlDependencies>, IProvideDbContext
 
     private readonly MsSqlContainer _msSql = new MsSqlBuilder().Build();
 
-    public DbContextOptions Options => new DbContextOptionsBuilder().UseSqlServer(MsSql.GetConnectionString()).Options;
+    public TransactionalDbContextOptions Options
+    {
+        get
+        {
+            var rawOptions = new DbContextOptionsBuilder().UseSqlServer(MsSql.GetConnectionString()).Options;
+
+            return new ExplicitTransactionalDbContextOptions(rawOptions, true, true);
+        }
+    }
 
     internal MsSqlContainer MsSql
     {

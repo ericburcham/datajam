@@ -19,10 +19,11 @@ public static class TestFixtureConstructorParameterProvider
     private static TestFixtureData BuildSqlServerConstructorParameters()
     {
         var mappingConfigurator = new MappingConfigurator();
-        var domain = new FamilyDomain(MsSqlDependencies.Instance.Options, mappingConfigurator);
+        var dbContextOptions = MsSqlDependencies.Instance.Options;
+        var domain = new FamilyDomain(dbContextOptions, mappingConfigurator, dbContextOptions.SupportsLocalTransactions, dbContextOptions.SupportsTransactionScopes);
         var domainContext = new DomainContext<FamilyDomain>(domain);
         var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 
-        return new(domainRepository, true) { TestName = "MsSql" };
+        return new(domainRepository) { TestName = "MsSql" };
     }
 }

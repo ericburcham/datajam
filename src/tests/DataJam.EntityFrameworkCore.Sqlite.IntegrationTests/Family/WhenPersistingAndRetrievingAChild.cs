@@ -3,8 +3,8 @@
 [TestFixtureSource(typeof(TestFixtureConstructorParameterProvider), nameof(TestFixtureConstructorParameterProvider.Repositories))]
 public class WhenPersistingAndRetrievingAChild : TestSupport.TestPatterns.Family.WhenPersistingAndRetrievingAChild
 {
-    public WhenPersistingAndRetrievingAChild(IRepository repository, bool useAmbientTransaction)
-        : base(repository, useAmbientTransaction)
+    public WhenPersistingAndRetrievingAChild(IRepository repository)
+        : base(repository)
     {
     }
 }
