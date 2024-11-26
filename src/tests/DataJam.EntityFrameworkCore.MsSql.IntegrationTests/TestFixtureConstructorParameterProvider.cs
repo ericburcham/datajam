@@ -4,8 +4,6 @@ using System.Collections;
 
 using Family;
 
-using Microsoft.EntityFrameworkCore;
-
 using TestSupport.EntityFrameworkCore;
 
 public static class TestFixtureConstructorParameterProvider
