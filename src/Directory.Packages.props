@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Microsoft packages -->
+    <PackageVersion Include="EntityFramework" Version="6.5.1" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />

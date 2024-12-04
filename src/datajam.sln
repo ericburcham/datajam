@@ -76,6 +76,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore.Sqlite.IntegrationTests", "tests\DataJam.EntityFrameworkCore.Sqlite.IntegrationTests\DataJam.EntityFrameworkCore.Sqlite.IntegrationTests.csproj", "{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFramework", "code\DataJam.EntityFramework\DataJam.EntityFramework.csproj", "{2470AAF2-6D5D-4349-BB61-FC82FFFED701}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -132,6 +134,10 @@ Global
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2470AAF2-6D5D-4349-BB61-FC82FFFED701}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2470AAF2-6D5D-4349-BB61-FC82FFFED701}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2470AAF2-6D5D-4349-BB61-FC82FFFED701}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2470AAF2-6D5D-4349-BB61-FC82FFFED701}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 		{0EBB582A-0221-4046-8482-09F4E1FD70AF} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 		{7A683122-E92C-4EB0-BE13-0847992C94CC} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
+		{2470AAF2-6D5D-4349-BB61-FC82FFFED701} = {0ED872A4-B40C-4B25-BA6C-FBA62694C649}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}
