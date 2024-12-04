@@ -5,11 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="NUnit"/>
-        <PackageReference Include="Testcontainers"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <None Remove="DataJam.TestSupport.csproj.DotSettings"/>
     </ItemGroup>
 

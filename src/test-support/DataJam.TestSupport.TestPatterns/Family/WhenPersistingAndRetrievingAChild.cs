@@ -3,21 +3,15 @@
 using System.Linq;
 using System.Threading.Tasks;
 
+using EntityFrameworkCore;
+
 using FluentAssertions;
 
 using NUnit.Framework;
 
-public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
+public abstract class WhenPersistingAndRetrievingAChild(IRepository repository) : TransactionalScenario
 {
-    private readonly IRepository _repository;
-
     private Child _result = null!;
-
-    protected WhenPersistingAndRetrievingAChild(IRepository repository, bool useAmbientTransaction)
-        : base(useAmbientTransaction)
-    {
-        _repository = repository;
-    }
 
     private int StateEntriesWritten { get; set; }
 
@@ -53,12 +47,12 @@ public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
         var mother = new Mother { Name = "Mom" };
         var child = new Child { Name = "Kid" };
         child.AddParents(father, mother);
-        _repository.Context.Add(child);
-        StateEntriesWritten = await _repository.Context.CommitAsync().ConfigureAwait(false);
+        repository.Context.Add(child);
+        StateEntriesWritten = await repository.Context.CommitAsync().ConfigureAwait(false);
 
         // Act
         var scalar = new GetChildren();
-        _result = _repository.Find(scalar).Single();
+        _result = repository.Find(scalar).Single();
     }
 
     [Test]
@@ -71,7 +65,7 @@ public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
     protected override void OneTimeTearDown()
     {
         base.OneTimeTearDown();
-        var dataContext = (IDataContext)_repository.Context;
+        var dataContext = (IDataContext)repository.Context;
         dataContext.Dispose();
     }
 }

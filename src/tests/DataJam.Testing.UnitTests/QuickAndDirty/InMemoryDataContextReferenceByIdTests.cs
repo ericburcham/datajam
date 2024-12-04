@@ -40,14 +40,9 @@ public class InMemoryDataContextReferenceByIdTests
 
     private class Blog : IIdentifiable<long>
     {
-        public Blog()
-        {
-            Posts = new();
-        }
-
         public long Id { get; set; }
 
-        public List<Post> Posts { get; }
+        public List<Post> Posts { get; } = new();
     }
 
     private class Post : IIdentifiable<long>

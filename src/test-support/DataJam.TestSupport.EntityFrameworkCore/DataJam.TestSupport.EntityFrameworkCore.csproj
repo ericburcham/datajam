@@ -5,6 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="NUnit"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore"/>
     </ItemGroup>
 

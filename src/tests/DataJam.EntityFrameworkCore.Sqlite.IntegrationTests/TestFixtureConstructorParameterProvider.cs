@@ -23,6 +23,6 @@ public static class TestFixtureConstructorParameterProvider
         var domainContext = new DomainContext<FamilyDomain>(domain);
         var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 
-        return new(domainRepository, false) { TestName = "Sqlite" };
+        return new(domainRepository) { TestName = "Sqlite" };
     }
 }

@@ -3,6 +3,7 @@
 using System;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 using TestSupport.EntityFrameworkCore;
 
@@ -18,7 +19,10 @@ public class SqliteDependencies : Singleton<SqliteDependencies>, IProvideDbConte
 
     private static DbContextOptions BuildDbContextOptions()
     {
-        return new DbContextOptionsBuilder().UseSqlite(SqliteMockContainer.GetConnectionString()).Options;
+        return new DbContextOptionsBuilder()
+              .UseSqlite(SqliteMockContainer.GetConnectionString())
+              .ConfigureWarnings(x => x.Ignore(RelationalEventId.AmbientTransactionWarning))
+              .Options;
     }
 
     private static SqliteMockContainer BuildSqlite()

@@ -1,4 +1,4 @@
-namespace DataJam;
+namespace DataJam.EntityFrameworkCore;
 
 using Microsoft.EntityFrameworkCore;
 

@@ -23,6 +23,6 @@ public static class TestFixtureConstructorParameterProvider
         var domainContext = new DomainContext<FamilyDomain>(domain);
         var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 
-        return new(domainRepository, true) { TestName = "MsSql" };
+        return new(domainRepository) { TestName = "MsSql" };
     }
 }

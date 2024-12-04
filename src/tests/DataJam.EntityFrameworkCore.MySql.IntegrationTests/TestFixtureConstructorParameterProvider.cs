@@ -18,7 +18,7 @@ public static class TestFixtureConstructorParameterProvider
         }
     }
 
-    private static TestFixtureData BuildConstructorParameters<TMappingConfigurator>(DbContextOptions dbContextOptions, string testName, bool useAmbientTransaction)
+    private static TestFixtureData BuildConstructorParameters<TMappingConfigurator>(DbContextOptions dbContextOptions, string testName)
         where TMappingConfigurator : IConfigureDomainMappings<ModelBuilder>, new()
     {
         var mappingConfigurator = new TMappingConfigurator();
@@ -26,11 +26,11 @@ public static class TestFixtureConstructorParameterProvider
         var domainContext = new DomainContext<FamilyDomain>(domain);
         var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 
-        return new(domainRepository, useAmbientTransaction) { TestName = testName };
+        return new(domainRepository) { TestName = testName };
     }
 
     private static TestFixtureData BuildMySqlConstructorParameters()
     {
-        return BuildConstructorParameters<MappingConfigurator>(MySqlDependencies.Instance.Options, "MySql", true);
+        return BuildConstructorParameters<MappingConfigurator>(MySqlDependencies.Instance.Options, "MySql");
     }
 }

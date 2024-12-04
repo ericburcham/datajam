@@ -25,7 +25,7 @@
 
     <!-- Disable annoying warnings -->
     <PropertyGroup>
-        <NoWarn>1702;CS1591;MSB3277;NETSDK1138;NU5104;NU1702;NU1803</NoWarn>
+        <NoWarn>1702;CS1591;MSB3277;NETSDK1138;NU5104;NU1702;NU1803;NU1901;NU1902;NU1903</NoWarn>
     </PropertyGroup>
 
     <!-- Stylecop Analyzers -->

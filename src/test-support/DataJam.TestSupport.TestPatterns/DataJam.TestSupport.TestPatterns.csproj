@@ -11,6 +11,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
+        <ProjectReference Include="..\DataJam.TestSupport.EntityFrameworkCore\DataJam.TestSupport.EntityFrameworkCore.csproj" />
         <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj"/>
     </ItemGroup>
 

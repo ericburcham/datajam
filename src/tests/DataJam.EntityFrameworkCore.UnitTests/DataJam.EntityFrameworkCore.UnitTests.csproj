@@ -1,8 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
+        <PackageReference Include="FluentAssertions"/>
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj"/>
-        <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
     </ItemGroup>
 
 </Project>
