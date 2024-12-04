@@ -92,14 +92,9 @@ public class InMemoryDataContextAutoRegisterIdentityStrategiesTests
 
     private class Entity : IIdentifiable<int>
     {
-        public Entity()
-        {
-            MyProperties = new List<AnotherProperty>();
-        }
-
         public int Id { get; set; }
 
-        public IList<AnotherProperty> MyProperties { get; }
+        public IList<AnotherProperty> MyProperties { get; } = new List<AnotherProperty>();
 
         public AnotherProperty MyProperty { get; init; } = null!;
     }

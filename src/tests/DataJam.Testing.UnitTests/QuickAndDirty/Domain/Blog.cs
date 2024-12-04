@@ -3,14 +3,8 @@
 using System;
 using System.Collections.Generic;
 
-public class Blog
+public class Blog()
 {
-    public Blog()
-    {
-        Posts = new List<Post>();
-        Id = Guid.NewGuid();
-    }
-
     public Blog(string title)
         : this()
     {
@@ -19,9 +13,9 @@ public class Blog
 
     public Author Author { get; set; } = null!;
 
-    public Guid Id { get; set; }
+    public Guid Id { get; set; } = Guid.NewGuid();
 
-    public ICollection<Post> Posts { get; set; }
+    public ICollection<Post> Posts { get; set; } = new List<Post>();
 
     public string Title { get; set; } = null!;
 }

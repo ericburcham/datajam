@@ -7,21 +7,14 @@ using DbUp;
 
 using TestSupport;
 
-public class MySqlDatabaseDeployer : DatabaseDeployer
+public class MySqlDatabaseDeployer(string connectionString) : DatabaseDeployer
 {
-    private readonly string _connectionString;
-
-    public MySqlDatabaseDeployer(string connectionString)
-    {
-        _connectionString = connectionString;
-    }
-
     protected override Assembly MigrationAssembly => GetType().Assembly;
 
     protected override Task DeployInternal(Assembly migrationAssembly)
     {
-        EnsureDatabase.For.MySqlDatabase(_connectionString);
-        var upgradeResult = DeployChanges.To.MySqlDatabase(_connectionString).WithScriptsEmbeddedInAssembly(migrationAssembly).LogToConsole().Build().PerformUpgrade();
+        EnsureDatabase.For.MySqlDatabase(connectionString);
+        var upgradeResult = DeployChanges.To.MySqlDatabase(connectionString).WithScriptsEmbeddedInAssembly(migrationAssembly).LogToConsole().Build().PerformUpgrade();
 
         if (upgradeResult.Successful)
         {

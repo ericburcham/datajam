@@ -7,21 +7,14 @@ using DbUp;
 
 using TestSupport;
 
-public class MsSqlDatabaseDeployer : DatabaseDeployer
+public class MsSqlDatabaseDeployer(string connectionString) : DatabaseDeployer
 {
-    private readonly string _connectionString;
-
-    public MsSqlDatabaseDeployer(string connectionString)
-    {
-        _connectionString = connectionString;
-    }
-
     protected override Assembly MigrationAssembly => GetType().Assembly;
 
     protected override Task DeployInternal(Assembly migrationAssembly)
     {
-        EnsureDatabase.For.SqlDatabase(_connectionString);
-        var upgradeResult = DeployChanges.To.SqlDatabase(_connectionString).WithScriptsEmbeddedInAssembly(migrationAssembly).LogToConsole().Build().PerformUpgrade();
+        EnsureDatabase.For.SqlDatabase(connectionString);
+        var upgradeResult = DeployChanges.To.SqlDatabase(connectionString).WithScriptsEmbeddedInAssembly(migrationAssembly).LogToConsole().Build().PerformUpgrade();
 
         if (upgradeResult.Successful)
         {

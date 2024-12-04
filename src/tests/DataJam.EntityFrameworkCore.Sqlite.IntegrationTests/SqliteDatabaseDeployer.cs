@@ -7,20 +7,13 @@ using DbUp;
 
 using TestSupport;
 
-public class SqliteDatabaseDeployer : DatabaseDeployer
+public class SqliteDatabaseDeployer(string connectionString) : DatabaseDeployer
 {
-    private readonly string _connectionString;
-
-    public SqliteDatabaseDeployer(string connectionString)
-    {
-        _connectionString = connectionString;
-    }
-
     protected override Assembly MigrationAssembly => GetType().Assembly;
 
     protected override Task DeployInternal(Assembly migrationAssembly)
     {
-        var upgradeResult = DeployChanges.To.SQLiteDatabase(_connectionString).WithScriptsEmbeddedInAssembly(migrationAssembly).LogToConsole().Build().PerformUpgrade();
+        var upgradeResult = DeployChanges.To.SQLiteDatabase(connectionString).WithScriptsEmbeddedInAssembly(migrationAssembly).LogToConsole().Build().PerformUpgrade();
 
         if (upgradeResult.Successful)
         {

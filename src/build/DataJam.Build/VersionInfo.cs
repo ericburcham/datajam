@@ -1,13 +1,7 @@
 ﻿namespace DataJam.Build;
 
-public class VersionInfo
+public class VersionInfo(string versionPrefix, string versionSuffix)
 {
-    public VersionInfo(string versionPrefix, string versionSuffix)
-    {
-        VersionPrefix = versionPrefix;
-        VersionSuffix = versionSuffix;
-    }
-
     public string AssemblyVersion => VersionPrefix;
 
     public string FileVersion => AssemblyVersion;
@@ -29,7 +23,7 @@ public class VersionInfo
         }
     }
 
-    public string VersionPrefix { get; }
+    public string VersionPrefix { get; } = versionPrefix;
 
-    public string VersionSuffix { get; }
+    public string VersionSuffix { get; } = versionSuffix;
 }

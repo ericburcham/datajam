@@ -34,9 +34,3 @@ public interface IUnitOfWork
     T Update<T>(T item)
         where T : class;
 }
-
-/// <summary>Extends the IUnitOfWork contract with members that provide transaction support.</summary>
-/// <typeparam name="TTransaction">The Transaction type.</typeparam>
-public interface IUnitOfWork<TTransaction> : IDeclareTransactionSupport, ISupportTransactions<TTransaction>, IUnitOfWork
-{
-}

@@ -1,6 +1,5 @@
 namespace DataJam.EntityFrameworkCore;
 
-using System;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 /// <summary>Provides a disposable unit of work capable of both read and write operations.</summary>
-public class DataContext : DbContext, IDataContext, IUnitOfWork<IDbContextTransaction>
+public class DataContext : DbContext, IEntityFrameworkCoreDataContext
 {
     private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator;
 
@@ -22,16 +21,16 @@ public class DataContext : DbContext, IDataContext, IUnitOfWork<IDbContextTransa
         _mappingConfigurator = mappingConfigurator;
     }
 
-    /// <inheritdoc cref="ISupportTransactions{TTransaction}.CurrentTransaction" />
+    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.AutoTransactionBehavior" />
+    public AutoTransactionBehavior AutoTransactionBehavior
+    {
+        get => Database.AutoTransactionBehavior;
+
+        set => Database.AutoTransactionBehavior = value;
+    }
+
+    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.CurrentTransaction" />
     public IDbContextTransaction? CurrentTransaction => Database.CurrentTransaction;
-
-    /// <inheritdoc cref="IDeclareTransactionSupport.SupportsLocalTransactions" />
-    public bool SupportsLocalTransactions =>
-        throw new NotImplementedException($"{typeof(DataContext).FullName} does not support {nameof(SupportsLocalTransactions)} at this time.");
-
-    /// <inheritdoc cref="IDeclareTransactionSupport.SupportsTransactionScopes" />
-    public bool SupportsTransactionScopes =>
-        throw new NotImplementedException($"{typeof(DataContext).FullName} does not support {nameof(SupportsTransactionScopes)} at this time.");
 
     /// <inheritdoc cref="IUnitOfWork.Add{T}" />
     public new T Add<T>(T item)
@@ -49,13 +48,13 @@ public class DataContext : DbContext, IDataContext, IUnitOfWork<IDbContextTransa
         return Set<T>();
     }
 
-    /// <inheritdoc cref="ISupportTransactions{TTransaction}.BeginTransaction" />
+    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.BeginTransaction" />
     public IDbContextTransaction BeginTransaction()
     {
         return Database.BeginTransaction();
     }
 
-    /// <inheritdoc cref="ISupportTransactions{TTransaction}.BeginTransactionAsync" />
+    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.BeginTransactionAsync" />
     public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
     {
         return Database.BeginTransactionAsync(cancellationToken);
@@ -77,13 +76,13 @@ public class DataContext : DbContext, IDataContext, IUnitOfWork<IDbContextTransa
         return await SaveChangesAsync().ConfigureAwait(false);
     }
 
-    /// <inheritdoc cref="ISupportTransactions{TTransaction}.CommitTransaction" />
+    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.CommitTransaction" />
     public void CommitTransaction()
     {
         Database.CommitTransaction();
     }
 
-    /// <inheritdoc cref="ISupportTransactions{TTransaction}.CommitTransactionAsync" />
+    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.CommitTransactionAsync" />
     public Task CommitTransactionAsync(CancellationToken cancellationToken = default)
     {
         return Database.CommitTransactionAsync(cancellationToken);
@@ -96,13 +95,13 @@ public class DataContext : DbContext, IDataContext, IUnitOfWork<IDbContextTransa
         return Set<T>().Remove(item).Entity;
     }
 
-    /// <inheritdoc cref="ISupportTransactions{TTransaction}.RollbackTransaction" />
+    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.RollbackTransaction" />
     public void RollbackTransaction()
     {
         Database.RollbackTransaction();
     }
 
-    /// <inheritdoc cref="ISupportTransactions{TTransaction}.RollbackTransactionAsync" />
+    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.RollbackTransactionAsync" />
     public Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
     {
         return Database.RollbackTransactionAsync(cancellationToken);
