@@ -1,8 +1,7 @@
 jobs:
   - job: Nuke
     displayName: 'Nuke'
-    pool:
-      name: Enterprise Architecture - Default Linux
+    pool: Enterprise Architecture - Default Linux
     steps:
       - checkout: self
         clean: true
