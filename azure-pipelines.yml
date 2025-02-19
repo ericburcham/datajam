@@ -1,0 +1,32 @@
+variables:
+  - name: buildConfiguration
+    value: "Release"
+
+jobs:
+  - job: Nuke
+    displayName: 'Nuke'
+    pool:
+      name: Enterprise Architecture - Default Linux
+    steps:
+      - checkout: self
+        clean: true
+        persistCredentials: true
+      # Uncomment the following line to enable publishing artifacts to the Azure Artifacts feed.
+      # - task: NuGetAuthenticate@1
+      - task: Bash@3
+        displayName: 'Nuke Tool install'
+        inputs:
+          script: dotnet tool restore
+          targetType: 'inline'
+          workingDirectory: '$(Build.SourcesDirectory)'
+      - task: Bash@3
+        env:
+          NuGetApiKey: $(NUGET_API_KEY)
+          NuGetPackageSource: $(NUGET_PACKAGE_SOURCE)
+        displayName: 'Nuke Build'
+        inputs:
+          script: dotnet nuke-build
+          targetType: 'inline'
+          workingDirectory: '$(Build.SourcesDirectory)'
+    workspace:
+      clean: all
