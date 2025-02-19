@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "isRoot": true,
+  "tools": {
+    "nuke.extensions.builds.versioned": {
+      "version": "8.0.0",
+      "commands": [
+        "nuke-build"
+      ],
+      "rollForward": false
+    }
+  }
+}
