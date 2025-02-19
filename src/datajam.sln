@@ -42,6 +42,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{7ADD1DA9-9513-45
 		..\README.md = ..\README.md
 		..\nuget.config = ..\nuget.config
 		..\versionInfo.json = ..\versionInfo.json
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7F294636-6B02-4F75-B1F5-4CB5D7678020}"

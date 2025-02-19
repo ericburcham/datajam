@@ -1,29 +1,33 @@
 jobs:
-  - job: Nuke
-    displayName: 'Nuke'
-    pool: 
-      name: 'Enterprise Architecture - Default Linux'
-    workspace:
-      clean: all
+  - job: Build
+    displayName: Nuke
+    pool:
+      name: Enterprise Architecture - Default Linux
     steps:
       - checkout: self
         clean: true
         persistCredentials: true
+      - task: NuGetToolInstaller@1
+        displayName: 'NuGet Tool Installer'
+        env:
+          NODE_EXTRA_CA_CERTS: /etc/pki/tls/certs/ca-bundle.crt
+      - task: NuGetAuthenticate@1
+        displayName: 'NuGet Authenticate'
+        env:
+          NODE_EXTRA_CA_CERTS: /etc/pki/tls/certs/ca-bundle.crt
       - task: Bash@3
-        displayName: 'Nuke Tool Install'
-        inputs:
-          targetType: 'inline'
-          script: dotnet tool restore
-          workingDirectory: '$(Build.SourcesDirectory)'
-      - task: Bash@3
-        displayName: 'Nuke Build'
+        displayName: Run Nuke Default Target
         env:
           NuGetApiKey: $(NUGET_API_KEY)
           NuGetPackageSource: $(NUGET_PACKAGE_SOURCE)
+          NuGetPassword: $(NUGET_PASSWORD)
+          NuGetUsername: $(NUGET_USERNAME)
         inputs:
-          targetType: 'inline'
-          script: dotnet nuke-build
-          workingDirectory: '$(Build.SourcesDirectory)'
+          arguments: 'Default'
+          filePath: './build.sh'
+          targetType: 'filePath'
+    workspace:
+      clean: all
 
 variables:
   - name: buildConfiguration
