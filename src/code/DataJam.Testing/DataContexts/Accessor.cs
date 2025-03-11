@@ -2,15 +2,9 @@
 
 using System;
 
-internal class Accessor
+internal class Accessor(Action remover, Func<object, object, object> getter)
 {
-    public Accessor(Action remover, Func<object, object, object> getter)
-    {
-        Remover = remover;
-        Getter = getter;
-    }
+    internal Func<object, object, object> Getter { get; } = getter;
 
-    internal Func<object, object, object> Getter { get; }
-
-    internal Action Remover { get; }
+    internal Action Remover { get; } = remover;
 }

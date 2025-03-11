@@ -5,13 +5,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentAssertions" />
-        <PackageReference Include="NUnit" />
+        <PackageReference Include="FluentAssertions"/>
+        <PackageReference Include="NUnit"/>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
-      <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj" />
+        <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
+        <ProjectReference Include="..\DataJam.TestSupport.EntityFrameworkCore\DataJam.TestSupport.EntityFrameworkCore.csproj" />
+        <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="DataJam.TestSupport.TestPatterns.csproj.DotSettings"/>
     </ItemGroup>
 
 </Project>

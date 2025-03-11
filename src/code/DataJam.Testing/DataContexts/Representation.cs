@@ -3,20 +3,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
-internal class Representation
+internal class Representation(object entity, IEnumerable<Representation> relatedEntities)
 {
-    public Representation(object entity, IEnumerable<Representation> relatedEntities)
-    {
-        Entity = entity;
-        RelatedEntities = relatedEntities;
-        Parents = new();
-    }
+    internal object Entity { get; } = entity;
 
-    internal object Entity { get; }
+    internal Dictionary<object, Accessor> Parents { get; set; } = new();
 
-    internal Dictionary<object, Accessor> Parents { get; set; }
-
-    internal IEnumerable<Representation> RelatedEntities { get; set; }
+    internal IEnumerable<Representation> RelatedEntities { get; set; } = relatedEntities;
 
     public List<Representation> GetRelatedOrphans()
     {

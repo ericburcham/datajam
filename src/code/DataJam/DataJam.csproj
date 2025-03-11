@@ -1,5 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <None Remove="DataJam.csproj.DotSettings" />
-  </ItemGroup>
+    
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <None Remove="DataJam.csproj.DotSettings"/>
+    </ItemGroup>
+
 </Project>
