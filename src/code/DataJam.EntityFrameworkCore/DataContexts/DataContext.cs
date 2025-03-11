@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-/// <summary>Provides a disposable unit of work capable of both read and write operations.</summary>
+/// <summary>Provides a combination of the Unit Of Work and Repository patterns capable of both read and write operations.</summary>
 public class DataContext : DbContext, IEntityFrameworkCoreDataContext
 {
     private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator;
