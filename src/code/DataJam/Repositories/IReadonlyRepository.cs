@@ -3,20 +3,11 @@ namespace DataJam;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-/// <summary>Exposes an interface for repositories.</summary>
-public interface IRepository
+/// <summary>Exposes a readonly interface for repositories.</summary>
+public interface IReadonlyRepository
 {
     /// <summary>Gets the unit of work.</summary>
-    IDataContext Context { get; }
-
-    /// <summary>Executes a specified command.</summary>
-    /// <param name="command">The command to execute.</param>
-    void Execute(ICommand command);
-
-    /// <summary>Executes a specified command asynchronously.</summary>
-    /// <param name="command">The command to execute.</param>
-    /// <returns>A task representing the asynchronous operation.</returns>
-    Task ExecuteAsync(ICommand command);
+    IReadonlyDataContext Context { get; }
 
     /// <summary>Finds a collection of items based on a specified query.</summary>
     /// <typeparam name="T">The type of the items to find.</typeparam>
