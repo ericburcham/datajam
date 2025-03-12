@@ -3,18 +3,18 @@
 using JetBrains.Annotations;
 
 /// <summary>Provides an implementation of the repository pattern for a domain of related entities.</summary>
-/// <typeparam name="TDomain">The type of the domain for this repository.</typeparam>
+/// <typeparam name="T">The type of the domain for this repository.</typeparam>
 [PublicAPI]
-public class DomainRepository<TDomain> : Repository, IDomainRepository<TDomain>
-    where TDomain : class
+public class DomainRepository<T> : Repository, IDomainRepository<T>
+    where T : class
 {
-    /// <summary>Initializes a new instance of the <see cref="DomainRepository{TDomain}" /> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="DomainRepository{T}" /> class.</summary>
     /// <param name="domainContext">The domain context to use.</param>
-    public DomainRepository(IDomainContext<TDomain> domainContext)
+    public DomainRepository(IDomainContext<T> domainContext)
         : base(domainContext)
     {
     }
 
-    /// <inheritdoc cref="IDomainRepository{TDomain}.Context" />
-    public new IDomainContext<TDomain> Context => (IDomainContext<TDomain>)base.Context;
+    /// <inheritdoc cref="IDomainRepository{T}.Context" />
+    public new IDomainContext<T> Context => (IDomainContext<T>)base.Context;
 }

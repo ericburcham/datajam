@@ -8,9 +8,9 @@ using JetBrains.Annotations;
 [PublicAPI]
 public interface IDataSource
 {
-    /// <summary>Exposes a query for <typeparamref name="TResult" /> which can be used to build further query expressions and execute the query.</summary>
-    /// <typeparam name="TResult">The query's element type.</typeparam>
-    /// <returns>A query for <typeparamref name="TResult" />.</returns>
-    IQueryable<TResult> CreateQuery<TResult>()
-        where TResult : class;
+    /// <summary>Exposes a query for <typeparamref name="T" /> which can be used to build further query expressions and execute the query.</summary>
+    /// <typeparam name="T">The query's element type.</typeparam>
+    /// <returns>A query for <typeparamref name="T" />.</returns>
+    IQueryable<T> CreateQuery<T>()
+        where T : class;
 }

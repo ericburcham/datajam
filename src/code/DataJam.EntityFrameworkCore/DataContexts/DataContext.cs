@@ -84,7 +84,7 @@ public class DataContext : DbContext, IEntityFrameworkCoreDataContext
         return Database.CommitTransactionAsync(cancellationToken);
     }
 
-    /// <inheritdoc cref="IDataSource.CreateQuery{TResult}" />
+    /// <inheritdoc cref="IDataSource.CreateQuery{T}" />
     public IQueryable<T> CreateQuery<T>()
         where T : class
     {

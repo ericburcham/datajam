@@ -12,7 +12,7 @@ public interface IQuery<out T>
 {
     /// <summary>Executes the request against the specified data source and returns the results.</summary>
     /// <param name="dataSource">The data source to execute the query against.</param>
-    /// <returns>An <see cref="IEnumerable{TResult}" /> containing the results of the query.</returns>
+    /// <returns>An <see cref="IEnumerable{T}" /> containing the results of the query.</returns>
     public IEnumerable<T> Execute(IDataSource dataSource);
 }
 

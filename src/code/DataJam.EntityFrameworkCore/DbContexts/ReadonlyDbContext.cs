@@ -67,10 +67,10 @@ public class ReadonlyDbContext : DbContext
 
     /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
     /// <param name="entity">The entity is not used.</param>
-    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <typeparam name="T">The entity type is not used.</typeparam>
     /// <returns>Nothing.</returns>
     /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
-    public override EntityEntry<TEntity> Add<TEntity>(TEntity entity)
+    public override EntityEntry<T> Add<T>(T entity)
     {
         throw new InvalidOperationException($"{nameof(ReadonlyDbContext)} is readonly.  The {nameof(Add)} method is not supported.");
     }
@@ -78,10 +78,10 @@ public class ReadonlyDbContext : DbContext
     /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
     /// <param name="entity">The entity is not used.</param>
     /// <param name="cancellationToken">The cancellation token is not used.</param>
-    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <typeparam name="T">The entity type is not used.</typeparam>
     /// <returns>Nothing.</returns>
     /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
-    public override ValueTask<EntityEntry<TEntity>> AddAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default)
+    public override ValueTask<EntityEntry<T>> AddAsync<T>(T entity, CancellationToken cancellationToken = default)
     {
         throw new InvalidOperationException($"{nameof(ReadonlyDbContext)} is readonly.  The {nameof(AddAsync)} method is not supported.");
     }
@@ -142,10 +142,10 @@ public class ReadonlyDbContext : DbContext
 
     /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
     /// <param name="entity">The entity is not used.</param>
-    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <typeparam name="T">The entity type is not used.</typeparam>
     /// <returns>Nothing.</returns>
     /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
-    public override EntityEntry<TEntity> Remove<TEntity>(TEntity entity)
+    public override EntityEntry<T> Remove<T>(T entity)
     {
         throw new InvalidOperationException($"{nameof(ReadonlyDbContext)} is readonly.  The {nameof(Remove)} method is not supported.");
     }
@@ -213,10 +213,10 @@ public class ReadonlyDbContext : DbContext
 
     /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
     /// <param name="entity">The entity is not used.</param>
-    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <typeparam name="T">The entity type is not used.</typeparam>
     /// <returns>Nothing.</returns>
     /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
-    public override EntityEntry<TEntity> Update<TEntity>(TEntity entity)
+    public override EntityEntry<T> Update<T>(T entity)
     {
         throw new InvalidOperationException($"{nameof(ReadonlyDbContext)} is readonly.  The {nameof(Update)} method is not supported.");
     }
