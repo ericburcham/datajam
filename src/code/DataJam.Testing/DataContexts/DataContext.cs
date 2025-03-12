@@ -5,7 +5,10 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides a data context useful for testing.</summary>
+[PublicAPI]
 public class DataContext : IDataContext, IReadonlyDataContext
 {
     private readonly Queue _addQueue = new();
@@ -36,13 +39,6 @@ public class DataContext : IDataContext, IReadonlyDataContext
         return item;
     }
 
-    /// <inheritdoc cref="IDataSource" />
-    public virtual IQueryable<T> CreateQuery<T>()
-        where T : class
-    {
-        return Repo.GetRepresentations<T>();
-    }
-
     /// <inheritdoc cref="IUnitOfWork" />
     public virtual int Commit()
     {
@@ -60,6 +56,13 @@ public class DataContext : IDataContext, IReadonlyDataContext
         task.Start();
 
         return task;
+    }
+
+    /// <inheritdoc cref="IDataSource" />
+    public virtual IQueryable<T> CreateQuery<T>()
+        where T : class
+    {
+        return Repo.GetRepresentations<T>();
     }
 
     /// <inheritdoc cref="IDataContext" />

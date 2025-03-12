@@ -5,10 +5,13 @@ using System.Data.Common;
 using System.Threading;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 /// <summary>Represents a disposable unit of work capable of both read and write operations based on Entity Framework Core's <see cref="DbContext" />.</summary>
+[PublicAPI]
 public interface IEntityFrameworkCoreDataContext : IDataContext
 {
     /// <summary>

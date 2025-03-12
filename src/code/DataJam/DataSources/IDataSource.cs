@@ -2,7 +2,10 @@
 
 using System.Linq;
 
+using JetBrains.Annotations;
+
 /// <summary>Exposes an interface for querying data sources.</summary>
+[PublicAPI]
 public interface IDataSource
 {
     /// <summary>Exposes a query for <typeparamref name="TResult" /> which can be used to build further query expressions and execute the query.</summary>

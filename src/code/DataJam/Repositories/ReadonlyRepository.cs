@@ -3,7 +3,10 @@ namespace DataJam;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides a readonly implementation of the Repository pattern.</summary>
+[PublicAPI]
 public class ReadonlyRepository : IReadonlyRepository
 {
     /// <summary>Initializes a new instance of the <see cref="ReadonlyRepository" /> class.</summary>

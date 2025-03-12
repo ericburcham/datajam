@@ -4,9 +4,12 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
+using JetBrains.Annotations;
+
 /// <summary>A base class for identity strategies.</summary>
 /// <typeparam name="T">The element Type.</typeparam>
 /// <typeparam name="TIdentity">The identity Type.</typeparam>
+[PublicAPI]
 public abstract class IdentityStrategy<T, TIdentity> : IIdentityStrategy<T>
     where T : class
 {

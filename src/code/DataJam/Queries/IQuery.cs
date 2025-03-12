@@ -3,8 +3,11 @@ namespace DataJam;
 using System;
 using System.Collections.Generic;
 
+using JetBrains.Annotations;
+
 /// <summary>Exposes an interface for requests that return collections.</summary>
 /// <typeparam name="T">The type of the expected result set.</typeparam>
+[PublicAPI]
 public interface IQuery<out T>
 {
     /// <summary>Executes the request against the specified data source and returns the results.</summary>

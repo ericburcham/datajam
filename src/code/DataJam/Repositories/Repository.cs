@@ -3,7 +3,10 @@ namespace DataJam;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides an implementation of the Repository pattern.</summary>
+[PublicAPI]
 public class Repository : IRepository
 {
     /// <summary>Initializes a new instance of the <see cref="Repository" /> class.</summary>

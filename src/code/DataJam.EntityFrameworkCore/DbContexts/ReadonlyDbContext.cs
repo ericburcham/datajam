@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
@@ -37,6 +39,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 ///         <see href="https://aka.ms/efcore-docs-saving-data">Saving data with EF Core</see> for more information and examples.
 ///     </para>
 /// </remarks>
+[PublicAPI]
 public class ReadonlyDbContext : DbContext
 {
     /// <summary>

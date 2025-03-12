@@ -1,7 +1,10 @@
 namespace DataJam;
 
+using JetBrains.Annotations;
+
 /// <summary>Exposes an interface for scalar queries.</summary>
 /// <typeparam name="T">The type of the expected result.</typeparam>
+[PublicAPI]
 public interface IScalar<out T>
 {
     /// <summary>Executes the request against the specified data source and returns the scalar value.</summary>

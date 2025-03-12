@@ -2,7 +2,10 @@ namespace DataJam;
 
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides a contract for implementing the unit of work pattern.</summary>
+[PublicAPI]
 public interface IUnitOfWork
 {
     /// <summary>Adds a new <typeparamref name="T" /> to the unit of work.</summary>

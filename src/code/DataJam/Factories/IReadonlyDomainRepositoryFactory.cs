@@ -2,9 +2,12 @@ namespace DataJam;
 
 using System;
 
+using JetBrains.Annotations;
+
 /// <summary>Represents a factory that creates readonly repositories for domains of related entities.</summary>
 /// <typeparam name="TConfigurationBinder">The concrete type that is used to bind the configuration.</typeparam>
 /// <typeparam name="TConfigurationOptions">The concrete type that is used to carry configuration options.</typeparam>
+[PublicAPI]
 public interface IReadonlyDomainRepositoryFactory<out TConfigurationBinder, in TConfigurationOptions>
     where TConfigurationBinder : class
 {

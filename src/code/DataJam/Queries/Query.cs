@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides a base class for queries.</summary>
 /// <typeparam name="T">The type of the expected result set.</typeparam>
+[PublicAPI]
 public abstract class Query<T> : IQuery<T>
 {
     /// <summary>Gets or sets the query to execute.</summary>

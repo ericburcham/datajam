@@ -2,9 +2,12 @@ namespace DataJam.EntityFrameworkCore;
 
 using System.Linq;
 
+using JetBrains.Annotations;
+
 using Microsoft.EntityFrameworkCore;
 
 /// <summary>Provides a data context which is limited to read operations.</summary>
+[PublicAPI]
 public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyDataContext
 {
     private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator;

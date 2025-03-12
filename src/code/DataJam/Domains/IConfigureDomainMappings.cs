@@ -1,7 +1,10 @@
 namespace DataJam;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides a contract for Types that configure domain mappings against the backing data store.</summary>
 /// <typeparam name="TConfigurationBinder">The concrete type that is used to bind the configuration.</typeparam>
+[PublicAPI]
 public interface IConfigureDomainMappings<in TConfigurationBinder>
     where TConfigurationBinder : class
 {

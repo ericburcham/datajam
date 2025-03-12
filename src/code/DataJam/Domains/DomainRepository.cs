@@ -1,7 +1,10 @@
 ﻿namespace DataJam;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides an implementation of the repository pattern for a domain of related entities.</summary>
 /// <typeparam name="TDomain">The type of the domain for this repository.</typeparam>
+[PublicAPI]
 public class DomainRepository<TDomain> : Repository, IDomainRepository<TDomain>
     where TDomain : class
 {

@@ -3,7 +3,10 @@ namespace DataJam;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 /// <summary>Exposes an interface for repositories.</summary>
+[PublicAPI]
 public interface IRepository
 {
     /// <summary>Gets the unit of work.</summary>

@@ -4,10 +4,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 /// <summary>Provides a combination of the Unit Of Work and Repository patterns capable of both read and write operations.</summary>
+[PublicAPI]
 public class DataContext : DbContext, IEntityFrameworkCoreDataContext
 {
     private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator;
@@ -39,13 +42,6 @@ public class DataContext : DbContext, IEntityFrameworkCoreDataContext
         Set<T>().Add(item);
 
         return item;
-    }
-
-    /// <inheritdoc cref="IDataSource.CreateQuery{TResult}" />
-    public IQueryable<T> CreateQuery<T>()
-        where T : class
-    {
-        return Set<T>();
     }
 
     /// <inheritdoc cref="IEntityFrameworkCoreDataContext.BeginTransaction" />
@@ -86,6 +82,13 @@ public class DataContext : DbContext, IEntityFrameworkCoreDataContext
     public Task CommitTransactionAsync(CancellationToken cancellationToken = default)
     {
         return Database.CommitTransactionAsync(cancellationToken);
+    }
+
+    /// <inheritdoc cref="IDataSource.CreateQuery{TResult}" />
+    public IQueryable<T> CreateQuery<T>()
+        where T : class
+    {
+        return Set<T>();
     }
 
     /// <inheritdoc cref="IUnitOfWork.Remove{T}" />

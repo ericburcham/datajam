@@ -5,7 +5,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides extension methods for <see cref="Type" />s.</summary>
+[PublicAPI]
 public static class TypeExtensions
 {
     /// <summary>Determines if the given <paramref name="type" /> is an enumerable of some kind.</summary>
