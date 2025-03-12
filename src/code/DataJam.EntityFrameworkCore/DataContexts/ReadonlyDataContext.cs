@@ -18,8 +18,8 @@ public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyDataContext
         _mappingConfigurator = mappingConfigurator;
     }
 
-    /// <inheritdoc cref="IDataSource.AsQueryable{TResult}" />
-    public IQueryable<T> AsQueryable<T>()
+    /// <inheritdoc cref="IDataSource.CreateQuery{TResult}" />
+    public IQueryable<T> CreateQuery<T>()
         where T : class
     {
         return Set<T>();

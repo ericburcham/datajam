@@ -37,7 +37,7 @@ public class DataContext : IDataContext, IReadonlyDataContext
     }
 
     /// <inheritdoc cref="IDataSource" />
-    public virtual IQueryable<T> AsQueryable<T>()
+    public virtual IQueryable<T> CreateQuery<T>()
         where T : class
     {
         return Repo.GetRepresentations<T>();
