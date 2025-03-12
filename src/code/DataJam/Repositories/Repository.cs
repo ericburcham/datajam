@@ -41,13 +41,6 @@ public class Repository : IRepository
     }
 
     /// <inheritdoc cref="IRepository" />
-    public IEnumerable<TProjection> Find<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
-        where TSelection : class
-    {
-        return query.Execute(Context);
-    }
-
-    /// <inheritdoc cref="IRepository" />
     public Task<T> FindAsync<T>(IScalar<T> scalar)
     {
         return Task.Factory.StartNew(() => scalar.Execute(Context));
@@ -55,13 +48,6 @@ public class Repository : IRepository
 
     /// <inheritdoc cref="IRepository" />
     public Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query)
-    {
-        return Task.Factory.StartNew(() => query.Execute(Context));
-    }
-
-    /// <inheritdoc cref="IRepository" />
-    public Task<IEnumerable<TProjection>> FindAsync<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
-        where TSelection : class
     {
         return Task.Factory.StartNew(() => query.Execute(Context));
     }

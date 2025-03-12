@@ -21,14 +21,6 @@ public interface IReadonlyRepository
     /// <returns>The item matching the specified scalar query.</returns>
     T Find<T>(IScalar<T> scalar);
 
-    /// <summary>Finds a collection of projection items based on a specified query.</summary>
-    /// <typeparam name="TSelection">The type of the items to select from.</typeparam>
-    /// <typeparam name="TProjection">The type of the items to project.</typeparam>
-    /// <param name="query">The query to execute.</param>
-    /// <returns>An enumerable of projection items matching the specified query.</returns>
-    IEnumerable<TProjection> Find<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
-        where TSelection : class;
-
     /// <summary>Finds a single item based on a specified scalar query asynchronously.</summary>
     /// <typeparam name="T">The type of the item to find.</typeparam>
     /// <param name="scalar">The scalar query to execute.</param>
@@ -40,12 +32,4 @@ public interface IReadonlyRepository
     /// <param name="query">The query to execute.</param>
     /// <returns>A task representing the asynchronous operation. The task result contains an enumerable of items matching the specified query.</returns>
     Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query);
-
-    /// <summary>Finds a collection of projection items based on a specified query asynchronously.</summary>
-    /// <typeparam name="TSelection">The type of the items to select from.</typeparam>
-    /// <typeparam name="TProjection">The type of the items to project.</typeparam>
-    /// <param name="query">The query to execute.</param>
-    /// <returns>A task representing the asynchronous operation. The task result contains an enumerable of projection items matching the specified query.</returns>
-    Task<IEnumerable<TProjection>> FindAsync<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
-        where TSelection : class;
 }
