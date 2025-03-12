@@ -10,10 +10,10 @@ using JetBrains.Annotations;
 public class ReadonlyRepository : IReadonlyRepository
 {
     /// <summary>Initializes a new instance of the <see cref="ReadonlyRepository" /> class.</summary>
-    /// <param name="dataContext">The data context to use.</param>
-    public ReadonlyRepository(IReadonlyDataContext dataContext)
+    /// <param name="domainContext">The data context to use.</param>
+    public ReadonlyRepository(IReadonlyDataContext domainContext)
     {
-        Context = dataContext;
+        Context = domainContext;
     }
 
     /// <inheritdoc cref="IReadonlyRepository" />
