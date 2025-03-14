@@ -16,30 +16,30 @@ public class ReadonlyRepository : IReadonlyRepository
         Context = domainContext;
     }
 
-    /// <inheritdoc cref="IReadonlyRepository" />
+    /// <inheritdoc cref="IReadonlyRepository.Context" />
     public IReadonlyDataContext Context { get; }
 
-    /// <inheritdoc cref="IReadonlyRepository" />
+    /// <inheritdoc cref="IReadonlyRepository.Find{T}(IQuery{T})" />
     public IEnumerable<T> Find<T>(IQuery<T> query)
     {
         return query.Execute(Context);
     }
 
-    /// <inheritdoc cref="IReadonlyRepository" />
+    /// <inheritdoc cref="IReadonlyRepository.Find{T}(IScalar{T})" />
     public T Find<T>(IScalar<T> scalar)
     {
         return scalar.Execute(Context);
     }
 
-    /// <inheritdoc cref="IReadonlyRepository" />
-    public Task<T> FindAsync<T>(IScalar<T> scalar)
-    {
-        return Task.Factory.StartNew(() => scalar.Execute(Context));
-    }
-
-    /// <inheritdoc cref="IReadonlyRepository" />
+    /// <inheritdoc cref="IReadonlyRepository.FindAsync{T}(IQuery{T})" />
     public Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query)
     {
         return Task.Factory.StartNew(() => query.Execute(Context));
+    }
+
+    /// <inheritdoc cref="IReadonlyRepository.FindAsync{T}(IScalar{T})" />
+    public Task<T> FindAsync<T>(IScalar<T> scalar)
+    {
+        return Task.Factory.StartNew(() => scalar.Execute(Context));
     }
 }

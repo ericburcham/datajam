@@ -18,9 +18,9 @@ public abstract class Domain<TConfigurationBinder, TConfigurationOptions> : IDom
         ConfigurationOptions = configurationOptions;
     }
 
-    /// <inheritdoc cref="IDomain{TConfigurationBinder,TConfigurationOptions}" />
+    /// <inheritdoc cref="IDomain{TConfigurationBinder,TConfigurationOptions}.ConfigurationOptions" />
     public TConfigurationOptions ConfigurationOptions { get; }
 
-    /// <inheritdoc cref="IDomain{TConfigurationBinder,TConfigurationOptions}" />
+    /// <inheritdoc cref="IDomain{TConfigurationBinder,TConfigurationOptions}.MappingConfigurator" />
     public IConfigureDomainMappings<TConfigurationBinder> MappingConfigurator { get; }
 }

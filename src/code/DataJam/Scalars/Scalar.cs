@@ -12,7 +12,7 @@ public abstract class Scalar<T> : IScalar<T>
     /// <summary>Gets or sets the scalar query to execute.</summary>
     protected Func<IDataSource, T> Selector { get; set; } = null!;
 
-    /// <inheritdoc cref="IScalar{T}" />
+    /// <inheritdoc cref="IScalar{T}.Execute" />
     public T Execute(IDataSource dataSource)
     {
         return Selector(dataSource);

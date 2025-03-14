@@ -91,6 +91,15 @@ public class DataContext : DbContext, IEFCoreDataContext
         return Set<T>();
     }
 
+    /// <inheritdoc cref="IUnitOfWork.Reload{T}" />
+    public T Reload<T>(T item)
+        where T : class
+    {
+        Entry(item).Reload();
+
+        return item;
+    }
+
     /// <inheritdoc cref="IUnitOfWork.Remove{T}" />
     public new T Remove<T>(T item)
         where T : class

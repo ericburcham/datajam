@@ -15,7 +15,7 @@ public abstract class Query<T> : IQuery<T>
     /// <summary>Gets or sets the query to execute.</summary>
     protected Func<IDataSource, IQueryable<T>> Selector { get; set; } = null!;
 
-    /// <inheritdoc cref="IQuery{T}" />
+    /// <inheritdoc cref="IQuery{T}.Execute" />
     public IEnumerable<T> Execute(IDataSource dataSource)
     {
         return Selector(dataSource);
@@ -45,7 +45,7 @@ public abstract class Query<TSelection, TProjection> : IQuery<TSelection, TProje
     /// <summary>Gets or sets the selector to execute when querying the data store.</summary>
     protected Func<IDataSource, IQueryable<TSelection>> Selector { get; set; } = null!;
 
-    /// <inheritdoc cref="IQuery{TSelection, TProjection}" />
+    /// <inheritdoc cref="IQuery{T}.Execute" />
     public IEnumerable<TProjection> Execute(IDataSource dataSource)
     {
         return Projector(Selector(dataSource));

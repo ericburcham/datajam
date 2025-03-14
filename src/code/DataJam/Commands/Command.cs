@@ -11,7 +11,7 @@ public abstract class Command : ICommand
     /// <summary>Gets or sets the command action to execute.</summary>
     protected Action<IUnitOfWork> ContextCommand { get; set; } = null!;
 
-    /// <inheritdoc cref="ICommand" />
+    /// <inheritdoc cref="ICommand.Execute" />
     public void Execute(IUnitOfWork unitOfWork)
     {
         ContextCommand(unitOfWork);
