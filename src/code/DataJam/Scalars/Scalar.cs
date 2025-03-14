@@ -2,15 +2,18 @@ namespace DataJam;
 
 using System;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides a base class for scalar queries..</summary>
-/// <typeparam name="TResult">The type of the expected result.</typeparam>
-public abstract class Scalar<TResult> : IScalar<TResult>
+/// <typeparam name="T">The type of the expected result.</typeparam>
+[PublicAPI]
+public abstract class Scalar<T> : IScalar<T>
 {
     /// <summary>Gets or sets the scalar query to execute.</summary>
-    protected Func<IDataSource, TResult> Selector { get; set; } = null!;
+    protected Func<IDataSource, T> Selector { get; set; } = null!;
 
-    /// <inheritdoc cref="IScalar{TResult}" />
-    public TResult Execute(IDataSource dataSource)
+    /// <inheritdoc cref="IScalar{T}.Execute" />
+    public T Execute(IDataSource dataSource)
     {
         return Selector(dataSource);
     }

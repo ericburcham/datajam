@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.EntityFrameworkCore
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.EntityFrameworkCore.UnitTests", "tests\DataJam.EntityFrameworkCore.UnitTests\DataJam.EntityFrameworkCore.UnitTests.csproj", "{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataJam.Build", "build\DataJam.Build\DataJam.Build.csproj", "{3C00C3FC-7063-40C6-B3FD-9026723DE33E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "code", "code", "{0ED872A4-B40C-4B25-BA6C-FBA62694C649}"
 	ProjectSection(SolutionItems) = preProject
 		code\Directory.Build.props = code\Directory.Build.props
@@ -21,12 +19,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{F2626B7C-5C3D-4B3D-A94C-C236DD975B57}"
 	ProjectSection(SolutionItems) = preProject
 		tests\Directory.Build.props = tests\Directory.Build.props
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_build", "_build", "{086DC7D9-258B-4819-B124-83752CCEE74F}"
-	ProjectSection(SolutionItems) = preProject
-		build\Directory.Build.props = build\Directory.Build.props
-		build\Directory.Build.targets = build\Directory.Build.targets
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.Testing.UnitTests", "tests\DataJam.Testing.UnitTests\DataJam.Testing.UnitTests.csproj", "{F8AC6D3B-1580-4E48-A40C-F996DE011F50}"
@@ -47,17 +39,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{7ADD1DA9-9513-4576-B490-72CED6334CB2}"
 	ProjectSection(SolutionItems) = preProject
 		..\.gitignore = ..\.gitignore
-		..\.space.kts = ..\.space.kts
-		..\CODEOWNERS = ..\CODEOWNERS
 		..\README.md = ..\README.md
-		..\version-info.txt = ..\version-info.txt
 		..\nuget.config = ..\nuget.config
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".space", ".space", "{A1A42544-191B-4ACE-B5EC-2F189FA8E731}"
-	ProjectSection(SolutionItems) = preProject
-		..\.space\fleet.devfile.yaml = ..\.space\fleet.devfile.yaml
-		..\.space\rider.devfile.yaml = ..\.space\rider.devfile.yaml
+		..\versionInfo.json = ..\versionInfo.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7F294636-6B02-4F75-B1F5-4CB5D7678020}"
@@ -96,8 +80,6 @@ Global
 		{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3C00C3FC-7063-40C6-B3FD-9026723DE33E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3C00C3FC-7063-40C6-B3FD-9026723DE33E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8AC6D3B-1580-4E48-A40C-F996DE011F50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F8AC6D3B-1580-4E48-A40C-F996DE011F50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8AC6D3B-1580-4E48-A40C-F996DE011F50}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -146,13 +128,11 @@ Global
 		{AFF7DB3B-0702-4E60-90BE-9ED8F76E39E3} = {0ED872A4-B40C-4B25-BA6C-FBA62694C649}
 		{2ED83B5F-FCE3-40C3-B5BF-C2A6290656C1} = {0ED872A4-B40C-4B25-BA6C-FBA62694C649}
 		{4A1193AC-9C2A-48E0-BE61-A29EF13BF5AB} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
-		{3C00C3FC-7063-40C6-B3FD-9026723DE33E} = {086DC7D9-258B-4819-B124-83752CCEE74F}
 		{F8AC6D3B-1580-4E48-A40C-F996DE011F50} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 		{90F2CC68-EFD0-4B64-9159-5D7B48ECAE00} = {0ED872A4-B40C-4B25-BA6C-FBA62694C649}
 		{25C6CABB-ED1F-4AB6-A4E4-C8CE93C190D5} = {0ED872A4-B40C-4B25-BA6C-FBA62694C649}
 		{1A21ED3C-9BDD-42B7-B0A7-E340111DBAFC} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 		{2DE00942-F708-48F1-AF30-5ABD93F1E172} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
-		{A1A42544-191B-4ACE-B5EC-2F189FA8E731} = {7ADD1DA9-9513-4576-B490-72CED6334CB2}
 		{7F294636-6B02-4F75-B1F5-4CB5D7678020} = {7ADD1DA9-9513-4576-B490-72CED6334CB2}
 		{3E1EC2B7-AE43-4F74-B56B-7E0771B45FF2} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 		{0EBB582A-0221-4046-8482-09F4E1FD70AF} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
