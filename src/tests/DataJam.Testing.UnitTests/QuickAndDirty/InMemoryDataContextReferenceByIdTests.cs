@@ -26,7 +26,7 @@ public class InMemoryDataContextReferenceByIdTests
 
         try
         {
-            foreach (var blogId in _context.AsQueryable<Blog>().Select(b => b.Id))
+            foreach (var blogId in _context.CreateQuery<Blog>().Select(b => b.Id))
             {
                 var post = new Post { BlogId = blogId };
                 _context.Add(post);

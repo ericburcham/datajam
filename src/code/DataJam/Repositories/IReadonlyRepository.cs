@@ -5,21 +5,12 @@ using System.Threading.Tasks;
 
 using JetBrains.Annotations;
 
-/// <summary>Exposes an interface for repositories.</summary>
+/// <summary>Exposes a readonly interface for repositories.</summary>
 [PublicAPI]
-public interface IRepository
+public interface IReadonlyRepository
 {
     /// <summary>Gets the unit of work.</summary>
-    IDataContext Context { get; }
-
-    /// <summary>Executes a specified command.</summary>
-    /// <param name="command">The command to execute.</param>
-    void Execute(ICommand command);
-
-    /// <summary>Executes a specified command asynchronously.</summary>
-    /// <param name="command">The command to execute.</param>
-    /// <returns>A task representing the asynchronous operation.</returns>
-    Task ExecuteAsync(ICommand command);
+    IReadonlyDataContext Context { get; }
 
     /// <summary>Finds a collection of items based on a specified query.</summary>
     /// <typeparam name="T">The type of the items to find.</typeparam>

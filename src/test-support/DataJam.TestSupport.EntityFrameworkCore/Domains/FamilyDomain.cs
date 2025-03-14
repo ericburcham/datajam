@@ -7,4 +7,4 @@ using Microsoft.EntityFrameworkCore;
 public class FamilyDomain(
     DbContextOptions configurationOptions,
     IConfigureDomainMappings<ModelBuilder> mappingConfigurator)
-    : EntityFrameworkCoreDomain(configurationOptions, mappingConfigurator);
+    : EFCoreDomain(configurationOptions, mappingConfigurator);

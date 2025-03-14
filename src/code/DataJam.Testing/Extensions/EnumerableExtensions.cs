@@ -3,7 +3,10 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides extension methods for types that extend IEnumerable.</summary>
+[PublicAPI]
 public static class EnumerableExtensions
 {
     /// <summary>Checks to see if the given <paramref name="target" /> is empty.  Returns the opposite of the Any method.</summary>

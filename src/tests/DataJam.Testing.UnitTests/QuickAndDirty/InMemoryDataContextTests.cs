@@ -93,7 +93,7 @@ public class InMemoryDataContextTests
         _context.Add(blog);
 
         // assert
-        _context.AsQueryable<Post>().Should().HaveCount(0);
+        _context.CreateQuery<Post>().Should().HaveCount(0);
     }
 
     [TestCase]
@@ -107,7 +107,7 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // assert
-        _context.AsQueryable<Post>().Should().HaveCount(2);
+        _context.CreateQuery<Post>().Should().HaveCount(2);
     }
 
     [TestCase]
@@ -127,7 +127,7 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // assert
-        _context.AsQueryable<Post>().Should().HaveCount(2);
+        _context.CreateQuery<Post>().Should().HaveCount(2);
     }
 
     [TestCase]
@@ -141,7 +141,7 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // assert
-        var site = _context.AsQueryable<Site>().First();
+        var site = _context.CreateQuery<Site>().First();
         site.Should().BeSameAs(item);
     }
 
@@ -156,8 +156,8 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // assert
-        _context.AsQueryable<Author>().Should().HaveCount(1);
-        _context.AsQueryable<Author>().First().Should().BeSameAs(blog.Author);
+        _context.CreateQuery<Author>().Should().HaveCount(1);
+        _context.CreateQuery<Author>().First().Should().BeSameAs(blog.Author);
     }
 
     [TestCase]
@@ -171,8 +171,8 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // assert
-        _context.AsQueryable<Author>().Should().HaveCount(1);
-        _context.AsQueryable<Author>().First().Should().BeSameAs(site.Blog.Author);
+        _context.CreateQuery<Author>().Should().HaveCount(1);
+        _context.CreateQuery<Author>().First().Should().BeSameAs(site.Blog.Author);
     }
 
     [TestCase]
@@ -188,9 +188,9 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // assert
-        _context.AsQueryable<Site>().Any(s => ReferenceEquals(item, s)).Should().BeTrue();
+        _context.CreateQuery<Site>().Any(s => ReferenceEquals(item, s)).Should().BeTrue();
 
-        _context.AsQueryable<Site>().Any(s => ReferenceEquals(item2, s)).Should().BeTrue();
+        _context.CreateQuery<Site>().Any(s => ReferenceEquals(item2, s)).Should().BeTrue();
     }
 
     [TestCase]
@@ -252,7 +252,7 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // Assert
-        _context.AsQueryable<Post>().Should().HaveCount(1);
+        _context.CreateQuery<Post>().Should().HaveCount(1);
     }
 
     [TestCase]
@@ -272,8 +272,8 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // Assert
-        _context.AsQueryable<Post>().Should().Contain(post1);
-        _context.AsQueryable<Post>().Should().NotContain(post2);
+        _context.CreateQuery<Post>().Should().Contain(post1);
+        _context.CreateQuery<Post>().Should().NotContain(post2);
     }
 
     [TestCase]
@@ -292,9 +292,9 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // Assert
-        _context.AsQueryable<Post>().Should().NotContain(post1);
-        _context.AsQueryable<Post>().Should().NotContain(post2);
-        _context.AsQueryable<Post>().Should().HaveCount(0);
+        _context.CreateQuery<Post>().Should().NotContain(post1);
+        _context.CreateQuery<Post>().Should().NotContain(post2);
+        _context.CreateQuery<Post>().Should().HaveCount(0);
     }
 
     [TestCase]
@@ -311,8 +311,8 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // Assert
-        _context.AsQueryable<Blog>().Should().NotContain(blog);
-        _context.AsQueryable<Blog>().Should().HaveCount(0);
+        _context.CreateQuery<Blog>().Should().NotContain(blog);
+        _context.CreateQuery<Blog>().Should().HaveCount(0);
     }
 
     [TestCase]
@@ -345,8 +345,8 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // assert
-        _context.AsQueryable<Blog>().Should().HaveCount(0);
-        _context.AsQueryable<Site>().First().Blog.Should().BeNull();
+        _context.CreateQuery<Blog>().Should().HaveCount(0);
+        _context.CreateQuery<Site>().First().Blog.Should().BeNull();
     }
 
     [TestCase]
@@ -368,9 +368,9 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // Assert
-        _context.AsQueryable<Post>().Should().HaveCount(1);
-        _context.AsQueryable<Post>().First().Should().BeSameAs(post1);
-        _context.AsQueryable<Blog>().Count(b => b.Posts.Count > 1).Should().Be(0);
+        _context.CreateQuery<Post>().Should().HaveCount(1);
+        _context.CreateQuery<Post>().First().Should().BeSameAs(post1);
+        _context.CreateQuery<Blog>().Count(b => b.Posts.Count > 1).Should().Be(0);
     }
 
     [TestCase]
@@ -389,10 +389,10 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // Assert
-        _context.AsQueryable<Site>().Should().HaveCount(1);
-        _context.AsQueryable<Site>().First().Should().BeSameAs(site2);
-        _context.AsQueryable<Blog>().Should().HaveCount(1);
-        _context.AsQueryable<Blog>().First().Should().BeSameAs(blog);
+        _context.CreateQuery<Site>().Should().HaveCount(1);
+        _context.CreateQuery<Site>().First().Should().BeSameAs(site2);
+        _context.CreateQuery<Blog>().Should().HaveCount(1);
+        _context.CreateQuery<Blog>().First().Should().BeSameAs(blog);
     }
 
     [TestCase]
@@ -412,7 +412,7 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // assert
-        var posts = _context.AsQueryable<Post>();
+        var posts = _context.CreateQuery<Post>();
         posts.Should().HaveCount(0);
     }
 
@@ -437,9 +437,9 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // Assert
-        _context.AsQueryable<Post>().Should().HaveCount(2);
-        _context.AsQueryable<Post>().First().Should().BeSameAs(post1);
-        _context.AsQueryable<Blog>().Single().Posts.Should().HaveCount(2);
+        _context.CreateQuery<Post>().Should().HaveCount(2);
+        _context.CreateQuery<Post>().First().Should().BeSameAs(post1);
+        _context.CreateQuery<Blog>().Single().Posts.Should().HaveCount(2);
         site.Blog.Should().BeNull();
     }
 
@@ -457,9 +457,9 @@ public class InMemoryDataContextTests
         _context.Commit();
 
         // assert
-        _context.AsQueryable<Blog>().Should().HaveCount(1);
-        _context.AsQueryable<Blog>().First().Posts.Should().HaveCount(0);
-        _context.AsQueryable<Post>().Should().HaveCount(0);
+        _context.CreateQuery<Blog>().Should().HaveCount(1);
+        _context.CreateQuery<Blog>().First().Posts.Should().HaveCount(0);
+        _context.CreateQuery<Post>().Should().HaveCount(0);
     }
 
     [SetUp]

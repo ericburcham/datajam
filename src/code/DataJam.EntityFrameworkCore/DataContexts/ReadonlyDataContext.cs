@@ -2,9 +2,12 @@ namespace DataJam.EntityFrameworkCore;
 
 using System.Linq;
 
+using JetBrains.Annotations;
+
 using Microsoft.EntityFrameworkCore;
 
 /// <summary>Provides a data context which is limited to read operations.</summary>
+[PublicAPI]
 public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyDataContext
 {
     private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator;
@@ -18,8 +21,8 @@ public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyDataContext
         _mappingConfigurator = mappingConfigurator;
     }
 
-    /// <inheritdoc cref="IDataSource.AsQueryable{TResult}" />
-    public IQueryable<T> AsQueryable<T>()
+    /// <inheritdoc cref="IDataSource.CreateQuery{T}" />
+    public IQueryable<T> CreateQuery<T>()
         where T : class
     {
         return Set<T>();

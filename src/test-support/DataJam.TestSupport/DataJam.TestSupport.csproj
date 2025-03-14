@@ -10,6 +10,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj"/>
+        <ProjectReference Include="..\..\code\DataJam\DataJam.csproj" />
     </ItemGroup>
 
 </Project>

@@ -141,7 +141,7 @@ internal sealed class RepresentationRepository
     private object CreateGenericList(Type type)
     {
         var listType = typeof(List<>);
-        Type[] typeArgs = { type };
+        Type[] typeArgs = [type];
         var genericType = listType.MakeGenericType(typeArgs);
 
         return Activator.CreateInstance(genericType)!;
@@ -183,7 +183,7 @@ internal sealed class RepresentationRepository
             {
                 if (itemInList != childItem)
                 {
-                    addMethod!.Invoke(list, new[] { itemInList });
+                    addMethod!.Invoke(list, [itemInList]);
                 }
             }
 
@@ -311,7 +311,7 @@ internal sealed class RepresentationRepository
             var addMethod = collectionType.GetMethod("Add");
             var propertyInfos = propertiesThatReferToRepresentation.ToList();
 
-            if (!propertyInfos.Any() || propertyInfos.Count() > 1)
+            if (!propertyInfos.Any() || propertyInfos.Count > 1)
             {
                 return;
             }
@@ -329,7 +329,7 @@ internal sealed class RepresentationRepository
                     collection = referencingProperty.GetValue(data.Entity, null);
                 }
 
-                addMethod!.Invoke(collection, new[] { representation.Entity });
+                addMethod!.Invoke(collection, [representation.Entity]);
             }
             else
             {

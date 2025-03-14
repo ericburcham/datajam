@@ -5,7 +5,10 @@ using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides a data context useful for testing.</summary>
+[PublicAPI]
 public class DataContext : IDataContext, IReadonlyDataContext
 {
     private readonly Queue _addQueue = new();
@@ -27,7 +30,7 @@ public class DataContext : IDataContext, IReadonlyDataContext
 
     internal RepresentationRepository Repo { get; }
 
-    /// <inheritdoc cref="IUnitOfWork" />
+    /// <inheritdoc cref="IUnitOfWork.Add{T}" />
     public virtual T Add<T>(T item)
         where T : class
     {
@@ -36,14 +39,7 @@ public class DataContext : IDataContext, IReadonlyDataContext
         return item;
     }
 
-    /// <inheritdoc cref="IDataSource" />
-    public virtual IQueryable<T> AsQueryable<T>()
-        where T : class
-    {
-        return Repo.GetRepresentations<T>();
-    }
-
-    /// <inheritdoc cref="IUnitOfWork" />
+    /// <inheritdoc cref="IUnitOfWork.Commit" />
     public virtual int Commit()
     {
         var changeCount = 0;
@@ -53,7 +49,7 @@ public class DataContext : IDataContext, IReadonlyDataContext
         return changeCount;
     }
 
-    /// <inheritdoc cref="IUnitOfWork" />
+    /// <inheritdoc cref="IUnitOfWork.CommitAsync" />
     public virtual Task<int> CommitAsync()
     {
         var task = new Task<int>(Commit);
@@ -62,7 +58,14 @@ public class DataContext : IDataContext, IReadonlyDataContext
         return task;
     }
 
-    /// <inheritdoc cref="IDataContext" />
+    /// <inheritdoc cref="IDataSource.CreateQuery{T}" />
+    public virtual IQueryable<T> CreateQuery<T>()
+        where T : class
+    {
+        return Repo.GetRepresentations<T>();
+    }
+
+    /// <inheritdoc cref="IDisposable.Dispose" />
     public void Dispose()
     {
     }
@@ -83,14 +86,14 @@ public class DataContext : IDataContext, IReadonlyDataContext
         }
     }
 
-    /// <inheritdoc cref="IUnitOfWork" />
+    /// <inheritdoc cref="IUnitOfWork.Reload{T}" />
     public virtual T Reload<T>(T item)
         where T : class
     {
         return item;
     }
 
-    /// <inheritdoc cref="IUnitOfWork" />
+    /// <inheritdoc cref="IUnitOfWork.Remove{T}" />
     public virtual T Remove<T>(T item)
         where T : class
     {
@@ -99,7 +102,7 @@ public class DataContext : IDataContext, IReadonlyDataContext
         return item;
     }
 
-    /// <inheritdoc cref="IUnitOfWork" />
+    /// <inheritdoc cref="IUnitOfWork.Update{T}" />
     public virtual T Update<T>(T item)
         where T : class
     {
