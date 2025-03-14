@@ -1,26 +1,70 @@
 ﻿namespace DataJam.EntityFrameworkCore.MySql.IntegrationTests;
 
+using System;
 using System.Reflection;
 using System.Threading.Tasks;
 
-using DbUp;
+using FluentMigrator.Runner;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using TestSupport;
+using TestSupport.FluentMigrator;
 
 public class MySqlDatabaseDeployer(string connectionString) : DatabaseDeployer
 {
-    protected override Assembly MigrationAssembly => GetType().Assembly;
+    protected override Assembly MigrationAssembly => MigrationAnchor.AnchoredAssembly;
 
     protected override Task DeployInternal(Assembly migrationAssembly)
     {
         EnsureDatabase.For.MySqlDatabase(connectionString);
-        var upgradeResult = DeployChanges.To.MySqlDatabase(connectionString).WithScriptsEmbeddedInAssembly(migrationAssembly).LogToConsole().Build().PerformUpgrade();
 
-        if (upgradeResult.Successful)
+        using (var serviceProvider = BuildServiceProvider(connectionString, migrationAssembly))
         {
-            return Task.CompletedTask;
+            using (var scope = serviceProvider.CreateScope())
+            {
+                UpdateDatabase(scope.ServiceProvider);
+            }
         }
 
-        throw upgradeResult.Error;
+        return Task.CompletedTask;
+    }
+
+    private static ServiceProvider BuildServiceProvider(string connectionString, Assembly migrationAssembly)
+    {
+        return new ServiceCollection()
+
+               // Add common FluentMigrator services
+              .AddFluentMigratorCore()
+              .ConfigureRunner(
+                   rb => rb
+
+                         // Add MySql support to FluentMigrator
+                        .AddMySql5()
+
+                         // Set the connection string
+                        .WithGlobalConnectionString(connectionString)
+
+                         // Define the assembly containing the migrations
+                        .ScanIn(migrationAssembly)
+                        .For.Migrations())
+              .AddLogging(lb => lb.AddFluentMigratorConsole())
+              .BuildServiceProvider(false);
+    }
+
+    private static void UpdateDatabase(IServiceProvider serviceProvider)
+    {
+        var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+
+        try
+        {
+            runner.MigrateUp();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+
+            throw;
+        }
     }
 }

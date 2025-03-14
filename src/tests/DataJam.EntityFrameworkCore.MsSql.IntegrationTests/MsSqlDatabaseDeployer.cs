@@ -13,13 +13,13 @@ using TestSupport.FluentMigrator;
 
 public class MsSqlDatabaseDeployer(string connectionString) : DatabaseDeployer
 {
-    protected override Assembly MigrationAssembly => GetType().Assembly;
+    protected override Assembly MigrationAssembly => MigrationAnchor.AnchoredAssembly;
 
     protected override Task DeployInternal(Assembly migrationAssembly)
     {
         EnsureDatabase.For.SqlDatabase(connectionString);
 
-        using (var serviceProvider = CreateServices())
+        using (var serviceProvider = BuildServiceProvider(connectionString, migrationAssembly))
         {
             using (var scope = serviceProvider.CreateScope())
             {
@@ -28,34 +28,32 @@ public class MsSqlDatabaseDeployer(string connectionString) : DatabaseDeployer
         }
 
         return Task.CompletedTask;
+    }
 
-        static ServiceProvider CreateServices()
-        {
-            var connectionString = MsSqlDependencies.Instance.MsSql.GetConnectionString();
+    private static ServiceProvider BuildServiceProvider(string connectionString, Assembly migrationAssembly)
+    {
+        return new ServiceCollection()
 
-            return new ServiceCollection()
+               // Add common FluentMigrator services
+              .AddFluentMigratorCore()
+              .ConfigureRunner(
+                   rb => rb
 
-                   // Add common FluentMigrator services
-                  .AddFluentMigratorCore()
-                  .ConfigureRunner(
-                       rb => rb
+                         // Add SQLite support to FluentMigrator
+                        .AddSqlServer()
 
-                             // Add SQLite support to FluentMigrator
-                            .AddSqlServer()
+                         // Set the connection string
+                        .WithGlobalConnectionString(connectionString)
 
-                             // Set the connection string
-                            .WithGlobalConnectionString(connectionString)
+                         // Define the assembly containing the migrations
+                        .ScanIn(migrationAssembly)
+                        .For.Migrations())
 
-                             // Define the assembly containing the migrations
-                            .ScanIn(MigrationAnchor.AnchoredAssembly)
-                            .For.Migrations())
+               // Enable logging to console in the FluentMigrator way
+              .AddLogging(lb => lb.AddFluentMigratorConsole())
 
-                   // Enable logging to console in the FluentMigrator way
-                  .AddLogging(lb => lb.AddFluentMigratorConsole())
-
-                   // Build the service provider
-                  .BuildServiceProvider(false);
-        }
+               // Build the service provider
+              .BuildServiceProvider(false);
     }
 
     private static void UpdateDatabase(IServiceProvider serviceProvider)

@@ -5,6 +5,7 @@
         <PackageReference Include="FluentMigrator.Runner.Core"/>
         <PackageReference Include="JetBrains.Annotations"/>
         <PackageReference Include="Microsoft.Data.SqlClient" />
+        <PackageReference Include="MySql.Data" />
     </ItemGroup>
 
     <ItemGroup>
