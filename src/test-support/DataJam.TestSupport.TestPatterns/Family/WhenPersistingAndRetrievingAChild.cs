@@ -65,7 +65,7 @@ public abstract class WhenPersistingAndRetrievingAChild(IRepository repository) 
     protected override void OneTimeTearDown()
     {
         base.OneTimeTearDown();
-        var dataContext = (IDataContext)repository.Context;
+        var dataContext = repository.Context;
         dataContext.Dispose();
     }
 }
