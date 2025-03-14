@@ -5,11 +5,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="dbup-sqlserver"/>
+        <PackageReference Include="FluentMigrator.Runner.SqlServer"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer"/>
-        <PackageReference Include="MySql.EntityFrameworkCore"/>
         <PackageReference Include="Testcontainers.MsSql"/>
     </ItemGroup>
 
@@ -18,12 +16,9 @@
         <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj"/>
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.EntityFrameworkCore\DataJam.TestSupport.EntityFrameworkCore.csproj"/>
+        <ProjectReference Include="..\..\test-support\DataJam.TestSupport.FluentMigrator\DataJam.TestSupport.FluentMigrator.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.TestPatterns\DataJam.TestSupport.TestPatterns.csproj"/>
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport\DataJam.TestSupport.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <EmbeddedResource Include="Migrations\0001_family_schema.sql"/>
     </ItemGroup>
 
     <ItemGroup>
