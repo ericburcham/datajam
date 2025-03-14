@@ -1,12 +1,12 @@
-# clean-solution-quick-start/datajam
+# datajam
 
 ## Getting Started
 
 Download links:
 
-SSH clone URL: ssh://tfs.eprod.com:22/Enterprise%20Architecture/Core%20Packages/_git/DataJam
+SSH clone URL: git@github.com:ericburcham/datajam.git
 
-HTTPS clone URL: http://tfs.eprod.com/Enterprise%20Architecture/Core%20Packages/_git/DataJam
+HTTPS clone URL: https://github.com/ericburcham/datajam.git
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
