@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 /// <summary>Provides a combination of the Unit Of Work and Repository patterns capable of both read and write operations.</summary>
 [PublicAPI]
-public class DataContext : DbContext, IEntityFrameworkCoreDataContext
+public class DataContext : DbContext, IEFCoreDataContext
 {
     private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator;
 
@@ -24,7 +24,7 @@ public class DataContext : DbContext, IEntityFrameworkCoreDataContext
         _mappingConfigurator = mappingConfigurator;
     }
 
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.AutoTransactionBehavior" />
+    /// <inheritdoc cref="IEFCoreDataContext.AutoTransactionBehavior" />
     public AutoTransactionBehavior AutoTransactionBehavior
     {
         get => Database.AutoTransactionBehavior;
@@ -32,7 +32,7 @@ public class DataContext : DbContext, IEntityFrameworkCoreDataContext
         set => Database.AutoTransactionBehavior = value;
     }
 
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.CurrentTransaction" />
+    /// <inheritdoc cref="IEFCoreDataContext.CurrentTransaction" />
     public IDbContextTransaction? CurrentTransaction => Database.CurrentTransaction;
 
     /// <inheritdoc cref="IUnitOfWork.Add{T}" />
@@ -44,13 +44,13 @@ public class DataContext : DbContext, IEntityFrameworkCoreDataContext
         return item;
     }
 
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.BeginTransaction" />
+    /// <inheritdoc cref="IEFCoreDataContext.BeginTransaction" />
     public IDbContextTransaction BeginTransaction()
     {
         return Database.BeginTransaction();
     }
 
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.BeginTransactionAsync" />
+    /// <inheritdoc cref="IEFCoreDataContext.BeginTransactionAsync" />
     public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
     {
         return Database.BeginTransactionAsync(cancellationToken);
@@ -72,13 +72,13 @@ public class DataContext : DbContext, IEntityFrameworkCoreDataContext
         return await SaveChangesAsync().ConfigureAwait(false);
     }
 
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.CommitTransaction" />
+    /// <inheritdoc cref="IEFCoreDataContext.CommitTransaction" />
     public void CommitTransaction()
     {
         Database.CommitTransaction();
     }
 
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.CommitTransactionAsync" />
+    /// <inheritdoc cref="IEFCoreDataContext.CommitTransactionAsync" />
     public Task CommitTransactionAsync(CancellationToken cancellationToken = default)
     {
         return Database.CommitTransactionAsync(cancellationToken);
@@ -98,13 +98,13 @@ public class DataContext : DbContext, IEntityFrameworkCoreDataContext
         return Set<T>().Remove(item).Entity;
     }
 
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.RollbackTransaction" />
+    /// <inheritdoc cref="IEFCoreDataContext.RollbackTransaction" />
     public void RollbackTransaction()
     {
         Database.RollbackTransaction();
     }
 
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.RollbackTransactionAsync" />
+    /// <inheritdoc cref="IEFCoreDataContext.RollbackTransactionAsync" />
     public Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
     {
         return Database.RollbackTransactionAsync(cancellationToken);

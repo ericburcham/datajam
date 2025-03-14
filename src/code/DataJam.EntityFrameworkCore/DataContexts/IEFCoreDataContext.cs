@@ -1,4 +1,6 @@
-﻿namespace DataJam.EntityFrameworkCore;
+﻿// ReSharper disable InconsistentNaming
+
+namespace DataJam.EntityFrameworkCore;
 
 using System;
 using System.Data.Common;
@@ -12,7 +14,7 @@ using Microsoft.EntityFrameworkCore.Storage;
 
 /// <summary>Represents a disposable unit of work capable of both read and write operations based on Entity Framework Core's <see cref="DbContext" />.</summary>
 [PublicAPI]
-public interface IEntityFrameworkCoreDataContext : IDataContext
+public interface IEFCoreDataContext : IDataContext
 {
     /// <summary>
     ///     Gets or sets a value indicating whether or not a transaction will be created automatically by <see cref="DbContext.SaveChanges()" /> if neither

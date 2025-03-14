@@ -1,3 +1,5 @@
+// ReSharper disable InconsistentNaming
+
 namespace DataJam.EntityFrameworkCore;
 
 using System.Collections.Generic;
@@ -7,18 +9,18 @@ using JetBrains.Annotations;
 
 /// <summary>Provides a simple factory for constructing readonly entity framework core domain repositories.</summary>
 [PublicAPI]
-public class EntityFrameworkCoreReadonlyDomainRepositoryFactory : ReadonlyDomainRepositoryFactory<EntityFrameworkCoreDomain>
+public class EFCoreReadonlyDomainRepositoryFactory : ReadonlyDomainRepositoryFactory<EFCoreDomain>
 {
-    /// <summary>Initializes a new instance of the <see cref="EntityFrameworkCoreReadonlyDomainRepositoryFactory" /> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EFCoreReadonlyDomainRepositoryFactory" /> class.</summary>
     /// <param name="domains">Domains to use when constructing domain repositories.</param>
-    public EntityFrameworkCoreReadonlyDomainRepositoryFactory(IEnumerable<EntityFrameworkCoreDomain> domains)
+    public EFCoreReadonlyDomainRepositoryFactory(IEnumerable<EFCoreDomain> domains)
         : this(domains.ToArray())
     {
     }
 
-    /// <summary>Initializes a new instance of the <see cref="EntityFrameworkCoreReadonlyDomainRepositoryFactory" /> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EFCoreReadonlyDomainRepositoryFactory" /> class.</summary>
     /// <param name="domains">Domains to use when constructing domain repositories.</param>
-    public EntityFrameworkCoreReadonlyDomainRepositoryFactory(params EntityFrameworkCoreDomain[] domains)
+    public EFCoreReadonlyDomainRepositoryFactory(params EFCoreDomain[] domains)
         : base(domains)
     {
     }

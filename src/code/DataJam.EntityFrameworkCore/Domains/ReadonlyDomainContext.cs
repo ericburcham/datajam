@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 /// <typeparam name="T">The Type of the domain for this domain context.</typeparam>
 [PublicAPI]
 public class ReadonlyDomainContext<T> : ReadonlyDataContext, IReadonlyDomainContext<T>
-    where T : class, IEntityFrameworkCoreDomain
+    where T : class, IEFCoreDomain
 {
     /// <summary>Initializes a new instance of the <see cref="ReadonlyDomainContext{T}" /> class.</summary>
     /// <param name="domain">The domain to use.</param>

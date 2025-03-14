@@ -1,3 +1,5 @@
+// ReSharper disable InconsistentNaming
+
 namespace DataJam.EntityFrameworkCore;
 
 using System.Collections.Generic;
@@ -7,18 +9,18 @@ using JetBrains.Annotations;
 
 /// <summary>Provides a simple factory for constructing entity framework core domain repositories.</summary>
 [PublicAPI]
-public class EntityFrameworkCoreDomainRepositoryFactory : DomainRepositoryFactory<EntityFrameworkCoreDomain>
+public class EFCoreDomainRepositoryFactory : DomainRepositoryFactory<EFCoreDomain>
 {
-    /// <summary>Initializes a new instance of the <see cref="EntityFrameworkCoreDomainRepositoryFactory" /> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EFCoreDomainRepositoryFactory" /> class.</summary>
     /// <param name="domains">Domains to use when constructing domain repositories.</param>
-    public EntityFrameworkCoreDomainRepositoryFactory(IEnumerable<EntityFrameworkCoreDomain> domains)
+    public EFCoreDomainRepositoryFactory(IEnumerable<EFCoreDomain> domains)
         : this(domains.ToArray())
     {
     }
 
-    /// <summary>Initializes a new instance of the <see cref="EntityFrameworkCoreDomainRepositoryFactory" /> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EFCoreDomainRepositoryFactory" /> class.</summary>
     /// <param name="domains">Domains to use when constructing domain repositories.</param>
-    public EntityFrameworkCoreDomainRepositoryFactory(params EntityFrameworkCoreDomain[] domains)
+    public EFCoreDomainRepositoryFactory(params EFCoreDomain[] domains)
         : base(domains)
     {
     }
