@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 using JetBrains.Annotations;
 
+using NUnit.Framework;
+
 [PublicAPI]
 public abstract class TestDependencySetUpFixture<TDependencyProvider> : IAsyncDisposable, IDisposable
     where TDependencyProvider : CompositeTestDependencyProvider
@@ -40,22 +42,68 @@ public abstract class TestDependencySetUpFixture<TDependencyProvider> : IAsyncDi
         GC.SuppressFinalize(this);
     }
 
+    [OneTimeTearDown]
+    public virtual async Task RunAfterAllTests()
+    {
+        await Parallel.ForEachAsync(
+            Dependencies,
+            async (dependency, token) =>
+            {
+                switch (dependency)
+                {
+                    case IAsyncStartableTestDependency startable:
+                        await startable.StopAsync(token);
+
+                        break;
+
+                    case IStartableTestDependency startable:
+                        startable.Stop();
+
+                        break;
+                }
+            });
+    }
+
+    [OneTimeSetUp]
+    public virtual async Task RunBeforeAllTests()
+    {
+        await Parallel.ForEachAsync(
+            Dependencies,
+            async (dependency, token) =>
+            {
+                switch (dependency)
+                {
+                    case IAsyncStartableTestDependency startable:
+                        await startable.StartAsync(token);
+
+                        break;
+
+                    case IStartableTestDependency startable:
+                        startable.Start();
+
+                        break;
+                }
+            });
+    }
+
     protected virtual void Dispose(bool disposing)
     {
         ReleaseUnmanagedResources();
 
-        if (disposing)
+        if (!disposing)
         {
-            Parallel.ForEach(
-                Dependencies,
-                (dependency, _) =>
-                {
-                    if (dependency is IDisposable disposable)
-                    {
-                        disposable.Dispose();
-                    }
-                });
+            return;
         }
+
+        Parallel.ForEach(
+            Dependencies,
+            (dependency, _) =>
+            {
+                if (dependency is IDisposable disposable)
+                {
+                    disposable.Dispose();
+                }
+            });
     }
 
     protected virtual async ValueTask DisposeAsyncCore()
