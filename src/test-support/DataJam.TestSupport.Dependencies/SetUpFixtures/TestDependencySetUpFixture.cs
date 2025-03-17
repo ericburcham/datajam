@@ -10,15 +10,17 @@ using JetBrains.Annotations;
 using NUnit.Framework;
 
 [PublicAPI]
-public abstract class TestDependencySetUpFixture<TDependencyProvider> : IAsyncDisposable, IDisposable
-    where TDependencyProvider : CompositeTestDependencyProvider
+public abstract class TestDependencySetUpFixture<T> : IAsyncDisposable, IDisposable
+    where T : CompositeTestDependencyProvider
 {
-    protected TestDependencySetUpFixture(IEnumerable<TDependencyProvider> dependencyProviders)
+    private bool _disposed;
+
+    protected TestDependencySetUpFixture(IEnumerable<T> dependencyProviders)
         : this(dependencyProviders.ToArray())
     {
     }
 
-    protected TestDependencySetUpFixture(params TDependencyProvider[] dependencyProviders)
+    protected TestDependencySetUpFixture(params T[] dependencyProviders)
     {
         Dependencies = dependencyProviders.SelectMany(x => x.TestDependencies);
     }
@@ -88,41 +90,65 @@ public abstract class TestDependencySetUpFixture<TDependencyProvider> : IAsyncDi
 
     protected virtual void Dispose(bool disposing)
     {
-        ReleaseUnmanagedResources();
+        if (_disposed)
+        {
+            return;
+        }
 
         if (!disposing)
         {
             return;
         }
 
-        Parallel.ForEach(
-            Dependencies,
-            (dependency, _) =>
+        // For dependencies that implement IAsyncDisposable, we need to call DisposeAsync
+        // but since we're in a synchronous context, we'll need to wait for the task to complete
+        foreach (var dependency in Dependencies)
+        {
+            switch (dependency)
             {
-                if (dependency is IDisposable disposable)
-                {
+                case IAsyncDisposable disposable:
+                    // Run the async operation synchronously
+                    disposable.DisposeAsync().AsTask().GetAwaiter().GetResult();
+
+                    break;
+
+                case IDisposable disposable:
                     disposable.Dispose();
-                }
-            });
+
+                    break;
+            }
+        }
+
+        _disposed = true;
     }
 
     protected virtual async ValueTask DisposeAsyncCore()
     {
+        if (_disposed)
+        {
+            return;
+        }
+
+        // First handle all IAsyncDisposable dependencies
         await Parallel.ForEachAsync(
             Dependencies,
             async (dependency, _) =>
             {
-                if (dependency is IAsyncDisposable disposable)
+                switch (dependency)
                 {
-                    await disposable.DisposeAsync();
+                    case IAsyncDisposable disposable:
+                        await disposable.DisposeAsync();
+
+                        break;
+
+                    // Handle IDisposable dependencies that are not IAsyncDisposable
+                    case IDisposable disposable:
+                        disposable.Dispose();
+
+                        break;
                 }
             });
 
-        ReleaseUnmanagedResources();
-    }
-
-    private void ReleaseUnmanagedResources()
-    {
-        // Nothing to do here.
+        _disposed = true;
     }
 }
