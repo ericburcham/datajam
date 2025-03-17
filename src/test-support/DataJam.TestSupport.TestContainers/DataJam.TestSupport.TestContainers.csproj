@@ -2,5 +2,6 @@
     <ItemGroup>
         <PackageReference Include="NUnit"/>
         <PackageReference Include="Testcontainers.MsSql"/>
+        <PackageReference Include="Testcontainers.MySql" />
     </ItemGroup>
 </Project>

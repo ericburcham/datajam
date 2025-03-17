@@ -1,9 +1,3 @@
-// -----------------------------------------------------------------------
-// <copyright file="SqlServerExtensions.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace DataJam.TestSupport.FluentMigrator;
 
 using System;
