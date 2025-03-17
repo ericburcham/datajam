@@ -41,7 +41,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_", "_", "{7ADD1DA9-9513-45
 		..\.gitignore = ..\.gitignore
 		..\README.md = ..\README.md
 		..\nuget.config = ..\nuget.config
-		..\versionInfo.json = ..\versionInfo.json
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{7F294636-6B02-4F75-B1F5-4CB5D7678020}"
@@ -59,6 +58,18 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore.MySql.IntegrationTests", "tests\DataJam.EntityFrameworkCore.MySql.IntegrationTests\DataJam.EntityFrameworkCore.MySql.IntegrationTests.csproj", "{7A683122-E92C-4EB0-BE13-0847992C94CC}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore.Sqlite.IntegrationTests", "tests\DataJam.EntityFrameworkCore.Sqlite.IntegrationTests\DataJam.EntityFrameworkCore.Sqlite.IntegrationTests.csproj", "{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.FluentMigrations", "test-support\DataJam.TestSupport.FluentMigrations\DataJam.TestSupport.FluentMigrations.csproj", "{3DE79801-3B11-41EC-9215-56BB49C90520}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Dependencies", "test-support\DataJam.TestSupport.Dependencies\DataJam.TestSupport.Dependencies.csproj", "{7FFAED14-37B9-4DCC-81EE-FD67E19D1863}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Dependencies.TestContainers", "test-support\DataJam.TestSupport.Dependencies.TestContainers\DataJam.TestSupport.Dependencies.TestContainers.csproj", "{15FB9707-96EB-422C-816B-DC82F4C0922D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Dependencies.Sqlite", "test-support\DataJam.TestSupport.Dependencies.Sqlite\DataJam.TestSupport.Dependencies.Sqlite.csproj", "{CA6D2921-1721-4A71-9AE4-D78C976900AE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.FluentMigrator.Core", "test-support\DataJam.TestSupport.FluentMigrator.Core\DataJam.TestSupport.FluentMigrator.Core.csproj", "{2A879C45-975B-4A22-90D9-28B01606B53D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.FluentMigrations.Sqlite", "test-support\DataJam.TestSupport.FluentMigrations.Sqlite\DataJam.TestSupport.FluentMigrations.Sqlite.csproj", "{CA52E4B5-7D63-4442-AAFD-32EE4822E74E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -114,6 +125,30 @@ Global
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DE79801-3B11-41EC-9215-56BB49C90520}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE79801-3B11-41EC-9215-56BB49C90520}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE79801-3B11-41EC-9215-56BB49C90520}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE79801-3B11-41EC-9215-56BB49C90520}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FFAED14-37B9-4DCC-81EE-FD67E19D1863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FFAED14-37B9-4DCC-81EE-FD67E19D1863}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FFAED14-37B9-4DCC-81EE-FD67E19D1863}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FFAED14-37B9-4DCC-81EE-FD67E19D1863}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15FB9707-96EB-422C-816B-DC82F4C0922D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15FB9707-96EB-422C-816B-DC82F4C0922D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15FB9707-96EB-422C-816B-DC82F4C0922D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15FB9707-96EB-422C-816B-DC82F4C0922D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA6D2921-1721-4A71-9AE4-D78C976900AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA6D2921-1721-4A71-9AE4-D78C976900AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA6D2921-1721-4A71-9AE4-D78C976900AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA6D2921-1721-4A71-9AE4-D78C976900AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2A879C45-975B-4A22-90D9-28B01606B53D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2A879C45-975B-4A22-90D9-28B01606B53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2A879C45-975B-4A22-90D9-28B01606B53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2A879C45-975B-4A22-90D9-28B01606B53D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA52E4B5-7D63-4442-AAFD-32EE4822E74E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA52E4B5-7D63-4442-AAFD-32EE4822E74E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA52E4B5-7D63-4442-AAFD-32EE4822E74E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA52E4B5-7D63-4442-AAFD-32EE4822E74E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -132,6 +167,12 @@ Global
 		{0EBB582A-0221-4046-8482-09F4E1FD70AF} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 		{7A683122-E92C-4EB0-BE13-0847992C94CC} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
+		{3DE79801-3B11-41EC-9215-56BB49C90520} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{7FFAED14-37B9-4DCC-81EE-FD67E19D1863} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{15FB9707-96EB-422C-816B-DC82F4C0922D} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{CA6D2921-1721-4A71-9AE4-D78C976900AE} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{2A879C45-975B-4A22-90D9-28B01606B53D} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{CA52E4B5-7D63-4442-AAFD-32EE4822E74E} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}
