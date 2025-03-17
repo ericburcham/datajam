@@ -5,15 +5,15 @@ using System.Collections.Generic;
 using JetBrains.Annotations;
 
 [PublicAPI]
-public abstract class TestContainerSetUpFixture<TDependencyProvider> : TestDependencySetUpFixture<TDependencyProvider>
-    where TDependencyProvider : CompositeTestDependencyProvider
+public abstract class TestContainerSetUpFixture<T> : TestDependencySetUpFixture<T>
+    where T : CompositeTestDependencyProvider
 {
-    protected TestContainerSetUpFixture(IEnumerable<TDependencyProvider> dependencyProviders)
+    protected TestContainerSetUpFixture(IEnumerable<T> dependencyProviders)
         : base(dependencyProviders)
     {
     }
 
-    protected TestContainerSetUpFixture(params TDependencyProvider[] dependencyProviders)
+    protected TestContainerSetUpFixture(params T[] dependencyProviders)
         : base(dependencyProviders)
     {
     }
