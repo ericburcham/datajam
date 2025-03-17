@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentMigrator.Runner.MySql"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"/>
         <PackageReference Include="MySql.EntityFrameworkCore"/>
         <PackageReference Include="Testcontainers.MySql"/>

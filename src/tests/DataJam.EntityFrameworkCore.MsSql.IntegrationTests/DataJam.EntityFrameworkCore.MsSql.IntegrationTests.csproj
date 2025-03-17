@@ -5,7 +5,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="FluentMigrator.Runner.SqlServer"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.Relational"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer"/>
         <PackageReference Include="Testcontainers.MsSql"/>
@@ -17,6 +16,7 @@
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.EntityFrameworkCore\DataJam.TestSupport.EntityFrameworkCore.csproj"/>
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.FluentMigrator\DataJam.TestSupport.FluentMigrator.csproj" />
+        <ProjectReference Include="..\..\test-support\DataJam.TestSupport.TestContainers\DataJam.TestSupport.TestContainers.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.TestPatterns\DataJam.TestSupport.TestPatterns.csproj"/>
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport\DataJam.TestSupport.csproj"/>
     </ItemGroup>

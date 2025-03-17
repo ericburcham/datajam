@@ -1,56 +1,25 @@
 ﻿namespace DataJam.EntityFrameworkCore.MsSql.IntegrationTests;
 
-using System;
-using System.Threading;
-
-using DotNet.Testcontainers.Containers;
-
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 using Testcontainers.MsSql;
 
 using TestSupport.EntityFrameworkCore;
+using TestSupport.TestContainers;
 
 public class MsSqlDependencies : Singleton<MsSqlDependencies>, IProvideDbContextOptions
 {
-    private readonly ReaderWriterLockSlim _containerLock = new();
-
-    private readonly MsSqlContainer _msSql = new MsSqlBuilder().Build();
-
-    public DbContextOptions Options => new DbContextOptionsBuilder().UseSqlServer(MsSql.GetConnectionString()).Options;
-
-    internal MsSqlContainer MsSql
+    public DbContextOptions Options
     {
         get
         {
-            _containerLock.EnterUpgradeableReadLock();
+            var sqlContainer = RegisteredContainers.Get<MsSqlContainer>(ContainerNames.SQL_SERVER);
+            var connectionString = sqlContainer.GetConnectionString();
+            var connectionStringBuilder = new SqlConnectionStringBuilder(connectionString) { InitialCatalog = "test-db" };
+            connectionString = connectionStringBuilder.ConnectionString;
 
-            try
-            {
-                if (_msSql.State == TestcontainersStates.Undefined)
-                {
-                    _containerLock.EnterWriteLock();
-
-                    try
-                    {
-                        _msSql.StartAsync().Wait();
-                    }
-                    finally
-                    {
-                        _containerLock.ExitWriteLock();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            finally
-            {
-                _containerLock.ExitUpgradeableReadLock();
-            }
-
-            return _msSql;
+            return new DbContextOptionsBuilder().UseSqlServer(connectionString).Options;
         }
     }
 }
