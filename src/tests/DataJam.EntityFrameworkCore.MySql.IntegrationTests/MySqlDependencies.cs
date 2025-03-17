@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Testcontainers.MySql;
 
+using TestSupport.Dependencies;
 using TestSupport.EntityFrameworkCore;
-using TestSupport.TestContainers;
 
 public class MySqlDependencies : Singleton<MySqlDependencies>, IProvideDbContextOptions
 {
@@ -15,7 +15,7 @@ public class MySqlDependencies : Singleton<MySqlDependencies>, IProvideDbContext
     {
         get
         {
-            var mySqlContainer = RegisteredContainers.Get<MySqlContainer>(ContainerConstants.MYSQL_CONTAINER_NAME);
+            var mySqlContainer = RegisteredTestDependencies.Get<MySqlContainer>(ContainerConstants.MYSQL_CONTAINER_NAME);
             var connectionStringBuilder = new MySqlConnectionStringBuilder(mySqlContainer.GetConnectionString()) { Database = ContainerConstants.MYSQL_TEST_DB };
 
             return new DbContextOptionsBuilder().UseMySQL(connectionStringBuilder.ConnectionString).Options;

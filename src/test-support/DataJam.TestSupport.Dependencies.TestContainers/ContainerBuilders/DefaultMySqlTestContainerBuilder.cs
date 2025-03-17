@@ -1,8 +1,8 @@
-namespace DataJam.TestSupport.TestContainers;
+namespace DataJam.TestSupport.Dependencies.TestContainers;
 
 using Testcontainers.MySql;
 
-public class DefaultMySqlTestContainerBuilder : TestContainerBuilder<MySqlContainer>
+public class DefaultMySqlTestContainerBuilder : TestDependencyBuilder<MySqlContainer>
 {
     private readonly string _password;
 
@@ -13,7 +13,7 @@ public class DefaultMySqlTestContainerBuilder : TestContainerBuilder<MySqlContai
     ///     The default <see cref="MySqlBuilder" /> instance provided by the TestContainers.MySql package does not result in a connection string that can be used
     ///     successfully.  To work around this, we currently require the call site to provide a username and password which are used to configure the container.  These
     ///     credentials are included when invoking the container's <see cref="MySqlContainer.GetConnectionString" /> method.  If you wish to use another authentication
-    ///     method, make your own derivative of <see cref="TestContainerBuilder{MySqlContainer}" /> and use it instead of
+    ///     method, make your own derivative of <see cref="TestDependencyBuilder{MySqlContainer}" /> and use it instead of
     ///     <see cref="DefaultMySqlTestContainerBuilder" />.
     /// </remarks>
     /// <param name="userName">The username to use.</param>

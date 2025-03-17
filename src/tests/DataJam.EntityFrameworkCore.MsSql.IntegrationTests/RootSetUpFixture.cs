@@ -6,10 +6,12 @@ using Microsoft.Data.SqlClient;
 
 using Testcontainers.MsSql;
 
-using TestSupport.TestContainers;
+using TestSupport.Dependencies;
+using TestSupport.Dependencies.TestContainers;
+using TestSupport.FluentMigrator.Deployers;
 
 [SetUpFixture]
-internal class RootSetUpFixture() : TestContainerSetUpFixture<TestContainerProvider>(TestContainerProvider.Instance)
+internal class RootSetUpFixture() : TestDependencySetUpFixture<TestDependencyProvider>(TestDependencyProvider.Instance)
 {
     public override async Task RunBeforeAllTests()
     {
@@ -20,7 +22,7 @@ internal class RootSetUpFixture() : TestContainerSetUpFixture<TestContainerProvi
 
     private static async Task DeployMsSql()
     {
-        var sqlContainer = RegisteredContainers.Get<MsSqlContainer>(ContainerConstants.MSSQL_CONTAINER_NAME);
+        var sqlContainer = RegisteredTestDependencies.Get<MsSqlContainer>(ContainerConstants.MSSQL_CONTAINER_NAME);
         var connectionString = sqlContainer.GetConnectionString();
         var connectionStringBuilder = new SqlConnectionStringBuilder(connectionString) { InitialCatalog = ContainerConstants.MSSQL_TEST_DB };
         connectionString = connectionStringBuilder.ConnectionString;

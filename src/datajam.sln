@@ -61,7 +61,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.FluentMigrator", "test-support\DataJam.TestSupport.FluentMigrator\DataJam.TestSupport.FluentMigrator.csproj", "{3DE79801-3B11-41EC-9215-56BB49C90520}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.TestContainers", "test-support\DataJam.TestSupport.TestContainers\DataJam.TestSupport.TestContainers.csproj", "{64DEB07D-3AC2-42C8-BC00-DB7064546131}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Dependencies", "test-support\DataJam.TestSupport.Dependencies\DataJam.TestSupport.Dependencies.csproj", "{7FFAED14-37B9-4DCC-81EE-FD67E19D1863}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Dependencies.TestContainers", "test-support\DataJam.TestSupport.Dependencies.TestContainers\DataJam.TestSupport.Dependencies.TestContainers.csproj", "{15FB9707-96EB-422C-816B-DC82F4C0922D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,10 +123,14 @@ Global
 		{3DE79801-3B11-41EC-9215-56BB49C90520}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DE79801-3B11-41EC-9215-56BB49C90520}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DE79801-3B11-41EC-9215-56BB49C90520}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64DEB07D-3AC2-42C8-BC00-DB7064546131}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64DEB07D-3AC2-42C8-BC00-DB7064546131}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64DEB07D-3AC2-42C8-BC00-DB7064546131}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64DEB07D-3AC2-42C8-BC00-DB7064546131}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7FFAED14-37B9-4DCC-81EE-FD67E19D1863}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7FFAED14-37B9-4DCC-81EE-FD67E19D1863}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7FFAED14-37B9-4DCC-81EE-FD67E19D1863}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7FFAED14-37B9-4DCC-81EE-FD67E19D1863}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15FB9707-96EB-422C-816B-DC82F4C0922D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15FB9707-96EB-422C-816B-DC82F4C0922D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15FB9707-96EB-422C-816B-DC82F4C0922D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15FB9707-96EB-422C-816B-DC82F4C0922D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -144,7 +150,8 @@ Global
 		{7A683122-E92C-4EB0-BE13-0847992C94CC} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 		{3DE79801-3B11-41EC-9215-56BB49C90520} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
-		{64DEB07D-3AC2-42C8-BC00-DB7064546131} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{7FFAED14-37B9-4DCC-81EE-FD67E19D1863} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{15FB9707-96EB-422C-816B-DC82F4C0922D} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}

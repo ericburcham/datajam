@@ -6,10 +6,12 @@ using global::MySql.Data.MySqlClient;
 
 using Testcontainers.MySql;
 
-using TestSupport.TestContainers;
+using TestSupport.Dependencies;
+using TestSupport.Dependencies.TestContainers;
+using TestSupport.FluentMigrator.Deployers;
 
 [SetUpFixture]
-public class RootSetUpFixture() : TestContainerSetUpFixture<TestContainerProvider>(TestContainerProvider.Instance)
+public class RootSetUpFixture() : TestDependencySetUpFixture<TestDependencyProvider>(TestDependencyProvider.Instance)
 {
     public override async Task RunBeforeAllTests()
     {
@@ -20,7 +22,7 @@ public class RootSetUpFixture() : TestContainerSetUpFixture<TestContainerProvide
 
     private static async Task DeployMySql()
     {
-        var mySqlContainer = RegisteredContainers.Get<MySqlContainer>(ContainerConstants.MYSQL_CONTAINER_NAME);
+        var mySqlContainer = RegisteredTestDependencies.Get<MySqlContainer>(ContainerConstants.MYSQL_CONTAINER_NAME);
         var connectionString = mySqlContainer.GetConnectionString();
         var connectionStringBuilder = new MySqlConnectionStringBuilder(connectionString) { Database = ContainerConstants.MYSQL_TEST_DB };
         connectionString = connectionStringBuilder.ConnectionString;

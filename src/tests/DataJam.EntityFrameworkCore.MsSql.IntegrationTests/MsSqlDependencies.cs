@@ -5,8 +5,8 @@ using Microsoft.EntityFrameworkCore;
 
 using Testcontainers.MsSql;
 
+using TestSupport.Dependencies;
 using TestSupport.EntityFrameworkCore;
-using TestSupport.TestContainers;
 
 public class MsSqlDependencies : Singleton<MsSqlDependencies>, IProvideDbContextOptions
 {
@@ -14,7 +14,7 @@ public class MsSqlDependencies : Singleton<MsSqlDependencies>, IProvideDbContext
     {
         get
         {
-            var sqlContainer = RegisteredContainers.Get<MsSqlContainer>(ContainerConstants.MSSQL_CONTAINER_NAME);
+            var sqlContainer = RegisteredTestDependencies.Get<MsSqlContainer>(ContainerConstants.MSSQL_CONTAINER_NAME);
             var connectionStringBuilder = new SqlConnectionStringBuilder(sqlContainer.GetConnectionString()) { InitialCatalog = ContainerConstants.MSSQL_TEST_DB };
 
             return new DbContextOptionsBuilder().UseSqlServer(connectionStringBuilder.ConnectionString).Options;

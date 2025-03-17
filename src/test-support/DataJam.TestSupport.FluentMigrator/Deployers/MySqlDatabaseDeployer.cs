@@ -1,15 +1,12 @@
-﻿namespace DataJam.EntityFrameworkCore.MySql.IntegrationTests;
+﻿namespace DataJam.TestSupport.FluentMigrator.Deployers;
 
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
 
-using FluentMigrator.Runner;
+using global::FluentMigrator.Runner;
 
 using Microsoft.Extensions.DependencyInjection;
-
-using TestSupport;
-using TestSupport.FluentMigrator;
 
 public class MySqlDatabaseDeployer(string connectionString) : DatabaseDeployer
 {
