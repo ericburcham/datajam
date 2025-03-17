@@ -11,7 +11,7 @@ using TestSupport.Dependencies.TestContainers;
 using TestSupport.FluentMigrator.Deployers;
 
 [SetUpFixture]
-internal class RootSetUpFixture() : TestDependencySetUpFixture<TestDependencyProvider>(TestDependencyProvider.Instance)
+internal class RootSetUpFixture() : TestContainerSetUpFixture<TestDependencyProvider>(TestDependencyProvider.Instance)
 {
     public override async Task RunBeforeAllTests()
     {

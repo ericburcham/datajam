@@ -2,7 +2,7 @@ namespace DataJam.TestSupport.Dependencies.TestContainers;
 
 using Testcontainers.MySql;
 
-public class DefaultMySqlTestContainerBuilder : TestDependencyBuilder<MySqlContainer>
+public class DefaultMySqlTestContainerBuilder : ContainerBuilder<MySqlContainer>
 {
     private readonly string _password;
 
@@ -24,7 +24,7 @@ public class DefaultMySqlTestContainerBuilder : TestDependencyBuilder<MySqlConta
         _password = password;
     }
 
-    public override MySqlContainer Build()
+    protected override MySqlContainer BuildContainer()
     {
         return new MySqlBuilder()
               .WithPassword(_password)

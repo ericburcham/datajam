@@ -8,12 +8,12 @@ using JetBrains.Annotations;
 [PublicAPI]
 public abstract class CompositeTestDependencyProvider : IProvideTestDependencies
 {
-    private readonly Dictionary<string, object> _testDependencies = new();
+    private readonly Dictionary<string, ITestDependency> _testDependencies = new();
 
-    public IEnumerable<object> TestDependencies => _testDependencies.Values;
+    public IEnumerable<ITestDependency> TestDependencies => _testDependencies.Values;
 
     protected void Register<T>(string name, IBuildTestDependencies<T> builder)
-        where T : class
+        where T : ITestDependency
     {
         var dependency = builder.Build();
 

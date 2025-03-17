@@ -7,5 +7,5 @@ using JetBrains.Annotations;
 [PublicAPI]
 public interface IProvideTestDependencies
 {
-    IEnumerable<object> TestDependencies { get; }
+    IEnumerable<ITestDependency> TestDependencies { get; }
 }

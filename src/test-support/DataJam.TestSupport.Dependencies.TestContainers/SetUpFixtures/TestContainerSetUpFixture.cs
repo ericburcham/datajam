@@ -1,6 +1,5 @@
 ﻿namespace DataJam.TestSupport.Dependencies.TestContainers;
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,34 +8,19 @@ using DotNet.Testcontainers.Containers;
 
 using NUnit.Framework;
 
-public abstract class TestDependencySetUpFixture<TDependencyProvider> : IAsyncDisposable
+public abstract class TestContainerSetUpFixture<TDependencyProvider> : TestDependencySetUpFixture<TDependencyProvider>
     where TDependencyProvider : CompositeTestDependencyProvider
 {
-    private readonly IEnumerable<object> _dependencies;
+    private readonly IEnumerable<ITestDependency> _dependencies;
 
-    protected TestDependencySetUpFixture(IEnumerable<TDependencyProvider> dependencyProviders)
+    protected TestContainerSetUpFixture(IEnumerable<TDependencyProvider> dependencyProviders)
         : this(dependencyProviders.ToArray())
     {
     }
 
-    protected TestDependencySetUpFixture(params TDependencyProvider[] dependencyProviders)
+    protected TestContainerSetUpFixture(params TDependencyProvider[] dependencyProviders)
     {
         _dependencies = dependencyProviders.SelectMany(x => x.TestDependencies);
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        await Parallel.ForEachAsync(
-            _dependencies,
-            async (dependency, _) =>
-            {
-                if (dependency is IAsyncDisposable disposable)
-                {
-                    await disposable.DisposeAsync();
-                }
-            });
-
-        GC.SuppressFinalize(this);
     }
 
     [OneTimeTearDown]

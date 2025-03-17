@@ -4,7 +4,7 @@ using JetBrains.Annotations;
 
 [PublicAPI]
 public interface IBuildTestDependencies<out T>
-    where T : class
+    where T : ITestDependency
 {
     T Build();
 }
