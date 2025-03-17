@@ -1,4 +1,4 @@
-﻿namespace DataJam.TestSupport.FluentMigrator.Deployers;
+namespace DataJam.TestSupport.FluentMigrator.Deployers;
 
 using System;
 using System.Reflection;
@@ -8,14 +8,12 @@ using global::FluentMigrator.Runner;
 
 using Microsoft.Extensions.DependencyInjection;
 
-public class MsSqlDatabaseDeployer(string connectionString) : DatabaseDeployer
+public class SqliteDatabaseDeployer(string connectionString) : DatabaseDeployer
 {
     protected override Assembly MigrationAssembly => MigrationAnchor.AnchoredAssembly;
 
     protected override Task DeployInternal(Assembly migrationAssembly)
     {
-        EnsureDatabase.For.SqlDatabase(connectionString);
-
         using (var serviceProvider = BuildServiceProvider(connectionString, migrationAssembly))
         {
             using (var scope = serviceProvider.CreateScope())
@@ -36,8 +34,8 @@ public class MsSqlDatabaseDeployer(string connectionString) : DatabaseDeployer
               .ConfigureRunner(
                    rb => rb
 
-                         // Add SQL Server support to FluentMigrator
-                        .AddSqlServer()
+                         // Add SQLite support to FluentMigrator
+                        .AddSQLite()
 
                          // Set the connection string
                         .WithGlobalConnectionString(connectionString)

@@ -1,9 +1,8 @@
-﻿namespace DataJam.TestSupport.FluentMigrator.Migrations.Abstract;
+namespace DataJam.TestSupport.FluentMigrator.Migrations.Abstract;
 
-using JetBrains.Annotations;
+using global::FluentMigrator;
 
-[PublicAPI]
-public abstract class TableMigration : SchemaMigration, IDescribeTables
+public abstract class TableMigration : Migration, IDescribeTables
 {
     public abstract string TableName { get; }
 }

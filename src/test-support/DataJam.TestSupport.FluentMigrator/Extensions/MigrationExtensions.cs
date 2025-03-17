@@ -7,14 +7,37 @@ using global::FluentMigrator.Builders.Create;
 using global::FluentMigrator.Builders.Create.Table;
 using global::FluentMigrator.Builders.Delete;
 
+using JetBrains.Annotations;
+
+[PublicAPI]
 public static class MigrationExtensions
 {
     public static void ForeignKeys(this ICreateExpressionRoot create, IDescribeTables migration, IEnumerable<IDescribeTables> foreignKeyTables)
     {
-        ForeignKeys(create, migration, foreignKeyTables.ToArray());
+        create.ForeignKeys(migration, foreignKeyTables.ToArray());
     }
 
     public static void ForeignKeys(this ICreateExpressionRoot create, IDescribeTables migration, params IDescribeTables[] foreignKeyTables)
+    {
+        foreach (var foreignKeyTable in foreignKeyTables)
+        {
+            var foreignKeyName = GetDefaultForeignKeyName(migration, foreignKeyTable);
+            var defaultForeignColumn = GetDefaultForeignColumn(foreignKeyTable);
+
+            create.ForeignKey(foreignKeyName)
+                  .FromTable(migration.TableName)
+                  .ForeignColumn(defaultForeignColumn)
+                  .ToTable(foreignKeyTable.TableName)
+                  .PrimaryColumn("Id");
+        }
+    }
+
+    public static void ForeignKeys(this ICreateExpressionRoot create, IDescribeSchemaTables migration, IEnumerable<IDescribeSchemaTables> foreignKeyTables)
+    {
+        create.ForeignKeys(migration, foreignKeyTables.ToArray());
+    }
+
+    public static void ForeignKeys(this ICreateExpressionRoot create, IDescribeSchemaTables migration, params IDescribeSchemaTables[] foreignKeyTables)
     {
         foreach (var foreignKeyTable in foreignKeyTables)
         {
@@ -31,12 +54,28 @@ public static class MigrationExtensions
         }
     }
 
-    public static void ForeignKeys(this IDeleteExpressionRoot create, IDescribeTables migration, IEnumerable<IDescribeTables> foreignKeyTables)
+    public static void ForeignKeys(this IDeleteExpressionRoot delete, IDescribeTables migration, IEnumerable<IDescribeTables> foreignKeyTables)
     {
-        ForeignKeys(create, migration, foreignKeyTables.ToArray());
+        delete.ForeignKeys(migration, foreignKeyTables.ToArray());
     }
 
     public static void ForeignKeys(this IDeleteExpressionRoot delete, IDescribeTables migration, params IDescribeTables[] foreignKeyTables)
+    {
+        foreach (var foreignKeyTable in foreignKeyTables)
+        {
+            var foreignKeyName = GetDefaultForeignKeyName(migration, foreignKeyTable);
+
+            delete.ForeignKey(foreignKeyName)
+                  .OnTable(migration.TableName);
+        }
+    }
+
+    public static void ForeignKeys(this IDeleteExpressionRoot delete, IDescribeSchemaTables migration, IEnumerable<IDescribeSchemaTables> foreignKeyTables)
+    {
+        delete.ForeignKeys(migration, foreignKeyTables.ToArray());
+    }
+
+    public static void ForeignKeys(this IDeleteExpressionRoot delete, IDescribeSchemaTables migration, params IDescribeSchemaTables[] foreignKeyTables)
     {
         foreach (var foreignKeyTable in foreignKeyTables)
         {

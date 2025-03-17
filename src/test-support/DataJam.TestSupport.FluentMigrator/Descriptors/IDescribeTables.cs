@@ -3,7 +3,7 @@
 using JetBrains.Annotations;
 
 [PublicAPI]
-public interface IDescribeTables : IDescribeSchemas
+public interface IDescribeTables
 {
     public string TableName { get; }
 }

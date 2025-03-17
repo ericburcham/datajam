@@ -3,4 +3,4 @@
 using JetBrains.Annotations;
 
 [PublicAPI]
-public record TableDescriptor(string SchemaName, string TableName) : SchemaDescriptor(SchemaName), IDescribeTables;
+public record TableDescriptor(string TableName) : IDescribeTables;

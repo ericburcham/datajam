@@ -11,7 +11,7 @@ public class Migration202503141039CreateChildTable : FamilyTableMigration
 {
     public override string TableName => "Child";
 
-    private IEnumerable<TableDescriptor> ForeignKeys
+    private IEnumerable<SchemaTableDescriptor> ForeignKeys
     {
         get
         {
