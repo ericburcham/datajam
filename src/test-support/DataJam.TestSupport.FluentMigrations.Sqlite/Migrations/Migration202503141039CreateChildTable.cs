@@ -1,6 +1,6 @@
 namespace DataJam.TestSupport.FluentMigrations.Sqlite.Migrations;
 
-using DataJam.TestSupport.FluentMigrator.Core;
+using FluentMigrator.Core;
 
 using global::FluentMigrator;
 

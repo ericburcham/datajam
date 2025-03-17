@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 
 using TestSupport.Dependencies;
 using TestSupport.Dependencies.Sqlite;
-using TestSupport.FluentMigrations;
 using TestSupport.FluentMigrations.Sqlite.Deployers;
 
 [SetUpFixture]
