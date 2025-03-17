@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 using DotNet.Testcontainers.Containers;
 
-public class ContainerAdapter<T>(T container) : TestDependency<T>(container), IAsyncStartableTestDependency<T>, IAsyncDisposable
+public class ContainerAdapter<T>(T container) : TestDependency<T>(container), IAsyncStartableTestDependency, IAsyncDisposable
     where T : class, IContainer
 {
     public async ValueTask DisposeAsync()

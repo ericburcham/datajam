@@ -1,6 +1,6 @@
 namespace DataJam.TestSupport.Dependencies;
 
-public abstract class TestDependency<T>(T dependency) : ITestDependency<T>
+public abstract class TestDependency<T>(T dependency) : ITestDependency
     where T : class
 {
     public T Dependency { get; } = dependency;

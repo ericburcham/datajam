@@ -39,8 +39,3 @@ public interface IAsyncStartableTestDependency : IStartableTestDependency
     /// <exception cref="TaskCanceledException">Thrown when a task gets canceled.</exception>
     Task StopAsync(CancellationToken ct = default);
 }
-
-/// <summary>Provides a strongly-typed interface for test dependencies that can be started and stopped asynchronously.</summary>
-[PublicAPI]
-public interface IAsyncStartableTestDependency<out T> : IAsyncStartableTestDependency, IStartableTestDependency<T>
-    where T : class;

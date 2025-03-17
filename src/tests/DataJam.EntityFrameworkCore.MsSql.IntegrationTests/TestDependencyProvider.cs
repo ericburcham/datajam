@@ -20,7 +20,7 @@ internal class TestDependencyProvider : CompositeTestDependencyProvider
     public static TestDependencyProvider Instance => _instance.Value;
 }
 
-internal class UselessTestDependency : IStartableTestDependency<string>, IDisposable
+internal class UselessTestDependency : IStartableTestDependency, IDisposable
 {
     public string Dependency => string.Empty;
 
