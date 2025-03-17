@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="FluentMigrator.Runner.SQLite"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\DataJam.TestSupport.FluentMigrator.Core\DataJam.TestSupport.FluentMigrator.Core.csproj"/>
+    </ItemGroup>
+
+</Project>

@@ -62,11 +62,3 @@ public class SqliteTestDependency : IStartableTestDependency, IDisposable
         SqliteConnection.ClearAllPools();
     }
 }
-
-public class SqliteTestDependencyBuilder : TestDependencyBuilder<SqliteTestDependency>
-{
-    public override SqliteTestDependency Build()
-    {
-        return new();
-    }
-}
