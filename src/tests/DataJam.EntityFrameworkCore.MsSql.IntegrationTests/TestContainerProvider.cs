@@ -10,7 +10,7 @@ internal class TestContainerProvider : CompositeContainerProvider
 
     private TestContainerProvider()
     {
-        Register(ContainerNames.SQL_SERVER, new DefaultMsSqlTestContainerBuilder());
+        Register(ContainerConstants.MSSQL_CONTAINER_NAME, new DefaultMsSqlTestContainerBuilder());
     }
 
     public static TestContainerProvider Instance => _instance.Value;

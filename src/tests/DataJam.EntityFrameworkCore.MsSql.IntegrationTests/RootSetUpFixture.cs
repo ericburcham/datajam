@@ -20,9 +20,9 @@ internal class RootSetUpFixture() : TestContainerSetUpFixture<TestContainerProvi
 
     private static async Task DeployMsSql()
     {
-        var sqlContainer = RegisteredContainers.Get<MsSqlContainer>(ContainerNames.SQL_SERVER);
+        var sqlContainer = RegisteredContainers.Get<MsSqlContainer>(ContainerConstants.MSSQL_CONTAINER_NAME);
         var connectionString = sqlContainer.GetConnectionString();
-        var connectionStringBuilder = new SqlConnectionStringBuilder(connectionString) { InitialCatalog = "test-db" };
+        var connectionStringBuilder = new SqlConnectionStringBuilder(connectionString) { InitialCatalog = ContainerConstants.MSSQL_TEST_DB };
         connectionString = connectionStringBuilder.ConnectionString;
         var databaseDeployer = new MsSqlDatabaseDeployer(connectionString);
         await databaseDeployer.Deploy().ConfigureAwait(false);

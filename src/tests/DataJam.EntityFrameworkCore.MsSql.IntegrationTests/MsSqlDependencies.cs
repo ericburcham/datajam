@@ -14,12 +14,10 @@ public class MsSqlDependencies : Singleton<MsSqlDependencies>, IProvideDbContext
     {
         get
         {
-            var sqlContainer = RegisteredContainers.Get<MsSqlContainer>(ContainerNames.SQL_SERVER);
-            var connectionString = sqlContainer.GetConnectionString();
-            var connectionStringBuilder = new SqlConnectionStringBuilder(connectionString) { InitialCatalog = "test-db" };
-            connectionString = connectionStringBuilder.ConnectionString;
+            var sqlContainer = RegisteredContainers.Get<MsSqlContainer>(ContainerConstants.MSSQL_CONTAINER_NAME);
+            var connectionStringBuilder = new SqlConnectionStringBuilder(sqlContainer.GetConnectionString()) { InitialCatalog = ContainerConstants.MSSQL_TEST_DB };
 
-            return new DbContextOptionsBuilder().UseSqlServer(connectionString).Options;
+            return new DbContextOptionsBuilder().UseSqlServer(connectionStringBuilder.ConnectionString).Options;
         }
     }
 }
