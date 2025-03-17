@@ -49,12 +49,12 @@ public abstract class TestDependencySetUpFixture<T> : IAsyncDisposable, IDisposa
     {
         await Parallel.ForEachAsync(
             Dependencies,
-            async (dependency, token) =>
+            async (dependency, ct) =>
             {
                 switch (dependency)
                 {
                     case IAsyncStartableTestDependency startable:
-                        await startable.StopAsync(token);
+                        await startable.StopAsync(ct);
 
                         break;
 
@@ -71,12 +71,12 @@ public abstract class TestDependencySetUpFixture<T> : IAsyncDisposable, IDisposa
     {
         await Parallel.ForEachAsync(
             Dependencies,
-            async (dependency, token) =>
+            async (dependency, ct) =>
             {
                 switch (dependency)
                 {
                     case IAsyncStartableTestDependency startable:
-                        await startable.StartAsync(token);
+                        await startable.StartAsync(ct);
 
                         break;
 
