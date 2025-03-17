@@ -10,8 +10,7 @@ public class WhenPersistingAndRetrievingAChild() : TestSupport.TestPatterns.Fami
         var mappingConfigurator = new MappingConfigurator();
         var domain = new FamilyDomain(MsSqlDependencies.Instance.Options, mappingConfigurator);
         var domainContext = new DomainContext<FamilyDomain>(domain);
-        var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 
-        return domainRepository;
+        return new DomainRepository<FamilyDomain>(domainContext);
     }
 }

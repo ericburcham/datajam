@@ -1,18 +1,16 @@
 <Project>
-
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
-
   <ItemGroup>
     <!-- Microsoft packages -->
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+    <PackageVersion Include="Microsoft.Data.Sqlite.Core" Version="8.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.10" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
-
     <!-- Other packages -->
     <PackageVersion Include="dbup-mysql" Version="5.0.44" />
     <PackageVersion Include="dbup-sqlite" Version="5.0.40" />
@@ -38,5 +36,4 @@
     </PackageVersion>
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
   </ItemGroup>
-
 </Project>

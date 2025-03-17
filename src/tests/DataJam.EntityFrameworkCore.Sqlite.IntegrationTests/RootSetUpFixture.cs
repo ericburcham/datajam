@@ -1,38 +1,29 @@
 ﻿namespace DataJam.EntityFrameworkCore.Sqlite.IntegrationTests;
 
-using System.IO;
 using System.Threading.Tasks;
 
-using Microsoft.Data.Sqlite;
+using TestSupport.Dependencies;
+using TestSupport.Dependencies.Sqlite;
 
 [SetUpFixture]
-public class RootSetUpFixture
+internal class RootSetUpFixture : TestDependencySetUpFixture<TestDependencyProvider>
 {
-    [OneTimeSetUp]
-    public async Task OneTimeSetUp()
+    public RootSetUpFixture()
+        : base(TestDependencyProvider.Instance)
     {
-        await DeploySqlite().ConfigureAwait(false);
     }
 
-    [OneTimeTearDown]
-    public Task OneTimeTearDown()
+    public override async Task RunBeforeAllTests()
     {
-        SqliteConnection.ClearAllPools();
-        var sqlLiteConnectionString = SqliteDependencies.SqliteMockContainer.GetConnectionString();
-        var connectionStringBuilder = new SqliteConnectionStringBuilder(sqlLiteConnectionString);
-        var path = connectionStringBuilder.DataSource;
+        await base.RunBeforeAllTests();
 
-        if (File.Exists(path))
-        {
-            File.Delete(path);
-        }
-
-        return Task.CompletedTask;
+        await DeploySqlite();
     }
 
     private static async Task DeploySqlite()
     {
-        var connectionString = SqliteDependencies.SqliteMockContainer.GetConnectionString();
+        var sqliteDb = RegisteredTestDependencies.Get<SqliteTestDependency>(DependencyConstants.SQLITE_DEPENDENCY_NAME);
+        var connectionString = sqliteDb.GetConnectionString();
         var databaseDeployer = new SqliteDatabaseDeployer(connectionString);
         await databaseDeployer.Deploy().ConfigureAwait(false);
     }

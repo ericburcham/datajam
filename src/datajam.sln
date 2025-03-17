@@ -65,6 +65,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Depende
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Dependencies.TestContainers", "test-support\DataJam.TestSupport.Dependencies.TestContainers\DataJam.TestSupport.Dependencies.TestContainers.csproj", "{15FB9707-96EB-422C-816B-DC82F4C0922D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Dependencies.Sqlite", "test-support\DataJam.TestSupport.Dependencies.Sqlite\DataJam.TestSupport.Dependencies.Sqlite.csproj", "{CA6D2921-1721-4A71-9AE4-D78C976900AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -131,6 +133,10 @@ Global
 		{15FB9707-96EB-422C-816B-DC82F4C0922D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15FB9707-96EB-422C-816B-DC82F4C0922D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15FB9707-96EB-422C-816B-DC82F4C0922D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA6D2921-1721-4A71-9AE4-D78C976900AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA6D2921-1721-4A71-9AE4-D78C976900AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA6D2921-1721-4A71-9AE4-D78C976900AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA6D2921-1721-4A71-9AE4-D78C976900AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 		{3DE79801-3B11-41EC-9215-56BB49C90520} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 		{7FFAED14-37B9-4DCC-81EE-FD67E19D1863} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 		{15FB9707-96EB-422C-816B-DC82F4C0922D} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{CA6D2921-1721-4A71-9AE4-D78C976900AE} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}

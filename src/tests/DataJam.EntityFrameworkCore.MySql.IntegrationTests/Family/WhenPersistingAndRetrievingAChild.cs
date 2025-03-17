@@ -2,6 +2,7 @@
 
 using TestSupport.EntityFrameworkCore;
 
+[TestFixture]
 public class WhenPersistingAndRetrievingAChild() : TestSupport.TestPatterns.Family.WhenPersistingAndRetrievingAChild(BuildRepo())
 {
     private static IRepository BuildRepo()
@@ -9,8 +10,7 @@ public class WhenPersistingAndRetrievingAChild() : TestSupport.TestPatterns.Fami
         var mappingConfigurator = new MappingConfigurator();
         var domain = new FamilyDomain(MySqlDependencies.Instance.Options, mappingConfigurator);
         var domainContext = new DomainContext<FamilyDomain>(domain);
-        var domainRepository = new DomainRepository<FamilyDomain>(domainContext);
 
-        return domainRepository;
+        return new DomainRepository<FamilyDomain>(domainContext);
     }
 }
