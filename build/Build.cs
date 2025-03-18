@@ -1,5 +1,7 @@
 using Nuke.Common;
 using Nuke.Common.CI.GitHubActions;
+using Nuke.Common.Git;
+using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
 
@@ -14,13 +16,19 @@ class Build : NukeBuild
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
     readonly Configuration Configuration = IsLocalBuild ? Configuration.Debug : Configuration.Release;
 
+    [GitRepository] readonly GitRepository GitRepository;
+
     [Solution] readonly Solution Solution;
+
+    AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
 
     Target Clean =>
         x => x
             .Before(Restore)
             .Executes(() =>
              {
+                 ArtifactsDirectory.CreateOrCleanDirectory();
+
                  DotNetClean(o => o
                                  .SetConfiguration(Configuration)
                                  .SetProject(Solution.Path));
@@ -37,7 +45,33 @@ class Build : NukeBuild
                                  .SetProjectFile(Solution));
              });
 
-    Target Default => x => x.DependsOn(Test);
+    Target Default => x => x.DependsOn(Pack);
+
+    Target Pack =>
+        x => x
+            .DependsOn(Test)
+            .Executes(() =>
+             {
+                 DotNetPack(o => o
+                                .SetConfiguration(Configuration)
+                                .SetNoBuild(true)
+                                .SetOutputDirectory(ArtifactsDirectory)
+                                .SetProject(Solution));
+             })
+            .Produces(ArtifactsDirectory / "*.nupkg");
+
+    Target Publish =>
+        x => x
+            .DependsOn(Pack)
+            .TriggeredBy(Pack)
+            .Executes(() =>
+             {
+                 DotNetPublish(o => o
+                                   .SetConfiguration(Configuration)
+                                   .SetNoBuild(true)
+                                   .SetProject(Solution));
+             })
+            .OnlyWhenStatic(() => ShouldPublish);
 
     Target Restore =>
         x => x
@@ -47,6 +81,8 @@ class Build : NukeBuild
                  DotNetRestore(o => o
                                   .SetProjectFile(Solution));
              });
+
+    bool ShouldPublish => GitRepository.IsOnMainOrMasterBranch();
 
     Target Test =>
         x => x
@@ -64,5 +100,5 @@ class Build : NukeBuild
     /// - JetBrains Rider            https://nuke.build/rider
     /// - Microsoft VisualStudio     https://nuke.build/visualstudio
     /// - Microsoft VSCode           https://nuke.build/vscode
-    public static int Main() => Execute<Build>(x => x.Test);
+    public static int Main() => Execute<Build>(x => x.Default);
 }

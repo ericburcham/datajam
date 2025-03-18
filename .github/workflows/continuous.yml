@@ -33,3 +33,8 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
       - name: 'Run: Default'
         run: ./build.cmd Default
+      - name: 'Publish: artifacts'
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifacts
+          path: artifacts

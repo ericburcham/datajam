@@ -27,6 +27,8 @@
         "Clean",
         "Compile",
         "Default",
+        "Pack",
+        "Publish",
         "Restore",
         "Test"
       ]
