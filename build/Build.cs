@@ -8,7 +8,7 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 [GitHubActions("continuous",
                GitHubActionsImage.UbuntuLatest,
                On = [GitHubActionsTrigger.Push],
-               InvokedTargets = [nameof(Compile)])]
+               InvokedTargets = [nameof(Default)])]
 class Build : NukeBuild
 {
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
@@ -17,35 +17,44 @@ class Build : NukeBuild
     [Solution] readonly Solution Solution;
 
     Target Clean =>
-        _ => _
+        x => x
             .Before(Restore)
             .Executes(() =>
              {
-                 DotNetClean(_ => _.SetProject(Solution.Path));
+                 DotNetClean(o => o
+                                 .SetConfiguration(Configuration)
+                                 .SetProject(Solution.Path));
              });
 
     Target Compile =>
-        _ => _
+        x => x
             .DependsOn(Restore)
             .Executes(() =>
              {
-                 DotNetBuild(x => x.SetProjectFile(Solution));
+                 DotNetBuild(o => o
+                                 .SetConfiguration(Configuration)
+                                 .SetProjectFile(Solution));
              });
 
+    Target Default => x => x.DependsOn(Test);
+
     Target Restore =>
-        _ => _
+        x => x
             .DependsOn(Clean)
             .Executes(() =>
              {
-                 DotNetRestore(x => x.SetProjectFile(Solution));
+                 DotNetRestore(o => o
+                                  .SetProjectFile(Solution));
              });
 
     Target Test =>
-        _ => _
+        x => x
             .DependsOn(Compile)
             .Executes(() =>
              {
-                 DotNetTest(x => x.SetProjectFile(Solution));
+                 DotNetTest(o => o
+                                .SetConfiguration(Configuration)
+                                .SetProjectFile(Solution));
              });
 
     /// Support plugins are available for:
