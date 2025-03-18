@@ -18,8 +18,8 @@
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.Dependencies.Sqlite\DataJam.TestSupport.Dependencies.Sqlite.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.Dependencies\DataJam.TestSupport.Dependencies.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.EntityFrameworkCore\DataJam.TestSupport.EntityFrameworkCore.csproj"/>
-        <ProjectReference Include="..\..\test-support\DataJam.TestSupport.FluentMigrations.Sqlite\DataJam.TestSupport.FluentMigrations.Sqlite.csproj" />
-        <ProjectReference Include="..\..\test-support\DataJam.TestSupport.FluentMigrations\DataJam.TestSupport.FluentMigrations.csproj" />
+        <ProjectReference Include="..\..\test-support\DataJam.TestSupport.Migrations.Sqlite\DataJam.TestSupport.Migrations.Sqlite.csproj" />
+        <ProjectReference Include="..\..\test-support\DataJam.TestSupport.Migrations\DataJam.TestSupport.Migrations.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.TestPatterns\DataJam.TestSupport.TestPatterns.csproj"/>
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport\DataJam.TestSupport.csproj"/>
     </ItemGroup>

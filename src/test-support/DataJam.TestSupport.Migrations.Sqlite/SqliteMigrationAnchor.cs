@@ -1,4 +1,4 @@
-namespace DataJam.TestSupport.FluentMigrations.Sqlite;
+namespace DataJam.TestSupport.Migrations.Sqlite;
 
 using JetBrains.Annotations;
 

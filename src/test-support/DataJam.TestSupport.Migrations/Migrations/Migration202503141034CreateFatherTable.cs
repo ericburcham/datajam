@@ -1,4 +1,4 @@
-namespace DataJam.TestSupport.FluentMigrations;
+namespace DataJam.TestSupport.Migrations;
 
 using Abstract;
 

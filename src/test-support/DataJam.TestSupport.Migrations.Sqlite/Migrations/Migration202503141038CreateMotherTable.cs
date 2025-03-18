@@ -1,13 +1,13 @@
-namespace DataJam.TestSupport.FluentMigrations.Sqlite.Migrations;
+namespace DataJam.TestSupport.Migrations.Sqlite.Migrations;
 
 using FluentMigrator.Core;
 
 using global::FluentMigrator;
 
-[TimestampedMigration(2025, 03, 14, 10, 34, "Creates the Father table.")]
-public class Migration202503141034CreateFatherTable : TableMigration
+[TimestampedMigration(2025, 03, 14, 10, 38, "Creates the Mother table.")]
+public class Migration202503141038CreateMotherTable : TableMigration
 {
-    public override string TableName => "Father";
+    public override string TableName => "Mother";
 
     public override void Down()
     {
