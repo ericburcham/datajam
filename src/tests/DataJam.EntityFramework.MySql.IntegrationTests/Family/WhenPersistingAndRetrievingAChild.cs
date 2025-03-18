@@ -1,5 +1,7 @@
 namespace DataJam.EntityFramework.MySql.IntegrationTests.Family;
 
+using System;
+
 using NUnit.Framework;
 
 using TestSupport.EntityFramework;
@@ -7,15 +9,16 @@ using TestSupport.EntityFramework;
 [TestFixture]
 public class WhenPersistingAndRetrievingAChild : TestSupport.TestPatterns.Family.WhenPersistingAndRetrievingAChild
 {
-    protected override IRepository Repository
-    {
-        get
-        {
-            var mappingConfigurator = new MappingConfigurator();
-            var domain = new EFDomain(MySqlDependencies.Options, mappingConfigurator);
-            var domainContext = new MySqlDomainContext(domain);
+    private readonly Lazy<IRepository> _repository = new(ValueFactory);
 
-            return new DomainRepository<EFFamilyDomain>(domainContext);
-        }
+    protected override IRepository Repository => _repository.Value;
+
+    private static DomainRepository<EFFamilyDomain> ValueFactory()
+    {
+        var mappingConfigurator = new MappingConfigurator();
+        var domain = new EFDomain(MySqlDependencies.Options, mappingConfigurator);
+        var domainContext = new MySqlDomainContext(domain);
+
+        return new(domainContext);
     }
 }
