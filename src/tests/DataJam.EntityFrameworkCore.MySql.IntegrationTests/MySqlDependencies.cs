@@ -2,16 +2,18 @@
 
 using global::MySql.Data.MySqlClient;
 
+using JetBrains.Annotations;
+
 using Microsoft.EntityFrameworkCore;
 
 using Testcontainers.MySql;
 
 using TestSupport.Dependencies;
-using TestSupport.EntityFrameworkCore;
 
-public class MySqlDependencies : Singleton<MySqlDependencies>, IProvideDbContextOptions
+[UsedImplicitly]
+public class MySqlDependencies
 {
-    public DbContextOptions Options
+    public static DbContextOptions Options
     {
         get
         {

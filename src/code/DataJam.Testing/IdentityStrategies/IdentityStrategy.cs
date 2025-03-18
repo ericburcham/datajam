@@ -74,7 +74,7 @@ public abstract class IdentityStrategy<T, TIdentity> : IIdentityStrategy<T>
         }
     }
 
-    private PropertyInfo GetPropertyFromExpression(Expression<Func<T, TIdentity>> propertyExpression)
+    private static PropertyInfo GetPropertyFromExpression(Expression<Func<T, TIdentity>> propertyExpression)
     {
         MemberExpression memberExpression;
 
@@ -88,7 +88,7 @@ public abstract class IdentityStrategy<T, TIdentity> : IIdentityStrategy<T>
             }
             else
             {
-                throw new ArgumentException();
+                throw new ArgumentException(null, nameof(propertyExpression));
             }
         }
         else if (propertyExpression.Body is MemberExpression body)
@@ -97,7 +97,7 @@ public abstract class IdentityStrategy<T, TIdentity> : IIdentityStrategy<T>
         }
         else
         {
-            throw new ArgumentException();
+            throw new ArgumentException(null, nameof(propertyExpression));
         }
 
         return (PropertyInfo)memberExpression.Member;

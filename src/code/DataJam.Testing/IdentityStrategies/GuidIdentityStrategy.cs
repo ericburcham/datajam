@@ -14,7 +14,7 @@ internal class GuidIdentityStrategy<T> : IdentityStrategy<T, Guid>
 
     protected override bool DefaultValueIsUnset(Guid id)
     {
-        return id == default;
+        return id == Guid.Empty;
     }
 
     private Guid GenerateGuid()

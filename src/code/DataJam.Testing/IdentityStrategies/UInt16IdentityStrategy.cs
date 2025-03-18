@@ -14,7 +14,7 @@ internal class UInt16IdentityStrategy<T> : IdentityStrategy<T, ushort>
 
     protected override bool DefaultValueIsUnset(ushort id)
     {
-        return id == default;
+        return id == 0;
     }
 
     private ushort GenerateUInt16()

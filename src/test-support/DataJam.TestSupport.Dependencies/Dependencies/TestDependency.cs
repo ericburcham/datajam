@@ -1,5 +1,8 @@
 namespace DataJam.TestSupport.Dependencies;
 
+using JetBrains.Annotations;
+
+[PublicAPI]
 public abstract class TestDependency<T>(T dependency) : ITestDependency
     where T : class
 {

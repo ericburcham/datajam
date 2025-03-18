@@ -1,15 +1,17 @@
 ﻿namespace DataJam.EntityFrameworkCore.Sqlite.IntegrationTests;
 
+using JetBrains.Annotations;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 using TestSupport.Dependencies;
 using TestSupport.Dependencies.Sqlite;
-using TestSupport.EntityFrameworkCore;
 
-public class SqliteDependencies : Singleton<SqliteDependencies>, IProvideDbContextOptions
+[UsedImplicitly]
+public class SqliteDependencies
 {
-    public DbContextOptions Options
+    public static DbContextOptions Options
     {
         get
         {

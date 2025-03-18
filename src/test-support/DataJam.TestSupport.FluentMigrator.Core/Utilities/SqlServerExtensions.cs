@@ -3,8 +3,11 @@ namespace DataJam.TestSupport.FluentMigrator.Core;
 using System;
 using System.Data;
 
+using JetBrains.Annotations;
+
 using Microsoft.Data.SqlClient;
 
+[PublicAPI]
 public static class SqlServerExtensions
 {
     public static void SqlDatabase(this SupportedDatabasesForEnsureDatabase supported, string connectionString, int timeout = -1, string? collation = null)

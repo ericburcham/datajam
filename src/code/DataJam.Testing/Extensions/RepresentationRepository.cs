@@ -85,7 +85,7 @@ internal sealed class RepresentationRepository
         return success;
     }
 
-    private IEnumerable<Representation> AddRelatedObjects<T>(T item)
+    private List<Representation> AddRelatedObjects<T>(T item)
     {
         var reps = GetSingleRelationship(item).ToList();
         reps.AddRange(GetEnumerableRelationships(item));
@@ -206,7 +206,7 @@ internal sealed class RepresentationRepository
         }
     }
 
-    private IEnumerable<Representation> GetEnumerableRelationships<T>(T item)
+    private List<Representation> GetEnumerableRelationships<T>(T item)
     {
         var representations = new List<Representation>();
 
@@ -230,7 +230,7 @@ internal sealed class RepresentationRepository
         return representations;
     }
 
-    private IEnumerable<Representation> GetSingleRelationship<T>(T item)
+    private List<Representation> GetSingleRelationship<T>(T item)
     {
         var representations = new List<Representation>();
 

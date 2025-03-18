@@ -6,6 +6,4 @@ using JetBrains.Annotations;
 /// <typeparam name="T">The Type of the domain for this domain context.</typeparam>
 [PublicAPI]
 public interface IDomainContext<in T> : IDataContext
-    where T : class
-{
-}
+    where T : class;
