@@ -4,7 +4,7 @@
     <Import Project="../Directory.Build.props"/>
 
     <PropertyGroup>
-        <IsPackable>True</IsPackable>
+        <IsPackable>False</IsPackable>
     </PropertyGroup>
 
     <!-- Include Stylecop.json -->

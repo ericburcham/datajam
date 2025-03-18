@@ -1,10 +1,4 @@
-﻿// -----------------------------------------------------------------------
-// <copyright file="ReadonlyDbContext.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-
-namespace DataJam.EntityFramework.DbContexts;
+﻿namespace DataJam.EntityFramework;
 
 using System;
 using System.Data.Common;
@@ -48,11 +42,6 @@ using System.Threading.Tasks;
 public class ReadonlyDbContext : DbContext
 {
     /// <inheritdoc />
-    public ReadonlyDbContext()
-    {
-    }
-
-    /// <inheritdoc />
     public ReadonlyDbContext(string nameOrConnectionString)
         : base(nameOrConnectionString)
     {
@@ -82,6 +71,11 @@ public class ReadonlyDbContext : DbContext
     /// <inheritdoc />
     public ReadonlyDbContext(ObjectContext objectContext, bool dbContextOwnsObjectContext)
         : base(objectContext, dbContextOwnsObjectContext)
+    {
+    }
+
+    /// <inheritdoc />
+    protected ReadonlyDbContext()
     {
     }
 
