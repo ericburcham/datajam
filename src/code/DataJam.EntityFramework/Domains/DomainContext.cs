@@ -8,8 +8,3 @@ using JetBrains.Annotations;
 [PublicAPI]
 public class DomainContext<T>(T domain) : DataContext(domain.ConfigurationOptions, domain.MappingConfigurator), IDomainContext<T>
     where T : class, IEFDomain;
-
-#pragma warning disable SA1600
-public class DbConnectionDomainContext<T>(T domain, bool contextOwnsConnection)
-    : DataContext(domain.ConfigurationOptions, contextOwnsConnection, domain.MappingConfigurator), IDomainContext<T>
-    where T : class, IEFDbConnectionDomain;

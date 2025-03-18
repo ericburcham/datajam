@@ -4,17 +4,19 @@ using System.Data.Entity;
 
 using global::MySql.Data.EntityFramework;
 
+using TestSupport.EntityFramework;
+
 public class WhenPersistingAndRetrievingAChild() : TestSupport.TestPatterns.Family.WhenPersistingAndRetrievingAChild(BuildRepo())
 {
-    private static DomainRepository<EFDbConnectionDomain> BuildRepo()
+    private static DomainRepository<EFFamilyDomain> BuildRepo()
     {
         var mappingConfigurator = new MappingConfigurator();
-        var domain = new EFDbConnectionDomain(MySqlDependencies.Options, mappingConfigurator);
-        var domainContext = new FooContext(domain, true);
+        var domain = new EFDomain(MySqlDependencies.Options, mappingConfigurator);
+        var domainContext = new MySqlDomainContext(domain);
 
         return new(domainContext);
     }
 }
 
 [DbConfigurationType(typeof(MySqlEFConfiguration))]
-internal class FooContext(EFDbConnectionDomain domain, bool contextOwnsConnection) : DbConnectionDomainContext<EFDbConnectionDomain>(domain, contextOwnsConnection);
+internal class MySqlDomainContext(EFDomain domain) : DomainContext<EFDomain>(domain);
