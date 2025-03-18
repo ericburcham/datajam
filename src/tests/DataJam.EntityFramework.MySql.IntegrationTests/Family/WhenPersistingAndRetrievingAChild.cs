@@ -1,9 +1,5 @@
 namespace DataJam.EntityFramework.MySql.IntegrationTests.Family;
 
-using System.Data.Entity;
-
-using global::MySql.Data.EntityFramework;
-
 using TestSupport.EntityFramework;
 
 public class WhenPersistingAndRetrievingAChild() : TestSupport.TestPatterns.Family.WhenPersistingAndRetrievingAChild(BuildRepo())
@@ -17,6 +13,3 @@ public class WhenPersistingAndRetrievingAChild() : TestSupport.TestPatterns.Fami
         return new(domainContext);
     }
 }
-
-[DbConfigurationType(typeof(MySqlEFConfiguration))]
-internal class MySqlDomainContext(EFDomain domain) : DomainContext<EFDomain>(domain);
