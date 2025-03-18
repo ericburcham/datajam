@@ -5,14 +5,17 @@ using NUnit.Framework;
 using TestSupport.EntityFrameworkCore;
 
 [TestFixture]
-public class WhenPersistingAndRetrievingAChild() : TestSupport.TestPatterns.Family.WhenPersistingAndRetrievingAChild(BuildRepo())
+public class WhenPersistingAndRetrievingAChild : TestSupport.TestPatterns.Family.WhenPersistingAndRetrievingAChild
 {
-    private static DomainRepository<EFCoreFamilyDomain> BuildRepo()
+    protected override IRepository Repository
     {
-        var mappingConfigurator = new MappingConfigurator();
-        var domain = new EFCoreFamilyDomain(MsSqlDependencies.Options, mappingConfigurator);
-        var domainContext = new DomainContext<EFCoreFamilyDomain>(domain);
+        get
+        {
+            var mappingConfigurator = new MappingConfigurator();
+            var domain = new EFCoreFamilyDomain(MsSqlDependencies.Options, mappingConfigurator);
+            var domainContext = new DomainContext<EFCoreFamilyDomain>(domain);
 
-        return new(domainContext);
+            return new DomainRepository<EFCoreFamilyDomain>(domainContext);
+        }
     }
 }

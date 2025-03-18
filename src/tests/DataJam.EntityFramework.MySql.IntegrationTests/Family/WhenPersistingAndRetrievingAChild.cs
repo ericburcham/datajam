@@ -1,15 +1,21 @@
 namespace DataJam.EntityFramework.MySql.IntegrationTests.Family;
 
+using NUnit.Framework;
+
 using TestSupport.EntityFramework;
 
-public class WhenPersistingAndRetrievingAChild() : TestSupport.TestPatterns.Family.WhenPersistingAndRetrievingAChild(BuildRepo())
+[TestFixture]
+public class WhenPersistingAndRetrievingAChild : TestSupport.TestPatterns.Family.WhenPersistingAndRetrievingAChild
 {
-    private static DomainRepository<EFFamilyDomain> BuildRepo()
+    protected override IRepository Repository
     {
-        var mappingConfigurator = new MappingConfigurator();
-        var domain = new EFDomain(MySqlDependencies.Options, mappingConfigurator);
-        var domainContext = new MySqlDomainContext(domain);
+        get
+        {
+            var mappingConfigurator = new MappingConfigurator();
+            var domain = new EFDomain(MySqlDependencies.Options, mappingConfigurator);
+            var domainContext = new MySqlDomainContext(domain);
 
-        return new(domainContext);
+            return new DomainRepository<EFFamilyDomain>(domainContext);
+        }
     }
 }

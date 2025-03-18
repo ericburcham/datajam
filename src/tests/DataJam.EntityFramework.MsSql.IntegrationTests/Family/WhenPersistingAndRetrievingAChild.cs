@@ -1,15 +1,21 @@
 namespace DataJam.EntityFramework.MsSql.IntegrationTests.Family;
 
+using NUnit.Framework;
+
 using TestSupport.EntityFramework;
 
-public class WhenPersistingAndRetrievingAChild() : TestSupport.TestPatterns.Family.WhenPersistingAndRetrievingAChild(BuildRepo())
+[TestFixture]
+public class WhenPersistingAndRetrievingAChild : TestSupport.TestPatterns.Family.WhenPersistingAndRetrievingAChild
 {
-    private static DomainRepository<EFFamilyDomain> BuildRepo()
+    protected override IRepository Repository
     {
-        var mappingConfigurator = new MappingConfigurator();
-        var domain = new EFFamilyDomain(MsSqlDependencies.Options, mappingConfigurator);
-        var domainContext = new DomainContext<EFFamilyDomain>(domain);
+        get
+        {
+            var mappingConfigurator = new MappingConfigurator();
+            var domain = new EFFamilyDomain(MsSqlDependencies.Options, mappingConfigurator);
+            var domainContext = new DomainContext<EFFamilyDomain>(domain);
 
-        return new(domainContext);
+            return new DomainRepository<EFFamilyDomain>(domainContext);
+        }
     }
 }
