@@ -6,18 +6,12 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 
 /// <summary>Provides a readonly implementation of the Repository pattern.</summary>
+/// <param name="domainContext">The data context to use.</param>
 [PublicAPI]
-public class ReadonlyRepository : IReadonlyRepository
+public class ReadonlyRepository(IReadonlyDataContext domainContext) : IReadonlyRepository
 {
-    /// <summary>Initializes a new instance of the <see cref="ReadonlyRepository" /> class.</summary>
-    /// <param name="domainContext">The data context to use.</param>
-    public ReadonlyRepository(IReadonlyDataContext domainContext)
-    {
-        Context = domainContext;
-    }
-
     /// <inheritdoc cref="IReadonlyRepository.Context" />
-    public IReadonlyDataContext Context { get; }
+    public IReadonlyDataContext Context { get; } = domainContext;
 
     /// <inheritdoc cref="IReadonlyRepository.Find{T}(IQuery{T})" />
     public IEnumerable<T> Find<T>(IQuery<T> query)

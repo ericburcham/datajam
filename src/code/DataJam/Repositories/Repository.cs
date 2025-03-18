@@ -6,18 +6,12 @@ using System.Threading.Tasks;
 using JetBrains.Annotations;
 
 /// <summary>Provides an implementation of the Repository pattern.</summary>
+/// <param name="dataContext">The data context to use.</param>
 [PublicAPI]
-public class Repository : IRepository
+public class Repository(IDataContext dataContext) : IRepository
 {
-    /// <summary>Initializes a new instance of the <see cref="Repository" /> class.</summary>
-    /// <param name="dataContext">The data context to use.</param>
-    public Repository(IDataContext dataContext)
-    {
-        Context = dataContext;
-    }
-
     /// <inheritdoc cref="IRepository.Context" />
-    public IDataContext Context { get; }
+    public IDataContext Context { get; } = dataContext;
 
     /// <inheritdoc cref="IRepository.Execute" />
     public void Execute(ICommand command)

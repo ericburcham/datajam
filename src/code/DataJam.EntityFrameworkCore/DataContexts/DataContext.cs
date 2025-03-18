@@ -8,19 +8,12 @@ using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 
 /// <summary>Provides a combination of the Unit Of Work and Repository patterns capable of both read and write operations.</summary>
+/// <param name="options">The configuration options.</param>
+/// <param name="mappingConfigurator">The mapping configurator to use.</param>
 [PublicAPI]
-public class DataContext : DbContext, IEFCoreDataContext
+public class DataContext(DbContextOptions options, IConfigureDomainMappings<ModelBuilder> mappingConfigurator) : DbContext(options), IEFCoreDataContext
 {
-    private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator;
-
-    /// <summary>Initializes a new instance of the <see cref="DataContext" /> class.</summary>
-    /// <param name="options">The configuration options.</param>
-    /// <param name="mappingConfigurator">The mapping configurator to use.</param>
-    public DataContext(DbContextOptions options, IConfigureDomainMappings<ModelBuilder> mappingConfigurator)
-        : base(options)
-    {
-        _mappingConfigurator = mappingConfigurator;
-    }
+    private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator = mappingConfigurator;
 
     /// <inheritdoc cref="IUnitOfWork.Add{T}" />
     public new T Add<T>(T item)

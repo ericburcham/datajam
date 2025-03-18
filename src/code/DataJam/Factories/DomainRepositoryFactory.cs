@@ -6,9 +6,10 @@ using System.Linq;
 using JetBrains.Annotations;
 
 /// <summary>Provides a simple factory for constructing domain repositories.</summary>
+/// <param name="domains">Domains to use when constructing domain repositories.</param>
 /// <typeparam name="TDomain">The concrete domain type from the derived implementation.</typeparam>
 [PublicAPI]
-public abstract class DomainRepositoryFactory<TDomain> : IDomainRepositoryFactory<TDomain>
+public abstract class DomainRepositoryFactory<TDomain>(params TDomain[] domains) : IDomainRepositoryFactory<TDomain>
     where TDomain : class
 {
     /// <summary>Initializes a new instance of the <see cref="DomainRepositoryFactory{TDomain}" /> class.</summary>
@@ -18,15 +19,8 @@ public abstract class DomainRepositoryFactory<TDomain> : IDomainRepositoryFactor
     {
     }
 
-    /// <summary>Initializes a new instance of the <see cref="DomainRepositoryFactory{TDomain}" /> class.</summary>
-    /// <param name="domains">Domains to use when constructing domain repositories.</param>
-    protected DomainRepositoryFactory(params TDomain[] domains)
-    {
-        Domains = domains;
-    }
-
     /// <summary>Gets the domains to use when constructing domain repositories.</summary>
-    protected TDomain[] Domains { get; }
+    protected TDomain[] Domains { get; } = domains;
 
     /// <inheritdoc cref="IDomainRepositoryFactory{TDomain}.Create{T}" />
     public IDomainRepository<T> Create<T>()

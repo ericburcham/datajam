@@ -1,5 +1,3 @@
-// ReSharper disable InconsistentNaming
-
 namespace DataJam.EntityFrameworkCore;
 
 using System.Collections.Generic;

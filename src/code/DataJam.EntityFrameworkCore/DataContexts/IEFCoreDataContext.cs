@@ -1,6 +1,4 @@
-﻿// ReSharper disable InconsistentNaming
-
-namespace DataJam.EntityFrameworkCore;
+﻿namespace DataJam.EntityFrameworkCore;
 
 using JetBrains.Annotations;
 
