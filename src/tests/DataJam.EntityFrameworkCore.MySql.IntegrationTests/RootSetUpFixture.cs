@@ -8,7 +8,7 @@ using Testcontainers.MySql;
 
 using TestSupport.Dependencies;
 using TestSupport.Dependencies.TestContainers;
-using TestSupport.FluentMigrations;
+using TestSupport.Migrations;
 
 [SetUpFixture]
 public class RootSetUpFixture() : TestContainerSetUpFixture<TestDependencyProvider>(TestDependencyProvider.Instance)

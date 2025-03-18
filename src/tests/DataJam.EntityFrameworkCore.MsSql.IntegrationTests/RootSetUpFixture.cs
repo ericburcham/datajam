@@ -8,7 +8,7 @@ using Testcontainers.MsSql;
 
 using TestSupport.Dependencies;
 using TestSupport.Dependencies.TestContainers;
-using TestSupport.FluentMigrations;
+using TestSupport.Migrations;
 
 [SetUpFixture]
 internal class RootSetUpFixture() : TestContainerSetUpFixture<TestDependencyProvider>(TestDependencyProvider.Instance)

@@ -59,7 +59,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore.Sqlite.IntegrationTests", "tests\DataJam.EntityFrameworkCore.Sqlite.IntegrationTests\DataJam.EntityFrameworkCore.Sqlite.IntegrationTests.csproj", "{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.FluentMigrations", "test-support\DataJam.TestSupport.FluentMigrations\DataJam.TestSupport.FluentMigrations.csproj", "{3DE79801-3B11-41EC-9215-56BB49C90520}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Migrations", "test-support\DataJam.TestSupport.Migrations\DataJam.TestSupport.Migrations.csproj", "{3DE79801-3B11-41EC-9215-56BB49C90520}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Dependencies", "test-support\DataJam.TestSupport.Dependencies\DataJam.TestSupport.Dependencies.csproj", "{7FFAED14-37B9-4DCC-81EE-FD67E19D1863}"
 EndProject
@@ -69,7 +69,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Depende
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.FluentMigrator.Core", "test-support\DataJam.TestSupport.FluentMigrator.Core\DataJam.TestSupport.FluentMigrator.Core.csproj", "{2A879C45-975B-4A22-90D9-28B01606B53D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.FluentMigrations.Sqlite", "test-support\DataJam.TestSupport.FluentMigrations.Sqlite\DataJam.TestSupport.FluentMigrations.Sqlite.csproj", "{CA52E4B5-7D63-4442-AAFD-32EE4822E74E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Migrations.Sqlite", "test-support\DataJam.TestSupport.Migrations.Sqlite\DataJam.TestSupport.Migrations.Sqlite.csproj", "{CA52E4B5-7D63-4442-AAFD-32EE4822E74E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

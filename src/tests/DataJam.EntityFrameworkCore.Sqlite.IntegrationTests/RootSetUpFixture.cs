@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 using TestSupport.Dependencies;
 using TestSupport.Dependencies.Sqlite;
-using TestSupport.FluentMigrations.Sqlite.Deployers;
+using TestSupport.Migrations.Sqlite.Deployers;
 
 [SetUpFixture]
 internal class RootSetUpFixture : TestDependencySetUpFixture<TestDependencyProvider>

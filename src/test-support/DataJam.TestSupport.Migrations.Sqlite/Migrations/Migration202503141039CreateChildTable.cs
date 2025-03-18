@@ -1,4 +1,4 @@
-namespace DataJam.TestSupport.FluentMigrations.Sqlite.Migrations;
+namespace DataJam.TestSupport.Migrations.Sqlite.Migrations;
 
 using FluentMigrator.Core;
 

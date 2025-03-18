@@ -1,4 +1,4 @@
-namespace DataJam.TestSupport.FluentMigrations.Abstract;
+namespace DataJam.TestSupport.Migrations.Abstract;
 
 using FluentMigrator.Core;
 

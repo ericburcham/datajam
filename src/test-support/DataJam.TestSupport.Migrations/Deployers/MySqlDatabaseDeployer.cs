@@ -1,19 +1,23 @@
-namespace DataJam.TestSupport.FluentMigrations.Sqlite.Deployers;
+﻿namespace DataJam.TestSupport.Migrations;
 
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
 
+using FluentMigrator.Core;
+
 using global::FluentMigrator.Runner;
 
 using Microsoft.Extensions.DependencyInjection;
 
-public class SqliteDatabaseDeployer(string connectionString) : DatabaseDeployer
+public class MySqlDatabaseDeployer(string connectionString) : DatabaseDeployer
 {
-    protected override Assembly MigrationAssembly => SqliteMigrationAnchor.AnchoredAssembly;
+    protected override Assembly MigrationAssembly => MigrationAnchor.AnchoredAssembly;
 
     protected override Task DeployInternal(Assembly migrationAssembly)
     {
+        EnsureDatabase.For.MySqlDatabase(connectionString);
+
         using (var serviceProvider = BuildServiceProvider(connectionString, migrationAssembly))
         {
             using (var scope = serviceProvider.CreateScope())
@@ -34,8 +38,8 @@ public class SqliteDatabaseDeployer(string connectionString) : DatabaseDeployer
               .ConfigureRunner(
                    rb => rb
 
-                         // Add SQLite support to FluentMigrator
-                        .AddSQLite()
+                         // Add MySql support to FluentMigrator
+                        .AddMySql5()
 
                          // Set the connection string
                         .WithGlobalConnectionString(connectionString)
@@ -43,11 +47,7 @@ public class SqliteDatabaseDeployer(string connectionString) : DatabaseDeployer
                          // Define the assembly containing the migrations
                         .ScanIn(migrationAssembly)
                         .For.Migrations())
-
-               // Enable logging to console in the FluentMigrator way
               .AddLogging(lb => lb.AddFluentMigratorConsole())
-
-               // Build the service provider
               .BuildServiceProvider(false);
     }
 
