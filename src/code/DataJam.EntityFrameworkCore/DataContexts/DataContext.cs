@@ -1,13 +1,11 @@
 namespace DataJam.EntityFrameworkCore;
 
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 using JetBrains.Annotations;
 
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 /// <summary>Provides a combination of the Unit Of Work and Repository patterns capable of both read and write operations.</summary>
 [PublicAPI]

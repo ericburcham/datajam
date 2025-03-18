@@ -1,6 +1,5 @@
 namespace DataJam.EntityFramework;
 
-using System.Data.Common;
 using System.Data.Entity;
 
 using JetBrains.Annotations;

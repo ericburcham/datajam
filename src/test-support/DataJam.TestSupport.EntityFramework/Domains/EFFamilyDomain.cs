@@ -1,6 +1,5 @@
 namespace DataJam.TestSupport.EntityFramework;
 
-using System.Data.Common;
 using System.Data.Entity;
 
 using DataJam.EntityFramework;

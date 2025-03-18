@@ -10,6 +10,7 @@ public class FatherMapping : FamilyMapping<Father>
     {
         ToTable(nameof(Father), SCHEMA);
         HasKey(father => father.Id);
+
         HasMany(father => father.Children)
            .WithRequired(child => child.Father)
            .Map(m => m.MapKey("FatherId"));

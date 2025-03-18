@@ -19,8 +19,8 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 ///         more information and examples.
 ///     </para>
 ///     <para>
-///         Override the <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" /> method to configure the database (and other options) to be used
-///         for the context. Alternatively, if you would rather perform configuration externally instead of inline in your context, you can use
+///         Override the <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" /> method to configure the database (and other options) to be used for the
+///         context. Alternatively, if you would rather perform configuration externally instead of inline in your context, you can use
 ///         <see cref="DbContextOptionsBuilder{TContext}" /> (or <see cref="DbContextOptionsBuilder" />) to externally create an instance of
 ///         <see cref="DbContextOptions{TContext}" /> (or <see cref="DbContextOptions" />) and pass it to a base constructor of <see cref="DbContext" />.
 ///     </para>
