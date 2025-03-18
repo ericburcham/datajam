@@ -2,6 +2,8 @@ namespace DataJam.EntityFrameworkCore.UnitTests;
 
 using FluentAssertions;
 
+using NUnit.Framework;
+
 [TestFixture]
 public class AlwaysPassingTests
 {

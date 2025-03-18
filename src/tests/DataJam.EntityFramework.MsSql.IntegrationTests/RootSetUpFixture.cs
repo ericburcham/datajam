@@ -1,8 +1,7 @@
-﻿namespace DataJam.EntityFrameworkCore.MsSql.IntegrationTests;
+namespace DataJam.EntityFramework.MsSql.IntegrationTests;
 
+using System.Data.SqlClient;
 using System.Threading.Tasks;
-
-using Microsoft.Data.SqlClient;
 
 using NUnit.Framework;
 

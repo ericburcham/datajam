@@ -153,4 +153,11 @@ public class DataContext : DbContext, IEFDataContext
 
         return item;
     }
+
+    /// <inheritdoc cref="DbContext.OnModelCreating" />
+    protected override void OnModelCreating(DbModelBuilder modelBuilder)
+    {
+        _mappingConfigurator?.Configure(modelBuilder);
+        base.OnModelCreating(modelBuilder);
+    }
 }

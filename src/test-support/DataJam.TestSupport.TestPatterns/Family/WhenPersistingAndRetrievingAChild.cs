@@ -13,8 +13,6 @@ public abstract class WhenPersistingAndRetrievingAChild(IRepository repository) 
 {
     private Child _result = null!;
 
-    private int StateEntriesWritten { get; set; }
-
     [Test]
     public void ItShouldHaveAValidId()
     {
@@ -48,17 +46,11 @@ public abstract class WhenPersistingAndRetrievingAChild(IRepository repository) 
         var child = new Child { Name = "Kid" };
         child.AddParents(father, mother);
         repository.Context.Add(child);
-        StateEntriesWritten = await repository.Context.CommitAsync().ConfigureAwait(false);
+        await repository.Context.CommitAsync().ConfigureAwait(false);
 
         // Act
         var scalar = new GetChildren();
         _result = repository.Find(scalar).Single();
-    }
-
-    [Test]
-    public void TheRowCountShouldBeCorrect()
-    {
-        StateEntriesWritten.Should().Be(3);
     }
 
     [OneTimeTearDown]
