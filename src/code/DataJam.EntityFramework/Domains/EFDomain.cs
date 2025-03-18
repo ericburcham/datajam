@@ -1,5 +1,6 @@
 namespace DataJam.EntityFramework;
 
+using System.Data.Common;
 using System.Data.Entity;
 
 using JetBrains.Annotations;
@@ -10,3 +11,7 @@ using JetBrains.Annotations;
 [PublicAPI]
 public class EFDomain(IProvideNameOrConnectionString configurationOptions, IConfigureDomainMappings<DbModelBuilder> mappingConfigurator)
     : Domain<DbModelBuilder, IProvideNameOrConnectionString>(configurationOptions, mappingConfigurator), IEFDomain;
+
+#pragma warning disable SA1600
+public class EFDbConnectionDomain(DbConnection configurationOptions, IConfigureDomainMappings<DbModelBuilder> mappingConfigurator)
+    : Domain<DbModelBuilder, DbConnection>(configurationOptions, mappingConfigurator), IEFDbConnectionDomain;

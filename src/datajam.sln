@@ -81,6 +81,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFramework.MsS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.EntityFramework", "test-support\DataJam.TestSupport.EntityFramework\DataJam.TestSupport.EntityFramework.csproj", "{47B8D889-428E-45B4-A291-4D2F5C3882F3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFramework.MySql.IntegrationTests", "tests\DataJam.EntityFramework.MySql.IntegrationTests\DataJam.EntityFramework.MySql.IntegrationTests.csproj", "{346A458F-01F6-4175-AAFE-165F0ABCCB62}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -169,6 +171,10 @@ Global
 		{47B8D889-428E-45B4-A291-4D2F5C3882F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47B8D889-428E-45B4-A291-4D2F5C3882F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47B8D889-428E-45B4-A291-4D2F5C3882F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{346A458F-01F6-4175-AAFE-165F0ABCCB62}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{346A458F-01F6-4175-AAFE-165F0ABCCB62}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{346A458F-01F6-4175-AAFE-165F0ABCCB62}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{346A458F-01F6-4175-AAFE-165F0ABCCB62}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -197,6 +203,7 @@ Global
 		{5931E88A-8DC9-4A07-A152-4E3ABC053E4B} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 		{59B94B91-8946-449C-AB74-10E33A2C0705} = {5931E88A-8DC9-4A07-A152-4E3ABC053E4B}
 		{47B8D889-428E-45B4-A291-4D2F5C3882F3} = {1F83202C-5C08-4366-9B03-D0EB89C6F8C6}
+		{346A458F-01F6-4175-AAFE-165F0ABCCB62} = {5931E88A-8DC9-4A07-A152-4E3ABC053E4B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9D0A64A9-A49D-4927-8726-EA3643A4FB65}

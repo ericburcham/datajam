@@ -9,7 +9,7 @@ using Testcontainers.MsSql;
 using TestSupport.Dependencies;
 
 [UsedImplicitly]
-public class MsSqlDependencies
+public static class MsSqlDependencies
 {
     public static IProvideNameOrConnectionString Options
     {
