@@ -6,7 +6,10 @@ using FluentMigrator.Core;
 
 using global::FluentMigrator;
 
+using JetBrains.Annotations;
+
 [TimestampedMigration(2025, 03, 14, 10, 34, "Creates the Father table.")]
+[UsedImplicitly]
 public class Migration202503141034CreateFatherTable : FamilyTableMigration
 {
     public override string TableName => "Father";

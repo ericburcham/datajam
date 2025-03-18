@@ -1,16 +1,18 @@
 ﻿namespace DataJam.EntityFrameworkCore.MsSql.IntegrationTests;
 
+using JetBrains.Annotations;
+
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 using Testcontainers.MsSql;
 
 using TestSupport.Dependencies;
-using TestSupport.EntityFrameworkCore;
 
-public class MsSqlDependencies : Singleton<MsSqlDependencies>, IProvideDbContextOptions
+[UsedImplicitly]
+public class MsSqlDependencies
 {
-    public DbContextOptions Options
+    public static DbContextOptions Options
     {
         get
         {

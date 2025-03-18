@@ -14,7 +14,7 @@ internal class Int16IdentityStrategy<T> : IdentityStrategy<T, short>
 
     protected override bool DefaultValueIsUnset(short id)
     {
-        return id == default;
+        return id == 0;
     }
 
     private short GenerateInt16()

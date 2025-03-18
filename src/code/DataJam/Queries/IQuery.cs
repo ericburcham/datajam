@@ -19,6 +19,4 @@ public interface IQuery<out T>
 /// <summary>Exposes an interface for requests that return collections with a selectable projection.</summary>
 /// <typeparam name="TSelection">The source <see cref="Type" /> of the query.</typeparam>
 /// <typeparam name="TProjection">The projection <see cref="Type" /> of the query.</typeparam>
-public interface IQuery<out TSelection, out TProjection> : IQuery<TProjection>
-{
-}
+public interface IQuery<out TSelection, out TProjection> : IQuery<TProjection>;

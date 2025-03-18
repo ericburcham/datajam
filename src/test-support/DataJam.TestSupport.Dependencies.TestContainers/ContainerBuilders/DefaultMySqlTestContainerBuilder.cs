@@ -1,7 +1,10 @@
 namespace DataJam.TestSupport.Dependencies.TestContainers;
 
+using JetBrains.Annotations;
+
 using Testcontainers.MySql;
 
+[PublicAPI]
 public class DefaultMySqlTestContainerBuilder : ContainerBuilder<MySqlContainer>
 {
     private readonly string _password;

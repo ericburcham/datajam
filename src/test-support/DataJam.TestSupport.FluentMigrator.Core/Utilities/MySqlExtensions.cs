@@ -3,8 +3,11 @@ namespace DataJam.TestSupport.FluentMigrator.Core;
 using System;
 using System.Data;
 
+using JetBrains.Annotations;
+
 using MySql.Data.MySqlClient;
 
+[PublicAPI]
 public static class MySqlExtensions
 {
     public static void MySqlDatabase(this SupportedDatabasesForEnsureDatabase supported, string connectionString, int timeout = -1, string? collation = null)
@@ -40,15 +43,14 @@ public static class MySqlExtensions
             var sqlCommandText = $"CREATE DATABASE {databaseName}{collationString};";
 
             // Create the database...
-            using (var command = new MySqlCommand(sqlCommandText, connection) { CommandType = CommandType.Text })
-            {
-                if (timeout >= 0)
-                {
-                    command.CommandTimeout = timeout;
-                }
+            using var command = new MySqlCommand(sqlCommandText, connection) { CommandType = CommandType.Text };
 
-                command.ExecuteNonQuery();
+            if (timeout >= 0)
+            {
+                command.CommandTimeout = timeout;
             }
+
+            command.ExecuteNonQuery();
         }
     }
 
@@ -57,12 +59,10 @@ public static class MySqlExtensions
         var sqlCommandText = string.Format($"SELECT SCHEMA_NAME FROM information_schema.schemata WHERE SCHEMA_NAME = '{databaseName}';");
 
         // check to see if the database already exists..
-        using (var command = new MySqlCommand(sqlCommandText, connection) { CommandType = CommandType.Text })
-        {
-            var result = command.ExecuteScalar();
+        using var command = new MySqlCommand(sqlCommandText, connection) { CommandType = CommandType.Text };
+        var result = command.ExecuteScalar();
 
-            return result != null;
-        }
+        return result != null;
     }
 
     private static void GetMysqlConnectionStringBuilder(string connectionString, out string masterConnectionString, out string databaseName)
