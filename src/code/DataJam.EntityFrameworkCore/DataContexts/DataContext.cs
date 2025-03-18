@@ -24,17 +24,6 @@ public class DataContext : DbContext, IEFCoreDataContext
         _mappingConfigurator = mappingConfigurator;
     }
 
-    /// <inheritdoc cref="IEFCoreDataContext.AutoTransactionBehavior" />
-    public AutoTransactionBehavior AutoTransactionBehavior
-    {
-        get => Database.AutoTransactionBehavior;
-
-        set => Database.AutoTransactionBehavior = value;
-    }
-
-    /// <inheritdoc cref="IEFCoreDataContext.CurrentTransaction" />
-    public IDbContextTransaction? CurrentTransaction => Database.CurrentTransaction;
-
     /// <inheritdoc cref="IUnitOfWork.Add{T}" />
     public new T Add<T>(T item)
         where T : class
@@ -42,18 +31,6 @@ public class DataContext : DbContext, IEFCoreDataContext
         Set<T>().Add(item);
 
         return item;
-    }
-
-    /// <inheritdoc cref="IEFCoreDataContext.BeginTransaction" />
-    public IDbContextTransaction BeginTransaction()
-    {
-        return Database.BeginTransaction();
-    }
-
-    /// <inheritdoc cref="IEFCoreDataContext.BeginTransactionAsync" />
-    public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
-    {
-        return Database.BeginTransactionAsync(cancellationToken);
     }
 
     /// <inheritdoc cref="IUnitOfWork.Commit" />
@@ -70,18 +47,6 @@ public class DataContext : DbContext, IEFCoreDataContext
         ChangeTracker.DetectChanges();
 
         return await SaveChangesAsync().ConfigureAwait(false);
-    }
-
-    /// <inheritdoc cref="IEFCoreDataContext.CommitTransaction" />
-    public void CommitTransaction()
-    {
-        Database.CommitTransaction();
-    }
-
-    /// <inheritdoc cref="IEFCoreDataContext.CommitTransactionAsync" />
-    public Task CommitTransactionAsync(CancellationToken cancellationToken = default)
-    {
-        return Database.CommitTransactionAsync(cancellationToken);
     }
 
     /// <inheritdoc cref="IDataSource.CreateQuery{T}" />
@@ -105,18 +70,6 @@ public class DataContext : DbContext, IEFCoreDataContext
         where T : class
     {
         return Set<T>().Remove(item).Entity;
-    }
-
-    /// <inheritdoc cref="IEFCoreDataContext.RollbackTransaction" />
-    public void RollbackTransaction()
-    {
-        Database.RollbackTransaction();
-    }
-
-    /// <inheritdoc cref="IEFCoreDataContext.RollbackTransactionAsync" />
-    public Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
-    {
-        return Database.RollbackTransactionAsync(cancellationToken);
     }
 
     /// <inheritdoc cref="IUnitOfWork.Update{T}" />
