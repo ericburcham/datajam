@@ -4,6 +4,8 @@ using System.Threading.Tasks;
 
 using global::MySql.Data.MySqlClient;
 
+using NUnit.Framework;
+
 using Testcontainers.MySql;
 
 using TestSupport.Dependencies;

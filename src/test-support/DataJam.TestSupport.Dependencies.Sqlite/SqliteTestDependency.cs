@@ -1,9 +1,3 @@
-// -----------------------------------------------------------------------
-// <copyright file="SqliteTestDependency.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-// -----------------------------------------------------------------------
-
 namespace DataJam.TestSupport.Dependencies.Sqlite;
 
 using System;

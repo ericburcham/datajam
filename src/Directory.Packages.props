@@ -4,6 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- Microsoft packages -->
+    <PackageVersion Include="EntityFramework" Version="6.5.1" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="6.0.1" />
     <PackageVersion Include="Microsoft.Data.Sqlite.Core" Version="8.0.14" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.14" />
@@ -20,8 +21,10 @@
     <PackageVersion Include="FluentMigrator.Runner.SqlServer" Version="6.2.0" />
     <PackageVersion Include="JetBrains.Annotations" Version="2024.3.0" />
     <PackageVersion Include="MySql.Data" Version="9.2.0" />
+    <PackageVersion Include="MySql.Data.EntityFramework" Version="9.2.0" />
     <PackageVersion Include="MySql.EntityFrameworkCore" Version="9.0.0" />
     <PackageVersion Include="NSubstitute" Version="5.3.0" />
+    <PackageVersion Include="System.Data.SqlClient" Version="4.8.6" />
     <PackageVersion Include="Testcontainers" Version="4.3.0" />
     <PackageVersion Include="Testcontainers.MsSql" Version="4.3.0" />
     <PackageVersion Include="Testcontainers.MySql" Version="4.3.0" />

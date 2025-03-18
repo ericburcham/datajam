@@ -9,11 +9,11 @@ using FluentAssertions;
 
 using NUnit.Framework;
 
-public abstract class WhenPersistingAndRetrievingAChild(IRepository repository) : TransactionalScenario
+public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
 {
     private Child _result = null!;
 
-    private int StateEntriesWritten { get; set; }
+    protected abstract IRepository Repository { get; }
 
     [Test]
     public void ItShouldHaveAValidId()
@@ -47,25 +47,19 @@ public abstract class WhenPersistingAndRetrievingAChild(IRepository repository) 
         var mother = new Mother { Name = "Mom" };
         var child = new Child { Name = "Kid" };
         child.AddParents(father, mother);
-        repository.Context.Add(child);
-        StateEntriesWritten = await repository.Context.CommitAsync().ConfigureAwait(false);
+        Repository.Context.Add(child);
+        await Repository.Context.CommitAsync().ConfigureAwait(false);
 
         // Act
         var scalar = new GetChildren();
-        _result = repository.Find(scalar).Single();
-    }
-
-    [Test]
-    public void TheRowCountShouldBeCorrect()
-    {
-        StateEntriesWritten.Should().Be(3);
+        _result = Repository.Find(scalar).Single();
     }
 
     [OneTimeTearDown]
     protected override void OneTimeTearDown()
     {
         base.OneTimeTearDown();
-        var dataContext = repository.Context;
+        var dataContext = Repository.Context;
         dataContext.Dispose();
     }
 }

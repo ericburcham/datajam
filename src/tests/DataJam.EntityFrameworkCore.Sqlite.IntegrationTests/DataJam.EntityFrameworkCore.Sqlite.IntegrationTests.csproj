@@ -17,13 +17,8 @@
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.Dependencies\DataJam.TestSupport.Dependencies.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.EntityFrameworkCore\DataJam.TestSupport.EntityFrameworkCore.csproj"/>
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.Migrations.Sqlite\DataJam.TestSupport.Migrations.Sqlite.csproj" />
-        <ProjectReference Include="..\..\test-support\DataJam.TestSupport.Migrations\DataJam.TestSupport.Migrations.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.TestPatterns\DataJam.TestSupport.TestPatterns.csproj"/>
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport\DataJam.TestSupport.csproj"/>
-    </ItemGroup>
-
-    <ItemGroup>
-        <EmbeddedResource Include="Migrations\0001_family_schema.sql"/>
     </ItemGroup>
 
     <ItemGroup>

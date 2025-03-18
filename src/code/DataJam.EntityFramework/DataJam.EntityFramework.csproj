@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <RootNamespace>DataJam.EntityFramework</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="EntityFramework"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\DataJam\DataJam.csproj"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Remove="DataJam.EntityFramework.csproj.DotSettings"/>
+    </ItemGroup>
+
+</Project>

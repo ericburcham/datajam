@@ -2,6 +2,8 @@
 
 using System.Threading.Tasks;
 
+using NUnit.Framework;
+
 using TestSupport.Dependencies;
 using TestSupport.Dependencies.Sqlite;
 using TestSupport.Migrations.Sqlite.Deployers;

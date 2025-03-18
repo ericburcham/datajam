@@ -1,17 +1,12 @@
-namespace DataJam.EntityFrameworkCore;
+namespace DataJam.EntityFrameworkCore.Domains;
+
+using DataContexts;
 
 using JetBrains.Annotations;
 
 /// <summary>Provides a disposable unit of work that is capable of both read and write operations and which is organized around a domain.</summary>
+/// <param name="domain">The domain to use.</param>
 /// <typeparam name="T">The Type of the domain for this domain context.</typeparam>
 [PublicAPI]
-public class DomainContext<T> : DataContext, IDomainContext<T>
-    where T : class, IEFCoreDomain
-{
-    /// <summary>Initializes a new instance of the <see cref="DomainContext{T}" /> class.</summary>
-    /// <param name="domain">The domain to use.</param>
-    public DomainContext(T domain)
-        : base(domain.ConfigurationOptions, domain.MappingConfigurator)
-    {
-    }
-}
+public class DomainContext<T>(T domain) : DataContext(domain.ConfigurationOptions, domain.MappingConfigurator), IDomainContext<T>
+    where T : class, IDomain;
