@@ -4,7 +4,10 @@ using FluentMigrator.Core;
 
 using global::FluentMigrator;
 
+using JetBrains.Annotations;
+
 [TimestampedMigration(2025, 03, 14, 10, 38, "Creates the Mother table.")]
+[UsedImplicitly]
 public class Migration202503141038CreateMotherTable : TableMigration
 {
     public override string TableName => "Mother";

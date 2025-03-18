@@ -17,8 +17,8 @@ using Microsoft.EntityFrameworkCore.Storage;
 public interface IEFCoreDataContext : IDataContext
 {
     /// <summary>
-    ///     Gets or sets a value indicating whether or not a transaction will be created automatically by <see cref="DbContext.SaveChanges()" /> if neither
-    ///     'BeginTransaction' nor 'UseTransaction' has been called.
+    ///     Gets or sets a value indicating whether a transaction will be created automatically by <see cref="DbContext.SaveChanges()" /> if neither 'BeginTransaction'
+    ///     nor 'UseTransaction' has been called.
     /// </summary>
     /// <remarks>
     ///     <para>The default setting is <see cref="AutoTransactionBehavior.WhenNeeded" />.</para>
