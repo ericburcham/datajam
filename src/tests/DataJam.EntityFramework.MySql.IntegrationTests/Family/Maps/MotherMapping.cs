@@ -8,7 +8,7 @@ public class MotherMapping : FamilyMapping<Mother>
 {
     public MotherMapping()
     {
-        ToTable(nameof(Mother), SCHEMA);
+        ToTable(nameof(Mother));
         HasKey(mother => mother.Id);
 
         HasMany(mother => mother.Children)

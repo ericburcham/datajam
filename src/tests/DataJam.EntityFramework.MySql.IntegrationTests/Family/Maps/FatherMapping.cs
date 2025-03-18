@@ -8,7 +8,7 @@ public class FatherMapping : FamilyMapping<Father>
 {
     public FatherMapping()
     {
-        ToTable(nameof(Father), SCHEMA);
+        ToTable(nameof(Father));
         HasKey(father => father.Id);
 
         HasMany(father => father.Children)
