@@ -5,7 +5,4 @@
     <PackageReference Include="Microsoft.Data.SqlClient" />
     <PackageReference Include="MySql.Data" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj" />
-  </ItemGroup>
 </Project>
