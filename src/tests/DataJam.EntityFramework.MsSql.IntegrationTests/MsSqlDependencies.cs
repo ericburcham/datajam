@@ -2,6 +2,8 @@ namespace DataJam.EntityFramework.MsSql.IntegrationTests;
 
 using System.Data.SqlClient;
 
+using Configuration;
+
 using JetBrains.Annotations;
 
 using Testcontainers.MsSql;

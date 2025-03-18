@@ -1,4 +1,4 @@
-namespace DataJam.EntityFrameworkCore;
+namespace DataJam.EntityFrameworkCore.Domains;
 
 using JetBrains.Annotations;
 
@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 /// <param name="configurationOptions">The configuration options to use.</param>
 /// <param name="mappingConfigurator">The mapping configurator to use.</param>
 [PublicAPI]
-public abstract class EFCoreDomain(
+public abstract class Domain(
     DbContextOptions configurationOptions,
     IConfigureDomainMappings<ModelBuilder> mappingConfigurator)
-    : Domain<ModelBuilder, DbContextOptions>(configurationOptions, mappingConfigurator), IEFCoreDomain;
+    : Domain<ModelBuilder, DbContextOptions>(configurationOptions, mappingConfigurator), IDomain;

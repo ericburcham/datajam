@@ -2,6 +2,8 @@ namespace DataJam.EntityFramework.MsSql.IntegrationTests.Family;
 
 using System;
 
+using Domains;
+
 using NUnit.Framework;
 
 using TestSupport.EntityFramework;

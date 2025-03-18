@@ -1,4 +1,4 @@
-namespace DataJam.EntityFrameworkCore;
+namespace DataJam.EntityFrameworkCore.DataContexts;
 
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 /// <param name="options">The configuration options.</param>
 /// <param name="mappingConfigurator">The mapping configurator to use.</param>
 [PublicAPI]
-public class DataContext(DbContextOptions options, IConfigureDomainMappings<ModelBuilder> mappingConfigurator) : DbContext(options), IEFCoreDataContext
+public class DataContext(DbContextOptions options, IConfigureDomainMappings<ModelBuilder> mappingConfigurator) : DbContext(options), IDataContext
 {
     private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator = mappingConfigurator;
 

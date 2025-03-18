@@ -2,6 +2,8 @@ namespace DataJam.EntityFramework.MySql.IntegrationTests.Family;
 
 using System;
 
+using Domains;
+
 using NUnit.Framework;
 
 using TestSupport.EntityFramework;
@@ -16,7 +18,7 @@ public class WhenPersistingAndRetrievingAChild : TestSupport.TestPatterns.Family
     private static DomainRepository<EFFamilyDomain> ValueFactory()
     {
         var mappingConfigurator = new MappingConfigurator();
-        var domain = new EFDomain(MySqlDependencies.Options, mappingConfigurator);
+        var domain = new Domain(MySqlDependencies.Options, mappingConfigurator);
         var domainContext = new MySqlDomainContext(domain);
 
         return new(domainContext);

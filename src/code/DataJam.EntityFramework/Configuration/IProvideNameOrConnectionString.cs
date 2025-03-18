@@ -1,4 +1,6 @@
-namespace DataJam.EntityFramework;
+namespace DataJam.EntityFramework.Configuration;
+
+using DataContexts;
 
 using JetBrains.Annotations;
 

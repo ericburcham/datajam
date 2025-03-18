@@ -1,18 +1,20 @@
-namespace DataJam.EntityFramework;
+namespace DataJam.EntityFramework.Factories;
 
 using System.Collections.Generic;
 using System.Linq;
+
+using Domains;
 
 using JetBrains.Annotations;
 
 /// <summary>Provides a simple factory for constructing entity framework domain repositories.</summary>
 /// <param name="domains">Domains to use when constructing domain repositories.</param>
 [PublicAPI]
-public class EFDomainRepositoryFactory(params EFDomain[] domains) : DomainRepositoryFactory<EFDomain>(domains)
+public class DomainRepositoryFactory(params Domain[] domains) : DomainRepositoryFactory<Domain>(domains)
 {
-    /// <summary>Initializes a new instance of the <see cref="EFDomainRepositoryFactory" /> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="DomainRepositoryFactory" /> class.</summary>
     /// <param name="domains">Domains to use when constructing domain repositories.</param>
-    public EFDomainRepositoryFactory(IEnumerable<EFDomain> domains)
+    public DomainRepositoryFactory(IEnumerable<Domain> domains)
         : this(domains.ToArray())
     {
     }

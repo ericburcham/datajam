@@ -2,6 +2,8 @@
 
 using System;
 
+using Domains;
+
 using NUnit.Framework;
 
 using TestSupport.EntityFrameworkCore;

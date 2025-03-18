@@ -1,10 +1,14 @@
-﻿namespace DataJam.EntityFramework;
+﻿namespace DataJam.EntityFramework.DataContexts;
 
 using System.Data.Common;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+
+using Configuration;
+
+using DbContexts;
 
 using JetBrains.Annotations;
 

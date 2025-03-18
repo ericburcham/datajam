@@ -1,4 +1,6 @@
-namespace DataJam.EntityFramework;
+namespace DataJam.EntityFramework.Domains;
+
+using DataContexts;
 
 using JetBrains.Annotations;
 
@@ -7,4 +9,4 @@ using JetBrains.Annotations;
 /// <typeparam name="T">The Type of the domain for this domain context.</typeparam>
 [PublicAPI]
 public class ReadonlyDomainContext<T>(T domain) : ReadonlyDataContext(domain.ConfigurationOptions, domain.MappingConfigurator), IReadonlyDomainContext<T>
-    where T : class, IEFDomain;
+    where T : class, IDomain;

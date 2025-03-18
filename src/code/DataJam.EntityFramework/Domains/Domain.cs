@@ -1,6 +1,8 @@
-namespace DataJam.EntityFramework;
+namespace DataJam.EntityFramework.Domains;
 
 using System.Data.Entity;
+
+using Configuration;
 
 using JetBrains.Annotations;
 
@@ -8,5 +10,5 @@ using JetBrains.Annotations;
 /// <param name="configurationOptions">The configuration options to use.</param>
 /// <param name="mappingConfigurator">The mapping configurator to use.</param>
 [PublicAPI]
-public class EFDomain(IProvideNameOrConnectionString configurationOptions, IConfigureDomainMappings<DbModelBuilder> mappingConfigurator)
-    : Domain<DbModelBuilder, IProvideNameOrConnectionString>(configurationOptions, mappingConfigurator), IEFDomain;
+public class Domain(IProvideNameOrConnectionString configurationOptions, IConfigureDomainMappings<DbModelBuilder> mappingConfigurator)
+    : Domain<DbModelBuilder, IProvideNameOrConnectionString>(configurationOptions, mappingConfigurator), IDomain;

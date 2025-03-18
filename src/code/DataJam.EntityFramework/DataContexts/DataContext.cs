@@ -1,4 +1,4 @@
-namespace DataJam.EntityFramework;
+namespace DataJam.EntityFramework.DataContexts;
 
 using System.Data.Common;
 using System.Data.Entity;
@@ -7,11 +7,13 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Threading.Tasks;
 
+using Configuration;
+
 using JetBrains.Annotations;
 
 /// <summary>Provides a combination of the Unit Of Work and Repository patterns capable of both read and write operations.</summary>
 [PublicAPI]
-public class DataContext : DbContext, IEFDataContext
+public class DataContext : DbContext, IDataContext
 {
     private readonly IConfigureDomainMappings<DbModelBuilder>? _mappingConfigurator;
 

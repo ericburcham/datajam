@@ -1,18 +1,20 @@
-namespace DataJam.EntityFramework;
+namespace DataJam.EntityFrameworkCore.Factories;
 
 using System.Collections.Generic;
 using System.Linq;
 
+using Domains;
+
 using JetBrains.Annotations;
 
-/// <summary>Provides a simple factory for constructing readonly entity framework domain repositories.</summary>
+/// <summary>Provides a simple factory for constructing readonly entity framework core domain repositories.</summary>
 /// <param name="domains">Domains to use when constructing domain repositories.</param>
 [PublicAPI]
-public class EFReadonlyDomainRepositoryFactory(params EFDomain[] domains) : ReadonlyDomainRepositoryFactory<EFDomain>(domains)
+public class ReadonlyDomainRepositoryFactory(params Domain[] domains) : ReadonlyDomainRepositoryFactory<Domain>(domains)
 {
-    /// <summary>Initializes a new instance of the <see cref="EFReadonlyDomainRepositoryFactory" /> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="ReadonlyDomainRepositoryFactory" /> class.</summary>
     /// <param name="domains">Domains to use when constructing domain repositories.</param>
-    public EFReadonlyDomainRepositoryFactory(IEnumerable<EFDomain> domains)
+    public ReadonlyDomainRepositoryFactory(IEnumerable<Domain> domains)
         : this(domains.ToArray())
     {
     }

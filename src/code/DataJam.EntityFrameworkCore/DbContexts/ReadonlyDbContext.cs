@@ -1,4 +1,4 @@
-namespace DataJam.EntityFrameworkCore;
+namespace DataJam.EntityFrameworkCore.DbContexts;
 
 using System;
 using System.Collections.Generic;

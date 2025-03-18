@@ -2,7 +2,8 @@ namespace DataJam.TestSupport.EntityFramework;
 
 using System.Data.Entity;
 
-using DataJam.EntityFramework;
+using DataJam.EntityFramework.Configuration;
+using DataJam.EntityFramework.Domains;
 
 public class EFFamilyDomain(IProvideNameOrConnectionString configurationOptions, IConfigureDomainMappings<DbModelBuilder> mappingConfigurator)
-    : EFDomain(configurationOptions, mappingConfigurator);
+    : Domain(configurationOptions, mappingConfigurator);
