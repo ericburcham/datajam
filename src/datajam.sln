@@ -71,12 +71,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.FluentM
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Migrations.Sqlite", "test-support\DataJam.TestSupport.Migrations.Sqlite\DataJam.TestSupport.Migrations.Sqlite.csproj", "{CA52E4B5-7D63-4442-AAFD-32EE4822E74E}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "_build", "..\build\_build.csproj", "{E03EB868-679D-4BC2-99E7-FEB787A4AEC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E03EB868-679D-4BC2-99E7-FEB787A4AEC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E03EB868-679D-4BC2-99E7-FEB787A4AEC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFF7DB3B-0702-4E60-90BE-9ED8F76E39E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AFF7DB3B-0702-4E60-90BE-9ED8F76E39E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFF7DB3B-0702-4E60-90BE-9ED8F76E39E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
