@@ -33,6 +33,7 @@ class Build : NukeBuild
              {
                  DotNetBuild(o => o
                                  .SetConfiguration(Configuration)
+                                 .SetNoRestore(true)
                                  .SetProjectFile(Solution));
              });
 
@@ -54,6 +55,7 @@ class Build : NukeBuild
              {
                  DotNetTest(o => o
                                 .SetConfiguration(Configuration)
+                                .SetNoBuild(true)
                                 .SetProjectFile(Solution));
              });
 
