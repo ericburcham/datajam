@@ -14,7 +14,7 @@ internal class Int32IdentityStrategy<T> : IdentityStrategy<T, int>
 
     protected override bool DefaultValueIsUnset(int id)
     {
-        return id == default;
+        return id == 0;
     }
 
     private int GenerateInt32()

@@ -10,9 +10,9 @@ using Testcontainers.MsSql;
 using TestSupport.Dependencies;
 
 [UsedImplicitly]
-public class MsSqlDependencies : Singleton<MsSqlDependencies>
+public class MsSqlDependencies
 {
-    public DbContextOptions Options
+    public static DbContextOptions Options
     {
         get
         {

@@ -9,9 +9,9 @@ using TestSupport.Dependencies;
 using TestSupport.Dependencies.Sqlite;
 
 [UsedImplicitly]
-public class SqliteDependencies : Singleton<SqliteDependencies>
+public class SqliteDependencies
 {
-    public DbContextOptions Options
+    public static DbContextOptions Options
     {
         get
         {

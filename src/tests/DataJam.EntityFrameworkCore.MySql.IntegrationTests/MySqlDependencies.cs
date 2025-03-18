@@ -11,9 +11,9 @@ using Testcontainers.MySql;
 using TestSupport.Dependencies;
 
 [UsedImplicitly]
-public class MySqlDependencies : Singleton<MySqlDependencies>
+public class MySqlDependencies
 {
-    public DbContextOptions Options
+    public static DbContextOptions Options
     {
         get
         {

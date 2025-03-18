@@ -12,7 +12,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj"/>
-        <ProjectReference Include="..\..\code\DataJam.Utilities\DataJam.Utilities.csproj"/>
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.Dependencies.TestContainers\DataJam.TestSupport.Dependencies.TestContainers.csproj" />
         <ProjectReference Include="..\..\test-support\DataJam.TestSupport.EntityFrameworkCore\DataJam.TestSupport.EntityFrameworkCore.csproj"/>

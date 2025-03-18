@@ -42,7 +42,7 @@ public class InMemoryDataContextReferenceByIdTests
     {
         public long Id { get; set; }
 
-        public List<Post> Posts { get; } = new();
+        public List<Post> Posts { get; } = [];
     }
 
     private class Post : IIdentifiable<long>

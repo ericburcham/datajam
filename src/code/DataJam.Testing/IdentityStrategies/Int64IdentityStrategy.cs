@@ -14,7 +14,7 @@ internal class Int64IdentityStrategy<T> : IdentityStrategy<T, long>
 
     protected override bool DefaultValueIsUnset(long id)
     {
-        return id == default;
+        return id == 0;
     }
 
     private long GenerateInt64()

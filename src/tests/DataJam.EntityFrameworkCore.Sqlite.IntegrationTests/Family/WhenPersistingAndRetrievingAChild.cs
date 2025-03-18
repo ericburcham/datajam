@@ -8,7 +8,7 @@ public class WhenPersistingAndRetrievingAChild() : TestSupport.TestPatterns.Fami
     private static DomainRepository<FamilyDomain> BuildRepo()
     {
         var mappingConfigurator = new MappingConfigurator();
-        var domain = new FamilyDomain(SqliteDependencies.Instance.Options, mappingConfigurator);
+        var domain = new FamilyDomain(SqliteDependencies.Options, mappingConfigurator);
         var domainContext = new DomainContext<FamilyDomain>(domain);
 
         return new(domainContext);
