@@ -1,20 +1,18 @@
-// ReSharper disable InconsistentNaming
-
-namespace DataJam.EntityFrameworkCore;
+namespace DataJam.EntityFramework;
 
 using System.Collections.Generic;
 using System.Linq;
 
 using JetBrains.Annotations;
 
-/// <summary>Provides a simple factory for constructing entity framework core domain repositories.</summary>
+/// <summary>Provides a simple factory for constructing entity framework domain repositories.</summary>
 /// <param name="domains">Domains to use when constructing domain repositories.</param>
 [PublicAPI]
-public class EFCoreDomainRepositoryFactory(params EFCoreDomain[] domains) : DomainRepositoryFactory<EFCoreDomain>(domains)
+public class EFDomainRepositoryFactory(params EFDomain[] domains) : DomainRepositoryFactory<EFDomain>(domains)
 {
-    /// <summary>Initializes a new instance of the <see cref="EFCoreDomainRepositoryFactory" /> class.</summary>
+    /// <summary>Initializes a new instance of the <see cref="EFDomainRepositoryFactory" /> class.</summary>
     /// <param name="domains">Domains to use when constructing domain repositories.</param>
-    public EFCoreDomainRepositoryFactory(IEnumerable<EFCoreDomain> domains)
+    public EFDomainRepositoryFactory(IEnumerable<EFDomain> domains)
         : this(domains.ToArray())
     {
     }

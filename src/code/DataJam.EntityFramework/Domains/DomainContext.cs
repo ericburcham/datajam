@@ -1,4 +1,4 @@
-namespace DataJam.EntityFrameworkCore;
+namespace DataJam.EntityFramework;
 
 using JetBrains.Annotations;
 
@@ -7,4 +7,4 @@ using JetBrains.Annotations;
 /// <typeparam name="T">The Type of the domain for this domain context.</typeparam>
 [PublicAPI]
 public class DomainContext<T>(T domain) : DataContext(domain.ConfigurationOptions, domain.MappingConfigurator), IDomainContext<T>
-    where T : class, IEFCoreDomain;
+    where T : class, IEFDomain;

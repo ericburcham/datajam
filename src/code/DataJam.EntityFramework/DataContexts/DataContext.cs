@@ -19,10 +19,10 @@ public class DataContext : DbContext, IEFDataContext
     ///     Initializes a new instance of the <see cref="DataContext" /> class using the given string as the name or connection string for the database to which a
     ///     connection will be made. See the class remarks for how this is used to create a connection.
     /// </summary>
-    /// <param name="nameOrConnectionString">Either the database name or a connection string.</param>
+    /// <param name="nameOrConnectionStringProvider">Provides either the database name or a connection string.</param>
     /// <param name="mappingConfigurator">The mapping configurator to use.</param>
-    public DataContext(string nameOrConnectionString, IConfigureDomainMappings<DbModelBuilder>? mappingConfigurator)
-        : base(nameOrConnectionString)
+    public DataContext(IProvideNameOrConnectionString nameOrConnectionStringProvider, IConfigureDomainMappings<DbModelBuilder>? mappingConfigurator)
+        : base(nameOrConnectionStringProvider.NameOrConnectionString)
     {
         _mappingConfigurator = mappingConfigurator;
     }
@@ -31,11 +31,11 @@ public class DataContext : DbContext, IEFDataContext
     ///     Initializes a new instance of the <see cref="DataContext" /> class using the given string as the name or connection string for the database to which a
     ///     connection will be made, and initializes it from the given model. See the class remarks for how this is used to create a connection.
     /// </summary>
-    /// <param name="nameOrConnectionString">Either the database name or a connection string.</param>
+    /// <param name="nameOrConnectionStringProvider">Provides either the database name or a connection string.</param>
     /// <param name="model"> The model that will back this context.</param>
     /// <param name="mappingConfigurator">The mapping configurator to use.</param>
-    public DataContext(string nameOrConnectionString, DbCompiledModel model, IConfigureDomainMappings<DbModelBuilder>? mappingConfigurator)
-        : base(nameOrConnectionString, model)
+    public DataContext(IProvideNameOrConnectionString nameOrConnectionStringProvider, DbCompiledModel model, IConfigureDomainMappings<DbModelBuilder>? mappingConfigurator)
+        : base(nameOrConnectionStringProvider.NameOrConnectionString, model)
     {
         _mappingConfigurator = mappingConfigurator;
     }

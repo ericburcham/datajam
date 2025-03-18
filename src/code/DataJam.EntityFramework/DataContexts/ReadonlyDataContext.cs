@@ -6,7 +6,10 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides a data context which is limited to read operations.</summary>
+[PublicAPI]
 public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyDataContext
 {
     private readonly IConfigureDomainMappings<DbModelBuilder>? _mappingConfigurator;
@@ -15,10 +18,10 @@ public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyDataContext
     ///     Initializes a new instance of the <see cref="ReadonlyDataContext" /> class using the given string as the name or connection string for the database to
     ///     which a connection will be made. See the class remarks for how this is used to create a connection.
     /// </summary>
-    /// <param name="nameOrConnectionString">Either the database name or a connection string.</param>
+    /// <param name="nameOrConnectionStringProvider">Provides either the database name or a connection string.</param>
     /// <param name="mappingConfigurator">The mapping configurator to use.</param>
-    public ReadonlyDataContext(string nameOrConnectionString, IConfigureDomainMappings<DbModelBuilder>? mappingConfigurator)
-        : base(nameOrConnectionString)
+    public ReadonlyDataContext(IProvideNameOrConnectionString nameOrConnectionStringProvider, IConfigureDomainMappings<DbModelBuilder>? mappingConfigurator)
+        : base(nameOrConnectionStringProvider.NameOrConnectionString)
     {
         _mappingConfigurator = mappingConfigurator;
     }
@@ -27,11 +30,11 @@ public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyDataContext
     ///     Initializes a new instance of the <see cref="ReadonlyDataContext" /> class using the given string as the name or connection string for the database to
     ///     which a connection will be made, and initializes it from the given model. See the class remarks for how this is used to create a connection.
     /// </summary>
-    /// <param name="nameOrConnectionString">Either the database name or a connection string.</param>
+    /// <param name="nameOrConnectionStringProvider">Provides either the database name or a connection string.</param>
     /// <param name="model"> The model that will back this context.</param>
     /// <param name="mappingConfigurator">The mapping configurator to use.</param>
-    public ReadonlyDataContext(string nameOrConnectionString, DbCompiledModel model, IConfigureDomainMappings<DbModelBuilder>? mappingConfigurator)
-        : base(nameOrConnectionString, model)
+    public ReadonlyDataContext(IProvideNameOrConnectionString nameOrConnectionStringProvider, DbCompiledModel model, IConfigureDomainMappings<DbModelBuilder>? mappingConfigurator)
+        : base(nameOrConnectionStringProvider.NameOrConnectionString, model)
     {
         _mappingConfigurator = mappingConfigurator;
     }
