@@ -8,6 +8,8 @@ using System.Data.Entity.Infrastructure;
 using System.Threading;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 /// <summary>A ReadonlyDbContext instance represents a READONLY session with the database and can be used to query instances of your entities.</summary>
 /// <remarks>
 ///     <para>The Entity Data Model backing the context can be specified in several ways.</para>
@@ -39,6 +41,7 @@ using System.Threading.Tasks;
 ///         conventions used by the context when it creates a model. If no attribute is applied then the latest version of conventions will be used.
 ///     </para>
 /// </remarks>
+[PublicAPI]
 public class ReadonlyDbContext : DbContext
 {
     /// <inheritdoc />
