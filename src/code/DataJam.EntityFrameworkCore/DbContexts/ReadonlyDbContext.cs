@@ -10,10 +10,7 @@ using JetBrains.Annotations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-/// <summary>
-///     A ReadonlyDbContext instance represents a session with the database and can be used to query instances of your entities. DbContext is a combination of the
-///     Unit Of Work and Repository patterns.
-/// </summary>
+/// <summary>A ReadonlyDbContext instance represents a READONLY session with the database and can be used to query instances of your entities.</summary>
 /// <remarks>
 ///     <para>
 ///         Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This includes both parallel execution of
@@ -22,8 +19,8 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 ///         more information and examples.
 ///     </para>
 ///     <para>
-///         Override the <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" /> method to configure the database (and other options) to be used for the
-///         context. Alternatively, if you would rather perform configuration externally instead of inline in your context, you can use
+///         Override the <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" /> method to configure the database (and other options) to be used
+///         for the context. Alternatively, if you would rather perform configuration externally instead of inline in your context, you can use
 ///         <see cref="DbContextOptionsBuilder{TContext}" /> (or <see cref="DbContextOptionsBuilder" />) to externally create an instance of
 ///         <see cref="DbContextOptions{TContext}" /> (or <see cref="DbContextOptions" />) and pass it to a base constructor of <see cref="DbContext" />.
 ///     </para>
@@ -42,15 +39,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 [PublicAPI]
 public class ReadonlyDbContext : DbContext
 {
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="ReadonlyDbContext" /> class using the specified options. The
-    ///     <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" /> method will still be called to allow further configuration of the options.
-    /// </summary>
-    /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-dbcontext">DbContext lifetime, configuration, and initialization</see> and
-    ///     <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see> for more information and examples.
-    /// </remarks>
-    /// <param name="options">The options for this context.</param>
+    /// <inheritdoc />
     public ReadonlyDbContext(DbContextOptions options)
         : base(options)
     {
@@ -200,6 +189,25 @@ public class ReadonlyDbContext : DbContext
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
         throw new InvalidOperationException($"{nameof(ReadonlyDbContext)} is readonly.  The {nameof(SaveChangesAsync)} method is not supported.");
+    }
+
+    /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
+    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <returns>Nothing.</returns>
+    /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
+    public override DbSet<TEntity> Set<TEntity>()
+    {
+        throw new InvalidOperationException($"Do not call {nameof(Set)} on a {nameof(ReadonlyDbContext)}.");
+    }
+
+    /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
+    /// <param name="name">The name is not used.</param>
+    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <returns>Nothing.</returns>
+    /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
+    public override DbSet<TEntity> Set<TEntity>(string name)
+    {
+        throw new InvalidOperationException($"Do not call {nameof(Set)} on a {nameof(ReadonlyDbContext)}.");
     }
 
     /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>

@@ -3,10 +3,11 @@
     <!-- Global properties -->
     <PropertyGroup>
         <AssemblyName>$(MSBuildProjectName)</AssemblyName>
-        <Authors>Ghost Recon Team</Authors>
-        <Company>Enteprise Products</Company>
-        <Copyright>© Enteprise Products</Copyright>
-        <GenerateDocumentationFile>True</GenerateDocumentationFile>
+        <Authors>Eric Burcham</Authors>
+        <Company>Eric Burcham</Company>
+        <CopyrightCurrentYear>$([System.DateTime]::Now.Year)</CopyrightCurrentYear>
+        <CopyrightStartYear>2023</CopyrightStartYear>
+        <Copyright>© $(CopyrightStartYear) - $(CopyrightCurrentYear) Eric Burcham</Copyright>        <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <ImplicitUsings>disable</ImplicitUsings>
         <IsPackable>False</IsPackable>
         <LangVersion>latest</LangVersion>

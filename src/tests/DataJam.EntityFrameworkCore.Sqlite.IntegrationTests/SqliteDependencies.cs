@@ -1,32 +1,24 @@
 ﻿namespace DataJam.EntityFrameworkCore.Sqlite.IntegrationTests;
 
-using System;
-
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
+using TestSupport.Dependencies;
+using TestSupport.Dependencies.Sqlite;
 using TestSupport.EntityFrameworkCore;
 
 public class SqliteDependencies : Singleton<SqliteDependencies>, IProvideDbContextOptions
 {
-    private static readonly Lazy<DbContextOptions> _dbContextOptions = new(BuildDbContextOptions);
-
-    private static readonly Lazy<SqliteMockContainer> _sqlite = new(BuildSqlite);
-
-    public static SqliteMockContainer SqliteMockContainer => _sqlite.Value;
-
-    public DbContextOptions Options => _dbContextOptions.Value;
-
-    private static DbContextOptions BuildDbContextOptions()
+    public DbContextOptions Options
     {
-        return new DbContextOptionsBuilder()
-              .UseSqlite(SqliteMockContainer.GetConnectionString())
-              .ConfigureWarnings(x => x.Ignore(RelationalEventId.AmbientTransactionWarning))
-              .Options;
-    }
+        get
+        {
+            var sqliteDb = RegisteredTestDependencies.Get<SqliteTestDependency>(DependencyConstants.SQLITE_DEPENDENCY_NAME);
 
-    private static SqliteMockContainer BuildSqlite()
-    {
-        return new();
+            return new DbContextOptionsBuilder()
+                  .UseSqlite(sqliteDb.GetConnectionString())
+                  .ConfigureWarnings(x => x.Ignore(RelationalEventId.AmbientTransactionWarning))
+                  .Options;
+        }
     }
 }

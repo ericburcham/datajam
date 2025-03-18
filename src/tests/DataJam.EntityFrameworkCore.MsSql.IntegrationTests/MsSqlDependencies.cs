@@ -1,56 +1,23 @@
 ﻿namespace DataJam.EntityFrameworkCore.MsSql.IntegrationTests;
 
-using System;
-using System.Threading;
-
-using DotNet.Testcontainers.Containers;
-
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 using Testcontainers.MsSql;
 
+using TestSupport.Dependencies;
 using TestSupport.EntityFrameworkCore;
 
 public class MsSqlDependencies : Singleton<MsSqlDependencies>, IProvideDbContextOptions
 {
-    private readonly ReaderWriterLockSlim _containerLock = new();
-
-    private readonly MsSqlContainer _msSql = new MsSqlBuilder().Build();
-
-    public DbContextOptions Options => new DbContextOptionsBuilder().UseSqlServer(MsSql.GetConnectionString()).Options;
-
-    internal MsSqlContainer MsSql
+    public DbContextOptions Options
     {
         get
         {
-            _containerLock.EnterUpgradeableReadLock();
+            var sqlContainer = RegisteredTestDependencies.Get<MsSqlContainer>(ContainerConstants.MSSQL_CONTAINER_NAME);
+            var connectionStringBuilder = new SqlConnectionStringBuilder(sqlContainer.GetConnectionString()) { InitialCatalog = ContainerConstants.MSSQL_TEST_DB };
 
-            try
-            {
-                if (_msSql.State == TestcontainersStates.Undefined)
-                {
-                    _containerLock.EnterWriteLock();
-
-                    try
-                    {
-                        _msSql.StartAsync().Wait();
-                    }
-                    finally
-                    {
-                        _containerLock.ExitWriteLock();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-            finally
-            {
-                _containerLock.ExitUpgradeableReadLock();
-            }
-
-            return _msSql;
+            return new DbContextOptionsBuilder().UseSqlServer(connectionStringBuilder.ConnectionString).Options;
         }
     }
 }
