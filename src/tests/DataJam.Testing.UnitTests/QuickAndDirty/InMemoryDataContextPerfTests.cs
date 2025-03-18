@@ -33,7 +33,7 @@ public class InMemoryDataContextPerfTests
 
         sw.Stop();
         var averageInsert = sw.ElapsedMilliseconds / 1000;
-        averageInsert.Should().BeLessOrEqualTo(10);
+        averageInsert.Should().BeLessThanOrEqualTo(10);
         Console.WriteLine("Average Time for insert of graph is {0}", averageInsert);
     }
 
@@ -53,7 +53,7 @@ public class InMemoryDataContextPerfTests
 
         sw.Stop();
         var averageInsert = sw.ElapsedMilliseconds / 1000;
-        averageInsert.Should().BeLessOrEqualTo(10);
+        averageInsert.Should().BeLessThanOrEqualTo(10);
         Console.WriteLine("Average Time for insert of graph is {0}", averageInsert);
     }
 }
