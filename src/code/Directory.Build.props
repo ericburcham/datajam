@@ -6,7 +6,7 @@
     <PropertyGroup>
         <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
         <EmbedUntrackedSources>True</EmbedUntrackedSources>
-        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
         <IncludePackageReferencesDuringMarkupCompilation>True</IncludePackageReferencesDuringMarkupCompilation>
         <IncludeSource>True</IncludeSource>
         <IncludeSymbols>True</IncludeSymbols>
@@ -32,8 +32,9 @@
 
     <!-- Expose Internals to Tests -->
     <ItemGroup>
-        <InternalsVisibleTo Include="$(AssemblyName).IntegrationTests"/>
-        <InternalsVisibleTo Include="$(AssemblyName).UnitTests"/>
+        <InternalsVisibleTo Include="$(AssemblyName).IntegrationTests" />
+        <InternalsVisibleTo Include="$(AssemblyName).Tests" />
+        <InternalsVisibleTo Include="$(AssemblyName).UnitTests" />
     </ItemGroup>
 
 </Project>

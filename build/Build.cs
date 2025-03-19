@@ -35,7 +35,7 @@ class Build : NukeBuild
     Target AnnounceGitVersion =>
         x => x
             .Before(Clean)
-            .Executes(PrintVersion);
+            .Executes(() => GitVersion.PrintGitVersionInfo());
 
     Target AnnounceNuGetApiKey =>
         x => x
@@ -91,12 +91,14 @@ class Build : NukeBuild
             .DependsOn(Test)
             .Executes(() =>
              {
+                 var version = GitVersion.GetPackageVersion(ShouldPublish);
+
                  DotNetPack(o => o
                                 .SetConfiguration(Configuration)
                                 .SetNoBuild(true)
                                 .SetOutputDirectory(ArtifactsDirectory)
                                 .SetProject(Solution)
-                                .SetVersion(GitVersion.FullSemVer));
+                                .SetVersion(version));
 
                  Log.Information($"Produced NuGet package version {GitVersion.NuGetVersion}");
              })
@@ -168,43 +170,5 @@ class Build : NukeBuild
         var clearPart = value.Substring(maskLength);
 
         return maskedPart + clearPart;
-    }
-
-    private void PrintVersion()
-    {
-        Log.Information($"AssemblySemFileVer: {GitVersion.AssemblySemFileVer}");
-        Log.Information($"AssemblySemVer: {GitVersion.AssemblySemVer}");
-        Log.Information($"BranchName: {GitVersion.BranchName}");
-        Log.Information($"BuildMetaData: {GitVersion.BuildMetaData}");
-        Log.Information($"BuildMetaDataPadded: {GitVersion.BuildMetaDataPadded}");
-        Log.Information($"CommitDate: {GitVersion.CommitDate}");
-        Log.Information($"CommitsSinceVersionSource: {GitVersion.CommitsSinceVersionSource}");
-        Log.Information($"CommitsSinceVersionSourcePadded: {GitVersion.CommitsSinceVersionSourcePadded}");
-        Log.Information($"EscapedBranchName: {GitVersion.EscapedBranchName}");
-        Log.Information($"FullBuildMetaData: {GitVersion.FullBuildMetaData}");
-        Log.Information($"FullSemVer: {GitVersion.FullSemVer}");
-        Log.Information($"InformationalVersion: {GitVersion.InformationalVersion}");
-        Log.Information($"InformationalVersion: {GitVersion.InformationalVersion}");
-        Log.Information($"LegacySemVer: {GitVersion.LegacySemVer}");
-        Log.Information($"LegacySemVerPadded: {GitVersion.LegacySemVerPadded}");
-        Log.Information($"Major: {GitVersion.Major}");
-        Log.Information($"MajorMinorPatch: {GitVersion.MajorMinorPatch}");
-        Log.Information($"Minor: {GitVersion.Minor}");
-        Log.Information($"NuGetPreReleaseTag: {GitVersion.NuGetPreReleaseTag}");
-        Log.Information($"NuGetPreReleaseTagV2: {GitVersion.NuGetPreReleaseTagV2}");
-        Log.Information($"NuGetVersion: {GitVersion.NuGetVersion}");
-        Log.Information($"NuGetVersionV2: {GitVersion.NuGetVersionV2}");
-        Log.Information($"Patch: {GitVersion.Patch}");
-        Log.Information($"PreReleaseLabel: {GitVersion.PreReleaseLabel}");
-        Log.Information($"PreReleaseLabelWithDash: {GitVersion.PreReleaseLabelWithDash}");
-        Log.Information($"PreReleaseNumber: {GitVersion.PreReleaseNumber}");
-        Log.Information($"PreReleaseTag: {GitVersion.PreReleaseTag}");
-        Log.Information($"PreReleaseTagWithDash: {GitVersion.PreReleaseTagWithDash}");
-        Log.Information($"SemVer: {GitVersion.SemVer}");
-        Log.Information($"Sha: {GitVersion.Sha}");
-        Log.Information($"ShortSha: {GitVersion.ShortSha}");
-        Log.Information($"UncommittedChanges: {GitVersion.UncommittedChanges}");
-        Log.Information($"VersionSourceSha: {GitVersion.VersionSourceSha}");
-        Log.Information($"WeightedPreReleaseNumber: {GitVersion.WeightedPreReleaseNumber}");
     }
 }
