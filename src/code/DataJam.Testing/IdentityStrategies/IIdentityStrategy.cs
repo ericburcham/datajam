@@ -8,5 +8,7 @@ using JetBrains.Annotations;
 public interface IIdentityStrategy<in T>
     where T : class
 {
+    /// <summary>Assigns the identity values.</summary>
+    /// <param name="entity">The entity to assign the identity value for.</param>
     void Assign(T entity);
 }
