@@ -28,6 +28,7 @@
         "Compile",
         "Default",
         "Pack",
+        "PrintVersion",
         "Publish",
         "Restore",
         "Test"

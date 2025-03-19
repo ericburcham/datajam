@@ -4,6 +4,9 @@ using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tools.DotNet;
+using Nuke.Common.Tools.GitVersion;
+
+using Serilog;
 
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
@@ -19,6 +22,8 @@ class Build : NukeBuild
     [GitRepository] readonly GitRepository GitRepository;
 
     [Solution] readonly Solution Solution;
+
+    [GitVersion] GitVersion GitVersion;
 
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
 
@@ -60,6 +65,13 @@ class Build : NukeBuild
              })
             .Produces(ArtifactsDirectory / "*.nupkg");
 
+    Target PrintVersion =>
+        x => x
+           .Executes(() =>
+            {
+                Log.Information($"GitVersion = {GitVersion.MajorMinorPatch}");
+            });
+
     Target Publish =>
         x => x
             .DependsOn(Pack)
@@ -78,6 +90,8 @@ class Build : NukeBuild
             .DependsOn(Clean)
             .Executes(() =>
              {
+                 DotNetToolRestore();
+
                  DotNetRestore(o => o
                                   .SetProjectFile(Solution));
              });
