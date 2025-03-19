@@ -11,7 +11,7 @@ using Serilog;
 
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
-[GitHubActions("continuous",
+[GitHubActions("nuke-build",
                GitHubActionsImage.UbuntuLatest,
                On = [GitHubActionsTrigger.Push],
                FetchDepth = 0, // Important for GitVersion
@@ -29,6 +29,28 @@ class Build : NukeBuild
 
     [Solution] readonly Solution Solution;
 
+    Target AnnounceGitVersion =>
+        x => x
+           .Executes(PrintVersion);
+
+    Target AnnounceNuGetApiKey =>
+        x => x
+            .Before(AnnounceGitVersion)
+            .Executes(() =>
+             {
+                 var valueName = nameof(NuGetApiKey);
+
+                 if (string.IsNullOrEmpty(NuGetApiKey))
+                 {
+                     Log.Information($"{valueName} is not defined.");
+                 }
+                 else
+                 {
+                     var maskedValue = MaskString(NuGetApiKey, 4);
+                     Log.Information($"{valueName} is defined: {maskedValue}.");
+                 }
+             });
+
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
 
     Target Clean =>
@@ -45,7 +67,7 @@ class Build : NukeBuild
 
     Target Compile =>
         x => x
-            .DependsOn(Restore, Version)
+            .DependsOn(AnnounceNuGetApiKey, Restore, AnnounceGitVersion)
             .Executes(() =>
              {
                  DotNetBuild(o => o
@@ -123,16 +145,26 @@ class Build : NukeBuild
                                 .SetProjectFile(Solution));
              });
 
-    Target Version =>
-        x => x
-            .Executes(PrintVersion);
-
     /// Support plugins are available for:
     /// - JetBrains ReSharper        https://nuke.build/resharper
     /// - JetBrains Rider            https://nuke.build/rider
     /// - Microsoft VisualStudio     https://nuke.build/visualstudio
     /// - Microsoft VSCode           https://nuke.build/vscode
     public static int Main() => Execute<Build>(x => x.Default);
+
+    private static string MaskString(string value, int clear)
+    {
+        if (clear >= value.Length)
+        {
+            return value;
+        }
+
+        var maskLength = value.Length - clear;
+        var maskedPart = new string('*', maskLength);
+        var clearPart = value.Substring(maskLength);
+
+        return maskedPart + clearPart;
+    }
 
     private void PrintVersion()
     {
