@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 using Configuration;
 
+using DataJam.Domains;
+
 using JetBrains.Annotations;
 
 /// <summary>Provides a combination of the Unit Of Work and Repository patterns capable of both read and write operations.</summary>

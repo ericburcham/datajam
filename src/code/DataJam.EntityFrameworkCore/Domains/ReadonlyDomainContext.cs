@@ -2,6 +2,8 @@ namespace DataJam.EntityFrameworkCore.Domains;
 
 using DataContexts;
 
+using DataJam.Domains;
+
 using JetBrains.Annotations;
 
 /// <summary>Represents a disposable unit of work that is only capable of read operations.</summary>
