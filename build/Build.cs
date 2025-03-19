@@ -13,8 +13,11 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 [GitHubActions("nuke-build",
                GitHubActionsImage.UbuntuLatest,
+               
+               // FetchDepth is important for GitVersion
+               FetchDepth = 0,
                On = [GitHubActionsTrigger.Push],
-               FetchDepth = 0, // Important for GitVersion
+               ImportSecrets = [nameof(NuGetApiKey)],
                InvokedTargets = [nameof(Default)])]
 class Build : NukeBuild
 {
