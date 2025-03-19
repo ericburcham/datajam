@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 
 /// <summary>Represents a disposable unit of work capable of both read and write operations based on Entity Framework Core's <see cref="DbContext" />.</summary>
 [PublicAPI]
-public interface IDataContext : DataJam.IDataContext
+public interface IDataContext : DataJam.DataContexts.IDataContext
 {
     /// <summary>Gets database related information and operations for this context.</summary>
     DatabaseFacade Database { get; }

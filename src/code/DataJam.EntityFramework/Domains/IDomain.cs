@@ -4,6 +4,8 @@ using System.Data.Entity;
 
 using Configuration;
 
+using DataJam.Domains;
+
 using JetBrains.Annotations;
 
 /// <summary>A representation of a domain of related entities that is specific to Entity Framework.</summary>

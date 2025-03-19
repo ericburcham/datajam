@@ -1,5 +1,7 @@
 namespace DataJam.EntityFrameworkCore.Sqlite.IntegrationTests.Family;
 
+using DataJam.Domains;
+
 using Microsoft.EntityFrameworkCore;
 
 using TestSupport.TestPatterns.Family;
