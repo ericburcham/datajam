@@ -24,6 +24,7 @@
     "ExecutableTarget": {
       "type": "string",
       "enum": [
+        "AnnounceGitVersion",
         "AnnounceNuGetApiKey",
         "Clean",
         "Compile",
@@ -31,8 +32,7 @@
         "Pack",
         "Publish",
         "Restore",
-        "Test",
-        "Version"
+        "Test"
       ]
     },
     "Verbosity": {
