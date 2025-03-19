@@ -1,17 +1,16 @@
-namespace DataJam.EntityFrameworkCore;
+namespace DataJam.EntityFrameworkCore.DbContexts;
 
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-/// <summary>
-///     A ReadonlyDbContext instance represents a session with the database and can be used to query instances of your entities. DbContext is a combination of the
-///     Unit Of Work and Repository patterns.
-/// </summary>
+/// <summary>A ReadonlyDbContext instance represents a READONLY session with the database and can be used to query instances of your entities.</summary>
 /// <remarks>
 ///     <para>
 ///         Entity Framework Core does not support multiple parallel operations being run on the same DbContext instance. This includes both parallel execution of
@@ -37,17 +36,10 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 ///         <see href="https://aka.ms/efcore-docs-saving-data">Saving data with EF Core</see> for more information and examples.
 ///     </para>
 /// </remarks>
+[PublicAPI]
 public class ReadonlyDbContext : DbContext
 {
-    /// <summary>
-    ///     Initializes a new instance of the <see cref="ReadonlyDbContext" /> class using the specified options. The
-    ///     <see cref="DbContext.OnConfiguring(DbContextOptionsBuilder)" /> method will still be called to allow further configuration of the options.
-    /// </summary>
-    /// <remarks>
-    ///     See <see href="https://aka.ms/efcore-docs-dbcontext">DbContext lifetime, configuration, and initialization</see> and
-    ///     <see href="https://aka.ms/efcore-docs-dbcontext-options">Using DbContextOptions</see> for more information and examples.
-    /// </remarks>
-    /// <param name="options">The options for this context.</param>
+    /// <inheritdoc />
     public ReadonlyDbContext(DbContextOptions options)
         : base(options)
     {
@@ -64,10 +56,10 @@ public class ReadonlyDbContext : DbContext
 
     /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
     /// <param name="entity">The entity is not used.</param>
-    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <typeparam name="T">The entity type is not used.</typeparam>
     /// <returns>Nothing.</returns>
     /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
-    public override EntityEntry<TEntity> Add<TEntity>(TEntity entity)
+    public override EntityEntry<T> Add<T>(T entity)
     {
         throw new InvalidOperationException($"{nameof(ReadonlyDbContext)} is readonly.  The {nameof(Add)} method is not supported.");
     }
@@ -75,10 +67,10 @@ public class ReadonlyDbContext : DbContext
     /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
     /// <param name="entity">The entity is not used.</param>
     /// <param name="cancellationToken">The cancellation token is not used.</param>
-    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <typeparam name="T">The entity type is not used.</typeparam>
     /// <returns>Nothing.</returns>
     /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
-    public override ValueTask<EntityEntry<TEntity>> AddAsync<TEntity>(TEntity entity, CancellationToken cancellationToken = default)
+    public override ValueTask<EntityEntry<T>> AddAsync<T>(T entity, CancellationToken cancellationToken = default)
     {
         throw new InvalidOperationException($"{nameof(ReadonlyDbContext)} is readonly.  The {nameof(AddAsync)} method is not supported.");
     }
@@ -139,10 +131,10 @@ public class ReadonlyDbContext : DbContext
 
     /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
     /// <param name="entity">The entity is not used.</param>
-    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <typeparam name="T">The entity type is not used.</typeparam>
     /// <returns>Nothing.</returns>
     /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
-    public override EntityEntry<TEntity> Remove<TEntity>(TEntity entity)
+    public override EntityEntry<T> Remove<T>(T entity)
     {
         throw new InvalidOperationException($"{nameof(ReadonlyDbContext)} is readonly.  The {nameof(Remove)} method is not supported.");
     }
@@ -200,6 +192,25 @@ public class ReadonlyDbContext : DbContext
     }
 
     /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
+    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <returns>Nothing.</returns>
+    /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
+    public override DbSet<TEntity> Set<TEntity>()
+    {
+        throw new InvalidOperationException($"Do not call {nameof(Set)} on a {nameof(ReadonlyDbContext)}.");
+    }
+
+    /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
+    /// <param name="name">The name is not used.</param>
+    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <returns>Nothing.</returns>
+    /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
+    public override DbSet<TEntity> Set<TEntity>(string name)
+    {
+        throw new InvalidOperationException($"Do not call {nameof(Set)} on a {nameof(ReadonlyDbContext)}.");
+    }
+
+    /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
     /// <param name="entity">The entity is not used.</param>
     /// <returns>Nothing.</returns>
     /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
@@ -210,10 +221,10 @@ public class ReadonlyDbContext : DbContext
 
     /// <summary>Should not be invoked.  Throws an <see cref="InvalidOperationException" />.</summary>
     /// <param name="entity">The entity is not used.</param>
-    /// <typeparam name="TEntity">The entity type is not used.</typeparam>
+    /// <typeparam name="T">The entity type is not used.</typeparam>
     /// <returns>Nothing.</returns>
     /// <exception cref="InvalidOperationException">Thrown on every invocation.</exception>
-    public override EntityEntry<TEntity> Update<TEntity>(TEntity entity)
+    public override EntityEntry<T> Update<T>(T entity)
     {
         throw new InvalidOperationException($"{nameof(ReadonlyDbContext)} is readonly.  The {nameof(Update)} method is not supported.");
     }

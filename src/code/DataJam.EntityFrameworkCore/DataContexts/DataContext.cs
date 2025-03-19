@@ -1,36 +1,19 @@
-namespace DataJam.EntityFrameworkCore;
+namespace DataJam.EntityFrameworkCore.DataContexts;
 
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 
 /// <summary>Provides a combination of the Unit Of Work and Repository patterns capable of both read and write operations.</summary>
-public class DataContext : DbContext, IEntityFrameworkCoreDataContext
+/// <param name="options">The configuration options.</param>
+/// <param name="mappingConfigurator">The mapping configurator to use.</param>
+[PublicAPI]
+public class DataContext(DbContextOptions options, IConfigureDomainMappings<ModelBuilder> mappingConfigurator) : DbContext(options), IDataContext
 {
-    private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator;
-
-    /// <summary>Initializes a new instance of the <see cref="DataContext" /> class.</summary>
-    /// <param name="options">The configuration options.</param>
-    /// <param name="mappingConfigurator">The mapping configurator to use.</param>
-    public DataContext(DbContextOptions options, IConfigureDomainMappings<ModelBuilder> mappingConfigurator)
-        : base(options)
-    {
-        _mappingConfigurator = mappingConfigurator;
-    }
-
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.AutoTransactionBehavior" />
-    public AutoTransactionBehavior AutoTransactionBehavior
-    {
-        get => Database.AutoTransactionBehavior;
-
-        set => Database.AutoTransactionBehavior = value;
-    }
-
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.CurrentTransaction" />
-    public IDbContextTransaction? CurrentTransaction => Database.CurrentTransaction;
+    private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator = mappingConfigurator;
 
     /// <inheritdoc cref="IUnitOfWork.Add{T}" />
     public new T Add<T>(T item)
@@ -39,25 +22,6 @@ public class DataContext : DbContext, IEntityFrameworkCoreDataContext
         Set<T>().Add(item);
 
         return item;
-    }
-
-    /// <inheritdoc cref="IDataSource.AsQueryable{TResult}" />
-    public IQueryable<T> AsQueryable<T>()
-        where T : class
-    {
-        return Set<T>();
-    }
-
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.BeginTransaction" />
-    public IDbContextTransaction BeginTransaction()
-    {
-        return Database.BeginTransaction();
-    }
-
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.BeginTransactionAsync" />
-    public Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
-    {
-        return Database.BeginTransactionAsync(cancellationToken);
     }
 
     /// <inheritdoc cref="IUnitOfWork.Commit" />
@@ -76,16 +40,20 @@ public class DataContext : DbContext, IEntityFrameworkCoreDataContext
         return await SaveChangesAsync().ConfigureAwait(false);
     }
 
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.CommitTransaction" />
-    public void CommitTransaction()
+    /// <inheritdoc cref="IDataSource.CreateQuery{T}" />
+    public IQueryable<T> CreateQuery<T>()
+        where T : class
     {
-        Database.CommitTransaction();
+        return Set<T>();
     }
 
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.CommitTransactionAsync" />
-    public Task CommitTransactionAsync(CancellationToken cancellationToken = default)
+    /// <inheritdoc cref="IUnitOfWork.Reload{T}" />
+    public T Reload<T>(T item)
+        where T : class
     {
-        return Database.CommitTransactionAsync(cancellationToken);
+        Entry(item).Reload();
+
+        return item;
     }
 
     /// <inheritdoc cref="IUnitOfWork.Remove{T}" />
@@ -93,18 +61,6 @@ public class DataContext : DbContext, IEntityFrameworkCoreDataContext
         where T : class
     {
         return Set<T>().Remove(item).Entity;
-    }
-
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.RollbackTransaction" />
-    public void RollbackTransaction()
-    {
-        Database.RollbackTransaction();
-    }
-
-    /// <inheritdoc cref="IEntityFrameworkCoreDataContext.RollbackTransactionAsync" />
-    public Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
-    {
-        return Database.RollbackTransactionAsync(cancellationToken);
     }
 
     /// <inheritdoc cref="IUnitOfWork.Update{T}" />

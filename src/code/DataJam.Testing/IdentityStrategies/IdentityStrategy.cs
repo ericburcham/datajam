@@ -4,9 +4,12 @@ using System;
 using System.Linq.Expressions;
 using System.Reflection;
 
+using JetBrains.Annotations;
+
 /// <summary>A base class for identity strategies.</summary>
 /// <typeparam name="T">The element Type.</typeparam>
 /// <typeparam name="TIdentity">The identity Type.</typeparam>
+[PublicAPI]
 public abstract class IdentityStrategy<T, TIdentity> : IIdentityStrategy<T>
     where T : class
 {
@@ -71,7 +74,7 @@ public abstract class IdentityStrategy<T, TIdentity> : IIdentityStrategy<T>
         }
     }
 
-    private PropertyInfo GetPropertyFromExpression(Expression<Func<T, TIdentity>> propertyExpression)
+    private static PropertyInfo GetPropertyFromExpression(Expression<Func<T, TIdentity>> propertyExpression)
     {
         MemberExpression memberExpression;
 
@@ -85,7 +88,7 @@ public abstract class IdentityStrategy<T, TIdentity> : IIdentityStrategy<T>
             }
             else
             {
-                throw new ArgumentException();
+                throw new ArgumentException(null, nameof(propertyExpression));
             }
         }
         else if (propertyExpression.Body is MemberExpression body)
@@ -94,7 +97,7 @@ public abstract class IdentityStrategy<T, TIdentity> : IIdentityStrategy<T>
         }
         else
         {
-            throw new ArgumentException();
+            throw new ArgumentException(null, nameof(propertyExpression));
         }
 
         return (PropertyInfo)memberExpression.Member;

@@ -2,7 +2,8 @@
 
 using System;
 
+using JetBrains.Annotations;
+
 /// <summary>Represents a disposable unit of work capable of both read and write operations.</summary>
-public interface IDataContext : IDataSource, IDisposable, IUnitOfWork
-{
-}
+[PublicAPI]
+public interface IDataContext : IDataSource, IDisposable, IUnitOfWork;

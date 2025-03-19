@@ -2,10 +2,10 @@
   "version": 1,
   "isRoot": true,
   "tools": {
-    "nuke.extensions.builds.versioned": {
-      "version": "9.0.0",
+    "gitversion.tool": {
+      "version": "6.1.0",
       "commands": [
-        "nuke-build"
+        "dotnet-gitversion"
       ],
       "rollForward": false
     }

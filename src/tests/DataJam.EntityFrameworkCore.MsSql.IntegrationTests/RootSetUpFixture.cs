@@ -2,18 +2,32 @@
 
 using System.Threading.Tasks;
 
+using Microsoft.Data.SqlClient;
+
+using NUnit.Framework;
+
+using Testcontainers.MsSql;
+
+using TestSupport.Dependencies;
+using TestSupport.Dependencies.TestContainers;
+using TestSupport.Migrations;
+
 [SetUpFixture]
-public class RootSetUpFixture
+internal class RootSetUpFixture() : TestContainerSetUpFixture<TestDependencyProvider>(TestDependencyProvider.Instance)
 {
-    [OneTimeSetUp]
-    public async Task OneTimeSetUp()
+    public override async Task RunBeforeAllTests()
     {
-        await DeployMsSql().ConfigureAwait(false);
+        await base.RunBeforeAllTests();
+
+        await DeployMsSql();
     }
 
     private static async Task DeployMsSql()
     {
-        var connectionString = MsSqlDependencies.Instance.MsSql.GetConnectionString();
+        var sqlContainer = RegisteredTestDependencies.Get<MsSqlContainer>(ContainerConstants.MSSQL_CONTAINER_NAME);
+        var connectionString = sqlContainer.GetConnectionString();
+        var connectionStringBuilder = new SqlConnectionStringBuilder(connectionString) { InitialCatalog = ContainerConstants.MSSQL_TEST_DB };
+        connectionString = connectionStringBuilder.ConnectionString;
         var databaseDeployer = new MsSqlDatabaseDeployer(connectionString);
         await databaseDeployer.Deploy().ConfigureAwait(false);
     }

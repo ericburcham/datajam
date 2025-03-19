@@ -3,9 +3,11 @@
     <!-- Global properties -->
     <PropertyGroup>
         <AssemblyName>$(MSBuildProjectName)</AssemblyName>
-        <Authors>Ghost Recon Team</Authors>
-        <Company>Enteprise Products</Company>
-        <Copyright>© Enteprise Products</Copyright>
+        <Authors>Eric Burcham</Authors>
+        <Company>Eric Burcham</Company>
+        <CopyrightCurrentYear>$([System.DateTime]::Now.Year)</CopyrightCurrentYear>
+        <CopyrightStartYear>2023</CopyrightStartYear>
+        <Copyright>© $(CopyrightStartYear) - $(CopyrightCurrentYear) Eric Burcham</Copyright>
         <GenerateDocumentationFile>True</GenerateDocumentationFile>
         <ImplicitUsings>disable</ImplicitUsings>
         <IsPackable>False</IsPackable>
@@ -16,6 +18,14 @@
         <Product>DataJam</Product>
         <RootNamespace>$(MSBuildProjectName)</RootNamespace>
         <TargetFramework>net8.0</TargetFramework>
+    </PropertyGroup>
+
+    <!-- Pin default version information -->
+    <PropertyGroup>
+        <VersionPrefix>0.0.0</VersionPrefix>
+        <GenerateAssemblyVersionAttribute>true</GenerateAssemblyVersionAttribute>
+        <GenerateAssemblyFileVersionAttribute>true</GenerateAssemblyFileVersionAttribute>
+        <GenerateAssemblyInformationalVersionAttribute>true</GenerateAssemblyInformationalVersionAttribute>
     </PropertyGroup>
 
     <!-- Treat all warnings as errors -->

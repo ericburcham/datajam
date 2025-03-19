@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <ItemGroup>
+        <PackageReference Include="FluentMigrator"/>
+        <PackageReference Include="FluentMigrator.Runner.Core"/>
+        <PackageReference Include="FluentMigrator.Runner.MySql"/>
+        <PackageReference Include="FluentMigrator.Runner.SqlServer"/>
+        <PackageReference Include="JetBrains.Annotations"/>
+        <PackageReference Include="Microsoft.Data.SqlClient"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\DataJam.TestSupport.FluentMigrator.Core\DataJam.TestSupport.FluentMigrator.Core.csproj"/>
+        <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj"/>
+    </ItemGroup>
+
+</Project>

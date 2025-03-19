@@ -1,25 +1,23 @@
-namespace DataJam.EntityFrameworkCore;
+namespace DataJam.EntityFrameworkCore.DataContexts;
 
 using System.Linq;
+
+using DbContexts;
+
+using JetBrains.Annotations;
 
 using Microsoft.EntityFrameworkCore;
 
 /// <summary>Provides a data context which is limited to read operations.</summary>
-public class ReadonlyDataContext : ReadonlyDbContext, IReadonlyDataContext
+/// <param name="options">The configuration options.</param>
+/// <param name="mappingConfigurator">The mapping configurator to use.</param>
+[PublicAPI]
+public class ReadonlyDataContext(DbContextOptions options, IConfigureDomainMappings<ModelBuilder> mappingConfigurator) : ReadonlyDbContext(options), IReadonlyDataContext
 {
-    private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator;
+    private readonly IConfigureDomainMappings<ModelBuilder>? _mappingConfigurator = mappingConfigurator;
 
-    /// <summary>Initializes a new instance of the <see cref="ReadonlyDataContext" /> class.</summary>
-    /// <param name="options">The configuration options.</param>
-    /// <param name="mappingConfigurator">The mapping configurator to use.</param>
-    public ReadonlyDataContext(DbContextOptions options, IConfigureDomainMappings<ModelBuilder> mappingConfigurator)
-        : base(options)
-    {
-        _mappingConfigurator = mappingConfigurator;
-    }
-
-    /// <inheritdoc cref="IDataSource.AsQueryable{TResult}" />
-    public IQueryable<T> AsQueryable<T>()
+    /// <inheritdoc cref="IDataSource.CreateQuery{T}" />
+    public IQueryable<T> CreateQuery<T>()
         where T : class
     {
         return Set<T>();

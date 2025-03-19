@@ -94,7 +94,7 @@ public class InMemoryDataContextAutoRegisterIdentityStrategiesTests
     {
         public int Id { get; set; }
 
-        public IList<AnotherProperty> MyProperties { get; } = new List<AnotherProperty>();
+        public List<AnotherProperty> MyProperties { get; } = [];
 
         public AnotherProperty MyProperty { get; init; } = null!;
     }

@@ -4,6 +4,6 @@ public class GetChildren : Query<Child>
 {
     public GetChildren()
     {
-        Selector = dataSource => dataSource.AsQueryable<Child>();
+        Selector = dataSource => dataSource.CreateQuery<Child>();
     }
 }

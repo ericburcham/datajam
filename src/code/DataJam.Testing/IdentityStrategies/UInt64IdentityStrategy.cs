@@ -14,7 +14,7 @@ internal class UInt64IdentityStrategy<T> : IdentityStrategy<T, ulong>
 
     protected override bool DefaultValueIsUnset(ulong id)
     {
-        return id == default;
+        return id == 0;
     }
 
     private ulong GenerateInt64()

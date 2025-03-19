@@ -3,68 +3,49 @@ namespace DataJam;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using JetBrains.Annotations;
+
 /// <summary>Provides an implementation of the Repository pattern.</summary>
-public class Repository : IRepository
+/// <param name="dataContext">The data context to use.</param>
+[PublicAPI]
+public class Repository(IDataContext dataContext) : IRepository
 {
-    private readonly IDataContext _dataContext;
+    /// <inheritdoc cref="IRepository.Context" />
+    public IDataContext Context { get; } = dataContext;
 
-    /// <summary>Initializes a new instance of the <see cref="Repository" /> class.</summary>
-    /// <param name="dataContext">The data context to use.</param>
-    public Repository(IDataContext dataContext)
-    {
-        _dataContext = dataContext;
-    }
-
-    /// <inheritdoc cref="IRepository" />
-    public IUnitOfWork Context => _dataContext;
-
-    /// <inheritdoc cref="IRepository" />
+    /// <inheritdoc cref="IRepository.Execute" />
     public void Execute(ICommand command)
     {
-        command.Execute(_dataContext);
+        command.Execute(Context);
     }
 
-    /// <inheritdoc cref="IRepository" />
+    /// <inheritdoc cref="IRepository.ExecuteAsync" />
     public Task ExecuteAsync(ICommand command)
     {
-        return Task.Factory.StartNew(() => command.Execute(_dataContext));
+        return Task.Factory.StartNew(() => command.Execute(Context));
     }
 
-    /// <inheritdoc cref="IRepository" />
+    /// <inheritdoc cref="IRepository.Find{T}(IQuery{T})" />
     public IEnumerable<T> Find<T>(IQuery<T> query)
     {
-        return query.Execute(_dataContext);
+        return query.Execute(Context);
     }
 
-    /// <inheritdoc cref="IRepository" />
+    /// <inheritdoc cref="IRepository.Find{T}(IScalar{T})" />
     public T Find<T>(IScalar<T> scalar)
     {
-        return scalar.Execute(_dataContext);
+        return scalar.Execute(Context);
     }
 
-    /// <inheritdoc cref="IRepository" />
-    public IEnumerable<TProjection> Find<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
-        where TSelection : class
-    {
-        return query.Execute(_dataContext);
-    }
-
-    /// <inheritdoc cref="IRepository" />
-    public Task<T> FindAsync<T>(IScalar<T> scalar)
-    {
-        return Task.Factory.StartNew(() => scalar.Execute(_dataContext));
-    }
-
-    /// <inheritdoc cref="IRepository" />
+    /// <inheritdoc cref="IRepository.FindAsync{T}(IQuery{T})" />
     public Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query)
     {
-        return Task.Factory.StartNew(() => query.Execute(_dataContext));
+        return Task.Factory.StartNew(() => query.Execute(Context));
     }
 
-    /// <inheritdoc cref="IRepository" />
-    public Task<IEnumerable<TProjection>> FindAsync<TSelection, TProjection>(IQuery<TSelection, TProjection> query)
-        where TSelection : class
+    /// <inheritdoc cref="IRepository.FindAsync{T}(IScalar{T})" />
+    public Task<T> FindAsync<T>(IScalar<T> scalar)
     {
-        return Task.Factory.StartNew(() => query.Execute(_dataContext));
+        return Task.Factory.StartNew(() => scalar.Execute(Context));
     }
 }
