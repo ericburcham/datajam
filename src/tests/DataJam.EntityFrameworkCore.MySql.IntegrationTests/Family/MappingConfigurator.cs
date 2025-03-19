@@ -1,5 +1,7 @@
 namespace DataJam.EntityFrameworkCore.MySql.IntegrationTests.Family;
 
+using DataJam.Domains;
+
 using Microsoft.EntityFrameworkCore;
 
 using TestSupport.TestPatterns.Family;

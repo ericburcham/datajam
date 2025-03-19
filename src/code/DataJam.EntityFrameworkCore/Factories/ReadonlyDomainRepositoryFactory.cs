@@ -3,6 +3,9 @@ namespace DataJam.EntityFrameworkCore.Factories;
 using System.Collections.Generic;
 using System.Linq;
 
+using DataJam.Domains;
+using DataJam.Factories;
+
 using Domains;
 
 using JetBrains.Annotations;
