@@ -13,7 +13,7 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 [GitHubActions("nuke-build",
                GitHubActionsImage.UbuntuLatest,
-               
+
                // FetchDepth is important for GitVersion
                FetchDepth = 0,
                On = [GitHubActionsTrigger.Push],
@@ -34,7 +34,8 @@ class Build : NukeBuild
 
     Target AnnounceGitVersion =>
         x => x
-           .Executes(PrintVersion);
+            .Before(Clean)
+            .Executes(PrintVersion);
 
     Target AnnounceNuGetApiKey =>
         x => x
@@ -70,7 +71,7 @@ class Build : NukeBuild
 
     Target Compile =>
         x => x
-            .DependsOn(AnnounceNuGetApiKey, Restore, AnnounceGitVersion)
+            .DependsOn(AnnounceNuGetApiKey, AnnounceGitVersion, Restore)
             .Executes(() =>
              {
                  DotNetBuild(o => o
