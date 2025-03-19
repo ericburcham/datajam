@@ -28,10 +28,10 @@
         "Compile",
         "Default",
         "Pack",
-        "PrintVersion",
         "Publish",
         "Restore",
-        "Test"
+        "Test",
+        "Version"
       ]
     },
     "Verbosity": {
@@ -112,6 +112,11 @@
             "Debug",
             "Release"
           ]
+        },
+        "NuGetApiKey": {
+          "type": "string",
+          "description": "NuGet API Key for publishing packages",
+          "default": "Secrets must be entered via 'nuke :secrets [profile]'"
         },
         "Solution": {
           "type": "string",

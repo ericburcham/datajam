@@ -3,6 +3,7 @@ using Nuke.Common.CI.GitHubActions;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
+using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
 
@@ -13,6 +14,7 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 [GitHubActions("continuous",
                GitHubActionsImage.UbuntuLatest,
                On = [GitHubActionsTrigger.Push],
+               FetchDepth = 0, // Important for GitVersion
                InvokedTargets = [nameof(Default)])]
 class Build : NukeBuild
 {
@@ -21,9 +23,11 @@ class Build : NukeBuild
 
     [GitRepository] readonly GitRepository GitRepository;
 
-    [Solution] readonly Solution Solution;
+    [GitVersion] readonly GitVersion GitVersion;
 
-    [GitVersion] GitVersion GitVersion;
+    [Parameter("NuGet API Key for publishing packages")] [Secret] readonly string NuGetApiKey;
+
+    [Solution] readonly Solution Solution;
 
     AbsolutePath ArtifactsDirectory => RootDirectory / "artifacts";
 
@@ -41,13 +45,17 @@ class Build : NukeBuild
 
     Target Compile =>
         x => x
-            .DependsOn(Restore)
+            .DependsOn(Restore, Version)
             .Executes(() =>
              {
                  DotNetBuild(o => o
+                                 .SetAssemblyVersion(GitVersion.AssemblySemVer)
                                  .SetConfiguration(Configuration)
+                                 .SetFileVersion(GitVersion.AssemblySemFileVer)
+                                 .SetInformationalVersion(GitVersion.InformationalVersion)
                                  .SetNoRestore(true)
-                                 .SetProjectFile(Solution));
+                                 .SetProjectFile(Solution)
+                                 .SetVersion(GitVersion.SemVer));
              });
 
     Target Default => x => x.DependsOn(Pack);
@@ -61,29 +69,35 @@ class Build : NukeBuild
                                 .SetConfiguration(Configuration)
                                 .SetNoBuild(true)
                                 .SetOutputDirectory(ArtifactsDirectory)
-                                .SetProject(Solution));
+                                .SetProject(Solution)
+                                .SetVersion(GitVersion.FullSemVer));
+
+                 Log.Information($"Produced NuGet package version {GitVersion.NuGetVersion}");
              })
             .Produces(ArtifactsDirectory / "*.nupkg");
-
-    Target PrintVersion =>
-        x => x
-           .Executes(() =>
-            {
-                Log.Information($"GitVersion = {GitVersion.MajorMinorPatch}");
-            });
 
     Target Publish =>
         x => x
             .DependsOn(Pack)
-            .TriggeredBy(Pack)
             .Executes(() =>
              {
-                 DotNetPublish(o => o
-                                   .SetConfiguration(Configuration)
-                                   .SetNoBuild(true)
-                                   .SetProject(Solution));
+                 // If you want to publish to NuGet.org, include the NuGetApiKey
+                 if (string.IsNullOrEmpty(NuGetApiKey))
+                 {
+                     return;
+                 }
+
+                 var packages = ArtifactsDirectory.GlobFiles("*.nupkg");
+
+                 DotNetNuGetPush(s => s
+                                     .SetSource("https://api.nuget.org/v3/index.json")
+                                     .SetApiKey(NuGetApiKey)
+                                     .CombineWith(packages, (cs, v) => cs.SetTargetPath(v)));
+
+                 Log.Information($"Published {packages.Count} packages to NuGet");
              })
-            .OnlyWhenStatic(() => ShouldPublish);
+            .OnlyWhenStatic(() => ShouldPublish)
+            .TriggeredBy(Pack);
 
     Target Restore =>
         x => x
@@ -109,10 +123,52 @@ class Build : NukeBuild
                                 .SetProjectFile(Solution));
              });
 
+    Target Version =>
+        x => x
+            .Executes(PrintVersion);
+
     /// Support plugins are available for:
     /// - JetBrains ReSharper        https://nuke.build/resharper
     /// - JetBrains Rider            https://nuke.build/rider
     /// - Microsoft VisualStudio     https://nuke.build/visualstudio
     /// - Microsoft VSCode           https://nuke.build/vscode
     public static int Main() => Execute<Build>(x => x.Default);
+
+    private void PrintVersion()
+    {
+        Log.Information($"AssemblySemFileVer: {GitVersion.AssemblySemFileVer}");
+        Log.Information($"AssemblySemVer: {GitVersion.AssemblySemVer}");
+        Log.Information($"BranchName: {GitVersion.BranchName}");
+        Log.Information($"BuildMetaData: {GitVersion.BuildMetaData}");
+        Log.Information($"BuildMetaDataPadded: {GitVersion.BuildMetaDataPadded}");
+        Log.Information($"CommitDate: {GitVersion.CommitDate}");
+        Log.Information($"CommitsSinceVersionSource: {GitVersion.CommitsSinceVersionSource}");
+        Log.Information($"CommitsSinceVersionSourcePadded: {GitVersion.CommitsSinceVersionSourcePadded}");
+        Log.Information($"EscapedBranchName: {GitVersion.EscapedBranchName}");
+        Log.Information($"FullBuildMetaData: {GitVersion.FullBuildMetaData}");
+        Log.Information($"FullSemVer: {GitVersion.FullSemVer}");
+        Log.Information($"InformationalVersion: {GitVersion.InformationalVersion}");
+        Log.Information($"InformationalVersion: {GitVersion.InformationalVersion}");
+        Log.Information($"LegacySemVer: {GitVersion.LegacySemVer}");
+        Log.Information($"LegacySemVerPadded: {GitVersion.LegacySemVerPadded}");
+        Log.Information($"Major: {GitVersion.Major}");
+        Log.Information($"MajorMinorPatch: {GitVersion.MajorMinorPatch}");
+        Log.Information($"Minor: {GitVersion.Minor}");
+        Log.Information($"NuGetPreReleaseTag: {GitVersion.NuGetPreReleaseTag}");
+        Log.Information($"NuGetPreReleaseTagV2: {GitVersion.NuGetPreReleaseTagV2}");
+        Log.Information($"NuGetVersion: {GitVersion.NuGetVersion}");
+        Log.Information($"NuGetVersionV2: {GitVersion.NuGetVersionV2}");
+        Log.Information($"Patch: {GitVersion.Patch}");
+        Log.Information($"PreReleaseLabel: {GitVersion.PreReleaseLabel}");
+        Log.Information($"PreReleaseLabelWithDash: {GitVersion.PreReleaseLabelWithDash}");
+        Log.Information($"PreReleaseNumber: {GitVersion.PreReleaseNumber}");
+        Log.Information($"PreReleaseTag: {GitVersion.PreReleaseTag}");
+        Log.Information($"PreReleaseTagWithDash: {GitVersion.PreReleaseTagWithDash}");
+        Log.Information($"SemVer: {GitVersion.SemVer}");
+        Log.Information($"Sha: {GitVersion.Sha}");
+        Log.Information($"ShortSha: {GitVersion.ShortSha}");
+        Log.Information($"UncommittedChanges: {GitVersion.UncommittedChanges}");
+        Log.Information($"VersionSourceSha: {GitVersion.VersionSourceSha}");
+        Log.Information($"WeightedPreReleaseNumber: {GitVersion.WeightedPreReleaseNumber}");
+    }
 }
