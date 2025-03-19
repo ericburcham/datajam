@@ -400,3 +400,6 @@ FodyWeavers.xsd
 
 # Backup files from various text editors
 *.bak
+
+# Nuke's temp directory
+.nuke/temp/
