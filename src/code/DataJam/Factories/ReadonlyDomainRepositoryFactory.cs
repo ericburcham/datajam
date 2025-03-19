@@ -1,7 +1,9 @@
-namespace DataJam;
+namespace DataJam.Factories;
 
 using System.Collections.Generic;
 using System.Linq;
+
+using Domains;
 
 using JetBrains.Annotations;
 

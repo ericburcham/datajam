@@ -2,6 +2,8 @@
 
 using System;
 
+using DataJam.Domains;
+
 using Domains;
 
 using NUnit.Framework;

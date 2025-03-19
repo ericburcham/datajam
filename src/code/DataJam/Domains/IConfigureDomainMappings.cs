@@ -1,4 +1,4 @@
-namespace DataJam;
+namespace DataJam.Domains;
 
 using JetBrains.Annotations;
 
