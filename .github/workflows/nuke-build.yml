@@ -22,9 +22,6 @@ jobs:
   ubuntu-latest:
     name: ubuntu-latest
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        dotnet: [ '8.0.x', '9.0.x' ]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -36,10 +33,15 @@ jobs:
             .nuke/temp
             ~/.nuget/packages
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
-      - name: Install .NET SDKs
+      - name: Install .NET 8 SDK
         uses: actions/setup-dotnet@v4.1.0
         with:
-          dotnet-version: ${{ matrix.dotnet }}
+          dotnet-version: 8.0.x
+          dotnet-quality: ga
+      - name: Install .NET 9 SDK
+        uses: actions/setup-dotnet@v4.1.0
+        with:
+          dotnet-version: 9.0.x
           dotnet-quality: ga
       - name: 'Run: Nuke'
         run: ./build.cmd Nuke
