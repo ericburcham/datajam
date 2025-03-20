@@ -36,7 +36,7 @@ jobs:
             .nuke/temp
             ~/.nuget/packages
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
-      - name: Install .NET 8
+      - name: Install .NET SDKs
         uses: actions/setup-dotnet@v4.1.0
         with:
           dotnet-version: ${{ matrix.dotnet }}
