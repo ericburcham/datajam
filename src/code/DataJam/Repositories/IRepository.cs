@@ -3,6 +3,8 @@ namespace DataJam;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+using DataContexts;
+
 using JetBrains.Annotations;
 
 /// <summary>Exposes an interface for repositories.</summary>
