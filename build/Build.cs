@@ -146,14 +146,8 @@ class Build : NukeBuild
                  var listRuntimeCommand = environmentIsWindows ? "powershell dotnet --list-runtimes" : "dotnet --list-runtimes";
                  var listSdksCommand = environmentIsWindows ? "powershell dotnet --list-sdks" : "dotnet --list-sdks";
 
-                 ProcessTasks.StartShell(listRuntimeCommand,
-                                         logOutput: false)
-                             .AssertZeroExitCode();
-
-                 ProcessTasks.StartShell(listSdksCommand,
-                                         logOutput: false)
-                             .AssertZeroExitCode();
-
+                 ProcessTasks.StartShell(listRuntimeCommand).AssertZeroExitCode();
+                 ProcessTasks.StartShell(listSdksCommand).AssertZeroExitCode();
                  Log.Information("Sleeping for 15 seconds to allow SDKs to be listed.");
                  Thread.Sleep(15000);
 
@@ -174,14 +168,8 @@ class Build : NukeBuild
                  }
 
                  // List installed runtimes and SDKs again
-                 ProcessTasks.StartShell(listRuntimeCommand,
-                                         logOutput: false)
-                             .AssertZeroExitCode();
-
-                 ProcessTasks.StartShell(listSdksCommand,
-                                         logOutput: false)
-                             .AssertZeroExitCode();
-
+                 ProcessTasks.StartShell(listRuntimeCommand).AssertZeroExitCode();
+                 ProcessTasks.StartShell(listSdksCommand).AssertZeroExitCode();
                  Log.Information("Sleeping for 15 seconds to allow SDKs to be listed.");
                  Thread.Sleep(15000);
              })
