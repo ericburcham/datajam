@@ -1,16 +1,25 @@
+using System.Collections.Generic;
+using System.Linq;
+
+using Newtonsoft.Json.Linq;
+
 using Nuke.Common;
+using Nuke.Common.CI;
 using Nuke.Common.CI.GitHubActions;
+using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
+using Nuke.Common.Utilities;
 
 using Serilog;
 
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
+[DotNetVerbosityMapping]
 [GitHubActions("nuke-build",
                GitHubActionsImage.UbuntuLatest,
 
@@ -19,6 +28,8 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
                On = [GitHubActionsTrigger.Push],
                ImportSecrets = [nameof(NuGetApiKey)],
                InvokedTargets = [nameof(Default)])]
+[HandleSingleFileExecution]
+[ShutdownDotNetAfterServerBuild]
 class Build : NukeBuild
 {
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
@@ -84,7 +95,57 @@ class Build : NukeBuild
                                  .SetVersion(GitVersion.SemVer));
              });
 
-    Target Default => x => x.DependsOn(Pack);
+    Target Default => x => x.DependsOn(InstallAdditionalSdks, Pack, Publish);
+
+    Target InstallAdditionalSdks =>
+        x => x
+            .Before(Clean)
+            .Executes(() =>
+             {
+                 var additionalSdkVersions = GetAdditionalSdkVersions();
+
+                 if (additionalSdkVersions == null)
+                 {
+                     Log.Information("No additional SDKs found.");
+
+                     return;
+                 }
+
+                 var versions = additionalSdkVersions.ToList();
+
+                 if (versions.Count == 0)
+                 {
+                     Log.Information("No additional SDKs found.");
+
+                     return;
+                 }
+
+                 Log.Information("Additional SDKs found:");
+
+                 // Build the path to the dotnet install script
+                 var environmentIsWindows = EnvironmentInfo.IsWin;
+                 var scriptFileName = environmentIsWindows ? "dotnet-install.ps1" : "dotnet-install.sh";
+                 var globalNukeDirectory = EnvironmentInfo.SpecialFolder(SpecialFolders.UserProfile) / ".nuke";
+                 var scriptFile = globalNukeDirectory / scriptFileName;
+
+                 // Download the script file
+                 var scriptUrl = $"https://dot.net/v1/{scriptFileName}";
+                 Log.Information($"Downloading .NET SDK install script: {scriptUrl}");
+                 HttpTasks.HttpDownloadFile(scriptUrl, scriptFile);
+
+                 // Install SDKs
+                 foreach (var version in versions)
+                 {
+                     Log.Information($"Installing .NET SDK version {version}");
+
+                     ProcessTasks.StartShell(environmentIsWindows
+                                                 ? $"powershell {scriptFile.ToString().DoubleQuoteIfNeeded()} dotnet -Version {version}"
+                                                 : $"{scriptFile.ToString().DoubleQuoteIfNeeded()} dotnet --version {version}",
+                                             logOutput: false)
+                                 .AssertZeroExitCode();
+                 }
+             })
+            .ProceedAfterFailure();
 
     Target Pack =>
         x => x
@@ -157,6 +218,14 @@ class Build : NukeBuild
     /// - Microsoft VisualStudio     https://nuke.build/visualstudio
     /// - Microsoft VSCode           https://nuke.build/vscode
     public static int Main() => Execute<Build>(x => x.Default);
+
+    private static IEnumerable<string> GetAdditionalSdkVersions()
+    {
+        var additionalSdksFile = RootDirectory / "additional-sdks.json";
+        var jObject = additionalSdksFile.Existing()?.ReadJson() ?? new JObject();
+
+        return jObject["sdks"]?["versions"]?.Values<string>() ?? [];
+    }
 
     private static string MaskString(string value, int clear)
     {

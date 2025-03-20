@@ -29,6 +29,7 @@
         "Clean",
         "Compile",
         "Default",
+        "InstallAdditionalSdks",
         "Pack",
         "Publish",
         "Restore",
