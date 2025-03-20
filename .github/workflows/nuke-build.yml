@@ -33,11 +33,11 @@ jobs:
             .nuke/temp
             ~/.nuget/packages
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
-      - name: Set up .NET 8
+      - name: Install .NET 8
         uses: actions/setup-dotnet@v4.1.0
         with:
           dotnet-version: 8.0.407
-      - name: Set up .NET 9
+      - name: Install .NET 9
         uses: actions/setup-dotnet@v4.1.0
         with:
           dotnet-version: 9.0.201
