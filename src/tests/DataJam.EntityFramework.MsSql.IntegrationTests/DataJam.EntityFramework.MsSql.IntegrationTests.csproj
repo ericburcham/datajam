@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\code\DataJam.EntityFramework\DataJam.EntityFramework.csproj" />
     <ProjectReference Include="..\..\test-support\DataJam.TestSupport.Dependencies.TestContainers\DataJam.TestSupport.Dependencies.TestContainers.csproj" />
     <ProjectReference Include="..\..\test-support\DataJam.TestSupport.Dependencies\DataJam.TestSupport.Dependencies.csproj" />
     <ProjectReference Include="..\..\test-support\DataJam.TestSupport.EntityFramework\DataJam.TestSupport.EntityFramework.csproj" />
