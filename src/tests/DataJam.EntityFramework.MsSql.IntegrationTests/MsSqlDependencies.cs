@@ -17,6 +17,7 @@ public static class MsSqlDependencies
     {
         get
         {
+            #pragma warning disable CS0618 // Type or member is obsolete
             var sqlContainer = RegisteredTestDependencies.Get<MsSqlContainer>(ContainerConstants.MSSQL_CONTAINER_NAME);
             var connectionStringBuilder = new SqlConnectionStringBuilder(sqlContainer.GetConnectionString()) { InitialCatalog = ContainerConstants.MSSQL_TEST_DB };
 
