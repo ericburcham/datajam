@@ -81,7 +81,7 @@ if (Test-Path $AdditionalSdksFile) {
     $AdditionalSdkChannels = (Get-Content $AdditionalSdksFile | ConvertFrom-Json).sdks.channels
 
     foreach ($AdditionalChannel in $AdditionalSdkChannels) {
-        Write-Host "Installing .NET SDK Channel: $AdditionalChannel"
+        Write-Host "Installing .NET SDK for channel: $AdditionalChannel"
         ExecSafe { & powershell $DotNetInstallFile -Channel $AdditionalChannel }
     }
 }

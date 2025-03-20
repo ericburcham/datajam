@@ -23,6 +23,7 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
 [DotNetVerbosityMapping]
 [GitHubActions("nuke-build",
                GitHubActionsImage.UbuntuLatest,
+               AutoGenerate = false,
 
                // FetchDepth is important for GitVersion
                FetchDepth = 0,
