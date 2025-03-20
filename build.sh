@@ -78,9 +78,9 @@ if [[ -f "$ADDITIONAL_SDKS_FILE" ]]; then
     ADDITIONAL_CHANNELS=$(jq -r '.sdks.channels[]' "$ADDITIONAL_SDKS_FILE")
     
     if [[ -n "$ADDITIONAL_CHANNELS" ]]; then
-        for DOTNET_CHANNEL in $ADDITIONAL_CHANNELS; do
-            echo "Installing .NET SDK for channel: $DOTNET_CHANNEL"
-            "$DOTNET_INSTALL_FILE" --channel "$DOTNET_CHANNEL"
+        for ADDITIONAL_CHANNEL in $ADDITIONAL_CHANNELS; do
+            echo "Installing .NET SDK for channel: $ADDITIONAL_CHANNEL"
+            "$DOTNET_INSTALL_FILE" --channel "$ADDITIONAL_CHANNEL"
         done
     else
         echo "No additional SDK channels found in $ADDITIONAL_SDKS_FILE."

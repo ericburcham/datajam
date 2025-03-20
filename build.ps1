@@ -80,9 +80,9 @@ if (Test-Path $AdditionalSdksFile) {
     $DotNetInstallFile = "$PSScriptRoot\.nuke\temp\dotnet-install.ps1"
     $AdditionalSdkChannels = (Get-Content $AdditionalSdksFile | ConvertFrom-Json).sdks.channels
 
-    foreach ($DotNetChannel in $AdditionalSdkChannels) {
-        Write-Host "Installing .NET SDK Channel: $DotNetChannel"
-        ExecSafe { & powershell $DotNetInstallFile -Channel $DotNetChannel }
+    foreach ($AdditionalChannel in $AdditionalSdkChannels) {
+        Write-Host "Installing .NET SDK Channel: $AdditionalChannel"
+        ExecSafe { & powershell $DotNetInstallFile -Channel $AdditionalChannel }
     }
 }
 
