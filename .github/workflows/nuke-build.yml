@@ -41,8 +41,8 @@ jobs:
         uses: actions/setup-dotnet@v4.1.0
         with:
           dotnet-version: 9.0.201
-      - name: 'Run: Default'
-        run: ./build.cmd Default
+      - name: 'Run: Nuke'
+        run: ./build.cmd Nuke
         env:
           NuGetApiKey: ${{ secrets.NUGET_API_KEY }}
       - name: 'Publish: artifacts'
