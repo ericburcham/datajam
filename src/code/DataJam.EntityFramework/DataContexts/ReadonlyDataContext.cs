@@ -8,6 +8,9 @@ using System.Linq;
 
 using Configuration;
 
+using DataJam.DataContexts;
+using DataJam.Domains;
+
 using DbContexts;
 
 using JetBrains.Annotations;

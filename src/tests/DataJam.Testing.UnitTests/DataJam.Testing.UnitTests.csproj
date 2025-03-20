@@ -1,10 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <ItemGroup>
-        <PackageReference Include="AwesomeAssertions"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\..\code\DataJam.Testing\DataJam.Testing.csproj"/>
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
     </ItemGroup>

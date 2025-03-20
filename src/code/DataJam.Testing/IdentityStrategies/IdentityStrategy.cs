@@ -39,8 +39,7 @@ public abstract class IdentityStrategy<T, TIdentity> : IIdentityStrategy<T>
     /// <summary>Gets or sets the last value of the identity for this Type.</summary>
     public TIdentity LastValue { get; protected set; } = default!;
 
-    /// <summary>Assigns the identity values.</summary>
-    /// <param name="entity">The entity to assign the identity value for.</param>
+    /// <inheritdoc cref="IIdentityStrategy{T}.Assign" />
     public void Assign(T entity)
     {
         _identitySetter.Invoke(entity);

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <RootNamespace>DataJam.EntityFramework</RootNamespace>
+        <TargetFrameworks>netstandard2.1</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>

@@ -1,4 +1,4 @@
-﻿namespace DataJam;
+﻿namespace DataJam.DataContexts;
 
 using System;
 

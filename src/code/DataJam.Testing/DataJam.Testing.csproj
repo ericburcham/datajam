@@ -1,9 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <RootNamespace>DataJam.Testing</RootNamespace>
-    </PropertyGroup>
-
     <ItemGroup>
         <ProjectReference Include="..\DataJam\DataJam.csproj"/>
     </ItemGroup>
