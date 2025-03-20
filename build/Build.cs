@@ -147,8 +147,8 @@ class Build : NukeBuild
                      Log.Information($"Installing .NET SDK version {version}");
 
                      ProcessTasks.StartShell(environmentIsWindows
-                                                 ? $"powershell {formattedScriptFile} -NoPath -Version {version}"
-                                                 : $"{formattedScriptFile} --no-path --version {version}",
+                                                 ? $"powershell {formattedScriptFile} -Version {version}"
+                                                 : $"{formattedScriptFile} --version {version}",
                                              logOutput: false)
                                  .AssertZeroExitCode();
                  }
