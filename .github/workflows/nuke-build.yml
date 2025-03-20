@@ -33,14 +33,16 @@ jobs:
             .nuke/temp
             ~/.nuget/packages
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
-      - name: Install .NET 8
+      - name: Install .NET 8 SDK
         uses: actions/setup-dotnet@v4.1.0
         with:
-          dotnet-version: 8.0.407
-      - name: Install .NET 9
+          dotnet-version: 8.0.x
+          dotnet-quality: ga
+      - name: Install .NET 9 SDK
         uses: actions/setup-dotnet@v4.1.0
         with:
-          dotnet-version: 9.0.201
+          dotnet-version: 9.0.x
+          dotnet-quality: ga
       - name: 'Run: Nuke'
         run: ./build.cmd Nuke
         env:
