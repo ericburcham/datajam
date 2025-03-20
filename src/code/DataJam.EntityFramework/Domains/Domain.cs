@@ -4,6 +4,8 @@ using System.Data.Entity;
 
 using Configuration;
 
+using DataJam.Domains;
+
 using JetBrains.Annotations;
 
 /// <summary>Provides a base class for domains that is specific to Entity Framework.</summary>
