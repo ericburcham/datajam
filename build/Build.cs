@@ -133,14 +133,22 @@ class Build : NukeBuild
                  Log.Information($"Downloading .NET SDK install script: {scriptUrl}");
                  HttpTasks.HttpDownloadFile(scriptUrl, scriptFile);
 
+                 // Set permissions on the script file
+                 var formattedScriptFile = scriptFile.ToString().DoubleQuoteIfNeeded();
+
+                 if (EnvironmentInfo.IsLinux)
+                 {
+                     ProcessTasks.StartShell($"chmod +x {formattedScriptFile}", logOutput: false).AssertZeroExitCode();
+                 }
+
                  // Install SDKs
                  foreach (var version in versions)
                  {
                      Log.Information($"Installing .NET SDK version {version}");
 
                      ProcessTasks.StartShell(environmentIsWindows
-                                                 ? $"powershell {scriptFile.ToString().DoubleQuoteIfNeeded()} dotnet -Version {version}"
-                                                 : $"{scriptFile.ToString().DoubleQuoteIfNeeded()} dotnet --version {version}",
+                                                 ? $"powershell {formattedScriptFile} dotnet -Version {version}"
+                                                 : $"{formattedScriptFile} dotnet --version {version}",
                                              logOutput: false)
                                  .AssertZeroExitCode();
                  }
