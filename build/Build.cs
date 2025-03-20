@@ -1,5 +1,7 @@
 using Nuke.Common;
+using Nuke.Common.CI;
 using Nuke.Common.CI.GitHubActions;
+using Nuke.Common.Execution;
 using Nuke.Common.Git;
 using Nuke.Common.IO;
 using Nuke.Common.ProjectModel;
@@ -11,14 +13,18 @@ using Serilog;
 
 using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
+[DotNetVerbosityMapping]
 [GitHubActions("nuke-build",
                GitHubActionsImage.UbuntuLatest,
+               AutoGenerate = false,
 
                // FetchDepth is important for GitVersion
                FetchDepth = 0,
                On = [GitHubActionsTrigger.Push],
                ImportSecrets = [nameof(NuGetApiKey)],
-               InvokedTargets = [nameof(Default)])]
+               InvokedTargets = [nameof(Nuke)])]
+[HandleSingleFileExecution]
+[ShutdownDotNetAfterServerBuild]
 class Build : NukeBuild
 {
     [Parameter("Configuration to build - Default is 'Debug' (local) or 'Release' (server)")]
@@ -84,7 +90,7 @@ class Build : NukeBuild
                                  .SetVersion(GitVersion.SemVer));
              });
 
-    Target Default => x => x.DependsOn(Pack);
+    Target Nuke => x => x.DependsOn(Pack, Publish);
 
     Target Pack =>
         x => x
@@ -156,7 +162,7 @@ class Build : NukeBuild
     /// - JetBrains Rider            https://nuke.build/rider
     /// - Microsoft VisualStudio     https://nuke.build/visualstudio
     /// - Microsoft VSCode           https://nuke.build/vscode
-    public static int Main() => Execute<Build>(x => x.Default);
+    public static int Main() => Execute<Build>(x => x.Nuke);
 
     private static string MaskString(string value, int clear)
     {

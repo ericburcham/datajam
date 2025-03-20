@@ -33,8 +33,16 @@ jobs:
             .nuke/temp
             ~/.nuget/packages
           key: ${{ runner.os }}-${{ hashFiles('**/global.json', '**/*.csproj', '**/Directory.Packages.props') }}
-      - name: 'Run: Default'
-        run: ./build.cmd Default
+      - name: Install .NET 8
+        uses: actions/setup-dotnet@v4.1.0
+        with:
+          dotnet-version: 8.0.407
+      - name: Install .NET 9
+        uses: actions/setup-dotnet@v4.1.0
+        with:
+          dotnet-version: 9.0.201
+      - name: 'Run: Nuke'
+        run: ./build.cmd Nuke
         env:
           NuGetApiKey: ${{ secrets.NUGET_API_KEY }}
       - name: 'Publish: artifacts'
