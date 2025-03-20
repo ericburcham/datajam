@@ -6,6 +6,12 @@
         <PackageReference Include="Testcontainers.MySql"/>
     </ItemGroup>
 
+    <!-- Override package versions when targeting net8.0 -->
+    <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
+        <PackageReference Remove="Microsoft.EntityFrameworkCore.Relational"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" VersionOverride="8.0.14"/>
+    </ItemGroup>
+
     <ItemGroup>
         <ProjectReference Include="..\..\code\DataJam.EntityFrameworkCore\DataJam.EntityFrameworkCore.csproj"/>
         <ProjectReference Include="..\..\code\DataJam\DataJam.csproj"/>
