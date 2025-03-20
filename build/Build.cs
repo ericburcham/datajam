@@ -1,9 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-
-using Newtonsoft.Json.Linq;
-
 using Nuke.Common;
 using Nuke.Common.CI;
 using Nuke.Common.CI.GitHubActions;
@@ -14,7 +8,6 @@ using Nuke.Common.ProjectModel;
 using Nuke.Common.Tooling;
 using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.GitVersion;
-using Nuke.Common.Utilities;
 
 using Serilog;
 
@@ -29,7 +22,7 @@ using static Nuke.Common.Tools.DotNet.DotNetTasks;
                FetchDepth = 0,
                On = [GitHubActionsTrigger.Push],
                ImportSecrets = [nameof(NuGetApiKey)],
-               InvokedTargets = [nameof(Default)])]
+               InvokedTargets = [nameof(Nuke)])]
 [HandleSingleFileExecution]
 [ShutdownDotNetAfterServerBuild]
 class Build : NukeBuild
@@ -97,84 +90,7 @@ class Build : NukeBuild
                                  .SetVersion(GitVersion.SemVer));
              });
 
-    Target Default => x => x.DependsOn(InstallAdditionalSdks, Pack, Publish);
-
-    Target InstallAdditionalSdks =>
-        x => x
-            .Before(Clean)
-            .Executes(() =>
-             {
-                 var additionalSdkChannels = GetAdditionalSdkChannels();
-
-                 if (additionalSdkChannels == null)
-                 {
-                     Log.Information("No additional SDKs found.");
-
-                     return;
-                 }
-
-                 var channels = additionalSdkChannels.ToList();
-
-                 if (channels.Count == 0)
-                 {
-                     Log.Information("No additional SDKs found.");
-
-                     return;
-                 }
-
-                 Log.Information("Additional SDKs found:");
-
-                 // Build the path to the dotnet install script
-                 var environmentIsWindows = EnvironmentInfo.IsWin;
-                 var scriptFileName = environmentIsWindows ? "dotnet-install.ps1" : "dotnet-install.sh";
-                 var globalNukeDirectory = EnvironmentInfo.SpecialFolder(SpecialFolders.UserProfile) / ".nuke";
-                 var scriptFile = globalNukeDirectory / scriptFileName;
-
-                 // Download the script file
-                 var scriptUrl = $"https://dot.net/v1/{scriptFileName}";
-                 Log.Information($"Downloading .NET SDK install script: {scriptUrl}");
-                 HttpTasks.HttpDownloadFile(scriptUrl, scriptFile);
-
-                 // Set permissions on the script file
-                 var formattedScriptFile = scriptFile.ToString().DoubleQuoteIfNeeded();
-
-                 if (EnvironmentInfo.IsLinux)
-                 {
-                     ProcessTasks.StartShell($"chmod +x {formattedScriptFile}", logOutput: false).AssertZeroExitCode();
-                 }
-
-                 // List installed runtimes and SDKs
-                 var listRuntimeCommand = environmentIsWindows ? "powershell dotnet --list-runtimes" : "dotnet --list-runtimes";
-                 var listSdksCommand = environmentIsWindows ? "powershell dotnet --list-sdks" : "dotnet --list-sdks";
-
-                 ProcessTasks.StartShell(listRuntimeCommand).AssertZeroExitCode();
-                 ProcessTasks.StartShell(listSdksCommand).AssertZeroExitCode();
-                 Log.Information("Sleeping for 15 seconds to allow SDKs to be listed.");
-                 Thread.Sleep(15000);
-
-                 // Install SDKs
-                 foreach (var channel in channels)
-                 {
-                     Log.Information($"Installing .NET SDK version {channel}");
-
-                     ProcessTasks.StartShell(environmentIsWindows
-                                                 ? $"powershell {formattedScriptFile} -Channel {channel} -Runtime dotnet -Version latest"
-                                                 : $"{formattedScriptFile} --channel {channel} --runtime dotnet --version latest")
-                                 .AssertZeroExitCode();
-
-                     ProcessTasks.StartShell(environmentIsWindows
-                                                 ? $"powershell {formattedScriptFile} -Channel {channel} -Version latest"
-                                                 : $"{formattedScriptFile} --channel {channel} --version latest")
-                                 .AssertZeroExitCode();
-                 }
-
-                 // List installed runtimes and SDKs again
-                 ProcessTasks.StartShell(listRuntimeCommand).AssertZeroExitCode();
-                 ProcessTasks.StartShell(listSdksCommand).AssertZeroExitCode();
-                 Log.Information("Sleeping for 15 seconds to allow SDKs to be listed.");
-                 Thread.Sleep(15000);
-             })
-            .ProceedAfterFailure();
+    Target Nuke => x => x.DependsOn(Pack, Publish);
 
     Target Pack =>
         x => x
@@ -246,15 +162,7 @@ class Build : NukeBuild
     /// - JetBrains Rider            https://nuke.build/rider
     /// - Microsoft VisualStudio     https://nuke.build/visualstudio
     /// - Microsoft VSCode           https://nuke.build/vscode
-    public static int Main() => Execute<Build>(x => x.Default);
-
-    private static IEnumerable<string> GetAdditionalSdkChannels()
-    {
-        var additionalSdksFile = RootDirectory / "additional-sdks.json";
-        var jObject = additionalSdksFile.Existing()?.ReadJson() ?? new JObject();
-
-        return jObject["sdks"]?["channels"]?.Values<string>() ?? [];
-    }
+    public static int Main() => Execute<Build>(x => x.Nuke);
 
     private static string MaskString(string value, int clear)
     {

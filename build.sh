@@ -63,34 +63,5 @@ if [[ ! -z ${NUKE_ENTERPRISE_TOKEN+x} && "$NUKE_ENTERPRISE_TOKEN" != "" ]]; then
     "$DOTNET_EXE" nuget add source "https://f.feedz.io/nuke/enterprise/nuget" --name "nuke-enterprise" --username "PAT" --password "$NUKE_ENTERPRISE_TOKEN" --store-password-in-clear-text &>/dev/null || true
 fi
 
-###########################################################################
-# ChatGPT PUT YOUR WORK HERE
-###########################################################################
-
-# Path to the additional SDKs JSON file
-ADDITIONAL_SDKS_FILE="$SCRIPT_DIR/additional-sdks.json"
-
-# Check if additional-sdks.json exists
-if [[ -f "$ADDITIONAL_SDKS_FILE" ]]; then
-    echo "Reading additional SDK channels from $ADDITIONAL_SDKS_FILE"
-    
-    # Extract the channels using jq
-    ADDITIONAL_CHANNELS=$(jq -r '.sdks.channels[]' "$ADDITIONAL_SDKS_FILE")
-    
-    if [[ -n "$ADDITIONAL_CHANNELS" ]]; then
-        for ADDITIONAL_CHANNEL in $ADDITIONAL_CHANNELS; do
-            echo "Installing .NET SDK for channel: $ADDITIONAL_CHANNEL"
-            "$DOTNET_INSTALL_FILE" --channel "$ADDITIONAL_CHANNEL"
-        done
-    else
-        echo "No additional SDK channels found in $ADDITIONAL_SDKS_FILE."
-    fi
-else
-    echo "No additional-sdks.json file found. Skipping additional SDK installations."
-fi
-
-###########################################################################
-# RUN NUKE BUILD
-###########################################################################
 "$DOTNET_EXE" build "$BUILD_PROJECT_FILE" /nodeReuse:false /p:UseSharedCompilation=false -nologo -clp:NoSummary --verbosity quiet
 "$DOTNET_EXE" run --project "$BUILD_PROJECT_FILE" --no-build -- "$@"
