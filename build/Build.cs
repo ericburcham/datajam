@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 
 using Newtonsoft.Json.Linq;
 
@@ -102,18 +103,18 @@ class Build : NukeBuild
             .Before(Clean)
             .Executes(() =>
              {
-                 var additionalSdkVersions = GetAdditionalSdkVersions();
+                 var additionalSdkChannels = GetAdditionalSdkChannels();
 
-                 if (additionalSdkVersions == null)
+                 if (additionalSdkChannels == null)
                  {
                      Log.Information("No additional SDKs found.");
 
                      return;
                  }
 
-                 var versions = additionalSdkVersions.ToList();
+                 var channels = additionalSdkChannels.ToList();
 
-                 if (versions.Count == 0)
+                 if (channels.Count == 0)
                  {
                      Log.Information("No additional SDKs found.");
 
@@ -141,17 +142,48 @@ class Build : NukeBuild
                      ProcessTasks.StartShell($"chmod +x {formattedScriptFile}", logOutput: false).AssertZeroExitCode();
                  }
 
+                 // List installed runtimes and SDKs
+                 var listRuntimeCommand = environmentIsWindows ? "powershell dotnet --list-runtimes" : "dotnet --list-runtimes";
+                 var listSdksCommand = environmentIsWindows ? "powershell dotnet --list-sdks" : "dotnet --list-sdks";
+
+                 ProcessTasks.StartShell(listRuntimeCommand,
+                                         logOutput: false)
+                             .AssertZeroExitCode();
+
+                 ProcessTasks.StartShell(listSdksCommand,
+                                         logOutput: false)
+                             .AssertZeroExitCode();
+
+                 Log.Information("Sleeping for 15 seconds to allow SDKs to be listed.");
+                 Thread.Sleep(15000);
+
                  // Install SDKs
-                 foreach (var version in versions)
+                 foreach (var channel in channels)
                  {
-                     Log.Information($"Installing .NET SDK version {version}");
+                     Log.Information($"Installing .NET SDK version {channel}");
 
                      ProcessTasks.StartShell(environmentIsWindows
-                                                 ? $"powershell {formattedScriptFile} -Version {version}"
-                                                 : $"{formattedScriptFile} --version {version}",
-                                             logOutput: false)
+                                                 ? $"powershell {formattedScriptFile} -Channel {channel} -Runtime dotnet -Version latest"
+                                                 : $"{formattedScriptFile} --channel {channel} --runtime dotnet --version latest")
+                                 .AssertZeroExitCode();
+
+                     ProcessTasks.StartShell(environmentIsWindows
+                                                 ? $"powershell {formattedScriptFile} -Channel {channel} -Version latest"
+                                                 : $"{formattedScriptFile} --channel {channel} --version latest")
                                  .AssertZeroExitCode();
                  }
+
+                 // List installed runtimes and SDKs again
+                 ProcessTasks.StartShell(listRuntimeCommand,
+                                         logOutput: false)
+                             .AssertZeroExitCode();
+
+                 ProcessTasks.StartShell(listSdksCommand,
+                                         logOutput: false)
+                             .AssertZeroExitCode();
+
+                 Log.Information("Sleeping for 15 seconds to allow SDKs to be listed.");
+                 Thread.Sleep(15000);
              })
             .ProceedAfterFailure();
 
@@ -227,12 +259,12 @@ class Build : NukeBuild
     /// - Microsoft VSCode           https://nuke.build/vscode
     public static int Main() => Execute<Build>(x => x.Default);
 
-    private static IEnumerable<string> GetAdditionalSdkVersions()
+    private static IEnumerable<string> GetAdditionalSdkChannels()
     {
         var additionalSdksFile = RootDirectory / "additional-sdks.json";
         var jObject = additionalSdksFile.Existing()?.ReadJson() ?? new JObject();
 
-        return jObject["sdks"]?["versions"]?.Values<string>() ?? [];
+        return jObject["sdks"]?["channels"]?.Values<string>() ?? [];
     }
 
     private static string MaskString(string value, int clear)
