@@ -28,7 +28,7 @@
         "AnnounceNuGetApiKey",
         "Clean",
         "Compile",
-        "Default",
+        "Nuke",
         "Pack",
         "Publish",
         "Restore",
