@@ -70,5 +70,24 @@ if (Test-Path env:NUKE_ENTERPRISE_TOKEN) {
     & $env:DOTNET_EXE nuget add source "https://f.feedz.io/nuke/enterprise/nuget" --name "nuke-enterprise" --username "PAT" --password $env:NUKE_ENTERPRISE_TOKEN > $null
 }
 
+###########################################################################
+# ChatGPT PUT YOUR WORK HERE
+###########################################################################
+
+$AdditionalSdksFile = "$PSScriptRoot\additional-sdks.json"
+
+if (Test-Path $AdditionalSdksFile) {
+    $DotNetInstallFile = "$PSScriptRoot\.nuke\temp\dotnet-install.ps1"
+    $AdditionalSdkChannels = (Get-Content $AdditionalSdksFile | ConvertFrom-Json).sdks.channels
+
+    foreach ($DotNetChannel in $AdditionalSdkChannels) {
+        Write-Host "Installing .NET SDK Channel: $DotNetChannel"
+        ExecSafe { & powershell $DotNetInstallFile -Channel $DotNetChannel }
+    }
+}
+
+###########################################################################
+# RUN NUKE BUILD
+###########################################################################
 ExecSafe { & $env:DOTNET_EXE build $BuildProjectFile /nodeReuse:false /p:UseSharedCompilation=false -nologo -clp:NoSummary --verbosity quiet }
 ExecSafe { & $env:DOTNET_EXE run --project $BuildProjectFile --no-build -- $BuildArguments }
