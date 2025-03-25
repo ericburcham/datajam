@@ -1,8 +1,4 @@
-namespace DataJam.EntityFrameworkCore.Domains;
-
-using DataContexts;
-
-using DataJam.Domains;
+namespace DataJam.EntityFrameworkCore;
 
 using JetBrains.Annotations;
 

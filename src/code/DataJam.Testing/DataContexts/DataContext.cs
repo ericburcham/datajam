@@ -3,9 +3,8 @@
 using System;
 using System.Collections;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-
-using DataContexts;
 
 using JetBrains.Annotations;
 
@@ -52,12 +51,9 @@ public class DataContext : IDataContext, IReadonlyDataContext
     }
 
     /// <inheritdoc cref="IUnitOfWork.CommitAsync" />
-    public virtual Task<int> CommitAsync()
+    public virtual async Task<int> CommitAsync(CancellationToken token = default)
     {
-        var task = new Task<int>(Commit);
-        task.Start();
-
-        return task;
+        return await Task.Run(Commit, token).ConfigureAwait(false);
     }
 
     /// <inheritdoc cref="IDataSource.CreateQuery{T}" />
@@ -68,8 +64,9 @@ public class DataContext : IDataContext, IReadonlyDataContext
     }
 
     /// <inheritdoc cref="IDisposable.Dispose" />
-    public void Dispose()
+    public virtual void Dispose()
     {
+        GC.SuppressFinalize(this);
     }
 
     /// <summary>Registers the given <paramref name="identityStrategy" />.</summary>

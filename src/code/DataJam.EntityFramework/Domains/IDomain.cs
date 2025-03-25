@@ -1,10 +1,6 @@
-namespace DataJam.EntityFramework.Domains;
+namespace DataJam.EntityFramework;
 
 using System.Data.Entity;
-
-using Configuration;
-
-using DataJam.Domains;
 
 using JetBrains.Annotations;
 
