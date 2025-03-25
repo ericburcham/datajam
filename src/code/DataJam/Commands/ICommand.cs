@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 [PublicAPI]
 public interface ICommand
 {
-    /// <summary>Executes the command using the provided data context.</summary>
-    /// <param name="unitOfWork">The data context to execute the command with.</param>
+    /// <summary>Executes the command using the provided unit of work.</summary>
+    /// <param name="unitOfWork">The unit of work to execute the command with.</param>
     void Execute(IUnitOfWork unitOfWork);
 }

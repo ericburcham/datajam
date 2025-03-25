@@ -1,5 +1,6 @@
 namespace DataJam;
 
+using System.Threading;
 using System.Threading.Tasks;
 
 using JetBrains.Annotations;
@@ -11,7 +12,7 @@ public interface IUnitOfWork
     /// <summary>Adds a new <typeparamref name="T" /> to the unit of work.</summary>
     /// <param name="item">The item to add.</param>
     /// <typeparam name="T">The <paramref name="item" />'s type.</typeparam>
-    /// <returns>The <paramref name="item" /> that was added to the unit of work.</returns>
+    /// <returns>The <paramref name="item" /> to be added.</returns>
     T Add<T>(T item)
         where T : class;
 
@@ -20,8 +21,9 @@ public interface IUnitOfWork
     int Commit();
 
     /// <summary>Saves all changes made in this unit of work.</summary>
+    /// <param name="token">The cancellation token.</param>
     /// <returns>A task that represents the asynchronous save operation. The task result contains the number of state entries written while saving changes.</returns>
-    Task<int> CommitAsync();
+    Task<int> CommitAsync(CancellationToken token = default);
 
     /// <summary>Reloads the provided instance of <typeparamref name="T" /> from the underlying data store.</summary>
     /// <typeparam name="T">The <paramref name="item" />'s type.</typeparam>
@@ -40,7 +42,7 @@ public interface IUnitOfWork
     /// <summary>Updates the given <paramref name="item" /> in the unit of work.</summary>
     /// <param name="item">The <paramref name="item" /> to update.</param>
     /// <typeparam name="T">The <paramref name="item" />'s type.</typeparam>
-    /// <returns>The updated <paramref name="item" />.</returns>
+    /// <returns>The <paramref name="item" /> to be updated.</returns>
     T Update<T>(T item)
         where T : class;
 }

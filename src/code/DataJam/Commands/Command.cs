@@ -8,8 +8,8 @@ using JetBrains.Annotations;
 [PublicAPI]
 public abstract class Command : ICommand
 {
-    /// <summary>Gets or sets the command action to execute.</summary>
-    protected Action<IUnitOfWork> ContextCommand { get; set; } = null!;
+    /// <summary>Gets the command action to execute.</summary>
+    protected Action<IUnitOfWork> ContextCommand { get; } = null!;
 
     /// <inheritdoc cref="ICommand.Execute" />
     public void Execute(IUnitOfWork unitOfWork)

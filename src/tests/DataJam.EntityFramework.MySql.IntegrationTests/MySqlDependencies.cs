@@ -1,7 +1,5 @@
 namespace DataJam.EntityFramework.MySql.IntegrationTests;
 
-using Configuration;
-
 using global::MySql.Data.MySqlClient;
 
 using JetBrains.Annotations;
