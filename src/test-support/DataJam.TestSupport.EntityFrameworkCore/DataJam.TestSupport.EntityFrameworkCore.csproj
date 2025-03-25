@@ -1,5 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <PropertyGroup>
+        <CentralPackageVersionOverrideEnabled>true</CentralPackageVersionOverrideEnabled>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="NUnit"/>
         <PackageReference Include="Microsoft.EntityFrameworkCore"/>
