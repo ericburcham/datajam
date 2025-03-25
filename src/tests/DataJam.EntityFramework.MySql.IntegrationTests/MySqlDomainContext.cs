@@ -2,8 +2,6 @@ namespace DataJam.EntityFramework.MySql.IntegrationTests;
 
 using System.Data.Entity;
 
-using Domains;
-
 using global::MySql.Data.EntityFramework;
 
 [DbConfigurationType(typeof(MySqlEFConfiguration))]

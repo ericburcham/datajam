@@ -1,11 +1,6 @@
-namespace DataJam.EntityFrameworkCore.DataContexts;
+namespace DataJam.EntityFrameworkCore;
 
 using System.Linq;
-
-using DataJam.DataContexts;
-using DataJam.Domains;
-
-using DbContexts;
 
 using JetBrains.Annotations;
 

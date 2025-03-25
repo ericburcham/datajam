@@ -1,7 +1,5 @@
 namespace DataJam.EntityFrameworkCore.MsSql.IntegrationTests.Family;
 
-using DataJam.Domains;
-
 using Microsoft.EntityFrameworkCore;
 
 using TestSupport.TestPatterns.Family;

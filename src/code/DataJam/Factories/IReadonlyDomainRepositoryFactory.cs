@@ -1,6 +1,4 @@
-namespace DataJam.Factories;
-
-using Domains;
+namespace DataJam;
 
 using JetBrains.Annotations;
 
