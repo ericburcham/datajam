@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 using JetBrains.Annotations;
@@ -115,11 +116,11 @@ public class DataContext : DbContext, IDataContext
     }
 
     /// <inheritdoc cref="IUnitOfWork.CommitAsync" />
-    public async Task<int> CommitAsync()
+    public async Task<int> CommitAsync(CancellationToken token = default)
     {
         ChangeTracker.DetectChanges();
 
-        return await SaveChangesAsync().ConfigureAwait(false);
+        return await SaveChangesAsync(token).ConfigureAwait(false);
     }
 
     /// <inheritdoc cref="IDataSource.CreateQuery{T}" />

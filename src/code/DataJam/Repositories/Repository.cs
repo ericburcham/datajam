@@ -1,6 +1,7 @@
 namespace DataJam;
 
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 using JetBrains.Annotations;
@@ -20,9 +21,9 @@ public class Repository(IDataContext dataContext) : IRepository
     }
 
     /// <inheritdoc cref="IRepository.ExecuteAsync" />
-    public Task ExecuteAsync(ICommand command)
+    public Task ExecuteAsync(ICommand command, CancellationToken token = default)
     {
-        return Task.Factory.StartNew(() => command.Execute(Context));
+        return Task.Run(() => command.Execute(Context), token);
     }
 
     /// <inheritdoc cref="IRepository.Find{T}(IQuery{T})" />
@@ -37,15 +38,15 @@ public class Repository(IDataContext dataContext) : IRepository
         return scalar.Execute(Context);
     }
 
-    /// <inheritdoc cref="IRepository.FindAsync{T}(IQuery{T})" />
-    public Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query)
+    /// <inheritdoc cref="IRepository.FindAsync{T}(IQuery{T},CancellationToken)" />
+    public async Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query, CancellationToken token = default)
     {
-        return Task.Factory.StartNew(() => query.Execute(Context));
+        return await Task.Run(() => query.Execute(Context), token).ConfigureAwait(false);
     }
 
-    /// <inheritdoc cref="IRepository.FindAsync{T}(IScalar{T})" />
-    public Task<T> FindAsync<T>(IScalar<T> scalar)
+    /// <inheritdoc cref="IRepository.FindAsync{T}(IScalar{T}, CancellationToken)" />
+    public async Task<T> FindAsync<T>(IScalar<T> scalar, CancellationToken token = default)
     {
-        return Task.Factory.StartNew(() => scalar.Execute(Context));
+        return await Task.Run(() => scalar.Execute(Context), token).ConfigureAwait(false);
     }
 }

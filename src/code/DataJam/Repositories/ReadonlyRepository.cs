@@ -1,6 +1,7 @@
 namespace DataJam;
 
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 using JetBrains.Annotations;
@@ -25,15 +26,15 @@ public class ReadonlyRepository(IReadonlyDataContext domainContext) : IReadonlyR
         return scalar.Execute(Context);
     }
 
-    /// <inheritdoc cref="IReadonlyRepository.FindAsync{T}(IQuery{T})" />
-    public Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query)
+    /// <inheritdoc cref="IReadonlyRepository.FindAsync{T}(IQuery{T},CancellationToken)" />
+    public async Task<IEnumerable<T>> FindAsync<T>(IQuery<T> query, CancellationToken token = default)
     {
-        return Task.Factory.StartNew(() => query.Execute(Context));
+        return await Task.Run(() => query.Execute(Context), token).ConfigureAwait(false);
     }
 
-    /// <inheritdoc cref="IReadonlyRepository.FindAsync{T}(IScalar{T})" />
-    public Task<T> FindAsync<T>(IScalar<T> scalar)
+    /// <inheritdoc cref="IReadonlyRepository.FindAsync{T}(IScalar{T},CancellationToken)" />
+    public async Task<T> FindAsync<T>(IScalar<T> scalar, CancellationToken token = default)
     {
-        return Task.Factory.StartNew(() => scalar.Execute(Context));
+        return await Task.Run(() => scalar.Execute(Context), token).ConfigureAwait(false);
     }
 }
