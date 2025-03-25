@@ -1,8 +1,6 @@
 ﻿namespace DataJam.TestSupport.EntityFrameworkCore;
 
-using DataJam.EntityFrameworkCore.Domains;
-
-using Domains;
+using DataJam.EntityFrameworkCore;
 
 using Microsoft.EntityFrameworkCore;
 

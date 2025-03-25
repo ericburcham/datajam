@@ -1,9 +1,8 @@
-namespace DataJam.EntityFrameworkCore.DataContexts;
+namespace DataJam.EntityFrameworkCore;
 
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
-
-using DataJam.Domains;
 
 using JetBrains.Annotations;
 
@@ -35,11 +34,11 @@ public class DataContext(DbContextOptions options, IConfigureDomainMappings<Mode
     }
 
     /// <inheritdoc cref="IUnitOfWork.CommitAsync" />
-    public async Task<int> CommitAsync()
+    public async Task<int> CommitAsync(CancellationToken token = default)
     {
         ChangeTracker.DetectChanges();
 
-        return await SaveChangesAsync().ConfigureAwait(false);
+        return await SaveChangesAsync(token).ConfigureAwait(false);
     }
 
     /// <inheritdoc cref="IDataSource.CreateQuery{T}" />

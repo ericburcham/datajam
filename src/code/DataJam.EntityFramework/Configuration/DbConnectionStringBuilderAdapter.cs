@@ -1,4 +1,4 @@
-namespace DataJam.EntityFramework.Configuration;
+namespace DataJam.EntityFramework;
 
 using System.Data.Common;
 
