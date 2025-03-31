@@ -10,9 +10,10 @@
     </ItemGroup>
 
     <!-- Override package versions when targeting net8.0 -->
+    <!-- DO NOT UPDATE: These specific versions are required for net8.0 compatibility -->
     <ItemGroup Condition="'$(TargetFramework)' == 'net8.0'">
         <PackageReference Remove="Microsoft.EntityFrameworkCore"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore" VersionOverride="8.0.14"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" VersionOverride="[8.*,9.0)"/>
     </ItemGroup>
 
     <ItemGroup>
