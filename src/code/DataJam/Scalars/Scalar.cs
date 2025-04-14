@@ -9,8 +9,8 @@ using JetBrains.Annotations;
 [PublicAPI]
 public abstract class Scalar<T> : IScalar<T>
 {
-    /// <summary>Gets the scalar query to execute.</summary>
-    protected Func<IDataSource, T> Selector { get; } = null!;
+    /// <summary>Gets or sets the scalar query to execute.</summary>
+    protected Func<IDataSource, T> Selector { get; set; } = null!;
 
     /// <inheritdoc cref="IScalar{T}.Execute" />
     public T Execute(IDataSource dataSource)
