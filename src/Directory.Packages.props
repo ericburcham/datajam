@@ -19,7 +19,7 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.3" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.3" />
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.13.0" />
-    <PackageVersion Include="MySql.Data" Version="9.2.0" />
+    <PackageVersion Include="MySql.Data" Version="9.3.0" />
     <PackageVersion Include="MySql.Data.EntityFramework" Version="9.2.0" />
     <PackageVersion Include="MySql.EntityFrameworkCore" Version="9.0.0" />
     <PackageVersion Include="NUnit" Version="4.3.2" />
@@ -31,6 +31,5 @@
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="System.Data.SqlClient" Version="4.9.0" />
     <PackageVersion Include="Testcontainers.MsSql" Version="4.4.0" />
-    <PackageVersion Include="Testcontainers.MySql" Version="4.3.0" />
   </ItemGroup>
 </Project>
