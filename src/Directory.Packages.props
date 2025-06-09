@@ -4,7 +4,7 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup>
-    <PackageVersion Include="AwesomeAssertions" Version="8.2.0" />
+    <PackageVersion Include="AwesomeAssertions" Version="9.0.0" />
     <PackageVersion Include="EntityFramework" Version="6.5.1" />
     <PackageVersion Include="FluentMigrator" Version="7.1.0" />
     <PackageVersion Include="FluentMigrator.Runner.Core" Version="7.1.0" />
@@ -18,19 +18,19 @@
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.5" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.5" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.5" />
-    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
     <PackageVersion Include="MySql.Data" Version="9.3.0" />
     <PackageVersion Include="MySql.Data.EntityFramework" Version="9.3.0" />
     <PackageVersion Include="MySql.EntityFrameworkCore" Version="9.0.3" />
     <PackageVersion Include="NUnit" Version="4.3.2" />
-    <PackageVersion Include="NUnit.Analyzers" Version="4.8.0">
+    <PackageVersion Include="NUnit.Analyzers" Version="4.8.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
     <PackageVersion Include="NUnit3TestAdapter" Version="5.0.0" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="System.Data.SqlClient" Version="4.9.0" />
-    <PackageVersion Include="Testcontainers.MsSql" Version="4.4.0" />
-    <PackageVersion Include="Testcontainers.MySql" Version="4.4.0" />
+    <PackageVersion Include="Testcontainers.MsSql" Version="4.5.0" />
+    <PackageVersion Include="Testcontainers.MySql" Version="4.5.0" />
   </ItemGroup>
 </Project>
