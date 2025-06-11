@@ -1,6 +1,6 @@
 namespace DataJam.Testing.UnitTests.IdentityStrategyTests;
 
-using FluentAssertions;
+using AwesomeAssertions;
 
 using NUnit.Framework;
 
