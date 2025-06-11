@@ -1,8 +1,8 @@
 namespace DataJam.Testing.UnitTests.IdentityStrategyTests;
 
-using Domains.None;
+using AwesomeAssertions;
 
-using FluentAssertions;
+using Domains.None;
 
 using NUnit.Framework;
 

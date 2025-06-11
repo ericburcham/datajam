@@ -2,7 +2,7 @@ namespace DataJam.Testing.UnitTests.IdentityStrategyTests;
 
 using System;
 
-using FluentAssertions;
+using AwesomeAssertions;
 
 using NUnit.Framework;
 

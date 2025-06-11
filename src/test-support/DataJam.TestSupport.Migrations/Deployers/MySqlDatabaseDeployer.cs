@@ -35,18 +35,17 @@ public class MySqlDatabaseDeployer(string connectionString) : DatabaseDeployer
 
                // Add common FluentMigrator services
               .AddFluentMigratorCore()
-              .ConfigureRunner(
-                   rb => rb
+              .ConfigureRunner(rb => rb
 
-                         // Add MySql support to FluentMigrator
-                        .AddMySql5()
+                                     // Add MySql support to FluentMigrator
+                                    .AddMySql5()
 
-                         // Set the connection string
-                        .WithGlobalConnectionString(connectionString)
+                                     // Set the connection string
+                                    .WithGlobalConnectionString(connectionString)
 
-                         // Define the assembly containing the migrations
-                        .ScanIn(migrationAssembly)
-                        .For.Migrations())
+                                     // Define the assembly containing the migrations
+                                    .ScanIn(migrationAssembly)
+                                    .For.Migrations())
               .AddLogging(lb => lb.AddFluentMigratorConsole())
               .BuildServiceProvider(false);
     }

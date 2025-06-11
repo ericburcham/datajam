@@ -4,9 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-using Domain;
+using AwesomeAssertions;
 
-using FluentAssertions;
+using Domain;
 
 using NUnit.Framework;
 

@@ -31,18 +31,17 @@ public class SqliteDatabaseDeployer(string connectionString) : DatabaseDeployer
 
                // Add common FluentMigrator services
               .AddFluentMigratorCore()
-              .ConfigureRunner(
-                   rb => rb
+              .ConfigureRunner(rb => rb
 
-                         // Add SQLite support to FluentMigrator
-                        .AddSQLite()
+                                     // Add SQLite support to FluentMigrator
+                                    .AddSQLite()
 
-                         // Set the connection string
-                        .WithGlobalConnectionString(connectionString)
+                                     // Set the connection string
+                                    .WithGlobalConnectionString(connectionString)
 
-                         // Define the assembly containing the migrations
-                        .ScanIn(migrationAssembly)
-                        .For.Migrations())
+                                     // Define the assembly containing the migrations
+                                    .ScanIn(migrationAssembly)
+                                    .For.Migrations())
 
                // Enable logging to console in the FluentMigrator way
               .AddLogging(lb => lb.AddFluentMigratorConsole())
