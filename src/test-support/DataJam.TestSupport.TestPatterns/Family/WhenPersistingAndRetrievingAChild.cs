@@ -3,9 +3,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-using EntityFrameworkCore;
+using AwesomeAssertions;
 
-using FluentAssertions;
+using EntityFrameworkCore;
 
 using NUnit.Framework;
 
