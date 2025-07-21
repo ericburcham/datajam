@@ -18,6 +18,10 @@ name: nuke-build
 
 on: [push]
 
+permissions:
+  contents: read
+  actions: write
+
 jobs:
   ubuntu-latest:
     name: ubuntu-latest
