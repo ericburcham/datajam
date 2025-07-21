@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+
 <Project>
 
-    <Import Project="../Directory.Build.props"/>
+    <Import Project="../Directory.Build.props" />
 
     <PropertyGroup>
         <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
@@ -17,10 +17,10 @@
     <!-- Include Stylecop.json -->
     <ItemGroup>
         <!-- Removes the stylecop.json file included from the outer Directory.Build.props file-->
-        <AdditionalFiles Remove="../../stylecop.json" Link="stylecop.json"/>
+        <AdditionalFiles Remove="../../stylecop.json" Link="stylecop.json" />
 
         <!-- Add the stylecop.json file that is specific to the code folder. -->
-        <AdditionalFiles Include="../stylecop.json" Link="stylecop.json"/>
+        <AdditionalFiles Include="../stylecop.json" Link="stylecop.json" />
     </ItemGroup>
 
 

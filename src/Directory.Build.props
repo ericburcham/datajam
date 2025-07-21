@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+
 <Project>
     <!-- Global properties -->
     <PropertyGroup>
@@ -32,7 +32,7 @@
 
     <!-- Stylecop Analyzers -->
     <ItemGroup>
-        <AdditionalFiles Include="../../stylecop.json" Link="stylecop.json"/>
+        <AdditionalFiles Include="../../stylecop.json" Link="stylecop.json" />
         <PackageReference Include="StyleCop.Analyzers">
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
