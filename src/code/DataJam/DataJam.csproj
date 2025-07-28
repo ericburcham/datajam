@@ -5,7 +5,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <None Remove="DataJam.csproj.DotSettings"/>
+        <None Remove="DataJam.csproj.DotSettings" />
     </ItemGroup>
     
     <ItemGroup>
