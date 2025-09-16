@@ -1,4 +1,6 @@
-﻿namespace DataJam.EntityFrameworkCore.MySql.IntegrationTests.Family;
+﻿// Copyright (c) PlaceholderCompany. All rights reserved.
+
+namespace DataJam.EntityFrameworkCore.MySql.IntegrationTests.Family;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

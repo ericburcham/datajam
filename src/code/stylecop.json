@@ -18,7 +18,7 @@
       ],
       "fileNamingConvention": "stylecop",
       "headerDecoration": "-----------------------------------------------------------------------",
-      "xmlHeader": true
+      "xmlHeader": false
     },
     "indentation": {
       "indentationSize": 4,

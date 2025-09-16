@@ -1,3 +1,5 @@
+// Copyright (c) PlaceholderCompany. All rights reserved.
+
 namespace DataJam.TestSupport.TestPatterns.Family;
 
 using System.Collections.Generic;

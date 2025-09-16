@@ -1,4 +1,6 @@
-﻿namespace DataJam.TestSupport.Dependencies;
+﻿// Copyright (c) PlaceholderCompany. All rights reserved.
+
+namespace DataJam.TestSupport.Dependencies;
 
 using System;
 using System.Collections.Generic;
@@ -10,16 +12,16 @@ public abstract class CompositeTestDependencyProvider : IProvideTestDependencies
 {
     private readonly Dictionary<string, ITestDependency> _testDependencies = new();
 
-    public IEnumerable<ITestDependency> TestDependencies => _testDependencies.Values;
+    public IEnumerable<ITestDependency> TestDependencies => this._testDependencies.Values;
 
     protected void Register<T>(string name, IBuildTestDependencies<T> builder)
         where T : ITestDependency
     {
         var dependency = builder.Build();
 
-        if (!_testDependencies.TryAdd(name, dependency))
+        if (!this._testDependencies.TryAdd(name, dependency))
         {
-            throw new ArgumentException($"A test dependency with the name \'{name}\' already exists in the {GetType().Name}.");
+            throw new ArgumentException($"A test dependency with the name \'{name}\' already exists in the {this.GetType().Name}.");
         }
 
         TestDependencyRegistry.Add(name, dependency);

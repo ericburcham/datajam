@@ -1,3 +1,5 @@
+// Copyright (c) PlaceholderCompany. All rights reserved.
+
 namespace DataJam.Testing.UnitTests.IdentityStrategyTests;
 
 using AwesomeAssertions;
