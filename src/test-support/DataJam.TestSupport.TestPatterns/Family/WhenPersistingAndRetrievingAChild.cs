@@ -20,25 +20,25 @@ public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
     [Test]
     public void ItShouldHaveAValidId()
     {
-        this._result.Id.Should().NotBe(0);
+        _result.Id.Should().NotBe(0);
     }
 
     [Test]
     public void ItShouldHaveTheCorrectFather()
     {
-        this._result.Father.Name.Should().Be("Dad");
+        _result.Father.Name.Should().Be("Dad");
     }
 
     [Test]
     public void ItShouldHaveTheCorrectMother()
     {
-        this._result.Mother.Name.Should().Be("Mom");
+        _result.Mother.Name.Should().Be("Mom");
     }
 
     [Test]
     public void ItShouldHaveTheCorrectName()
     {
-        this._result.Name.Should().Be("Kid");
+        _result.Name.Should().Be("Kid");
     }
 
     [OneTimeSetUp]
@@ -49,19 +49,19 @@ public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
         var mother = new Mother { Name = "Mom" };
         var child = new Child { Name = "Kid" };
         child.AddParents(father, mother);
-        this.Repository.Context.Add(child);
-        await this.Repository.Context.CommitAsync().ConfigureAwait(false);
+        Repository.Context.Add(child);
+        await Repository.Context.CommitAsync().ConfigureAwait(false);
 
         // Act
         var scalar = new GetChildren();
-        this._result = this.Repository.Find(scalar).Single();
+        _result = Repository.Find(scalar).Single();
     }
 
     [OneTimeTearDown]
     protected override void OneTimeTearDown()
     {
         base.OneTimeTearDown();
-        var dataContext = this.Repository.Context;
+        var dataContext = Repository.Context;
         dataContext.Dispose();
     }
 }

@@ -6,6 +6,6 @@ public class GetChildren : Query<Child>
 {
     public GetChildren()
     {
-        this.Selector = dataSource => dataSource.CreateQuery<Child>();
+        Selector = dataSource => dataSource.CreateQuery<Child>();
     }
 }
