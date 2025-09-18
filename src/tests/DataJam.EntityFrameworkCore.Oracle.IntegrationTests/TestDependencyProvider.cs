@@ -11,7 +11,7 @@ internal class TestDependencyProvider : CompositeTestDependencyProvider
 
     private TestDependencyProvider()
     {
-        Register(ContainerConstants.ORACLE_CONTAINER_NAME, new DefaultOracleTestContainerBuilder("Oracle123"));
+        Register(ContainerConstants.ORACLE_CONTAINER_NAME, new DefaultOracleTestContainerBuilder(ContainerConstants.ORACLE_PASSWORD));
     }
 
     public static TestDependencyProvider Instance => _instance.Value;

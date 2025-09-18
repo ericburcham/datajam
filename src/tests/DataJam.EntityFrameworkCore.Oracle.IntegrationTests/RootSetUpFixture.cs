@@ -2,6 +2,8 @@ namespace DataJam.EntityFrameworkCore.Oracle.IntegrationTests;
 
 using System.Threading.Tasks;
 
+using global::Oracle.ManagedDataAccess.Client;
+
 using NUnit.Framework;
 
 using Testcontainers.Oracle;
@@ -23,7 +25,9 @@ internal class RootSetUpFixture() : TestContainerSetUpFixture<TestDependencyProv
     private static async Task DeployOracle()
     {
         var oracleContainer = RegisteredTestDependencies.Get<OracleContainer>(ContainerConstants.ORACLE_CONTAINER_NAME);
-        var connectionString = oracleContainer.GetConnectionString();
+        var connectionStringFromContainer = oracleContainer.GetConnectionString();
+        var connectionStringBuilder = new OracleConnectionStringBuilder(connectionStringFromContainer);
+        var connectionString = connectionStringBuilder.ConnectionString;
         var databaseDeployer = new OracleDatabaseDeployer(connectionString);
         await databaseDeployer.Deploy().ConfigureAwait(false);
     }

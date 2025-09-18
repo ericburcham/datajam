@@ -9,6 +9,6 @@ public class FatherMapping : FamilyMapping<Father>
 {
     public override void Configure(EntityTypeBuilder<Father> builder)
     {
-        builder.ToTable(nameof(Father)).HasKey(father => father.Id);
+        // builder.ToTable(nameof(Father)).HasKey(father => father.Id);
     }
 }

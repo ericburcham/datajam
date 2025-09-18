@@ -33,8 +33,6 @@ public class OracleDatabaseDeployer(string connectionString) : DatabaseDeployer
 
     protected override Task DeployInternal(Assembly migrationAssembly)
     {
-        EnsureDatabase.For.OracleDatabase(connectionString);
-
         using (var serviceProvider = BuildServiceProvider(connectionString, migrationAssembly))
         {
             using (var scope = serviceProvider.CreateScope())
