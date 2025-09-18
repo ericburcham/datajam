@@ -15,6 +15,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 public class OracleDatabaseDeployer(string connectionString) : DatabaseDeployer
 {
+    static OracleDatabaseDeployer()
+    {
+        // Register Oracle provider factory VERY early to ensure it's available
+        // This must happen before FluentMigrator tries to resolve providers
+        try
+        {
+            DbProviderFactories.RegisterFactory("Oracle.ManagedDataAccess.Client", OracleClientFactory.Instance);
+        }
+        catch
+        {
+            // Factory might already be registered, ignore
+        }
+    }
+
     protected override Assembly MigrationAssembly => Oracle.OracleMigrationAnchor.AnchoredAssembly;
 
     protected override Task DeployInternal(Assembly migrationAssembly)
@@ -34,28 +48,25 @@ public class OracleDatabaseDeployer(string connectionString) : DatabaseDeployer
 
     private static ServiceProvider BuildServiceProvider(string connectionString, Assembly migrationAssembly)
     {
-        // Register Oracle provider factory
-        DbProviderFactories.RegisterFactory("Oracle.ManagedDataAccess.Client", OracleClientFactory.Instance);
+        var services = new ServiceCollection();
 
-        return new ServiceCollection()
+        // Add FluentMigrator core services
+        services.AddFluentMigratorCore();
 
-               // Add common FluentMigrator services
-              .AddFluentMigratorCore()
-              .ConfigureRunner(rb => rb
+        // Configure the runner with Oracle Managed explicitly
+        services.ConfigureRunner(rb => rb
+            .AddOracleManaged()
+            .WithGlobalConnectionString(connectionString)
+            .ScanIn(migrationAssembly)
+            .For.Migrations());
 
-                                     // Add Oracle support to FluentMigrator
-                                    .AddOracle()
-                                    .WithGlobalConnectionString(connectionString)
+        // Add logging
+        services.AddLogging(lb => lb.AddFluentMigratorConsole());
 
-                                     // Define the assembly containing the Oracle migrations
-                                    .ScanIn(migrationAssembly)
-                                    .For.Migrations())
+        // Explicitly replace any Oracle-related services to ensure we use managed provider
+        services.AddSingleton<global::FluentMigrator.Runner.Processors.Oracle.OracleManagedDbFactory>();
 
-               // Enable logging to console in the FluentMigrator way
-              .AddLogging(lb => lb.AddFluentMigratorConsole())
-
-               // Build the service provider
-              .BuildServiceProvider(false);
+        return services.BuildServiceProvider(false);
     }
 
     private static void UpdateDatabase(IServiceProvider serviceProvider)
