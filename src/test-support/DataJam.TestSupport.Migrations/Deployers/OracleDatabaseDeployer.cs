@@ -1,6 +1,7 @@
 namespace DataJam.TestSupport.Migrations;
 
 using System;
+using System.Data.Common;
 using System.Reflection;
 using System.Threading.Tasks;
 
@@ -8,11 +9,13 @@ using FluentMigrator.Core;
 
 using global::FluentMigrator.Runner;
 
+using global::Oracle.ManagedDataAccess.Client;
+
 using Microsoft.Extensions.DependencyInjection;
 
 public class OracleDatabaseDeployer(string connectionString) : DatabaseDeployer
 {
-    protected override Assembly MigrationAssembly => MigrationAnchor.AnchoredAssembly;
+    protected override Assembly MigrationAssembly => Oracle.OracleMigrationAnchor.AnchoredAssembly;
 
     protected override Task DeployInternal(Assembly migrationAssembly)
     {
@@ -31,6 +34,9 @@ public class OracleDatabaseDeployer(string connectionString) : DatabaseDeployer
 
     private static ServiceProvider BuildServiceProvider(string connectionString, Assembly migrationAssembly)
     {
+        // Register Oracle provider factory
+        DbProviderFactories.RegisterFactory("Oracle.ManagedDataAccess.Client", OracleClientFactory.Instance);
+
         return new ServiceCollection()
 
                // Add common FluentMigrator services
@@ -39,11 +45,9 @@ public class OracleDatabaseDeployer(string connectionString) : DatabaseDeployer
 
                                      // Add Oracle support to FluentMigrator
                                     .AddOracle()
-
-                                     // Set the connection string
                                     .WithGlobalConnectionString(connectionString)
 
-                                     // Define the assembly containing the migrations
+                                     // Define the assembly containing the Oracle migrations
                                     .ScanIn(migrationAssembly)
                                     .For.Migrations())
 

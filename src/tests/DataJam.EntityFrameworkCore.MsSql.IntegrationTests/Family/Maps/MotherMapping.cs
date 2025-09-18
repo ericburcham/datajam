@@ -9,6 +9,6 @@ public class MotherMapping : FamilyMapping<Mother>
 {
     public override void Configure(EntityTypeBuilder<Mother> builder)
     {
-        builder.ToTable(nameof(Mother), SCHEMA).HasKey(mother => mother.Id);
+        builder.ToTable(nameof(Mother)).HasKey(mother => mother.Id);
     }
 }

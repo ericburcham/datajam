@@ -12,6 +12,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\DataJam.TestSupport.FluentMigrator.Core\DataJam.TestSupport.FluentMigrator.Core.csproj"/>
+        <ProjectReference Include="..\DataJam.TestSupport.Migrations.Oracle\DataJam.TestSupport.Migrations.Oracle.csproj"/>
         <ProjectReference Include="..\DataJam.TestSupport\DataJam.TestSupport.csproj"/>
     </ItemGroup>
 
