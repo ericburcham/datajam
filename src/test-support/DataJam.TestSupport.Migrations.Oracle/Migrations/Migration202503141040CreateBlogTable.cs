@@ -6,11 +6,11 @@ using global::FluentMigrator;
 
 using JetBrains.Annotations;
 
-[TimestampedMigration(2025, 03, 14, 10, 38, "Creates the Mother table for Oracle.")]
+[TimestampedMigration(2025, 03, 14, 10, 40, "Creates the Blog table for Oracle.")]
 [UsedImplicitly]
-public class Migration202503141038CreateMotherTable : TableMigration
+public class Migration202503141040CreateBlogTable : TableMigration
 {
-    public override string TableName => "MOTHER";
+    public override string TableName => "BLOG";
 
     public override void Down()
     {
@@ -25,9 +25,9 @@ public class Migration202503141038CreateMotherTable : TableMigration
               .AsInt64()
               .NotNullable()
               .PrimaryKey($"PK_{TableName}")
-              .WithColumn("NAME")
+              .WithColumn("URL")
               .AsString(100)
-              .NotNullable();
+              .Nullable();
 
         Execute.Sql($"CREATE SEQUENCE SEQ_{TableName}_ID START WITH 1 INCREMENT BY 1");
     }

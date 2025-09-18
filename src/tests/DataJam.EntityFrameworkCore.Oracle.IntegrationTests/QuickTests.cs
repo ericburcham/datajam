@@ -5,7 +5,11 @@ using System.Collections.Generic;
 
 using AwesomeAssertions;
 
+using global::Oracle.ManagedDataAccess.Client;
+
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 using NUnit.Framework;
 
@@ -21,9 +25,30 @@ public class QuickTests
     {
         try
         {
+            var connectionString = RegisteredTestDependencies.Get<OracleContainer>(ContainerConstants.ORACLE_CONTAINER_NAME).GetConnectionString();
+
+            // Query to see what tables exist in the database
+            using (var connection = new OracleConnection(connectionString))
+            {
+                connection.Open();
+                using (var command = new OracleCommand("SELECT table_name FROM user_tables ORDER BY table_name", connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        Console.WriteLine("=== TABLES IN DATABASE ===");
+                        while (reader.Read())
+                        {
+                            Console.WriteLine($"Table: {reader["table_name"]}");
+                        }
+
+                        Console.WriteLine("=== END TABLES ===");
+                    }
+                }
+            }
+
             using (var db = new BloggingContext())
             {
-                var blog = new Blog { Url = "https://blogs.oracle.com" };
+                var blog = new Blog { BlogId = 1, Url = "https://blogs.oracle.com" };
 
                 db.Blogs!.Add(blog);
                 db.SaveChanges();
@@ -80,7 +105,39 @@ public class QuickTests
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var connectionString = RegisteredTestDependencies.Get<OracleContainer>(ContainerConstants.ORACLE_CONTAINER_NAME).GetConnectionString();
-            optionsBuilder.UseOracle(connectionString);
+            optionsBuilder.UseOracle(connectionString)
+                         .ConfigureWarnings(x => x.Ignore(RelationalEventId.AmbientTransactionWarning))
+                         .LogTo(Console.WriteLine, LogLevel.Information)
+                         .EnableSensitiveDataLogging();
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Blog>(entity =>
+            {
+                entity.ToTable("BLOG");
+                entity.HasKey(e => e.BlogId);
+                entity.Property(e => e.BlogId)
+                    .HasColumnName("ID")
+                    .ValueGeneratedNever();
+                entity.Property(e => e.Url)
+                    .HasColumnName("URL")
+                    .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<Post>(entity =>
+            {
+                entity.ToTable("POST");
+                entity.HasKey(e => e.PostId);
+                entity.Property(e => e.PostId)
+                    .HasColumnName("ID")
+                    .ValueGeneratedNever();
+                entity.Property(e => e.BlogId)
+                    .HasColumnName("BLOGID");
+                entity.HasOne(d => d.Blog)
+                    .WithMany(p => p.Posts)
+                    .HasForeignKey(d => d.BlogId);
+            });
         }
     }
 }

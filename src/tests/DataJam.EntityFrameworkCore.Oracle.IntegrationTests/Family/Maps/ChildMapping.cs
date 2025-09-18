@@ -9,6 +9,11 @@ public class ChildMapping : FamilyMapping<Child>
 {
     public override void Configure(EntityTypeBuilder<Child> builder)
     {
-        // builder.ToTable(nameof(Child)).HasKey(child => child.Id);
+        builder.ToTable("CHILD");
+        builder.HasKey(child => child.Id);
+        builder.Property(c => c.FatherId).HasColumnName("FATHERID").ValueGeneratedNever();
+        builder.Property(c => c.MotherId).HasColumnName("MOTHERID").ValueGeneratedNever();
+        builder.Property(c => c.Id).HasColumnName("ID").ValueGeneratedNever();
+        builder.Property(c => c.Name).HasColumnName("NAME");
     }
 }
