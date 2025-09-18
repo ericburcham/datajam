@@ -53,6 +53,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore.MySql.IntegrationTests", "tests\DataJam.EntityFrameworkCore.MySql.IntegrationTests\DataJam.EntityFrameworkCore.MySql.IntegrationTests.csproj", "{7A683122-E92C-4EB0-BE13-0847992C94CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore.Oracle.IntegrationTests", "tests\DataJam.EntityFrameworkCore.Oracle.IntegrationTests\DataJam.EntityFrameworkCore.Oracle.IntegrationTests.csproj", "{B8C2E4D7-2F31-4A0E-9B4F-5E8C3D9A1F6E}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.EntityFrameworkCore.Sqlite.IntegrationTests", "tests\DataJam.EntityFrameworkCore.Sqlite.IntegrationTests\DataJam.EntityFrameworkCore.Sqlite.IntegrationTests.csproj", "{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataJam.TestSupport.Migrations", "test-support\DataJam.TestSupport.Migrations\DataJam.TestSupport.Migrations.csproj", "{3DE79801-3B11-41EC-9215-56BB49C90520}"
@@ -125,6 +127,10 @@ Global
 		{7A683122-E92C-4EB0-BE13-0847992C94CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7A683122-E92C-4EB0-BE13-0847992C94CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7A683122-E92C-4EB0-BE13-0847992C94CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8C2E4D7-2F31-4A0E-9B4F-5E8C3D9A1F6E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8C2E4D7-2F31-4A0E-9B4F-5E8C3D9A1F6E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8C2E4D7-2F31-4A0E-9B4F-5E8C3D9A1F6E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8C2E4D7-2F31-4A0E-9B4F-5E8C3D9A1F6E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -191,6 +197,7 @@ Global
 		{F982ACA5-9EF8-4A94-91DD-E80CF5D9A12B} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 		{0EBB582A-0221-4046-8482-09F4E1FD70AF} = {F982ACA5-9EF8-4A94-91DD-E80CF5D9A12B}
 		{7A683122-E92C-4EB0-BE13-0847992C94CC} = {F982ACA5-9EF8-4A94-91DD-E80CF5D9A12B}
+		{B8C2E4D7-2F31-4A0E-9B4F-5E8C3D9A1F6E} = {F982ACA5-9EF8-4A94-91DD-E80CF5D9A12B}
 		{A14F3AAE-8021-4BB3-B76D-E2E2C48EE4B5} = {F982ACA5-9EF8-4A94-91DD-E80CF5D9A12B}
 		{5931E88A-8DC9-4A07-A152-4E3ABC053E4B} = {F2626B7C-5C3D-4B3D-A94C-C236DD975B57}
 		{59B94B91-8946-449C-AB74-10E33A2C0705} = {5931E88A-8DC9-4A07-A152-4E3ABC053E4B}
