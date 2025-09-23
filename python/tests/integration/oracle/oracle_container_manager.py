@@ -11,15 +11,6 @@ from testcontainers.oracle import OracleDbContainer
 if TYPE_CHECKING:
     from collections.abc import AsyncGenerator
 
-from datajam_sqlalchemy import create_oracle_connection_string
-
-from .container_constants import (
-    ORACLE_IMAGE,
-    ORACLE_PASSWORD,
-    ORACLE_PORT,
-    ORACLE_SERVICE_NAME,
-    ORACLE_USERNAME,
-)
 
 logger = logging.getLogger(__name__)
 
@@ -42,9 +33,7 @@ class OracleContainerManager:
         logger.info("Starting Oracle container...")
 
         # Create and start the Oracle container using the free image
-        self._container = OracleDbContainer(
-            image="gvenzl/oracle-free:slim"  # Use the official free image
-        )
+        self._container = OracleDbContainer(image="gvenzl/oracle-free:slim")  # Use the official free image
 
         # Start the container (this will block until ready)
         self._container.start()
@@ -78,6 +67,7 @@ class OracleContainerManager:
 
         try:
             from sqlalchemy import text
+
             async with self._engine.begin() as conn:
                 result = await conn.execute(text("SELECT 1 FROM DUAL"))
                 row = result.fetchone()

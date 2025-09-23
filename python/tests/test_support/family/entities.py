@@ -3,11 +3,14 @@
 from __future__ import annotations
 
 from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import DeclarativeBase, relationship
+
 
 # Create base class for our entities
-Base = declarative_base()
+class Base(DeclarativeBase):
+    """Base class for all entities."""
+
+    pass
 
 
 class Person(Base):
