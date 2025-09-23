@@ -3,7 +3,14 @@
     "allow": [
       "Bash(dotnet test:*)",
       "WebFetch(domain:github.com)",
-      "Bash(dotnet build:*)"
+      "Bash(dotnet build:*)",
+      "Bash(tree:*)",
+      "Bash(cat:*)",
+      "Bash(python:*)",
+      "Bash(nox:*)",
+      "Bash(git add:*)",
+      "Bash(pip install:*)",
+      "WebFetch(domain:testcontainers-python.readthedocs.io)"
     ],
     "deny": [],
     "ask": []

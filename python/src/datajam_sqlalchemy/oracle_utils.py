@@ -70,5 +70,5 @@ def create_oracle_connection_string(
     username: str = "system",
     password: str = "oracle",
 ) -> str:
-    """Create an Oracle connection string for SQLAlchemy."""
+    """Create an Oracle connection string for SQLAlchemy using python-oracledb."""
     return f"oracle+oracledb://{username}:{password}@{host}:{port}/?service_name={service_name}"
