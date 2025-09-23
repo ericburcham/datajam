@@ -8,12 +8,11 @@ public class MotherMapping : FamilyMapping<Mother>
 {
     public MotherMapping()
     {
-        ToTable(nameof(Mother), SCHEMA);
+        ToTable(nameof(Mother));
         HasKey(mother => mother.Id);
 
         HasMany(mother => mother.Children)
-           .WithRequired(child => child.Mother)
-           .Map(m => m.MapKey("MotherId"));
+           .WithRequired(child => child.Mother);
     }
 
     public override void Configure(DbModelBuilder builder)

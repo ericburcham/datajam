@@ -4,5 +4,6 @@
     <PackageReference Include="JetBrains.Annotations" />
     <PackageReference Include="Microsoft.Data.SqlClient" />
     <PackageReference Include="MySql.Data" />
+    <PackageReference Include="Oracle.ManagedDataAccess.Core" />
   </ItemGroup>
 </Project>

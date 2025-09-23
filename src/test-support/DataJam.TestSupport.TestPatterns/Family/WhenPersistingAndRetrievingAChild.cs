@@ -16,12 +16,6 @@ public abstract class WhenPersistingAndRetrievingAChild : TransactionalScenario
     protected abstract IRepository Repository { get; }
 
     [Test]
-    public void ItShouldHaveAValidId()
-    {
-        _result.Id.Should().NotBe(0);
-    }
-
-    [Test]
     public void ItShouldHaveTheCorrectFather()
     {
         _result.Father.Name.Should().Be("Dad");

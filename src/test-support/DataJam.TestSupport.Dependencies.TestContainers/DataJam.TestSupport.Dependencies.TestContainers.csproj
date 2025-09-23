@@ -3,6 +3,7 @@
         <PackageReference Include="JetBrains.Annotations" />
         <PackageReference Include="Testcontainers.MsSql"/>
         <PackageReference Include="Testcontainers.MySql" />
+        <PackageReference Include="Testcontainers.Oracle" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\DataJam.TestSupport.Dependencies\DataJam.TestSupport.Dependencies.csproj" />

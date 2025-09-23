@@ -25,9 +25,9 @@ public class RootSetUpFixture() : TestContainerSetUpFixture<TestDependencyProvid
     private static async Task DeployMySql()
     {
         var mySqlContainer = RegisteredTestDependencies.Get<MySqlContainer>(ContainerConstants.MYSQL_CONTAINER_NAME);
-        var connectionString = mySqlContainer.GetConnectionString();
-        var connectionStringBuilder = new MySqlConnectionStringBuilder(connectionString) { Database = ContainerConstants.MYSQL_TEST_DB };
-        connectionString = connectionStringBuilder.ConnectionString;
+        var connectionStringFromContainer = mySqlContainer.GetConnectionString();
+        var connectionStringBuilder = new MySqlConnectionStringBuilder(connectionStringFromContainer) { Database = ContainerConstants.MYSQL_TEST_DB };
+        var connectionString = connectionStringBuilder.ConnectionString;
         var databaseDeployer = new MySqlDatabaseDeployer(connectionString);
         await databaseDeployer.Deploy().ConfigureAwait(false);
     }

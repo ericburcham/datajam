@@ -1,4 +1,4 @@
-namespace DataJam.EntityFrameworkCore.MsSql.IntegrationTests.Family;
+namespace DataJam.EntityFrameworkCore.Oracle.IntegrationTests.Family;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;

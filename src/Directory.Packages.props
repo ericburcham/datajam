@@ -9,6 +9,7 @@
     <PackageVersion Include="FluentMigrator" Version="7.1.0" />
     <PackageVersion Include="FluentMigrator.Runner.Core" Version="7.1.0" />
     <PackageVersion Include="FluentMigrator.Runner.MySql" Version="7.1.0" />
+    <PackageVersion Include="FluentMigrator.Runner.Oracle" Version="7.1.0" />
     <PackageVersion Include="FluentMigrator.Runner.SQLite" Version="7.1.0" />
     <PackageVersion Include="FluentMigrator.Runner.SqlServer" Version="7.1.0" />
     <PackageVersion Include="JetBrains.Annotations" Version="2025.2.2" />
@@ -28,9 +29,12 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageVersion>
     <PackageVersion Include="NUnit3TestAdapter" Version="5.1.0" />
+    <PackageVersion Include="Oracle.EntityFrameworkCore" Version="9.23.60" />
+    <PackageVersion Include="Oracle.ManagedDataAccess.Core" Version="23.6.0" />
     <PackageVersion Include="StyleCop.Analyzers" Version="1.2.0-beta.556" />
     <PackageVersion Include="System.Data.SqlClient" Version="4.9.0" />
     <PackageVersion Include="Testcontainers.MsSql" Version="4.7.0" />
     <PackageVersion Include="Testcontainers.MySql" Version="4.7.0" />
+    <PackageVersion Include="Testcontainers.Oracle" Version="4.7.0" />
   </ItemGroup>
 </Project>

@@ -32,28 +32,6 @@ public static class MigrationExtensions
         }
     }
 
-    public static void ForeignKeys(this ICreateExpressionRoot create, IDescribeSchemaTables migration, IEnumerable<IDescribeSchemaTables> foreignKeyTables)
-    {
-        create.ForeignKeys(migration, foreignKeyTables.ToArray());
-    }
-
-    public static void ForeignKeys(this ICreateExpressionRoot create, IDescribeSchemaTables migration, params IDescribeSchemaTables[] foreignKeyTables)
-    {
-        foreach (var foreignKeyTable in foreignKeyTables)
-        {
-            var foreignKeyName = GetDefaultForeignKeyName(migration, foreignKeyTable);
-            var defaultForeignColumn = GetDefaultForeignColumn(foreignKeyTable);
-
-            create.ForeignKey(foreignKeyName)
-                  .FromTable(migration.TableName)
-                  .InSchema(migration.SchemaName)
-                  .ForeignColumn(defaultForeignColumn)
-                  .ToTable(foreignKeyTable.TableName)
-                  .InSchema(foreignKeyTable.SchemaName)
-                  .PrimaryColumn("Id");
-        }
-    }
-
     public static void ForeignKeys(this IDeleteExpressionRoot delete, IDescribeTables migration, IEnumerable<IDescribeTables> foreignKeyTables)
     {
         delete.ForeignKeys(migration, foreignKeyTables.ToArray());
@@ -67,23 +45,6 @@ public static class MigrationExtensions
 
             delete.ForeignKey(foreignKeyName)
                   .OnTable(migration.TableName);
-        }
-    }
-
-    public static void ForeignKeys(this IDeleteExpressionRoot delete, IDescribeSchemaTables migration, IEnumerable<IDescribeSchemaTables> foreignKeyTables)
-    {
-        delete.ForeignKeys(migration, foreignKeyTables.ToArray());
-    }
-
-    public static void ForeignKeys(this IDeleteExpressionRoot delete, IDescribeSchemaTables migration, params IDescribeSchemaTables[] foreignKeyTables)
-    {
-        foreach (var foreignKeyTable in foreignKeyTables)
-        {
-            var foreignKeyName = GetDefaultForeignKeyName(migration, foreignKeyTable);
-
-            delete.ForeignKey(foreignKeyName)
-                  .OnTable(migration.TableName)
-                  .InSchema(migration.SchemaName);
         }
     }
 
