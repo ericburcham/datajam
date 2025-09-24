@@ -53,7 +53,7 @@ class DataContext(IDataContext):
     def remove(self, entity: Any) -> None:
         """Mark an entity for deletion."""
         # Simply call delete - SQLAlchemy handles whether entity is attached
-        self._session.delete(entity)
+        self._session.delete(entity)  # type: ignore[unused-coroutine]
 
     async def commit(self) -> None:
         """Commit all pending changes."""

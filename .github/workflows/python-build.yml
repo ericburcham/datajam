@@ -48,10 +48,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-python-${{ matrix.python-version }}-
 
-      - name: Install Nox
+      - name: Install Nox and ensure consistent tool versions
         run: |
           python -m pip install --upgrade pip
           python -m pip install nox
+          # Pre-install linting tools to match noxfile versions
+          python -m pip install ruff==0.8.0 black==24.10.0 mypy==1.13.0 isort==5.13.2
 
       - name: Run linting
         working-directory: python

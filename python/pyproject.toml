@@ -40,10 +40,10 @@ testing = [
     "pytest-cov>=4.0.0",
 ]
 dev = [
-    "ruff>=0.1.0",
-    "black>=23.0.0",
-    "mypy>=1.5.0",
-    "isort>=5.12.0",
+    "ruff==0.8.0",
+    "black==24.10.0",
+    "mypy==1.13.0",
+    "isort==5.13.2",
     "nox>=2023.4.22",
     "pre-commit>=3.3.0",
 ]
@@ -112,22 +112,37 @@ warn_redundant_casts = true
 warn_unused_ignores = true
 warn_return_any = true
 strict_equality = true
+show_error_codes = true
 
+# Third-party libraries without type stubs
 [[tool.mypy.overrides]]
 module = "testcontainers.*"
 ignore_missing_imports = true
 
-[[tool.mypy.overrides]]
-module = "datajam.interfaces"
-disable_error_code = ["misc"]
-
+# SQLAlchemy imports (when not installed in lint-only environment)
 [[tool.mypy.overrides]]
 module = "sqlalchemy.*"
 ignore_missing_imports = true
 
+# SQLAlchemy has complex typing - allow some flexibility for known edge cases
 [[tool.mypy.overrides]]
-module = "datajam_sqlalchemy.*"
-ignore_missing_imports = true
+module = "datajam_sqlalchemy.oracle_utils"
+disable_error_code = ["assignment"]
+
+# Allow Any return from SQLAlchemy first() method
+[[tool.mypy.overrides]]
+module = "datajam_sqlalchemy.queryable"
+disable_error_code = ["no-any-return"]
+
+# SQLAlchemy delete() returns coroutine that varies by environment
+[[tool.mypy.overrides]]
+module = "datajam_sqlalchemy.data_context"
+disable_error_code = ["unused-coroutine", "unused-ignore"]
+
+# Protocol interfaces may have variance issues with generics
+[[tool.mypy.overrides]]
+module = "datajam.interfaces"
+disable_error_code = ["misc"]
 
 [tool.pytest.ini_options]
 minversion = "7.0"

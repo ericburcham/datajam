@@ -7,10 +7,7 @@ import pytest
 import pytest_asyncio
 from sqlalchemy.ext.asyncio import AsyncEngine
 
-from tests.integration.oracle.oracle_container_manager import (
-    OracleContainerManager,
-    cleanup_oracle_container,
-)
+from tests.integration.oracle.oracle_container_manager import OracleContainerManager, cleanup_oracle_container
 
 
 @pytest_asyncio.fixture(scope="function")

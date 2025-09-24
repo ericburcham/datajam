@@ -13,6 +13,14 @@ SRC_DIR = PROJECT_ROOT / "src"
 TESTS_DIR = PROJECT_ROOT / "tests"
 ARTIFACTS_DIR = PROJECT_ROOT / "artifacts"
 
+# Pinned tool versions for consistency across all environments
+LINT_TOOLS = [
+    "ruff==0.8.0",
+    "black==24.10.0",
+    "mypy==1.13.0",
+    "isort==5.13.2",
+]
+
 nox.options.error_on_missing_interpreters = True
 
 
@@ -43,10 +51,9 @@ def clean(session: nox.Session) -> None:
                     path.unlink()
 
 
-@nox.session(name="lint")
-def lint(session: nox.Session) -> None:
-    """Run linting and code style checks."""
-    session.install("ruff", "black", "isort", "mypy")
+def _run_lint_tools(session: nox.Session) -> None:
+    """Unified linting function used by all lint sessions."""
+    session.install(*LINT_TOOLS)
 
     session.log("Running ruff...")
     session.run("ruff", "check", str(SRC_DIR), str(TESTS_DIR))
@@ -61,10 +68,16 @@ def lint(session: nox.Session) -> None:
     session.run("mypy", str(SRC_DIR))
 
 
+@nox.session(name="lint")
+def lint(session: nox.Session) -> None:
+    """Run linting and code style checks."""
+    _run_lint_tools(session)
+
+
 @nox.session(name="format")
 def format_code(session: nox.Session) -> None:
     """Format code using black and isort."""
-    session.install("black", "isort", "ruff")
+    session.install(*LINT_TOOLS)
 
     session.log("Running ruff --fix...")
     session.run("ruff", "check", "--fix", str(SRC_DIR), str(TESTS_DIR))
@@ -185,8 +198,8 @@ def datajam_build(session: nox.Session) -> None:
     # Install dependencies
     session.install("-e", ".[dev,testing,sqlalchemy]")
 
-    # Run linting
-    lint(session)
+    # Run linting using unified function
+    _run_lint_tools(session)
 
     # Run tests
     test_all(session)
@@ -209,8 +222,8 @@ def ci(session: nox.Session) -> None:
     # Install dependencies
     session.install("-e", ".[dev,testing,sqlalchemy]")
 
-    # Run linting
-    lint(session)
+    # Run linting using unified function
+    _run_lint_tools(session)
 
     # Run all tests
     test_all(session)
