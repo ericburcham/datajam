@@ -56,7 +56,7 @@ class QueryableImpl(IQueryable[T]):
     async def first_or_none(self) -> T | None:
         """Execute the query and return the first result or None."""
         result = await self._session.execute(self._query.limit(1))
-        return result.scalars().first()  # type: ignore[no-any-return]
+        return result.scalars().first()
 
     async def count(self) -> int:
         """Execute the query and return the count of results."""

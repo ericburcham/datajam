@@ -69,7 +69,7 @@ class Domain(IDomain[MetaData, str]):
     async def create_tables(self) -> None:
         """Create all tables defined in the metadata."""
         async with self._engine.begin() as conn:
-            await conn.run_sync(self._metadata.create_all)
+            await conn.run_sync(self._metadata.create_all, checkfirst=False)
 
     async def drop_tables(self) -> None:
         """Drop all tables defined in the metadata."""

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from sqlalchemy import Column, ForeignKey, Integer, String
+from sqlalchemy import Column, ForeignKey, Integer, Sequence, String
 from sqlalchemy.orm import DeclarativeBase, relationship
 
 
@@ -18,7 +18,7 @@ class Person(Base):
 
     __tablename__ = "PERSON"
 
-    id = Column("ID", Integer, primary_key=True, autoincrement=True)
+    id = Column("ID", Integer, Sequence("SEQ_PERSON_ID"), primary_key=True)
     name = Column("NAME", String(100), nullable=False)
     person_type = Column("PERSON_TYPE", String(20), nullable=False)
 

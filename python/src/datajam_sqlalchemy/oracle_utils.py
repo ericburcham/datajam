@@ -27,12 +27,12 @@ class OracleNamingConvention:
 
         # Update index names
         for index in table.indexes:
-            if index.name:
-                index.name = OracleNamingConvention.to_oracle_identifier(index.name)
+            if index.name and isinstance(index.name, str):
+                index.name = OracleNamingConvention.to_oracle_identifier(index.name)  # type: ignore[assignment]
 
         # Update constraint names
         for constraint in table.constraints:
-            if constraint.name:
+            if constraint.name and isinstance(constraint.name, str):
                 constraint.name = OracleNamingConvention.to_oracle_identifier(constraint.name)
 
     @staticmethod
