@@ -473,3 +473,6 @@ python/.nox/
 python/htmlcov/
 python/.coverage
 python/.pytest_cache/
+
+# Claude Code settings
+.claude/settings.local.json

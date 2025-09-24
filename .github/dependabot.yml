@@ -5,7 +5,12 @@
 
 version: 2
 updates:
-  - package-ecosystem: "nuget" # See documentation for possible values
+  - package-ecosystem: "nuget" # .NET packages
     directory: "/src" # Location of package manifests
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "pip" # Python packages
+    directory: "/python" # Location of Python package manifests
     schedule:
       interval: "weekly"

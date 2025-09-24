@@ -13,10 +13,6 @@ on:
       - '*.targets'
       - 'global.json'
       - '.github/workflows/dotnet-build.yml'
-    branches:
-      - main
-      - develop
-      - 'feature/**'
   pull_request:
     paths:
       - 'src/**'
