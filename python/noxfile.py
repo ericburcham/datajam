@@ -6,8 +6,8 @@ from pathlib import Path
 
 import nox
 
-# Python versions to test against (GitHub Actions supports these)
-PYTHON_VERSIONS = ["3.10", "3.11", "3.12"]
+# Python versions to test against
+PYTHON_VERSIONS = ["3.13"]
 PROJECT_ROOT = Path(__file__).parent
 SRC_DIR = PROJECT_ROOT / "src"
 TESTS_DIR = PROJECT_ROOT / "tests"
