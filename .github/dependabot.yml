@@ -6,11 +6,41 @@
 version: 2
 updates:
   - package-ecosystem: "nuget" # .NET packages
-    directory: "/src" # Location of package manifests
+    directory: "/src"
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "nuget"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    reviewers:
+      - "ericburcham"
+    assignees:
+      - "ericburcham"
+    versioning-strategy: increase
 
   - package-ecosystem: "pip" # Python packages
     directory: "/python" # Location of Python package manifests
     schedule:
       interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "America/New_York"
+    open-pull-requests-limit: 10
+    labels:
+      - "dependencies"
+      - "python"
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+    reviewers:
+      - "ericburcham"
+    assignees:
+      - "ericburcham"
+    versioning-strategy: increase
