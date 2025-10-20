@@ -14,7 +14,7 @@
     <PackageVersion Include="FluentMigrator.Runner.SqlServer" Version="7.1.0" />
     <PackageVersion Include="JetBrains.Annotations" Version="2025.2.2" />
     <PackageVersion Include="Microsoft.Data.SqlClient" Version="6.1.2" />
-    <PackageVersion Include="Microsoft.Data.Sqlite.Core" Version="9.0.9" />
+    <PackageVersion Include="Microsoft.Data.Sqlite.Core" Version="9.0.10" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.9" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.9" />
     <PackageVersion Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.9" />
