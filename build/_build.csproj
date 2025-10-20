@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Build" Version="17.12.50" />
     <PackageReference Include="Microsoft.Build.Tasks.Core" Version="17.14.28" />
     <PackageDownload Include="GitVersion.Tool" Version="[6.1.0]" />
   </ItemGroup>
