@@ -23,10 +23,9 @@ updates:
       - "ericburcham"
     assignees:
       - "ericburcham"
-    versioning-strategy: increase
 
   - package-ecosystem: "pip" # Python packages
-    directory: "/python" # Location of Python package manifests
+    directory: "/python"
     schedule:
       interval: "weekly"
       day: "monday"
@@ -43,4 +42,3 @@ updates:
       - "ericburcham"
     assignees:
       - "ericburcham"
-    versioning-strategy: increase

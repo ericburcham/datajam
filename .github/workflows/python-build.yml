@@ -1,0 +1,110 @@
+name: Python DataJam Build
+
+on:
+  push:
+    paths:
+      - 'python/**'
+      - '.github/workflows/python-build.yml'
+  pull_request:
+    paths:
+      - 'python/**'
+      - '.github/workflows/python-build.yml'
+
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  python-build:
+    name: Python Build and Test
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.13"]
+
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache Python dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            python/.nox
+          key: ${{ runner.os }}-python-${{ matrix.python-version }}-${{ hashFiles('python/pyproject.toml', 'python/noxfile.py') }}
+          restore-keys: |
+            ${{ runner.os }}-python-${{ matrix.python-version }}-
+
+      - name: Install Nox and ensure consistent tool versions
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install nox
+          # Pre-install linting tools to match noxfile versions
+          python -m pip install ruff==0.8.0 black==24.10.0 mypy==1.13.0 isort==5.13.2
+
+      - name: Run linting
+        working-directory: python
+        run: nox -s lint
+
+      - name: Run unit tests
+        working-directory: python
+        run: nox -s test
+
+      - name: Run integration tests
+        working-directory: python
+        run: nox -s test-integration
+        env:
+          TESTCONTAINERS_ORACLE_PASSWORD: oracle123
+
+      - name: Build packages
+        working-directory: python
+        run: nox -s build
+
+      - name: Upload test coverage
+        if: matrix.python-version == '3.11'
+        uses: codecov/codecov-action@v3
+        with:
+          file: python/coverage.xml
+          flags: python
+          name: python-coverage
+
+      - name: Upload build artifacts
+        if: matrix.python-version == '3.11'
+        uses: actions/upload-artifact@v4
+        with:
+          name: python-packages
+          path: python/artifacts/
+
+  publish:
+    name: Publish Python packages
+    runs-on: ubuntu-latest
+    needs: python-build
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    environment: pypi
+    permissions:
+      id-token: write  # For trusted publishing to PyPI
+
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: python-packages
+          path: dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          packages-dir: dist/
